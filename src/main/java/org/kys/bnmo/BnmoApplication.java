@@ -8,13 +8,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class Demo {
+public class BnmoApplication {
     public static void main(String[] args) {
         // Set the Mac Dark theme
         FlatMacDarkLaf.setup();
 
         // Create a new frame
-        JFrame frame = new JFrame("Test");
+        JFrame frame = new JFrame("BNMO");
 
         // Set the layout of the frame
         frame.setLayout(new BorderLayout());
@@ -51,7 +51,7 @@ public class Demo {
         frame.add(dropdownPanel, BorderLayout.NORTH);
 
         // Set the size of the frame
-        frame.setSize(400, 300);
+        frame.setSize(700, 700);
 
         // Set the default close operation
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
