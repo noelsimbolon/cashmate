@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.kys</groupId>
-    <artifactId>pos-bnmo</artifactId>
+    <artifactId>bnmo</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -13,5 +13,12 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+    </dependencies>
 
 </project>
