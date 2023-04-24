@@ -5,6 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -22,10 +23,21 @@ public class MemberList implements ComponentFactory {
         this.listView = getListView();
         this.detailView = getDetailView("Jojo");
     }
-    private HBox getCard(String name)
-    {
-        HBox root = new HBox();
 
+    private HBox getStatusRow()
+    {
+        HBox statusRow = new HBox();
+        Label level = new Label("Member");
+        Label status = new Label("Active");
+        level.getStyleClass().add("level-label");
+        status.getStyleClass().add("level-label");
+
+        statusRow.getChildren().addAll(level, status);
+        statusRow.getStyleClass().add("status-row");
+        return statusRow;
+    }
+    private StackPane getMenuStack()
+    {
         Button dropDownButton = new Button("[Dropdown_icon]");
         dropDownButton.getStyleClass().add("dropdown-button");
         VBox menu = new VBox();
@@ -39,12 +51,20 @@ public class MemberList implements ComponentFactory {
         menuStack.getChildren().addAll(dropDownButton, menu);
         menuStack.getStyleClass().add("menu-stack");
 
+        return menuStack;
+    }
+
+    private HBox getCard(String name)
+    {
+        HBox root = new HBox();
+
+        StackPane menuStack = getMenuStack();
+
         VBox cardContent = new VBox();
         Label nameLabel = new Label(name);
         nameLabel.getStyleClass().add("name-label");
-        Label levelLabel = new Label("VIP");
-        levelLabel.getStyleClass().add("level-label");
-        cardContent.getChildren().addAll(nameLabel, levelLabel);
+        HBox statusRow = getStatusRow();
+        cardContent.getChildren().addAll(nameLabel, statusRow);
         cardContent.getStyleClass().add("card-content");
 
         root.getChildren().addAll(menuStack, cardContent);
@@ -52,7 +72,21 @@ public class MemberList implements ComponentFactory {
 
         return root;
     }
-    private VBox getListView()
+
+    private HBox getSearchBar()
+    {
+        HBox root = new HBox();
+
+        TextField searchTextField = new TextField();
+        searchTextField.promptTextProperty().set("Seach Name...");
+
+        Button searchButton = new Button("Search");
+
+        root.getChildren().addAll(searchTextField, searchButton);
+        root.getStyleClass().add("search-bar");
+        return root;
+    }
+    private HBox getFilterRow()
     {
         HBox filterRow = new HBox();
         Button customerFilterButton = new Button("Customers");
@@ -63,6 +97,21 @@ public class MemberList implements ComponentFactory {
         filterRow.getChildren().addAll(customerFilterButton, memberFilterButton);
         filterRow.getStyleClass().add("filter-row");
 
+        return filterRow;
+    }
+
+    private VBox getFilterHeader()
+    {
+        VBox root = new VBox();
+
+        root.getChildren().addAll(getFilterRow(), getSearchBar());
+        root.getStyleClass().add("filter-header");
+
+        return root;
+    }
+
+    private ScrollPane getListPanel()
+    {
         ScrollPane listPanel = new ScrollPane();
         VBox list = new VBox();
 
@@ -76,11 +125,23 @@ public class MemberList implements ComponentFactory {
         listPanel.setContent(list);
         listPanel.getStyleClass().add("member-scroll-panel");
 
+        return listPanel;
+    }
+
+    private VBox getListView()
+    {
+        VBox filterHeader = getFilterHeader();
+
+        ScrollPane listPanel = getListPanel();
+
         Button addMemberButton = new Button("[add_icon]");
         addMemberButton.getStyleClass().add("add-button");
 
+        StackPane listStack = new StackPane();
+        listStack.getChildren().addAll(listPanel, addMemberButton);
+
         VBox root = new VBox();
-        root.getChildren().addAll(filterRow, listPanel, addMemberButton);
+        root.getChildren().addAll(filterHeader, listStack);
         root.getStyleClass().add("list-column");
         return root;
     }
@@ -102,48 +163,90 @@ public class MemberList implements ComponentFactory {
         root.getStyleClass().add("detail-column");
         return root;
     }
-    private VBox getMemberDetailView(String name)
+
+    private VBox getMemberNameTitle(String name)
     {
-        HBox title = new HBox();
+        VBox title = new VBox();
         Label nameLabel = new Label(name);
-        Label level = new Label("member");
+        nameLabel.getStyleClass().add("name-label");
 
-        title.getChildren().addAll(nameLabel, level);
+        HBox statusRow = getStatusRow();
 
+        title.getChildren().addAll(nameLabel, statusRow);
+        title.getStyleClass().add("detail-title");
+
+        return title;
+    }
+
+
+
+    private GridPane getMemberInfo(String name)
+    {
         GridPane userInfo = new GridPane();
 
-        Label idIcon = new Label("idIcon");
-        Label phoneIcon = new Label("phoneIcon");
-        Label poinIcon = new Label("poinIcon");
+        Label idIcon = new Label("[idIcon]");
+        Label phoneIcon = new Label("[phoneIcon]");
+        Label pointIcon = new Label("[poinIcon]");
         GridPane.setConstraints(idIcon, 0, 0);
         GridPane.setConstraints(phoneIcon, 0, 1);
-        GridPane.setConstraints(poinIcon, 0, 2);
+        GridPane.setConstraints(pointIcon, 0, 2);
 
         Label id = new Label("id");
         Label phone = new Label("phone");
-        Label poin = new Label("poin");
-        GridPane.setConstraints(id, 0, 0);
-        GridPane.setConstraints(phone, 0, 1);
-        GridPane.setConstraints(poin, 0, 2);
+        Label point = new Label("point");
+        GridPane.setConstraints(id, 1, 0);
+        GridPane.setConstraints(phone, 1, 1);
+        GridPane.setConstraints(point, 1, 2);
 
-        userInfo.getChildren().addAll(idIcon, phoneIcon, poinIcon, id, phone, poin);
+        userInfo.getChildren().addAll(idIcon, phoneIcon, pointIcon, id, phone, point);
+        userInfo.getStyleClass().add("user-info");
+        return userInfo;
+    }
 
-        VBox transactionPreviewPanel = new VBox();
-        Label transactionTitle = new Label("Transactions");
+    private GridPane getPreviewList()
+    {
+        GridPane root = new GridPane();
 
-        transactionPreviewPanel.getChildren().add(transactionTitle);
         for (int i = 0; i < transactionPreviewCount; i++)
         {
-            Label transactionId = new Label("transaction" + i);
-            transactionPreviewPanel.getChildren().add(transactionId);
+             Label dateTime = new Label("06:99, 2" + i + "January" + "2023");
+             GridPane.setConstraints(dateTime, 0, i);
+             root.getChildren().add(dateTime);
         }
+
+        for (int i = 0; i < transactionPreviewCount; i++)
+        {
+            Label id = new Label("TRANSACTIONID" + i);
+            GridPane.setConstraints(id, 1, i);
+            root.getChildren().add(id);
+        }
+
+        return root;
+    }
+    private VBox getTransactionPreview()
+    {
+        VBox transactionPreviewPanel = new VBox();
+        Label transactionTitle = new Label("Transactions");
+        transactionTitle.getStyleClass().add("title");
+
+        transactionPreviewPanel.getChildren().add(transactionTitle);
+
+        transactionPreviewPanel.getChildren().add(getPreviewList());
 
         Button showTransactionsButton = new Button("See More");
 
         transactionPreviewPanel.getChildren().add(showTransactionsButton);
+        transactionPreviewPanel.getStyleClass().add("transaction-preview");
+        return transactionPreviewPanel;
+    }
+
+    private VBox getMemberDetailView(String name)
+    {
+        VBox title = getMemberNameTitle(name);
+        GridPane userInfo = getMemberInfo(name);
+        VBox transactionPreviewPanel = getTransactionPreview();
 
         VBox root = new VBox();
-
         root.getChildren().addAll(title, userInfo, transactionPreviewPanel);
 
         return root;
@@ -160,7 +263,6 @@ public class MemberList implements ComponentFactory {
         root.getStyleClass().add("member-list");
 
         try {
-
             String css = this.getClass()
                     .getResource("/styles/memberList.css")
                     .toExternalForm();
