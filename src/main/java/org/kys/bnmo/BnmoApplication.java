@@ -20,7 +20,6 @@ public class BnmoApplication extends Application {
 //        Font.loadFont(getClass().getResource("/fonts/FontAwesome.otf").toExternalForm(), 10);
 
         try {
-
             String css = this.getClass()
                     .getResource("/styles/global.css")
                     .toExternalForm();

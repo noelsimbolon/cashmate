@@ -24,6 +24,17 @@ public class MemberList implements ComponentFactory {
         this.detailView = getDetailView("Jojo");
     }
 
+    private VBox getEmptyRow()
+    {
+        VBox root = new VBox();
+        Label emptyIcon = new Label("[Empty_ICON]");
+        Label emptyLabel = new Label ("EMPTY DATA");
+
+        root.getChildren().addAll(emptyIcon, emptyLabel);
+        root.getStyleClass().add("empty-row");
+        return root;
+    }
+
     private HBox getStatusRow()
     {
         HBox statusRow = new HBox();
@@ -138,7 +149,11 @@ public class MemberList implements ComponentFactory {
         addMemberButton.getStyleClass().add("add-button");
 
         StackPane listStack = new StackPane();
-        listStack.getChildren().addAll(listPanel, addMemberButton);
+
+        if (false) listStack.getChildren().add(getEmptyRow());
+        else listStack.getChildren().add(listPanel);
+
+        listStack.getChildren().add(addMemberButton);
 
         VBox root = new VBox();
         root.getChildren().addAll(filterHeader, listStack);
@@ -239,14 +254,19 @@ public class MemberList implements ComponentFactory {
         transactionPreviewPanel.getStyleClass().add("transaction-preview");
         return transactionPreviewPanel;
     }
-
     private VBox getMemberDetailView(String name)
     {
+        VBox root = new VBox();
+        if (false)
+        {
+            root.getChildren().add(getEmptyRow());
+            return root;
+        }
+
         VBox title = getMemberNameTitle(name);
         GridPane userInfo = getMemberInfo(name);
         VBox transactionPreviewPanel = getTransactionPreview();
 
-        VBox root = new VBox();
         root.getChildren().addAll(title, userInfo, transactionPreviewPanel);
 
         return root;
@@ -254,7 +274,17 @@ public class MemberList implements ComponentFactory {
 
     private VBox getCustomerDetailView(String name)
     {
-        return new VBox();
+        VBox root = new VBox();
+        if (false)
+        {
+            root.getChildren().add(getEmptyRow());
+            return root;
+        }
+
+        VBox title = getMemberNameTitle(name);
+        root.getChildren().addAll(title);
+
+        return root;
     }
     @Override
     public Parent getComponent() {
