@@ -1,0 +1,124 @@
+.member-list {
+    -fx-min-width: 1200px;
+    -fx-max-width: 1290px;
+    -fx-min-height: 550px;
+    -fx-max-height: 600px;
+}
+.list-column {
+    -fx-min-width: 500px;
+    -fx-padding: 0 10px 10px 10px;
+    -fx-alignment: top-center;
+    -fx-border-width: 0 3px 0 0;
+    -fx-border-color: #9FE6FF;
+}
+
+.filter-row {
+    -fx-min-width: 500px;
+    -fx-spacing: 50px;
+    -fx-alignment: center;
+    -fx-padding: 20px;
+}
+
+.filter-button {
+    -fx-min-width: 200px;
+    -fx-background-radius: 10px;
+    -fx-background-color: #7dbbfa;
+    -fx-min-height: 30px;
+    -fx-text-fill: white;
+}
+
+.filter-button:hover {
+    -fx-background-color: #74aee8;
+}
+
+.button:hover {
+    -fx-cursor: hand;
+}
+
+.member-scroll-panel {
+    -fx-background: white;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-radius: 0;
+    -fx-min-height: 450px;
+    -fx-padding: 20px;
+    -fx-alignment: top-center;
+    -fx-fit-to-width: true;
+}
+
+.detail-column {
+    -fx-min-width: 800px;
+    -fx-background-color: #F1FBFF;
+}
+
+.members-box {
+    -fx-background-color: white;
+    -fx-spacing: 30px;
+    -fx-alignment: top-center;
+    -fx-min-width: 350px;
+    -fx-padding: 20px;
+}
+
+.add-button {
+    -fx-min-width: 150px;
+    -fx-background-color: #7dbbfa;
+    -fx-background-radius: 20px;
+    -fx-min-height: 30px;
+}
+
+.member-card {
+    -fx-min-width: 200px;
+    -fx-background-color: #9FE6FF;
+    -fx-background-radius: 10px;
+    -fx-spacing: 20px;
+    -fx-padding: 10px;
+    -fx-alignment: top-left;
+}
+
+.card-content {
+    -fx-font-size: 20px;
+    -fx-alignment: center-left;
+    -fx-spacing: 10px;
+}
+
+.card-content Label {
+    -fx-text-fill: white;
+}
+
+.level-label {
+    -fx-background-color: #fafafa;
+    -fx-background-radius: 20px;
+    -fx-padding: 5px;
+    -fx-min-width: 50px;
+    -fx-alignment: center;
+    -fx-font-size: 10px;
+    -fx-text-fill: green;
+}
+StackPane {
+    -fx-alignment: top-center;
+    -fx-padding: 15px 0 0 0;
+}
+
+
+.overlay-menu {
+    -fx-background-color: #F1FBFF;
+    -fx-background-radius: 10px;
+    -fx-alignment: center;
+    -fx-translate-y: 25px;
+}
+
+.overlay-menu Button {
+    -fx-min-width: 125px;
+    -fx-background-color: transparent;
+    -fx-font-size: 10px;
+    -fx-background-radius: 20px;
+    -fx-padding: 5px;
+}
+.overlay-menu Button:hover {
+    -fx-background-color: #7dbbfa;
+}
+
+StackPane .dropdown-button {
+    -fx-border-radius: 20px;
+    -fx-background-color: transparent;
+}
