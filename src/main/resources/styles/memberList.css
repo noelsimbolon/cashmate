@@ -3,7 +3,16 @@
     -fx-min-width: 1200px;
     -fx-max-width: 1290px;
     -fx-min-height: 550px;
-    -fx-max-height: 600px;
+    -fx-max-height: 570px;
+}
+
+.empty-row {
+    -fx-alignment: center;
+}
+
+.empty-row Label {
+    -fx-font-size: 50px;
+    -fx-text-fill: #9FE6FF;
 }
 
 /*list column*/
@@ -18,7 +27,7 @@
     -fx-spacing: 5px;
     -fx-padding: 0 0 10px 0;
     -fx-background-color: #fafafa;
-    -fx-background-radius: 0 0 10px 10px;
+    -fx-background-radius: 0 0 10px 0;
     -fx-min-width: 500px;
 }
 
@@ -88,7 +97,7 @@
 .add-button {
     -fx-background-radius: 20px;
     -fx-min-height: 30px;
-    -fx-translate-y: 450px;
+    -fx-translate-y: 410px;
     -fx-translate-x: 170px;
 }
 
@@ -128,6 +137,7 @@
     -fx-font-size: 10px;
     -fx-text-fill: green;
 }
+
 StackPane {
     -fx-alignment: top-center;
     -fx-padding: 15px 0 0 0;
@@ -153,6 +163,9 @@ StackPane .dropdown-button {
     -fx-background-color: transparent;
 }
 
+.list-column .empty-row {
+    -fx-min-height: 400px;
+}
 /*detail column*/
 
 .detail-column {
@@ -243,4 +256,9 @@ StackPane .dropdown-button {
 
 .transaction-preview GridPane .label {
     -fx-text-fill: #A1A1AA;
+}
+
+.detail-column .empty-row {
+    -fx-min-height: 550px;
+    -fx-translate-y: 30px;
 }

@@ -27,7 +27,6 @@ public class BnmoApplication extends Application {
         root.getChildren().add(formBuilder.getComponent());
 
         try {
-
             String css = this.getClass()
                     .getResource("/styles/global.css")
                     .toExternalForm();
