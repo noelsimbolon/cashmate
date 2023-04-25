@@ -1,6 +1,7 @@
+
 .root {
-    -fx-font-family: Verdana;
-    -fx-background-color: white;
+    -fx-font-family: "Bell MT";
+    -fx-background-color: #262F39;
 }
 .scroll-bar:horizontal .track,
 .scroll-bar:vertical .track{
