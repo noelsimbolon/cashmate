@@ -9,15 +9,22 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.kys.bnmo.components.MemberList;
+import org.kys.bnmo.components.FormBuilder;
 
 public class BnmoApplication extends Application {
 
     @Override
     public void start(Stage stage) {
-        MemberList memberList = new MemberList(new SimpleListProperty<>());
+        FormBuilder formBuilder = new FormBuilder();
+        formBuilder.addTitle("Member Details");
+        formBuilder.addTextBox("Name", "Enter member name");
+        formBuilder.addTextBox("Telephone", "Enter telephone number");
+        formBuilder.addDropdown("Member Level", "Select the member level", new String[] {"Regular", "VIP", "Non-Active"});
+        formBuilder.addTextBox("Points", "Enter amount of points");
+        formBuilder.addButton("Save");
+
         VBox root = new VBox();
-        root.getChildren().add(memberList.getComponent());
-//        Font.loadFont(getClass().getResource("/fonts/FontAwesome.otf").toExternalForm(), 10);
+        root.getChildren().add(formBuilder.getComponent());
 
         try {
 
@@ -32,6 +39,7 @@ public class BnmoApplication extends Application {
         {
             System.out.println("Failed to load css for global component!");
         }
+
         Scene scene = new Scene(root, 1290, 650);
         stage.setTitle("My JavaFX App");
         stage.setScene(scene);
