@@ -4,10 +4,10 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
-public class AddMemberScene implements ComponentFactory {
+public class AddMember implements ComponentFactory {
     private final VBox root;
 
-    public  AddMemberScene() {
+    public AddMember() {
         // Initialize root
         this.root = new VBox();
 
