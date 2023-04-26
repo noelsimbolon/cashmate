@@ -10,6 +10,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Region;
+import javafx.beans.binding.DoubleBinding;
+import javafx.beans.binding.Bindings;
 import javafx.scene.Parent;
 
 public class FormBuilder implements ComponentFactory {
@@ -28,8 +30,6 @@ public class FormBuilder implements ComponentFactory {
 
     public void addTitle(String title) {
         Label titleLabel = new Label(title);
-        Font font = Font.loadFont(getClass().getResource("/fonts/FontAwesome.otf").toExternalForm(), 24);
-        titleLabel.setFont(font);
         titleLabel.getStyleClass().add("form-title");
         root.getChildren().add(0, titleLabel);
     }
@@ -41,8 +41,6 @@ public class FormBuilder implements ComponentFactory {
 
         // Label
         Label labelComponent = new Label(label);
-        Font font = Font.loadFont(getClass().getResource("/fonts/FontAwesome.otf").toExternalForm(), 16);
-        labelComponent.setFont(font);
         labelComponent.getStyleClass().add("form-label");
 
         // Text field
@@ -64,8 +62,6 @@ public class FormBuilder implements ComponentFactory {
 
         // Label
         Label labelComponent = new Label(label);
-        Font font = Font.loadFont(getClass().getResource("/fonts/FontAwesome.otf").toExternalForm(), 16);
-        labelComponent.setFont(font);
         labelComponent.getStyleClass().add("form-label");
 
         // Dropdown
@@ -73,7 +69,13 @@ public class FormBuilder implements ComponentFactory {
         comboBox.setPromptText(placeholder);
         comboBox.getStyleClass().add("form-dropdown");
         comboBox.getItems().addAll(items);
-        HBox.setHgrow(comboBox, Priority.ALWAYS);
+
+        // Bind the preferred width of the dropdown to the available space
+        DoubleBinding comboBoxWidth = Bindings.createDoubleBinding(() ->
+                        row.getWidth() - labelComponent.getWidth() - row.getSpacing(),
+                row.widthProperty(), labelComponent.widthProperty());
+
+        comboBox.prefWidthProperty().bind(comboBoxWidth);
 
         // Add components to root
         row.getChildren().addAll(labelComponent, comboBox);
@@ -84,8 +86,6 @@ public class FormBuilder implements ComponentFactory {
     public void addButton(String label) {
         // Create button
         Button button = new Button(label);
-        Font font = Font.loadFont(getClass().getResource("/fonts/FontAwesome.otf").toExternalForm(), 20);
-        button.setFont(font);
         button.getStyleClass().add("form-button");
         HBox.setHgrow(button, Priority.ALWAYS);
 
@@ -95,7 +95,7 @@ public class FormBuilder implements ComponentFactory {
 
         // Add components to root
         HBox row = new HBox(spacer, button);
-        row.getStyleClass().add("form-row");
+        row.getStyleClass().add("form-input");
         row.setAlignment(Pos.CENTER_RIGHT);
         root.getChildren().add(row);
     }
