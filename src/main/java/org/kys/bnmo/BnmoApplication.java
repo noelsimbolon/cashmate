@@ -49,6 +49,7 @@ public class BnmoApplication extends Application {
         Parent root = page.getComponent();
         StyleLoadHelper helper = new StyleLoadHelper("/styles/global.css");
         helper.load(root);
+
         loadFonts(root, "Poppins", "ttf");
 
         Scene scene = new Scene(root, 1290, 650);

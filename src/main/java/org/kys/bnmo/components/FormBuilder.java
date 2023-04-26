@@ -13,6 +13,7 @@ import javafx.scene.layout.Region;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.binding.Bindings;
 import javafx.scene.Parent;
+import org.kys.bnmo.helpers.StyleLoadHelper;
 
 public class FormBuilder implements ComponentFactory {
 
@@ -103,18 +104,8 @@ public class FormBuilder implements ComponentFactory {
 
     public Parent getComponent() {
 
-        try {
-            String css = this.getClass()
-                    .getResource("/styles/forms.css")
-                    .toExternalForm();
-
-            root.getStylesheets().add(css);
-        }
-
-        catch (NullPointerException e)
-        {
-            System.out.println("Failed to load css for memberList component!");
-        }
+        StyleLoadHelper helper = new StyleLoadHelper("/styles/forms.css");
+        helper.load(root);
 
         return root;
     }

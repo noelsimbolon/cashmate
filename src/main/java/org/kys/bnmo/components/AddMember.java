@@ -3,6 +3,8 @@ package org.kys.bnmo.components;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import org.kys.bnmo.helpers.LoadHelper;
+import org.kys.bnmo.helpers.StyleLoadHelper;
 
 public class AddMember implements ComponentFactory {
     private final VBox root;
@@ -34,18 +36,9 @@ public class AddMember implements ComponentFactory {
 
     public Parent getComponent() {
 
-        try {
-            String css = this.getClass()
-                    .getResource("/styles/addMember.css")
-                    .toExternalForm();
+        StyleLoadHelper helper = new StyleLoadHelper("/styles/addMember.css");
 
-            root.getStylesheets().add(css);
-        }
-
-        catch (NullPointerException e)
-        {
-            System.out.println("Failed to load css for memberList component!");
-        }
+        helper.load(root);
 
         return root;
     }
