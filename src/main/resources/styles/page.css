@@ -1,0 +1,10 @@
+.root {
+    -fx-pref-width: 1290px;
+    -fx-pref-height: 650px;
+}
+
+Label {
+    -fx-text-fill: white;
+    -fx-font-weight: 600;
+    -fx-font-size: 30;
+}
