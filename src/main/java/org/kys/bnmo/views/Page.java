@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 import org.kys.bnmo.components.AddMember;
 import org.kys.bnmo.components.BillDisplay;
 import org.kys.bnmo.components.ComponentFactory;
+import org.kys.bnmo.components.NavBarFactory;
 import org.kys.bnmo.helpers.StyleLoadHelper;
 
 public class Page implements ComponentFactory {
@@ -19,7 +20,7 @@ public class Page implements ComponentFactory {
     public Parent getComponent() {
         HBox root = new HBox();
 
-        navBar = new VBox();
+        navBar = new NavBarFactory().getComponent();
         tabPane = new TabPane();
 
         navBar.getStyleClass().add("navbar");
