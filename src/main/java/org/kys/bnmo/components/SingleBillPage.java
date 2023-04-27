@@ -1,5 +1,6 @@
 package org.kys.bnmo.components;
 
+import javafx.geometry.HPos;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
@@ -33,8 +34,11 @@ public class SingleBillPage implements ComponentBuilder {
         GridPane gridpane = new GridPane();
         ColumnConstraints column1 = new ColumnConstraints();
         column1.setPercentWidth(50);
+        column1.setHalignment(HPos.LEFT);
+
         ColumnConstraints column2 = new ColumnConstraints();
         column2.setPercentWidth(50);
+        column2.setHalignment(HPos.RIGHT);
         gridpane.getColumnConstraints().addAll(column1, column2);
         gridpane.getStyleClass().add("space-between");
 
@@ -94,13 +98,17 @@ public class SingleBillPage implements ComponentBuilder {
     {
         GridPane header = new GridPane();
         ColumnConstraints column1 = new ColumnConstraints();
-        column1.setPercentWidth(40);
+        column1.setPercentWidth(50);
+        column1.setHalignment(HPos.LEFT);
         ColumnConstraints column2 = new ColumnConstraints();
-        column2.setPercentWidth(15);
+        column2.setPercentWidth(50/3);
+        column2.setHalignment(HPos.RIGHT);
         ColumnConstraints column3 = new ColumnConstraints();
-        column2.setPercentWidth(15);
+        column3.setPercentWidth(50/3);
+        column3.setHalignment(HPos.CENTER);
         ColumnConstraints column4 = new ColumnConstraints();
-        column2.setPercentWidth(15);
+        column4.setPercentWidth(50/3);
+        column4.setHalignment(HPos.RIGHT);
         header.getColumnConstraints().addAll(column1, column2, column3, column4);
 
         return header;
@@ -159,7 +167,7 @@ public class SingleBillPage implements ComponentBuilder {
         Label column2 = new Label(": " + value);
 
         column1.getStyleClass().addAll("small-text", "dark");
-        column1.getStyleClass().addAll("small-text");
+        column2.getStyleClass().addAll("small-text");
 
         addRow(root, row, Arrays.asList(column1, column2));
     }
@@ -189,9 +197,8 @@ public class SingleBillPage implements ComponentBuilder {
     {
         footerHeader = getSpaceBetweenColumnTemplate();
         Label headerColumn1 = new Label("Additional Information");
-        Label headerColumn2 = new Label("Totals");
 
-        addRow(footerHeader, 0, Arrays.asList(headerColumn1, headerColumn2));
+        addRow(footerHeader, 0, Arrays.asList(headerColumn1));
         footerHeader.getStyleClass().addAll("bottom-border", "small-text", "dark");
 
         GridPane footerEnd = getSpaceBetweenColumnTemplate();
@@ -207,6 +214,53 @@ public class SingleBillPage implements ComponentBuilder {
         root.getStyleClass().add("footer");
         return root;
     }
+
+    private void addSummaryRow(GridPane root, int row, String label, String value, boolean isBold)
+    {
+        Label column1 = new Label(label);
+        Label column2 = new Label(":");
+        Label column3 = new Label(value);
+
+        column1.getStyleClass().addAll("medium-text");
+        column2.getStyleClass().addAll("medium-text");
+        column3.getStyleClass().addAll("medium-text");
+
+        if (isBold)
+        {
+            column1.getStyleClass().addAll("dark");
+            column2.getStyleClass().addAll("dark");
+            column3.getStyleClass().addAll("dark");
+        }
+        addRow(root, row, Arrays.asList(column1, column2, column3));
+    }
+
+    public void addSummary() {
+
+        Label headerColumn2 = new Label("Totals");
+        GridPane.setConstraints(headerColumn2, 1, 0);
+        footerHeader.getChildren().add(headerColumn2);
+
+        GridPane summary = new GridPane();
+        ColumnConstraints column1 = new ColumnConstraints();
+        column1.setPercentWidth(20);
+        column1.setHalignment(HPos.LEFT);
+        ColumnConstraints column2 = new ColumnConstraints();
+        column2.setPercentWidth(5);
+        column2.setHalignment(HPos.LEFT);
+        ColumnConstraints column3 = new ColumnConstraints();
+        column3.setPercentWidth(75);
+        column3.setHalignment(HPos.RIGHT);
+        summary.getColumnConstraints().addAll(column1, column2, column3);
+
+        addSummaryRow(summary, 0, "Subtotal", "$12,345.00", false);
+        addSummaryRow(summary, 1, "Discount", "$0.00", false);
+        addSummaryRow(summary, 2, "Tax", "$0.00", false);
+        addSummaryRow(summary, 3, "Total", "$12,345.00", true);
+
+        GridPane.setConstraints(summary, 1, 0);
+        footerContent.getChildren().add(summary);
+    }
+
     @Override
     public void reset() {
         root = new VBox();
@@ -217,10 +271,8 @@ public class SingleBillPage implements ComponentBuilder {
 
         root.getChildren().addAll(mainComponent, getFooter());
         root.getStyleClass().add("page");
-    }
 
-    public void addSummary() {
-
+        addSummary();
     }
 
     @Override
