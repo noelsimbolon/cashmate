@@ -14,10 +14,13 @@ public class BillDisplay implements ComponentFactory {
         VBox pages = new VBox();
         SingleBillPage singleBillPageFactory = new SingleBillPage();
 
-        for (int i = 1; i < 3; i++)
+        for (int i = 0; i < 2; i++)
         {
             pages.getChildren().add(singleBillPageFactory.getAndResetComponent());
         }
+
+        pages.getStyleClass().add("document");
+
         root.setContent(pages);
 
         StyleLoadHelper helper = new StyleLoadHelper("/styles/bill.css");
