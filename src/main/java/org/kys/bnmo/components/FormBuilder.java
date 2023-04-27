@@ -15,18 +15,33 @@ import javafx.beans.binding.Bindings;
 import javafx.scene.Parent;
 import org.kys.bnmo.helpers.StyleLoadHelper;
 
-public class FormBuilder implements ComponentFactory {
+public class FormBuilder implements ComponentBuilder {
 
-    private final VBox root;
+    private VBox root;
 
-    private final VBox inputFields;
+    private VBox inputFields;
 
     public FormBuilder() {
+        reset();
+    }
+    @Override
+    public void reset() {
         this.root = new VBox();
         this.inputFields = new VBox();
         root.getStyleClass().add("form-container");
         inputFields.getStyleClass().add("input-field-container");
         root.getChildren().add(inputFields);
+    }
+
+    @Override
+    public Parent getAndResetComponent() {
+        StyleLoadHelper helper = new StyleLoadHelper("/styles/forms.css");
+        helper.load(root);
+
+        Parent rootResult = root;
+        reset();
+
+        return rootResult;
     }
 
     public void addTitle(String title) {
@@ -99,14 +114,5 @@ public class FormBuilder implements ComponentFactory {
         row.getStyleClass().add("form-input");
         row.setAlignment(Pos.CENTER_RIGHT);
         root.getChildren().add(row);
-    }
-
-
-    public Parent getComponent() {
-
-        StyleLoadHelper helper = new StyleLoadHelper("/styles/forms.css");
-        helper.load(root);
-
-        return root;
     }
 }

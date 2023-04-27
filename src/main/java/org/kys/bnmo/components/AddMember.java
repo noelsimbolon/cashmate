@@ -7,9 +7,13 @@ import org.kys.bnmo.helpers.LoadHelper;
 import org.kys.bnmo.helpers.StyleLoadHelper;
 
 public class AddMember implements ComponentFactory {
-    private final VBox root;
+    private VBox root;
 
     public AddMember() {
+
+    }
+
+    public Parent getComponent() {
         // Initialize root
         this.root = new VBox();
 
@@ -28,13 +32,10 @@ public class AddMember implements ComponentFactory {
 
         // Add components to the root
         root.getChildren().add(title);
-        root.getChildren().add(memberForm.getComponent());
+        root.getChildren().add(memberForm.getAndResetComponent());
 
         // Style the root
         root.getStyleClass().add("add-member-container");
-    }
-
-    public Parent getComponent() {
 
         StyleLoadHelper helper = new StyleLoadHelper("/styles/addMember.css");
 

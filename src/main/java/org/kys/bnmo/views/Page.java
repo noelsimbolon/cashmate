@@ -27,7 +27,7 @@ public class Page implements ComponentFactory {
         tab.setContent(new AddMember().getComponent());
 
         Tab tab2 = new Tab("bruh");
-        tab.setContent(new AddMember().getComponent());
+        tab2.setContent(new AddMember().getComponent());
 
         tabPane.getTabs().addAll(tab, tab2);
 
