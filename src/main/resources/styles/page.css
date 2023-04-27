@@ -5,4 +5,72 @@
 
 .navbar {
     -fx-pref-width: 300px;
+    -fx-background-color: #1C2A39;
 }
+
+TabPane {
+    -fx-pref-height: 650px;
+    -fx-pref-width: 1000px;
+    -fx-background-color: #262F39;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.tab-header-background {
+    -fx-background-color: #171E28;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-border-insets: 0;
+    -fx-pref-height: 100px;
+}
+
+.tab-header-area {
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+}
+
+.control-button-tab {
+    -fx-background-color: #262F39;
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+}
+
+.tab-close-button {
+    -fx-background-color: #171E28;
+}
+
+.tab-close-button:hover {
+    -fx-cursor: hand;
+}
+
+.tab {
+    -fx-background-radius: 16px 16px 0 0;
+    -fx-background-color: transparent;
+    -fx-min-height: 40px;
+    -fx-padding: 8px 10px;
+    -fx-background-insets: 0;
+    -fx-translate-x: -10px;
+}
+
+.tab:selected {
+    -fx-background-color: #262F39;
+}
+.tab:selected .focus-indicator {
+    -fx-focus-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.tab .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #F2F3F5;
+    -fx-font-size: 15px;
+    -fx-font-weight: 500;
+    -fx-padding: 0 10px;
+}
+
+.tab:selected .tab-label {
+    -fx-text-fill: #FCA311;
+}
+

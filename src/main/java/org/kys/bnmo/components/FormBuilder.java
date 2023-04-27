@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Region;
 import javafx.beans.binding.DoubleBinding;
@@ -35,7 +34,7 @@ public class FormBuilder implements ComponentBuilder {
 
     @Override
     public Parent getAndResetComponent() {
-        StyleLoadHelper helper = new StyleLoadHelper("/styles/forms.css");
+        StyleLoadHelper helper = new StyleLoadHelper("/styles/form.css");
         helper.load(root);
 
         Parent rootResult = root;

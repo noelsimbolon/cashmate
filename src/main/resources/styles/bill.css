@@ -1,0 +1,23 @@
+.root {
+
+}
+
+.page {
+    -fx-pref-width: 600px;
+    -fx-pref-height: 1000px;
+    -fx-background-color: white;
+}
+
+.header Label.dark {
+    -fx-text-fill: #111118;
+}
+
+.header Label.large-text {
+    -fx-font-size: 32px;
+
+}
+
+.header .app-title {
+    -fx-font-size: 24px;
+    -fx-text-fill: #FCA311;
+}

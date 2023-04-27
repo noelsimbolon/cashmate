@@ -7,6 +7,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.kys.bnmo.components.AddMember;
+import org.kys.bnmo.components.BillDisplay;
 import org.kys.bnmo.components.ComponentFactory;
 import org.kys.bnmo.helpers.StyleLoadHelper;
 
@@ -23,13 +24,13 @@ public class Page implements ComponentFactory {
 
         navBar.getStyleClass().add("navbar");
 
-        Tab tab = new Tab("Home");
+        Tab tab = new Tab("Membership");
         tab.setContent(new AddMember().getComponent());
 
-        Tab tab2 = new Tab("bruh");
-        tab2.setContent(new AddMember().getComponent());
+        Tab tab2 = new Tab("Bill[id]");
+        tab2.setContent(new BillDisplay().getComponent());
 
-        tabPane.getTabs().addAll(tab, tab2);
+        tabPane.getTabs().addAll(tab2, tab);
 
         root.getChildren().addAll(navBar, tabPane);
         root.getStyleClass().add("page");
