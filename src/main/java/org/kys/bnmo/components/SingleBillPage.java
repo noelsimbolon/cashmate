@@ -101,13 +101,13 @@ public class SingleBillPage implements ComponentBuilder {
         column1.setPercentWidth(50);
         column1.setHalignment(HPos.LEFT);
         ColumnConstraints column2 = new ColumnConstraints();
-        column2.setPercentWidth(50/3);
+        column2.setPercentWidth(16);
         column2.setHalignment(HPos.RIGHT);
         ColumnConstraints column3 = new ColumnConstraints();
-        column3.setPercentWidth(50/3);
+        column3.setPercentWidth(16);
         column3.setHalignment(HPos.CENTER);
         ColumnConstraints column4 = new ColumnConstraints();
-        column4.setPercentWidth(50/3);
+        column4.setPercentWidth(18);
         column4.setHalignment(HPos.RIGHT);
         header.getColumnConstraints().addAll(column1, column2, column3, column4);
 
