@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class NavBarFactory implements ComponentFactory {
+public class Navbar implements ComponentFactory {
     @Override
     public Parent getComponent() {
         // Main Vertical Box
