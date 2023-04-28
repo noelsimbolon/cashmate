@@ -174,13 +174,13 @@ public class SingleBillPage implements ComponentBuilder {
     private GridPane getFooterInformation()
     {
         GridPane root = new GridPane();
-
         addInformationRow(root, 0, "Costumer ID", "0000-000");
         addInformationRow(root, 1, "Membership", "VIP");
         addInformationRow(root, 2, "Status", "Active");
         addInformationRow(root, 3, "Phone Number", "+00 000 000 0000");
         addInformationRow(root, 4, "Point", "1000");
 
+        root.getStyleClass().add("footer-information");
         return root;
     }
     private GridPane getFooterContent()

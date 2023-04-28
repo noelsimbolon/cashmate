@@ -86,3 +86,7 @@
     -fx-background-color: #DADEE3;
     -fx-padding: 20px 40px 10px 40px;
 }
+
+.footer-information {
+    -fx-hgap: 20px;
+}
