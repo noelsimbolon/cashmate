@@ -7,10 +7,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import org.kys.bnmo.components.*;
 import org.kys.bnmo.components.bases.Navbar;
-import org.kys.bnmo.components.documents.BillDocument;
-import org.kys.bnmo.components.documents.ReportDocument;
-import org.kys.bnmo.components.tabs.AddMember;
+import org.kys.bnmo.components.tabs.AddMemberTab;
 import org.kys.bnmo.components.tabs.BillTab;
+import org.kys.bnmo.components.tabs.ReportTab;
 import org.kys.bnmo.helpers.StyleLoadHelper;
 
 public class Page implements ComponentFactory {
@@ -27,13 +26,13 @@ public class Page implements ComponentFactory {
         navBar.getStyleClass().add("navbar");
 
         Tab tab = new Tab("Membership");
-        tab.setContent(new AddMember().getComponent());
+        tab.setContent(new AddMemberTab().getAndResetComponent());
 
         Tab tab2 = new Tab("Bill[id]");
         tab2.setContent(new BillTab().getAndResetComponent());
 
         Tab tab3 = new Tab("Report[id]");
-        tab3.setContent(new ReportDocument().getComponent());
+        tab3.setContent(new ReportTab().getAndResetComponent());
 
         tabPane.getTabs().addAll(tab3, tab2, tab);
 

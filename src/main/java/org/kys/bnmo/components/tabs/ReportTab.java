@@ -1,17 +1,15 @@
 package org.kys.bnmo.components.tabs;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import org.kys.bnmo.components.documents.BillDocument;
+import org.kys.bnmo.components.documents.ReportDocument;
 
-public class BillTab extends TabContainer{
-    private static final BillDocument billDocumentFactory = new BillDocument();
+public class ReportTab extends TabContainer {
+    private static final ReportDocument reportDocumentFactory = new ReportDocument();
     @Override
     protected Pane getContent() {
-        Pane root = billDocumentFactory.getComponent();
+        Pane root = reportDocumentFactory.getComponent();
+        root.getStyleClass().add("center-tab-content");
         return root;
     }
 
