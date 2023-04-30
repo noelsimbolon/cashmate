@@ -1,4 +1,4 @@
-package org.kys.bnmo.components;
+package org.kys.bnmo.components.bases;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import org.kys.bnmo.components.ComponentBuilder;
 import org.kys.bnmo.helpers.StyleLoadHelper;
 
 public class CheckoutPanelBuilder extends ComponentBuilder {

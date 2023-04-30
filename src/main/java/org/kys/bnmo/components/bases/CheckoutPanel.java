@@ -1,4 +1,4 @@
-package org.kys.bnmo.components;
+package org.kys.bnmo.components.bases;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -6,6 +6,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import org.kys.bnmo.components.ComponentFactory;
 
 // TESTING
 class Item {
