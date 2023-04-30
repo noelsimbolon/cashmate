@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import org.kys.bnmo.helpers.StyleLoadHelper;
 
@@ -15,7 +16,7 @@ import java.util.Objects;
 
 public class Navbar implements ComponentFactory {
     @Override
-    public Parent getComponent() {
+    public Pane getComponent() {
         // Main Vertical Box
         VBox root = new VBox(10);
         root.setAlignment(Pos.TOP_CENTER);

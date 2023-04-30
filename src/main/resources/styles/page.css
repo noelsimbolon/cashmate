@@ -73,4 +73,9 @@ TabPane {
 .tab:selected .tab-label {
     -fx-text-fill: #FCA311;
 }
+.tab-content {
+    -fx-alignment: center;
+    -fx-fill-width: false;
+    -fx-padding: 10px;
+}
 

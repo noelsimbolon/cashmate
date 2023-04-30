@@ -1,15 +1,17 @@
 package org.kys.bnmo.components;
 
-import javafx.scene.Parent;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import org.kys.bnmo.helpers.StyleLoadHelper;
 
 public class ReportDocument implements ComponentFactory {
-    private ScrollPane root;
     @Override
-    public Parent getComponent() {
-        root = new ScrollPane();
+    public Pane getComponent() {
+
+        VBox root = new VBox();
+
+        ScrollPane scrollPane = new ScrollPane();
         VBox pages = new VBox();
         ReportPage reportPageFactory = new ReportPage();
 
@@ -21,11 +23,14 @@ public class ReportDocument implements ComponentFactory {
 
         pages.getStyleClass().add("document");
 
-        root.setContent(pages);
+        scrollPane.setContent(pages);
 
         StyleLoadHelper helper = new StyleLoadHelper(
                 "/styles/document.css", "/styles/report.css");
-        helper.load(root);
+        helper.load(scrollPane);
+
+        root.getChildren().add(scrollPane);
+        root.getStyleClass().add("tab-content");
 
         return root;
     }

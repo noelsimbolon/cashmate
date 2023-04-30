@@ -4,6 +4,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import org.kys.bnmo.components.*;
 import org.kys.bnmo.helpers.StyleLoadHelper;
 
@@ -12,7 +13,7 @@ public class Page implements ComponentFactory {
     private TabPane tabPane;
     private Parent currentPage;
     @Override
-    public Parent getComponent() {
+    public Pane getComponent() {
         HBox root = new HBox();
 
         navBar = new Navbar().getComponent();
