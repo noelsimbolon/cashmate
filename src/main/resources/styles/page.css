@@ -74,3 +74,30 @@ TabPane {
     -fx-text-fill: #FCA311;
 }
 
+/*tab content */
+
+.tab-content {
+    -fx-fill-width: false;
+    -fx-padding: 20px 40px;
+    -fx-spacing: 32px;
+}
+
+.center-tab-content {
+    -fx-alignment: center;
+}
+
+.fill-tab-content {
+    -fx-fill-width: true;
+}
+
+.tab-content .tab-header {
+    -fx-alignment: center-left;
+    -fx-fill-width: true;
+}
+
+.add-member-title {
+    -fx-text-fill: #F2F3F5;
+    -fx-font-size: 32px;
+    -fx-font-weight: 700;
+}
+

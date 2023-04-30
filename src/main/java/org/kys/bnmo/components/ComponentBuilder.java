@@ -1,8 +1,30 @@
 package org.kys.bnmo.components;
+import javafx.scene.layout.Pane;
 
-import javafx.scene.Parent;
+public abstract class ComponentBuilder {
 
-public interface ComponentBuilder {
-    public void reset();
-    public Parent getAndResetComponent();
+    private Pane root;
+
+    protected void setRoot(Pane root)
+    {
+        this.root = root;
+    }
+
+    protected Pane getRoot()
+    {
+        return this.root;
+    }
+
+    public ComponentBuilder()
+    {
+        reset();
+    }
+    public Pane getAndResetComponent()
+    {
+        Pane rootResult = root;
+        reset();
+        return rootResult;
+    }
+
+    abstract public void reset();
 }

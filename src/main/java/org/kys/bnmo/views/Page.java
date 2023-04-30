@@ -1,14 +1,15 @@
 package org.kys.bnmo.views;
 
 import javafx.scene.Parent;
-import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import org.kys.bnmo.components.AddMember;
-import org.kys.bnmo.components.BillDisplay;
-import org.kys.bnmo.components.ComponentFactory;
+import javafx.scene.layout.Pane;
+import org.kys.bnmo.components.*;
+import org.kys.bnmo.components.bases.Navbar;
+import org.kys.bnmo.components.tabs.AddMemberTab;
+import org.kys.bnmo.components.tabs.BillTab;
+import org.kys.bnmo.components.tabs.ReportTab;
 import org.kys.bnmo.helpers.StyleLoadHelper;
 
 public class Page implements ComponentFactory {
@@ -16,21 +17,24 @@ public class Page implements ComponentFactory {
     private TabPane tabPane;
     private Parent currentPage;
     @Override
-    public Parent getComponent() {
+    public Pane getComponent() {
         HBox root = new HBox();
 
-        navBar = new VBox();
+        navBar = new Navbar().getComponent();
         tabPane = new TabPane();
 
         navBar.getStyleClass().add("navbar");
 
         Tab tab = new Tab("Membership");
-        tab.setContent(new AddMember().getComponent());
+        tab.setContent(new AddMemberTab().getAndResetComponent());
 
         Tab tab2 = new Tab("Bill[id]");
-        tab2.setContent(new BillDisplay().getComponent());
+        tab2.setContent(new BillTab().getAndResetComponent());
 
-        tabPane.getTabs().addAll(tab2, tab);
+        Tab tab3 = new Tab("Report[id]");
+        tab3.setContent(new ReportTab().getAndResetComponent());
+
+        tabPane.getTabs().addAll(tab3, tab2, tab);
 
         root.getChildren().addAll(navBar, tabPane);
         root.getStyleClass().add("page");

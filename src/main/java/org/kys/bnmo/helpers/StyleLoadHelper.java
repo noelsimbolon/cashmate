@@ -2,30 +2,35 @@ package org.kys.bnmo.helpers;
 
 import javafx.scene.Parent;
 
-public class StyleLoadHelper implements LoadHelper {
+public class StyleLoadHelper extends LoadHelper {
     private String path;
-    public StyleLoadHelper(String path)
+
+    public StyleLoadHelper() {}
+    public StyleLoadHelper(String ... paths)
     {
-        this.path = path;
+        super(paths);
     }
 
     @Override
     public void load(Parent root) {
-        try {
-            String css = this.getClass()
-                    .getResource(path)
-                    .toExternalForm();
 
-            root.getStylesheets().add(css);
-        }
+        for (String path: paths) {
+            try {
+                String css = this.getClass()
+                        .getResource(path)
+                        .toExternalForm();
 
-        catch (NullPointerException e)
-        {
-            System.out.println("Failed to load css for component!");
+                root.getStylesheets().add(css);
+            } catch (NullPointerException e) {
+                System.out.println("Failed to load css with path: " + path);
+            }
         }
     }
     @Override
-    public void setResourcePath(String path) {
-        this.path = path;
+    public void setResourcePath(String ... paths) {
+        for (String path: paths)
+        {
+            this.paths.add(path);
+        }
     }
 }

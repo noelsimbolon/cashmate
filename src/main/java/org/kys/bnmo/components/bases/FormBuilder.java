@@ -1,52 +1,36 @@
-package org.kys.bnmo.components;
+package org.kys.bnmo.components.bases;
 
 import javafx.geometry.Pos;
-import javafx.scene.layout.Priority;
+import javafx.scene.layout.*;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Region;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.binding.Bindings;
-import javafx.scene.Parent;
+import org.kys.bnmo.components.ComponentBuilder;
 import org.kys.bnmo.helpers.StyleLoadHelper;
 
-public class FormBuilder implements ComponentBuilder {
-
-    private VBox root;
-
+public class FormBuilder extends ComponentBuilder {
     private VBox inputFields;
 
-    public FormBuilder() {
-        reset();
-    }
     @Override
     public void reset() {
-        this.root = new VBox();
+        VBox root = new VBox();
         this.inputFields = new VBox();
         root.getStyleClass().add("form-container");
         inputFields.getStyleClass().add("input-field-container");
         root.getChildren().add(inputFields);
-    }
-
-    @Override
-    public Parent getAndResetComponent() {
         StyleLoadHelper helper = new StyleLoadHelper("/styles/form.css");
         helper.load(root);
 
-        Parent rootResult = root;
-        reset();
-
-        return rootResult;
+        setRoot(root);
     }
 
     public void addTitle(String title) {
         Label titleLabel = new Label(title);
         titleLabel.getStyleClass().add("form-title");
-        root.getChildren().add(0, titleLabel);
+        getRoot().getChildren().add(0, titleLabel);
     }
 
     public void addTextBox(String label, String placeholder) {
@@ -112,6 +96,6 @@ public class FormBuilder implements ComponentBuilder {
         HBox row = new HBox(spacer, button);
         row.getStyleClass().add("form-input");
         row.setAlignment(Pos.CENTER_RIGHT);
-        root.getChildren().add(row);
+        getRoot().getChildren().add(row);
     }
 }

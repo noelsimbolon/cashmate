@@ -1,9 +1,10 @@
-package org.kys.bnmo.components;
+package org.kys.bnmo.components.NO_LONGER_USED;
 
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import org.kys.bnmo.helpers.LoadHelper;
+import org.kys.bnmo.components.ComponentFactory;
+import org.kys.bnmo.components.bases.FormBuilder;
 import org.kys.bnmo.helpers.StyleLoadHelper;
 
 public class AddMember implements ComponentFactory {
@@ -13,7 +14,7 @@ public class AddMember implements ComponentFactory {
 
     }
 
-    public Parent getComponent() {
+    public Pane getComponent() {
         // Initialize root
         this.root = new VBox();
 
