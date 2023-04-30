@@ -10,6 +10,7 @@ import org.kys.bnmo.components.bases.Navbar;
 import org.kys.bnmo.components.tabs.AddMemberTab;
 import org.kys.bnmo.components.tabs.BillTab;
 import org.kys.bnmo.components.tabs.ReportTab;
+import org.kys.bnmo.components.tabs.SettingTab;
 import org.kys.bnmo.helpers.StyleLoadHelper;
 
 public class Page implements ComponentFactory {
@@ -34,7 +35,10 @@ public class Page implements ComponentFactory {
         Tab tab3 = new Tab("Report[id]");
         tab3.setContent(new ReportTab().getAndResetComponent());
 
-        tabPane.getTabs().addAll(tab3, tab2, tab);
+        Tab tab4 = new Tab("Setting");
+        tab4.setContent(new SettingTab().getAndResetComponent());
+
+        tabPane.getTabs().addAll(tab4, tab3, tab2, tab);
 
         root.getChildren().addAll(navBar, tabPane);
         root.getStyleClass().add("page");

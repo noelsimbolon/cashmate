@@ -91,7 +91,7 @@ public class CheckoutPanel implements ComponentFactory {
         }
     }
 
-    public void addCustomerDropdownItem(String item) {
+    private void addCustomerDropdownItem(String item) {
         var checkoutPanelContainer = (VBox) root.lookup("#checkout-panel-container");
 
         if (checkoutPanelContainer != null) {
@@ -103,7 +103,7 @@ public class CheckoutPanel implements ComponentFactory {
         }
     }
 
-    public void removeCustomerDropdownItem(String item) {
+    private void removeCustomerDropdownItem(String item) {
         var checkoutPanelContainer = (VBox) root.lookup("#checkout-panel-container");
 
         if (checkoutPanelContainer != null) {
@@ -163,7 +163,7 @@ public class CheckoutPanel implements ComponentFactory {
 
     // This method might want to be refactored to adjust
     // with the data structure.
-    public void addItemCard(HBox itemCard) {
+    private void addItemCard(HBox itemCard) {
         var checkoutPanelContainer = (VBox) root.lookup("#checkout-panel-container");
 
         if (checkoutPanelContainer != null) {
@@ -184,7 +184,7 @@ public class CheckoutPanel implements ComponentFactory {
 
     // This method might want to be refactored to adjust
     // with the data structure.
-    public void removeItemCard(HBox itemCard) {
+    private void removeItemCard(HBox itemCard) {
         var checkoutPanelContainer = (VBox) root.lookup("#checkout-panel-container");
 
         if (checkoutPanelContainer != null) {

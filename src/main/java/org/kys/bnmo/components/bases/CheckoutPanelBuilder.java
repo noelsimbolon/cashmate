@@ -26,18 +26,9 @@ public class CheckoutPanelBuilder extends ComponentBuilder {
         inputFields.setId("checkout-panel-input-fields");
 
         root.getChildren().add(inputFields);
-    }
 
-    @Override
-    public Pane getAndResetComponent() {
         StyleLoadHelper helper = new StyleLoadHelper("/styles/CheckoutPanel.css");
         helper.load(root);
-
-        Pane rootResult = root;
-
-        reset();
-
-        return rootResult;
     }
 
     public void addButtonAndTextField(String placeholder) {
