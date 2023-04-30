@@ -18,7 +18,7 @@
 .form-label {
     -fx-font-size: 20px;
     -fx-text-fill: #F2F3F5;
-    -fx-pref-width: 180px;
+    -fx-min-width: 180px;
 }
 
 .form-input {
@@ -38,7 +38,6 @@
     -fx-background-color: #565B61;
     -fx-border-radius: 8px;
     -fx-font-size: 20px;
-    -fx-fill-width: true;
 }
 
 .form-dropdown .list-cell {
