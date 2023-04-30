@@ -5,21 +5,18 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import org.kys.bnmo.helpers.StyleLoadHelper;
 
-public class BillDocument implements ComponentFactory {
+public class ReportDocument implements ComponentFactory {
     private ScrollPane root;
-
     @Override
     public Parent getComponent() {
-
         root = new ScrollPane();
         VBox pages = new VBox();
-        BillPageBuilder billPageBuilder = new BillPageBuilder();
+        ReportPage reportPageFactory = new ReportPage();
 
         for (int i = 0; i < 2; i++)
         {
-            billPageBuilder.addRows();
-            billPageBuilder.addSummary();
-            pages.getChildren().add(billPageBuilder.getAndResetComponent());
+            reportPageFactory.addRows();
+            pages.getChildren().add(reportPageFactory.getAndResetComponent());
         }
 
         pages.getStyleClass().add("document");
@@ -27,7 +24,7 @@ public class BillDocument implements ComponentFactory {
         root.setContent(pages);
 
         StyleLoadHelper helper = new StyleLoadHelper(
-                "/styles/document.css", "/styles/bill.css");
+                "/styles/document.css", "/styles/report.css");
         helper.load(root);
 
         return root;

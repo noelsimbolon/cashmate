@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 import org.kys.bnmo.helpers.DocumentBuilderHelper;
 
 import java.util.Arrays;
+import java.util.Properties;
 
 public class BillPageBuilder extends ComponentBuilder {
 
@@ -157,6 +158,64 @@ public class BillPageBuilder extends ComponentBuilder {
         GridPane.setConstraints(summary, 1, 0);
         footerContent.getChildren().add(summary);
     }
+
+    private DocumentPageBuilder.ColumnProperty[] getColumnProperties()
+    {
+        DocumentPageBuilder.ColumnProperty property1 = new DocumentPageBuilder.ColumnProperty(
+                "Description",
+                50,
+                HPos.LEFT
+        );
+
+        DocumentPageBuilder.ColumnProperty property2 = new DocumentPageBuilder.ColumnProperty(
+                "Rate",
+                16,
+                HPos.RIGHT
+        );
+
+        DocumentPageBuilder.ColumnProperty property3 = new DocumentPageBuilder.ColumnProperty(
+                "Quantity",
+                16,
+                HPos.CENTER
+        );
+
+        DocumentPageBuilder.ColumnProperty property4 = new DocumentPageBuilder.ColumnProperty(
+                "Subtotal",
+                18,
+                HPos.RIGHT
+        );
+
+        return new DocumentPageBuilder.ColumnProperty[] {
+                property1,
+                property2,
+                property3,
+                property4
+        };
+    }
+
+    public void addRows()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            VBox firstColumnContent = new VBox();
+            Label row1 = new Label("Line Item Title");
+            Label row2 = new Label("Description");
+            row1.getStyleClass().addAll("small-text", "dark");
+            row2.getStyleClass().addAll("very-small-text", "dark");
+            firstColumnContent.getChildren().addAll(row1, row2);
+
+            Label columnLabel2 = new Label("$ 12,345.00");
+            Label columnLabel3 = new Label("1");
+            Label columnLabel4 = new Label("$ 12,345.00");
+
+            documentPageBuilder.addTableRow(
+                    firstColumnContent,
+                    columnLabel2,
+                    columnLabel3,
+                    columnLabel4);
+        }
+    }
+
     @Override
     public void reset() {
         documentPageBuilder.addTitle("Invoice");
@@ -165,7 +224,7 @@ public class BillPageBuilder extends ComponentBuilder {
         documentPageBuilder.addFooterRow(getFooterHeader());
         documentPageBuilder.addFooterRow(getFooterContent());
         documentPageBuilder.addFooterRow(getFooterEnd());
+        documentPageBuilder.setTable(getColumnProperties());
         root = documentPageBuilder.getAndResetComponent();
-        addSummary();
     }
 }

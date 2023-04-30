@@ -3,22 +3,39 @@ package org.kys.bnmo.components;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import org.kys.bnmo.helpers.DocumentBuilderHelper;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
 public class DocumentPageBuilder extends ComponentBuilder {
     private static final DocumentBuilderHelper documentBuilderHelper = new DocumentBuilderHelper();
-    VBox root;
-    VBox header;
-    VBox footer;
-    StringProperty titleProperty;
-    GridPane footerHeader;
-    GridPane footerContent;
+    private VBox root;
+    private VBox header;
+    private VBox footer;
+    private StringProperty titleProperty;
+    private VBox contentParent;
+    private GridPane contentTable;
+    private int currentRow;
+
+    public static class ColumnProperty {
+        public ColumnProperty (String title, int widthPercentage, HPos position) {
+            this.title = title;
+            this.position = position;
+            this.widthPercentage = widthPercentage;
+        }
+
+        public String title;
+        public int widthPercentage;
+        public HPos position;
+    }
     public DocumentPageBuilder()
     {
         reset();
@@ -28,6 +45,7 @@ public class DocumentPageBuilder extends ComponentBuilder {
     {
         Label title = new Label();
         title.textProperty().bind(this.titleProperty);
+        title.getStyleClass().add("title-label");
 
         title.getStyleClass().addAll("large-text", "dark");
         Label appTitle = new Label("CashMate.");
@@ -47,70 +65,56 @@ public class DocumentPageBuilder extends ComponentBuilder {
     }
 
 
-    private GridPane getListColumnTemplate()
+    private GridPane getListColumnTemplate(ColumnProperty ... properties)
     {
         GridPane header = new GridPane();
-        ColumnConstraints column1 = new ColumnConstraints();
-        column1.setPercentWidth(50);
-        column1.setHalignment(HPos.LEFT);
-        ColumnConstraints column2 = new ColumnConstraints();
-        column2.setPercentWidth(16);
-        column2.setHalignment(HPos.RIGHT);
-        ColumnConstraints column3 = new ColumnConstraints();
-        column3.setPercentWidth(16);
-        column3.setHalignment(HPos.CENTER);
-        ColumnConstraints column4 = new ColumnConstraints();
-        column4.setPercentWidth(18);
-        column4.setHalignment(HPos.RIGHT);
-        header.getColumnConstraints().addAll(column1, column2, column3, column4);
+
+        for (ColumnProperty property: properties)
+        {
+            ColumnConstraints column = new ColumnConstraints();
+            column.setPercentWidth(property.widthPercentage);
+            column.setHalignment(property.position);
+            header.getColumnConstraints().add(column);
+        }
 
         return header;
     }
-    private GridPane getContentHeader()
+
+    private String[] getTitles(ColumnProperty ... properties)
     {
-        GridPane header = getListColumnTemplate();
+        return Arrays.stream(properties)
+                .map(property -> property.title)
+                .toArray(size -> new String[size]);
+    }
 
-        Label columnLabel1 = new Label("Description");
-        Label columnLabel2 = new Label("Rate");
-        Label columnLabel3 = new Label("Quantity");
-        Label columnLabel4 = new Label("Subtotal");
+    private GridPane getContentHeader(ColumnProperty ... properties)
+    {
+        GridPane header = getListColumnTemplate(properties);
 
-        documentBuilderHelper.addGridRow(header, 0, Arrays.asList(
-                columnLabel1, columnLabel2, columnLabel3, columnLabel4)
-        );
+        List<Parent> titleLabels = new ArrayList<>();
+
+        for (String title: getTitles(properties))
+        {
+            Label columnLabel = new Label(title);
+            titleLabels.add(columnLabel);
+        }
+
+        documentBuilderHelper.addGridRow(header, 0, titleLabels);
 
         header.getStyleClass().add("content-header");
 
         return header;
     }
-    private VBox getContent()
+    private VBox getContent(ColumnProperty ... properties)
     {
-        GridPane header = getContentHeader();
-        GridPane content = getListColumnTemplate();
+        contentParent = new VBox();
+        return contentParent;
+    }
 
-        for (int i = 0; i < 10; i++)
-        {
-            VBox firstColumnContent = new VBox();
-            Label row1 = new Label("Line Item Title");
-            Label row2 = new Label("Description");
-            row1.getStyleClass().addAll("small-text", "dark");
-            row2.getStyleClass().addAll("very-small-text", "dark");
-            firstColumnContent.getChildren().addAll(row1, row2);
-
-            Label columnLabel2 = new Label("$ 12,345.00");
-            Label columnLabel3 = new Label("1");
-            Label columnLabel4 = new Label("$ 12,345.00");
-
-            documentBuilderHelper.addGridRow(content, i, Arrays.asList(
-                    firstColumnContent, columnLabel2, columnLabel3, columnLabel4)
-            );
-        }
-
-        content.getStyleClass().add("content");
-
+    private VBox getFooter()
+    {
         VBox root = new VBox();
-        root.getChildren().addAll(header, content);
-
+        root.getStyleClass().add("footer");
         return root;
     }
 
@@ -125,18 +129,36 @@ public class DocumentPageBuilder extends ComponentBuilder {
 
     public void addFooterRow(Parent row)
     {
+        footer.setStyle("-fx-padding: 20px 40px 10px 40px;");
         footer.getChildren().add(row);
     }
 
-    private VBox getFooter()
+    public void setTable(ColumnProperty ... properties) {
+        GridPane header = getContentHeader(properties);
+        contentTable = getListColumnTemplate(properties);
+        contentTable.getStyleClass().add("content");
+        contentParent.getChildren().clear();
+        contentParent.getChildren().addAll(header, contentTable);
+    }
+
+    public void addTableRow(Parent ... elements)
     {
-        VBox root = new VBox();
-        root.getStyleClass().add("footer");
-        return root;
+        RowConstraints rowConstraint = new RowConstraints();
+        rowConstraint.setValignment(VPos.TOP);
+        documentBuilderHelper.addGridRow(
+                contentTable,
+                currentRow,
+                Arrays.stream(elements).toList(),
+                rowConstraint);
+
+        currentRow++;
     }
 
     @Override
     public void reset() {
+
+        currentRow = 0;
+
         root = new VBox();
         titleProperty = new SimpleStringProperty(this, "");
 

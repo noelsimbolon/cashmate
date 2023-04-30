@@ -4,6 +4,7 @@ import javafx.geometry.HPos;
 import javafx.scene.Parent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 
 import java.util.List;
 
@@ -16,6 +17,12 @@ public class DocumentBuilderHelper {
             GridPane.setConstraints(elements.get(i), i, row);
             gridpane.getChildren().add(elements.get(i));
         }
+    }
+
+    public void addGridRow(GridPane gridpane, int row, List<Parent> elements, RowConstraints constraint)
+    {
+        addGridRow(gridpane, row, elements);
+        gridpane.getRowConstraints().add(constraint);
     }
     public GridPane getSpaceBetweenColumnTemplate()
     {

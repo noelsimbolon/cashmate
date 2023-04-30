@@ -1,0 +1,90 @@
+.root {
+
+}
+.document {
+    -fx-spacing: 20px;
+}
+.page {
+    -fx-pref-width: 600px;
+    -fx-background-color: white;
+}
+
+.dark {
+    -fx-text-fill: #111118;
+}
+
+.light {
+    -fx-text-fill: #111118;
+}
+
+.large-text {
+    -fx-font-size: 32px;
+}
+
+.medium-text {
+    -fx-font-size: 12px;
+}
+
+.small-text {
+    -fx-font-size: 10px;
+}
+
+.very-small-text {
+    -fx-font-size: 8px;
+}
+
+.bottom-border {
+    -fx-border-width: 0 0 2px 0;
+    -fx-border-color: #111118;
+}
+
+.main-component {
+    -fx-padding: 20px 40px 0 40px;
+}
+/*header*/
+
+.header {
+    -fx-padding: 0 0 20px 0;
+}
+
+.header .app-title {
+    -fx-font-size: 24px;
+    -fx-text-fill: #FCA311;
+}
+
+.label-row {
+    -fx-spacing: 5px;
+}
+
+.title-row {
+
+}
+
+.space-between {
+
+}
+
+.title-label {
+    -fx-max-width: 200px;
+    -fx-wrap-text: true;
+    -fx-line-spacing: -10px;
+}
+
+/*content*/
+
+.content {
+    -fx-padding: 5px 0 40px 0;
+    -fx-spacing: 10px;
+    -fx-row-valignment: top;
+}
+.content-header {
+    -fx-border-width: 0 0 1px 0;
+    -fx-padding: 0 0 5px 0;
+    -fx-border-color: #898D91;
+}
+
+/*footer*/
+
+.footer {
+    -fx-background-color: #DADEE3;
+}
