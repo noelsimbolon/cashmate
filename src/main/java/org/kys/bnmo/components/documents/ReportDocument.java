@@ -1,25 +1,25 @@
-package org.kys.bnmo.components;
+package org.kys.bnmo.components.documents;
 
-import javafx.scene.Parent;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import org.kys.bnmo.components.ComponentFactory;
 import org.kys.bnmo.helpers.StyleLoadHelper;
 
-public class BillDocument implements ComponentFactory {
-
+public class ReportDocument implements ComponentFactory {
     @Override
     public Pane getComponent() {
 
+        VBox root = new VBox();
+
         ScrollPane scrollPane = new ScrollPane();
         VBox pages = new VBox();
-        BillPageBuilder billPageBuilder = new BillPageBuilder();
+        ReportPage reportPageFactory = new ReportPage();
 
         for (int i = 0; i < 2; i++)
         {
-            billPageBuilder.addRows();
-            billPageBuilder.addSummary();
-            pages.getChildren().add(billPageBuilder.getAndResetComponent());
+            reportPageFactory.addRows();
+            pages.getChildren().add(reportPageFactory.getAndResetComponent());
         }
 
         pages.getStyleClass().add("document");
@@ -27,13 +27,10 @@ public class BillDocument implements ComponentFactory {
         scrollPane.setContent(pages);
 
         StyleLoadHelper helper = new StyleLoadHelper(
-                "/styles/document.css", "/styles/bill.css");
+                "/styles/document.css", "/styles/report.css");
         helper.load(scrollPane);
 
-        VBox root = new VBox();
-
         root.getChildren().add(scrollPane);
-        root.getStyleClass().add("tab-content");
 
         return root;
     }

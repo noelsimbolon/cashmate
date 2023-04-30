@@ -1,4 +1,4 @@
-package org.kys.bnmo.components;
+package org.kys.bnmo.components.documents;
 import javafx.geometry.HPos;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
@@ -6,17 +6,17 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import org.kys.bnmo.components.ComponentBuilder;
 import org.kys.bnmo.helpers.DocumentBuilderHelper;
 
 import java.util.Arrays;
-import java.util.Properties;
 
 public class BillPageBuilder extends ComponentBuilder {
 
     private static final DocumentPageBuilder documentPageBuilder = new DocumentPageBuilder();
     private static final DocumentBuilderHelper documentBuilderHelper = new DocumentBuilderHelper();
-    GridPane footerHeader;
-    GridPane footerContent;
+    private GridPane footerHeader;
+    private GridPane footerContent;
 
     private Parent getDateIdSegment()
     {
@@ -225,6 +225,6 @@ public class BillPageBuilder extends ComponentBuilder {
         documentPageBuilder.addFooterRow(getFooterContent());
         documentPageBuilder.addFooterRow(getFooterEnd());
         documentPageBuilder.setTable(getColumnProperties());
-        root = documentPageBuilder.getAndResetComponent();
+        setRoot(documentPageBuilder.getAndResetComponent());
     }
 }

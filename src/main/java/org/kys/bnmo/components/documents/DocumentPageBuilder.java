@@ -1,23 +1,21 @@
-package org.kys.bnmo.components;
+package org.kys.bnmo.components.documents;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import org.kys.bnmo.components.ComponentBuilder;
 import org.kys.bnmo.helpers.DocumentBuilderHelper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Properties;
 
 public class DocumentPageBuilder extends ComponentBuilder {
     private static final DocumentBuilderHelper documentBuilderHelper = new DocumentBuilderHelper();
-    private VBox root;
     private VBox header;
     private VBox footer;
     private StringProperty titleProperty;
@@ -159,7 +157,7 @@ public class DocumentPageBuilder extends ComponentBuilder {
 
         currentRow = 0;
 
-        root = new VBox();
+        VBox root = new VBox();
         titleProperty = new SimpleStringProperty(this, "");
 
         header = getHeader();
@@ -170,12 +168,8 @@ public class DocumentPageBuilder extends ComponentBuilder {
         footer = getFooter();
         root.getChildren().addAll(mainComponent, footer);
         root.getStyleClass().add("page");
+
+        setRoot(root);
     }
 
-    @Override
-    public Pane getAndResetComponent() {
-        Pane rootResult = root;
-        reset();
-        return rootResult;
-    }
 }
