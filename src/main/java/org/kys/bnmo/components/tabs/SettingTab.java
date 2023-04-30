@@ -1,15 +1,23 @@
 package org.kys.bnmo.components.tabs;
 
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import org.kys.bnmo.components.bases.FormBuilder;
 
 public class SettingTab extends TabContainer {
     private static final FormBuilder formBuilder = new FormBuilder();
+
+    private Stage stage;
+    public SettingTab(Stage stage)
+    {
+        this.stage = stage;
+    }
+
     @Override
     protected Pane getContent() {
 
         // Initialize form to add member
-        formBuilder.addTextBox("Config file", "Enter file/folder location");
+        formBuilder.addFilePicker("Folder Location", stage);
         formBuilder.addDropdown("Save file format", "Select the member level", new String[] {"JSON", "XML", "OBJ"});
         formBuilder.addButton("Save");
 

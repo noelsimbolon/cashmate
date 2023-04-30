@@ -40,6 +40,15 @@
     -fx-font-size: 20px;
 }
 
+.file-picker-button {
+    -fx-background-color: #565B61;
+    -fx-border-radius: 8px;
+    -fx-font-size: 20px;
+    -fx-content-display: left;
+    -fx-alignment: baseline-left;
+    -fx-text-fill: #F2F3F5;
+}
+
 .form-dropdown .list-cell {
     -fx-prompt-text-fill: #E0E1DD;
     -fx-background-color: #565B61;

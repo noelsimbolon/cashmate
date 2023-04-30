@@ -8,7 +8,6 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import org.kys.bnmo.components.bases.CheckoutPanel;
 import org.kys.bnmo.components.tabs.AddMemberTab;
 import org.kys.bnmo.components.tabs.BillTab;
 import org.kys.bnmo.components.tabs.ReportTab;
@@ -71,7 +70,7 @@ public class BnmoApplication extends Application {
     public void start(Stage stage) {
         Page page = new Page();
         page.addTab(new AddMemberTab().getAndResetComponent(), "Membership");
-        page.addTab(new SettingTab().getAndResetComponent(), "Settings");
+        page.addTab(new SettingTab(stage).getAndResetComponent(), "Settings");
         page.addTab(new BillTab().getAndResetComponent(), "Bill[id]");
         page.addTab(new ReportTab().getAndResetComponent(), "Report[id]");
 

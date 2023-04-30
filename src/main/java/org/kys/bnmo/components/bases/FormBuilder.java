@@ -1,5 +1,7 @@
 package org.kys.bnmo.components.bases;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.layout.*;
 import javafx.scene.control.ComboBox;
@@ -8,8 +10,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.binding.Bindings;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.kys.bnmo.components.ComponentBuilder;
 import org.kys.bnmo.helpers.StyleLoadHelper;
+
+import java.io.File;
 
 public class FormBuilder extends ComponentBuilder {
     private VBox inputFields;
@@ -82,6 +88,49 @@ public class FormBuilder extends ComponentBuilder {
         inputFields.getChildren().add(row);
     }
 
+    public void addFilePicker(String label, Stage stage) {
+
+        // Layout
+        HBox row = new HBox();
+        row.setAlignment(Pos.CENTER_LEFT);
+
+        // Label
+        Label labelComponent = new Label(label);
+        labelComponent.getStyleClass().add("form-label");
+
+        // create a Button
+        Button button = new Button(label);
+        button.getStyleClass().add("file-picker-button");
+
+        // create a File chooser
+        FileChooser chooser = new FileChooser();
+
+        // create an Event Handler
+        EventHandler<ActionEvent> event =
+                new EventHandler<ActionEvent>() {
+                    public void handle(ActionEvent e)
+                    {
+                        // get the file selected
+                        File file = chooser.showOpenDialog(stage);
+                        if (file != null) {
+                        }
+                    }
+                };
+
+        button.setOnAction(event);
+
+        // Bind the preferred width of the dropdown to the available space
+        DoubleBinding comboBoxWidth = Bindings.createDoubleBinding(() ->
+                        row.getWidth() - labelComponent.getWidth() - row.getSpacing(),
+                row.widthProperty(), labelComponent.widthProperty());
+
+        button.prefWidthProperty().bind(comboBoxWidth);
+
+        // Add components to root
+        row.getChildren().addAll(labelComponent, button);
+        row.getStyleClass().add("form-input");
+        inputFields.getChildren().add(row);
+    }
     public void addButton(String label) {
         // Create button
         Button button = new Button(label);
