@@ -38,7 +38,7 @@ public class AddMember implements ComponentFactory {
         // Style the root
         root.getStyleClass().add("add-member-container");
 
-        StyleLoadHelper helper = new StyleLoadHelper("/styles/addMember.css");
+        StyleLoadHelper helper = new StyleLoadHelper("/NO_LONGER_USED/addMember.css");
 
         helper.load(root);
 
