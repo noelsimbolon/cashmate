@@ -49,8 +49,11 @@ public class DocumentPageBuilder extends ComponentBuilder {
         Label appTitle = new Label("CashMate.");
         appTitle.getStyleClass().add("app-title");
 
+        RowConstraints rowConstraint = new RowConstraints();
+        rowConstraint.setValignment(VPos.TOP);
+
         GridPane titleRow = documentBuilderHelper.getSpaceBetweenColumnTemplate();
-        documentBuilderHelper.addGridRow(titleRow, 0, Arrays.asList(title, appTitle));
+        documentBuilderHelper.addGridRow(titleRow, 0, Arrays.asList(title, appTitle), rowConstraint);
         titleRow.getStyleClass().add("title-row");
 
 
