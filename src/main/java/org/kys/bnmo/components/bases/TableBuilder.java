@@ -1,4 +1,4 @@
-package org.kys.bnmo.components;
+package org.kys.bnmo.components.bases;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -9,13 +9,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
+import org.kys.bnmo.components.ComponentBuilder;
 import org.kys.bnmo.helpers.StyleLoadHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TableBuilder implements ComponentBuilder {
-    private VBox root;
+public class TableBuilder extends ComponentBuilder {
     private HBox rightTopBox;
     private HBox bottomBox;
     private HBox paginationNumberBox;
@@ -27,19 +27,24 @@ public class TableBuilder implements ComponentBuilder {
     private Button nextButton;
 
     public TableBuilder() {
-        reset();
+        super();
+    }
+
+    public Parent getComponent() {
+        return getRoot();
     }
 
     @Override
     public void reset() {
-        this.root = new VBox();
-        this.root.setFillWidth(true);
-        this.root.getStyleClass().add("table-container");
+        VBox root = new VBox();
+        setRoot(root);
+        root.setFillWidth(true);
+        root.getStyleClass().add("table-container");
 
         HBox topBox = new HBox();
         topBox.getStyleClass().add("table-topbox");
         topBox.setAlignment(Pos.CENTER_LEFT);
-        this.root.getChildren().add(topBox);
+        root.getChildren().add(topBox);
 
         HBox showEntriesBox = new HBox(12);
         showEntriesBox.setAlignment(Pos.CENTER_LEFT);
@@ -76,13 +81,13 @@ public class TableBuilder implements ComponentBuilder {
         this.table = new GridPane();
         this.table.getStyleClass().add("table-grid");
         this.tableData = new ArrayList<>();
-        this.root.getChildren().add(this.table);
+        root.getChildren().add(this.table);
 
         this.bottomBox = new HBox();
         this.bottomBox.setSpacing(12);
         this.bottomBox.getStyleClass().add("table-bottombox");
         this.bottomBox.setAlignment(Pos.CENTER_RIGHT);
-        this.root.getChildren().add(this.bottomBox);
+        root.getChildren().add(this.bottomBox);
 
         Button previousButton = new Button("Previous");
         previousButton.getStyleClass().add("text-like-button");
@@ -104,17 +109,11 @@ public class TableBuilder implements ComponentBuilder {
         this.bottomBox.getChildren().add(this.nextButton);
 
         StyleLoadHelper helper = new StyleLoadHelper("/styles/table.css");
-        helper.load(this.root);
-    }
-
-    @Override
-    public Parent getAndResetComponent() {
-        reset();
-
-        return this.root;
+        helper.load(root);
     }
 
     private void updateTable() {
+        this.table.add(new Text("hello"), 0, 0, 1, 1);
         updatePaginationNumbering();
 
         this.table.getChildren().clear();
@@ -193,6 +192,7 @@ public class TableBuilder implements ComponentBuilder {
         this.tableData.clear();
         for (List<String> row : data)
             this.tableData.add(new ArrayList<>(row));
+
         updateTable();
     }
 
