@@ -1,9 +1,13 @@
 package org.kys.bnmo.model;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class Customer {
     private UUID customerID;
+    
+    // Transaction history
+    private ArrayList<Transaction> transactionHistory;
 
     public Customer() {
         // Set random id
@@ -16,6 +20,14 @@ public class Customer {
 
     public UUID getCustomerID() {
         return this.customerID;
+    }
+
+    public ArrayList<Transaction> getTransactionHistory() {
+        return this.transactionHistory;
+    }
+
+    public void addTransaction(Transaction transaction) {
+        this.transactionHistory.add(transaction);
     }
 
     private Member applyMembership(String name, String phoneNumber) {
