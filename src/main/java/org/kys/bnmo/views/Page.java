@@ -11,7 +11,6 @@ import org.kys.bnmo.helpers.StyleLoadHelper;
 public class Page extends ComponentBuilder {
     private Pane navBar;
     private TabPane tabPane;
-    private Parent currentPage;
 
     public void addTab(Parent content, String title)
     {

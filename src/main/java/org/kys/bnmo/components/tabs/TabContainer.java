@@ -23,6 +23,11 @@ public abstract class TabContainer implements ComponentFactory {
         return root;
     }
 
+    protected  HBox getHeader()
+    {
+        return header;
+    }
+
     protected abstract Pane getContent();
     protected void addHeaderTitle(String title)
     {

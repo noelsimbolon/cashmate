@@ -1,25 +1,20 @@
 package org.kys.bnmo.components.bases;
 
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import org.kys.bnmo.components.ComponentFactory;
-import org.kys.bnmo.helpers.NavbarHelper;
+import org.kys.bnmo.helpers.IconButtonHelper;
 import org.kys.bnmo.helpers.StyleLoadHelper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
 
 public class Navbar implements ComponentFactory {
 
-    private static final NavbarHelper helper = new NavbarHelper();
+    private static final IconButtonHelper helper = new IconButtonHelper();
     @Override
     public Pane getComponent() {
         // Main Vertical Box

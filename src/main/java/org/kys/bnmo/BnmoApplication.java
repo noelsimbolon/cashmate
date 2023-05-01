@@ -14,19 +14,17 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import org.kys.bnmo.components.bases.CheckoutPanel;  // For checkout panel testing
 import org.kys.bnmo.components.tabs.*;
-import org.kys.bnmo.helpers.NavbarHelper;
+import org.kys.bnmo.helpers.IconButtonHelper;
 import org.kys.bnmo.helpers.StyleLoadHelper;
 import org.kys.bnmo.views.Page;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 public class BnmoApplication extends Application {
 
-    private final static NavbarHelper navbarHelper = new NavbarHelper();
+    private final static IconButtonHelper navbarHelper = new IconButtonHelper();
     private List<Tab> defaultTabs = new ArrayList();
     private Pane root;
     private List<Button> navbarButtons;

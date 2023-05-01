@@ -95,6 +95,15 @@ TabPane {
     -fx-fill-width: true;
 }
 
+.tab-content .tab-header .back-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0 20px 0 0;
+}
+
+.tab-content .tab-header .back-button:hover {
+    -fx-cursor: hand;
+}
+
 /*cashier tab*/
 .tab-content .tab-row {
     -fx-spacing: 20px;
