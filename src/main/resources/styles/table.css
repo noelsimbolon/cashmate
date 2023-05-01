@@ -1,0 +1,120 @@
+.table-container {
+    -fx-background-radius: 16px;
+    -fx-background-color: #3D444D;
+    -fx-text-fill: white;
+}
+
+.table-grid {
+    -fx-font-size: 14px;
+}
+
+.table-container .text {
+    -fx-fill: white;
+}
+
+.header-cell .text {
+    -fx-font-weight: bold;
+}
+
+.table-topbox {
+    -fx-padding: 24px 32px;
+}
+
+.table-bottombox {
+    -fx-padding: 32px 32px;
+}
+
+.cell {
+    -fx-padding: 16px 32px;
+}
+
+.table-show-entries-box .text {
+    -fx-fill: #E0E1DD;
+}
+
+.even-row-cell {
+    -fx-background-color: #262F39;
+}
+
+.table-container .combo-box {
+    -fx-background-color: #262F39;
+    -fx-background-radius: 8px;
+}
+
+.table-container .combo-box .list-view {
+    -fx-background-color: #262F39;
+    -fx-background-radius: 8px;
+}
+
+.table-container .combo-box .list-cell {
+    -fx-background-color: #262F39;
+    -fx-text-fill: #E0E1DD;
+    -fx-padding: 8;
+    -fx-background-radius: 8px;
+}
+
+.table-container .combo-box .list-cell:hover {
+    -fx-background-color: #1C2A39;
+}
+
+.table-container .combo-box .arrow {
+    -fx-background-color: #E0E1DD;
+}
+
+.table-container .combo-box .text-input {
+    -fx-padding: 2px;
+    -fx-pref-width: 50px;
+    -fx-background-radius: 8px;
+}
+
+.text-like-button {
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-font-size: 16px;
+    -fx-font-weight: normal;
+}
+
+.text-like-button .text {
+    -fx-fill: #E0E1DD;
+}
+
+.pagination-button {
+    -fx-border-color: transparent;
+    -fx-border-radius: 8px;
+    -fx-background-color: #262F39;
+    -fx-background-radius: 8px;
+    -fx-padding: 4 9;
+    -fx-font-size: 12px;
+    -fx-font-weight: normal;
+}
+
+.pagination-button .text {
+   -fx-padding: 0;
+   -fx-fill: #E0E1DD;
+}
+
+.pagination-button-active {
+    -fx-background-color: #FCA311;
+}
+
+.pagination-button-active .text {
+    -fx-fill: #262F39;
+}
+
+.searchbox {
+    -fx-border-color: #E0E1DD;
+    -fx-border-radius: 8px;
+    -fx-padding: 8px 9px 8px 9px;
+}
+
+.search-input {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+    -fx-font-size: 12px;
+    -fx-text-fill: #E0E1DD;
+    -fx-cursor: text;
+}
