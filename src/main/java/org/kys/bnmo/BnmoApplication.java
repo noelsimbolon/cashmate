@@ -12,6 +12,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import org.kys.bnmo.components.bases.CheckoutPanel;  // For checkout panel testing
 import org.kys.bnmo.components.tabs.*;
 import org.kys.bnmo.helpers.StyleLoadHelper;
 import org.kys.bnmo.views.Page;
