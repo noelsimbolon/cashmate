@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import org.kys.bnmo.components.ComponentFactory;
@@ -35,6 +36,7 @@ public class Navbar implements ComponentFactory {
         // Create Buttons Based On buttonNames and Add to the List
         for (String buttonName : buttonNames) {
             Button button = new Button(buttonName);
+            button.setId(buttonName.replaceAll("\\s+",""));
 
             // Set Button Action if Clicked
             button.setOnAction(event -> {
@@ -61,11 +63,17 @@ public class Navbar implements ComponentFactory {
         
         // Add Components to the root
         root.getChildren().add(programTitle);
-        root.getChildren().addAll(buttonList);
+        VBox buttons = new VBox();
+        buttons.getChildren().addAll(buttonList);
+        buttons.setId("buttons-box");
+        buttons.getStyleClass().add("buttons-box");
+        root.getChildren().add(buttons);
         
         // Load CSS File
         StyleLoadHelper helper = new StyleLoadHelper("/styles/navBar.css");
         helper.load(root);
+
+        root.getStyleClass().add("navbar");
 
         return root;
     }

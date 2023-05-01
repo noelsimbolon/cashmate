@@ -6,6 +6,10 @@
     -fx-padding: 49 0 18 0;
 }
 
+.buttons-box {
+    -fx-padding: 0 0 0 14;
+}
+
 .unselected-nav-button {
     -fx-alignment: center-left;
     -fx-background-color: #1C2A39;

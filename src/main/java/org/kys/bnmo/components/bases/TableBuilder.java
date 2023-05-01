@@ -1,5 +1,4 @@
 package org.kys.bnmo.components.bases;
-
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -11,7 +10,6 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import org.kys.bnmo.components.ComponentBuilder;
 import org.kys.bnmo.helpers.StyleLoadHelper;
-
 import java.util.ArrayList;
 import java.util.List;
 

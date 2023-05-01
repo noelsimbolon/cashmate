@@ -4,7 +4,6 @@ import javafx.scene.Parent;
 
 public class StyleLoadHelper extends LoadHelper {
     private String path;
-
     public StyleLoadHelper() {}
     public StyleLoadHelper(String ... paths)
     {
