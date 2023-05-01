@@ -8,10 +8,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import org.kys.bnmo.components.tabs.AddMemberTab;
-import org.kys.bnmo.components.tabs.BillTab;
-import org.kys.bnmo.components.tabs.ReportTab;
-import org.kys.bnmo.components.tabs.SettingTab;
+import org.kys.bnmo.components.tabs.*;
 import org.kys.bnmo.helpers.StyleLoadHelper;
 import org.kys.bnmo.views.Page;
 
@@ -69,10 +66,13 @@ public class BnmoApplication extends Application {
     @Override
     public void start(Stage stage) {
         Page page = new Page();
-        page.addTab(new AddMemberTab().getAndResetComponent(), "Membership");
-        page.addTab(new SettingTab(stage).getAndResetComponent(), "Settings");
-        page.addTab(new BillTab().getAndResetComponent(), "Bill[id]");
-        page.addTab(new ReportTab().getAndResetComponent(), "Report[id]");
+        page.addTab(new CatalogueTab().getComponent(), "Catalogue");
+        page.addTab(new MembershipTab().getComponent(), "Membership");
+        page.addTab(new CashierTab().getComponent(), "Cashier");
+        page.addTab(new AddMemberTab().getComponent(), "Membership");
+        page.addTab(new SettingTab(stage).getComponent(), "Settings");
+        page.addTab(new BillTab().getComponent(), "Bill[id]");
+        page.addTab(new ReportTab().getComponent(), "Report[id]");
 
         root = page.getAndResetComponent();
 

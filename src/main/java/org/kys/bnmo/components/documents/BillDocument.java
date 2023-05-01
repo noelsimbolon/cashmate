@@ -8,12 +8,12 @@ import org.kys.bnmo.helpers.StyleLoadHelper;
 
 public class BillDocument implements ComponentFactory {
 
+    private static final BillPageBuilder billPageBuilder = new BillPageBuilder();
     @Override
     public Pane getComponent() {
 
         ScrollPane scrollPane = new ScrollPane();
         VBox pages = new VBox();
-        BillPageBuilder billPageBuilder = new BillPageBuilder();
 
         for (int i = 0; i < 2; i++)
         {

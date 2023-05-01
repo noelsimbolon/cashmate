@@ -14,15 +14,12 @@ public class BillTab extends TabContainer{
         Pane root = billDocumentFactory.getComponent();
         return root;
     }
-
     public void setContent() {
 
     }
-
     @Override
-    public void reset() {
-
-        super.reset();
+    protected void additionalAction()
+    {
         getRoot().getStyleClass().add("center-tab-content");
     }
 }

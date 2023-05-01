@@ -24,9 +24,8 @@ public class AddMemberTab extends TabContainer {
     }
 
     @Override
-    public void reset() {
-
-        super.reset();
+    protected void additionalAction()
+    {
         getRoot().getStyleClass().add("fill-tab-content");
         addHeaderTitle("Add Member");
     }

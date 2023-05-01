@@ -7,6 +7,8 @@ import org.kys.bnmo.components.ComponentFactory;
 import org.kys.bnmo.helpers.StyleLoadHelper;
 
 public class ReportDocument implements ComponentFactory {
+
+    private static final ReportPage reportPageFactory = new ReportPage();
     @Override
     public Pane getComponent() {
 
@@ -14,7 +16,6 @@ public class ReportDocument implements ComponentFactory {
 
         ScrollPane scrollPane = new ScrollPane();
         VBox pages = new VBox();
-        ReportPage reportPageFactory = new ReportPage();
 
         for (int i = 0; i < 2; i++)
         {

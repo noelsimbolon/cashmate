@@ -8,13 +8,20 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import org.kys.bnmo.components.ComponentBuilder;
+import org.kys.bnmo.components.ComponentFactory;
 
-public abstract class TabContainer extends ComponentBuilder {
+public abstract class TabContainer implements ComponentFactory {
 
     private StringProperty headerProperty;
     private Pane content;
     private Label headerTitle;
     private HBox header;
+    private Pane root;
+
+    protected Pane getRoot()
+    {
+        return root;
+    }
 
     protected abstract Pane getContent();
     protected void addHeaderTitle(String title)
@@ -22,13 +29,13 @@ public abstract class TabContainer extends ComponentBuilder {
         headerProperty.set(title);
         header.getChildren().add(headerTitle);
     }
-    public void setBackButton()
+
+    protected void additionalAction()
     {
+
     }
-
     @Override
-    public void reset() {
-
+    public Pane getComponent() {
         header = new HBox();
         header.getStyleClass().add("tab-header");
         header.setPrefWidth(Double.MAX_VALUE);
@@ -41,11 +48,13 @@ public abstract class TabContainer extends ComponentBuilder {
 
         content = getContent();
 
-        VBox root = new VBox();
+        root = new VBox();
         root.getChildren().addAll(header, content);
         root.getStyleClass().add("tab-content");
 
-        setRoot(root);
+        additionalAction();
+
+        return root;
     }
 
 }

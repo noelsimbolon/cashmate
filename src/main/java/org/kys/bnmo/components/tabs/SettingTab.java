@@ -23,11 +23,9 @@ public class SettingTab extends TabContainer {
 
         return formBuilder.getAndResetComponent();
     }
-
     @Override
-    public void reset() {
-
-        super.reset();
+    protected void additionalAction()
+    {
         getRoot().getStyleClass().add("fill-tab-content");
         addHeaderTitle("Settings");
     }

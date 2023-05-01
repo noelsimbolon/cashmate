@@ -12,15 +12,12 @@ public class ReportTab extends TabContainer {
         root.getStyleClass().add("center-tab-content");
         return root;
     }
-
     public void setContent() {
 
     }
-
     @Override
-    public void reset() {
-
-        super.reset();
+    protected void additionalAction()
+    {
         getRoot().getStyleClass().add("center-tab-content");
     }
 }

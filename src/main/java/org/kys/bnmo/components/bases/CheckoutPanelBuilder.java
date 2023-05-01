@@ -14,12 +14,11 @@ import org.kys.bnmo.helpers.StyleLoadHelper;
 
 public class CheckoutPanelBuilder extends ComponentBuilder {
 
-    private VBox root;
     private VBox inputFields;
 
     @Override
     public void reset() {
-        root = new VBox();
+        VBox root = new VBox();
         root.setId("checkout-panel-container");
 
         inputFields = new VBox();
@@ -29,6 +28,8 @@ public class CheckoutPanelBuilder extends ComponentBuilder {
 
         StyleLoadHelper helper = new StyleLoadHelper("/styles/CheckoutPanel.css");
         helper.load(root);
+
+        setRoot(root);
     }
 
     public void addButtonAndTextField(String placeholder) {
