@@ -10,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import org.kys.bnmo.components.ComponentFactory;
+import org.kys.bnmo.helpers.NavbarHelper;
 import org.kys.bnmo.helpers.StyleLoadHelper;
 
 import java.util.ArrayList;
@@ -17,6 +18,8 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class Navbar implements ComponentFactory {
+
+    private static final NavbarHelper helper = new NavbarHelper();
     @Override
     public Pane getComponent() {
         // Main Vertical Box
@@ -44,20 +47,16 @@ public class Navbar implements ComponentFactory {
                 // Also Change the Button Graphic
                 for (int i = 0; i < buttonList.size(); i++) {
                     if (buttonList.get(i) == event.getSource()) {
-                        buttonList.get(i).getStyleClass().clear();
-                        buttonList.get(i).getStyleClass().add("selected-nav-button");
-                        setButtonGraphic(buttonList.get(i), "/icon/" + buttonNames.get(i) + "SelectedImage.png");
+                        helper.selectButton(buttonList.get(i));
                     } else {
-                        buttonList.get(i).getStyleClass().clear();
-                        buttonList.get(i).getStyleClass().add("unselected-nav-button");
-                        setButtonGraphic(buttonList.get(i), "/icon/" + buttonNames.get(i) + "Image.png");
+                        helper.unselectButton(buttonList.get(i));
                     }
                 }
             });
 
             // Set Default Button Style and Graphic
             button.getStyleClass().add("unselected-nav-button");
-            setButtonGraphic(button, "/icon/" + buttonName + "Image.png");
+            helper.setButtonGraphic(button, "/icon/" + buttonName + "Image.png");
             buttonList.add(button);
         }
         
@@ -76,12 +75,5 @@ public class Navbar implements ComponentFactory {
         root.getStyleClass().add("navbar");
 
         return root;
-    }
-
-    private void setButtonGraphic(Button button, String path) {
-        // Set Button Graphic to Image that Located in the Path
-        Image image = new Image(Objects.requireNonNull(getClass().getResource(path)).toExternalForm());
-        ImageView imageView = new ImageView(image);
-        button.setGraphic(imageView);
     }
 }

@@ -1,6 +1,8 @@
 package org.kys.bnmo;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
@@ -14,14 +16,17 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.kys.bnmo.components.bases.CheckoutPanel;  // For checkout panel testing
 import org.kys.bnmo.components.tabs.*;
+import org.kys.bnmo.helpers.NavbarHelper;
 import org.kys.bnmo.helpers.StyleLoadHelper;
 import org.kys.bnmo.views.Page;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class BnmoApplication extends Application {
 
+    private final static NavbarHelper navbarHelper = new NavbarHelper();
     private List<Tab> defaultTabs = new ArrayList();
     private Pane root;
     private List<Button> navbarButtons;
@@ -39,6 +44,11 @@ public class BnmoApplication extends Application {
         public void handle(ActionEvent event) {
             List<Tab> tabs = tabPane.getTabs();
 
+            Tab selectedTab = tabPane.getSelectionModel().getSelectedItem();
+
+            if (selectedTab != null
+                    && button.getId() == tabPane.getSelectionModel().getSelectedItem().getId()) return;
+
             for (Tab tab: tabs)
             {
                 if (tab.getId() == button.getId())
@@ -55,6 +65,43 @@ public class BnmoApplication extends Application {
                     tabPane.getTabs().add(tab);
                     tabPane.getSelectionModel().select(tab);
                     return;
+                }
+            }
+        }
+    }
+
+    private class TabChangeListener implements ChangeListener<Tab> {
+        private List<Button> buttons;
+        public TabChangeListener(List<Button> buttons) {
+            this.buttons = buttons;
+        }
+        @Override
+        public void changed(ObservableValue<? extends Tab> observable, Tab oldTab, Tab newTab) {
+            if (newTab != null) {
+                for (Button button: buttons)
+                {
+                    if (button.getId() == newTab.getId())
+                    {
+                        button.fire();
+                        return;
+                    }
+
+                    else
+                    {
+                        navbarHelper.unselectButton(button);
+                    }
+                }
+            }
+
+            else if (oldTab != null)
+            {
+                for (Button button: buttons)
+                {
+                    if (button.getId() == oldTab.getId())
+                    {
+                        navbarHelper.unselectButton(button);
+                        return;
+                    }
                 }
             }
         }
@@ -124,6 +171,10 @@ public class BnmoApplication extends Application {
             NavbarButtonHandler handler = new NavbarButtonHandler(button, tabPane);
             button.addEventHandler(ActionEvent.ACTION, handler);
         });
+
+        tabPane.getSelectionModel()
+                .selectedItemProperty()
+                .addListener(new TabChangeListener(navbarButtons));
 
         // styles
         StyleLoadHelper helper = new StyleLoadHelper("/styles/global.css");
