@@ -15,7 +15,7 @@ public class MembershipTab extends TabContainer {
     protected Pane getContent() {
 
         // table
-        tableBuilder.addSearchBar(2);
+//        tableBuilder.addSearchBar(2);
 
         Pane root = tableBuilder.getAndResetComponent();
 

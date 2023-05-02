@@ -18,7 +18,7 @@ public class CashierTab extends TabContainer {
         HBox root = new HBox();
 
         // table
-        tableBuilder.addSearchBar(2);
+//        tableBuilder.addSearchBar(2);
 
         Pane itemTable = tableBuilder.getAndResetComponent();
         Pane checkoutPanel = checkoutPanelFactory.getComponent();
