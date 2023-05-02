@@ -4,6 +4,13 @@
     -fx-text-fill: white;
 }
 
+.table-tab-pane {
+    -fx-tab-max-height: 0 ;
+}
+.table-tab-pane .tab-header-area {
+    visibility: hidden ;
+}
+
 .table-grid {
     -fx-font-size: 14px;
 }
