@@ -114,7 +114,7 @@ TabPane {
 }
 
 .tab-content .tab-row .tab-checkout-panel {
-    -fx-pref-width: 300px;
+    -fx-min-width: 300px;
 }
 
 
