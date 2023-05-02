@@ -10,9 +10,6 @@
     -fx-padding: 0 0 0 14;
 }
 
-.navbar-scroll-panel {
-    -fx-pref-height: 500px;
-}
 .unselected-nav-button {
     -fx-alignment: center-left;
     -fx-background-color: #1C2A39;
