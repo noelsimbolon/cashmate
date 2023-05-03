@@ -8,6 +8,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
@@ -105,41 +106,11 @@ public class BnmoApplication extends Application {
         }
     }
 
-    private void loadFonts(Parent root, String family, String ext)
-    {
-        List<String> fontStyles = new ArrayList(Arrays.asList(
-                "Bold",
-                "Italic",
-                "Medium",
-                "Regular",
-                "SemiBold"
-        ));
-
-        for (String fontStyle : fontStyles) {
-
-            try {
-                String path = "/fonts/" + family + "-" + fontStyle;
-                String italicPath = path + "Italic" + "." + ext;
-                path += "." + ext;
-
-                Font.loadFont(getClass().getResource(path).toExternalForm(), 30);
-
-                if (!(fontStyle.equals("Regular") || fontStyle.equals("Italic")))
-                    Font.loadFont(getClass().getResource(italicPath).toExternalForm(), 30);
-            }
-
-            catch (Exception e)
-            {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
-
     private TabPane getTabPane() {return ((TabPane)root.lookup("#parent-tab-pane"));}
 
     private List<Button> getNavbarButtons()
     {
-        return ((VBox)root.lookup("#buttons-box"))
+        return ((Pane)((ScrollPane)root.lookup("#navbar-scroll-panel")).getContent())
                 .getChildren()
                 .stream()
                 .map(button -> (Button) button)
@@ -177,7 +148,6 @@ public class BnmoApplication extends Application {
         // styles
         StyleLoadHelper helper = new StyleLoadHelper("/styles/global.css");
         helper.load(root);
-        loadFonts(root, "Poppins", "ttf");
 
         Scene scene = new Scene(root, 1290, 650);
         stage.setTitle("My JavaFX App");
