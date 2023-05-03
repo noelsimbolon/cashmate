@@ -131,3 +131,30 @@
     -fx-text-fill: #E0E1DD;
     -fx-cursor: text;
 }
+
+.table-add-item-button {
+    -fx-background-color: #FCA311;
+    -fx-padding: 8px 12px;
+    -fx-background-radius: 8px;
+}
+
+.table-add-item-button .text {
+    -fx-fill: #202225;
+}
+
+.entry-action-button {
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+    -fx-padding: 4;
+    -fx-font-size: 16px;
+    -fx-font-weight: normal;
+}
+
+.table-grid .context-menu {
+  -fx-background-color: #262F39;
+  -fx-text-fill: white;
+}
+
+.table-grid .menu-item:focused {
+     -fx-background-color: #1C2A39;
+}

@@ -1,13 +1,20 @@
 package org.kys.bnmo.components.bases;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import org.kys.bnmo.components.ComponentBuilder;
+import org.kys.bnmo.helpers.IconButtonHelper;
 import org.kys.bnmo.helpers.StyleLoadHelper;
+import org.kys.bnmo.helpers.Table.TableData;
 
 import java.util.List;
+import java.util.Objects;
 
 public class TableBuilder extends ComponentBuilder {
     Table currentTable;
@@ -18,6 +25,8 @@ public class TableBuilder extends ComponentBuilder {
 
     @Override
     public void reset() {
+        this.currentTable = null;
+
         VBox root = new VBox();
         setRoot(root);
         root.setFillWidth(true);
@@ -53,6 +62,8 @@ public class TableBuilder extends ComponentBuilder {
 
         HBox rightTopBox = new HBox();
         rightTopBox.getStyleClass().add("right-top-box");
+        rightTopBox.setAlignment(Pos.CENTER_LEFT);
+        rightTopBox.setSpacing(24);
         topBox.getChildren().add(rightTopBox);
 
         VBox tableWrapper = new VBox();
@@ -116,7 +127,7 @@ public class TableBuilder extends ComponentBuilder {
         table.setCurrentPageIndex(currentPage - 1);
     }
 
-    public void setTableData(List<List<String>> data, int  filterIndex) {
+    public void setTableData(TableData data, int  filterIndex) {
         VBox root = (VBox) getRoot();
         ComboBox<String> entriesComboBox = (ComboBox<String>) getRoot().lookup(".entries-combo-box");
         Table table = new Table(data, filterIndex, Integer.parseInt(entriesComboBox.getValue()));
@@ -137,20 +148,37 @@ public class TableBuilder extends ComponentBuilder {
 
         HBox searchBox = new HBox();
         searchBox.getStyleClass().add("searchbox");
+        searchBox.setSpacing(8);
+        searchBox.setAlignment(Pos.CENTER_LEFT);
         rightTopBox.getChildren().add(searchBox);
+
+        Image searchImage = new Image(Objects.requireNonNull(getClass().getResource("/icon/SearchIcon.png")).toExternalForm());
+        ImageView searchImageView = new ImageView(searchImage);
+        searchBox.getChildren().add(searchImageView);
 
         TextField searchBarInput = new TextField();
         searchBarInput.getStyleClass().add("search-input");
         searchBarInput.textProperty().addListener((observable, oldValue, newValue) -> {
             table.applyFilter(newValue);
         });
+        searchBarInput.setPromptText("Search...");
         searchBox.getChildren().add(searchBarInput);
     }
 
-//    public void addAddItemButton(String buttonText, EventHandler<? super MouseEvent> eventHandler) {
-//        Button button = new Button(buttonText);
-//        button.getStyleClass().add("table-add-item-button");
-//        button.setOnMouseClicked(eventHandler);
-//        this.rightTopBox.getChildren().add(button);
-//    }
+    public void addAddItemButton(String buttonText, EventHandler<? super MouseEvent> eventHandler) {
+        Button button = new Button(buttonText);
+        button.getStyleClass().add("table-add-item-button");
+        button.setOnMouseClicked(eventHandler);
+        IconButtonHelper iconButtonHelper = new IconButtonHelper();
+        iconButtonHelper.setButtonGraphic(button, "/icon/PlusIconDark.png");
+        HBox rightTopBox = (HBox) getRoot().lookup(".right-top-box");
+        rightTopBox.getChildren().add(button);
+    }
+
+    public void setColumnAlignment(int columnIdx, Pos pos) {
+        if (currentTable != null) {
+            Table table = currentTable;
+            table.setColumnAlignment(columnIdx, pos);
+        }
+    }
 }
