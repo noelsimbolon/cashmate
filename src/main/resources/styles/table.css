@@ -5,14 +5,16 @@
 }
 
 .table-tab-pane {
-    -fx-tab-max-height: 0 ;
+    -fx-tab-max-height: 0;
 }
 .table-tab-pane .tab-header-area {
-    visibility: hidden ;
+    visibility: hidden;
+    -fx-padding: -20 0 0 0;
 }
 
 .table-grid {
     -fx-font-size: 14px;
+    -fx-background-color: #3D444D;
 }
 
 .table-container .text {
@@ -25,10 +27,14 @@
 
 .table-topbox {
     -fx-padding: 24px 32px;
+    -fx-background-color: #3D444D;
+    -fx-background-radius: 16px 16px 0 0;
 }
 
 .table-bottombox {
     -fx-padding: 32px 32px;
+    -fx-background-color: #3D444D;
+    -fx-background-radius: 0 0 16px 16px;
 }
 
 .cell {
