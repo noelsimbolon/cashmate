@@ -4,22 +4,25 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class Customer {
-    private final UUID customerID;
+    // Customer count
+    public static int customerCount = 0;
+    private final int customerID;
     
     // Transaction history
     private ArrayList<Transaction> transactionHistory;
 
     public Customer() {
-        // Set random id
-        this.customerID = UUID.randomUUID();
+        // Set incremental id
+        customerCount++;
+        this.customerID = customerCount;
     }
 
-    public Customer(UUID customerID) {
+    public Customer(int customerID) {
         // Set predefined id
         this.customerID = customerID;
     }
 
-    public UUID getCustomerID() {
+    public int getCustomerID() {
         return this.customerID;
     }
 

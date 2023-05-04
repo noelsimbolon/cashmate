@@ -11,8 +11,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
 import org.kys.bnmo.components.bases.TableBuilder;
-import org.kys.bnmo.helpers.IconButtonHelper;
-import org.kys.bnmo.helpers.StyleLoadHelper;
 import org.kys.bnmo.helpers.Table.TableData;
 import org.kys.bnmo.model.Customer;
 import org.kys.bnmo.model.Member;
@@ -49,20 +47,20 @@ public class MembershipTab extends TabContainer {
             }
         }
 
+        System.out.println(customers);
+
         // Table heading
-        List<String> tableHeadings = new ArrayList<>(Arrays.asList("Name", "Phone", "Status", "Class", "Action"));
+        List<String> tableHeadings = new ArrayList<>(Arrays.asList("Customer ID", "Name", "Phone", "Status", "Class", "Action"));
 
         // List of table content
         List<List<String>> tableContent = new ArrayList<>();
-
-        // List of event listeners for action column
-        List<EventHandler<MouseEvent>> handlers = new ArrayList<>();
 
         // List of context menus for action column
         List<ContextMenu> contextMenus = new ArrayList<>();
 
         for (Customer customer : customers) {
             List<String> row = new ArrayList<>();
+            row.add(String.valueOf(customer.getCustomerID()));
             if (customer instanceof Member) {
                 row.add(((Member) customer).getName());
                 row.add(((Member) customer).getPhoneNumber());
@@ -76,9 +74,6 @@ public class MembershipTab extends TabContainer {
             }
 
             tableContent.add(row);
-            handlers.add(e -> {
-                System.out.println("Worked!");
-            });
 
             // Action menu
             ContextMenu menu;
@@ -92,6 +87,10 @@ public class MembershipTab extends TabContainer {
                 }
 
                 if (customer instanceof VIP) {
+                    // Add event listener
+                    item1.setOnAction(e -> {
+                        System.out.println("Edit VIP");
+                    });
                     menu = new ContextMenu(item1, item2);
                 } else {
                     MenuItem item3 = new MenuItem("Promote");
@@ -105,14 +104,22 @@ public class MembershipTab extends TabContainer {
         }
 
         // Set table data
-        TableData tableData = new TableData(tableHeadings, tableContent, handlers, contextMenus);
-        tableBuilder.setTableData(tableData, List.of(1));
+        TableData tableData = new TableData(tableHeadings, tableContent, null, contextMenus);
+        List<Integer> indices = new ArrayList<>();
+        indices.add(1);
+        tableBuilder.setTableData(tableData, indices);
 
         // Add search bar
         tableBuilder.addSearchBar();
 
-        // Set column alignment for header
+        // Set content column alignments as center left
+        for (int i = 0; i < tableHeadings.size(); i++) {
+            tableBuilder.setColumnAlignment(i, Pos.CENTER_LEFT);
+        }
+
+        // Set ID and action alignment as center
         tableBuilder.setColumnAlignment(0, Pos.CENTER);
+        tableBuilder.setColumnAlignment(tableHeadings.size() - 1, Pos.CENTER);
 
         // Set the root
         Pane root = tableBuilder.getAndResetComponent();

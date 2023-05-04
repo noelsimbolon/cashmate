@@ -13,6 +13,7 @@ import org.kys.bnmo.helpers.IconButtonHelper;
 import org.kys.bnmo.helpers.loaders.StyleLoadHelper;
 import org.kys.bnmo.helpers.Table.TableData;
 
+import java.util.List;
 import java.util.Objects;
 
 public class TableBuilder extends ComponentBuilder {
@@ -126,7 +127,7 @@ public class TableBuilder extends ComponentBuilder {
         table.setCurrentPageIndex(currentPage - 1);
     }
 
-    public void setTableData(TableData data, List<Integer>  filterIndices) {
+    public void setTableData(TableData data, List<Integer> filterIndices) {
         VBox root = (VBox) getRoot();
         ComboBox<String> entriesComboBox = (ComboBox<String>) getRoot().lookup(".entries-combo-box");
 
