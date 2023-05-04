@@ -12,6 +12,11 @@ public class VIP extends Member {
         super(name, phoneNumber);
     }
 
+    @Override
+    public String getCustomerClass() {
+        return "VIP";
+    }
+
     public double getDiscount() {
         return DISCOUNT_RATE;
     }
