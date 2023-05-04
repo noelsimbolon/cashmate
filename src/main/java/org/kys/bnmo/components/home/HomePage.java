@@ -1,17 +1,20 @@
 package org.kys.bnmo.components.home;
 
-import javafx.geometry.Pos;
+
+import javafx.animation.AnimationTimer;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import org.kys.bnmo.components.ComponentFactory;
-import org.kys.bnmo.components.bases.FormBuilder;
 import org.kys.bnmo.helpers.StyleLoadHelper;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class HomePage implements ComponentFactory {
 
     private Pane root;
+
 
     public HomePage() {
     }
@@ -56,6 +59,35 @@ public class HomePage implements ComponentFactory {
         title6.getStyleClass().add("add-member-title6");
         title6.relocate(605,380);
 
+        Label dateTimeLabel1 = new Label();
+        dateTimeLabel1.getStyleClass().add("date-time-label");
+        dateTimeLabel1.relocate(1080, 700);
+
+        Label dateTimeLabel2 = new Label();
+        dateTimeLabel2.getStyleClass().add("date-time-label");
+        dateTimeLabel2.relocate(1000, 740);
+
+        // Create animation timer to update the date and time label
+        AnimationTimer timer = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                // Get the current date and time
+                LocalDateTime currentDateTime = LocalDateTime.now();
+
+                // Format the current date and time
+                String formattedTime = currentDateTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+                String formattedDate = currentDateTime.format(DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy"));
+
+
+                // Update the date and time label
+                dateTimeLabel1.setText(formattedTime);
+                dateTimeLabel2.setText(formattedDate);
+
+            }
+        };
+
+        // Start the animation timer
+        timer.start();
 
         // Add components to the root
         root.getChildren().add(title);
@@ -65,6 +97,8 @@ public class HomePage implements ComponentFactory {
         root.getChildren().add(title4);
         root.getChildren().add(title5);
         root.getChildren().add(title6);
+        root.getChildren().add(dateTimeLabel1);
+        root.getChildren().add(dateTimeLabel2);
         root.getChildren().add(programTitle);
 
         // Style the root

@@ -71,3 +71,9 @@
     -fx-padding: 49 0 20 0;
 }
 
+.date-time-label{
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+    -fx-text-fill: White;
+}
+
