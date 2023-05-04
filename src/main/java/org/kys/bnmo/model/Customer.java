@@ -32,8 +32,6 @@ public class Customer {
     }
 
     private Member applyMembership(String name, String phoneNumber) {
-        return new Member(name, phoneNumber);
-
-        // Warning: this will assign new ID to the customer
+        return new Member(this.customerID, name, phoneNumber);
     }
 }

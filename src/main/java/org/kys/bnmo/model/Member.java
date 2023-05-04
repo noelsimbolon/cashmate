@@ -78,6 +78,6 @@ public class Member extends Customer {
     }
 
     private VIP promote() {
-        return new VIP(this.name, this.phoneNumber);
+        return new VIP(this.getCustomerID(), this.name, this.phoneNumber);
     }
 }
