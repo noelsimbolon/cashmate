@@ -5,7 +5,6 @@ import javafx.geometry.Side;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -20,16 +19,16 @@ import org.kys.bnmo.helpers.Table.TableEntry;
 import java.util.List;
 
 public class Table extends TabPane {
-    final private TableData tableData;
+    private final TableData tableData;
     private int showNEntries;
     private int nPages;
-    private int filterIndex;
+    private List<Integer> filterIndices;
 
-    public Table(TableData tableData, int filterIndex, int showNEntries) {
+    public Table(TableData tableData, List<Integer> filterIndices, int showNEntries) {
         super();
         this.getStyleClass().add("table-tab-pane");
         this.showNEntries = showNEntries;
-        this.filterIndex = filterIndex;
+        this.filterIndices = filterIndices;
         this.tableData = tableData;
 
         displayPages(tableData.getEntries());
@@ -159,25 +158,33 @@ public class Table extends TabPane {
         return showNEntries;
     }
 
-    public void setCurrentPageIndex(int page) {
-        this.getSelectionModel().select(page);
-    }
-
     public void setShowNEntries(int showNEntries) {
         this.showNEntries = showNEntries;
         displayPages(this.tableData.getEntries());
     }
 
+    public void setCurrentPageIndex(int page) {
+        this.getSelectionModel().select(page);
+    }
+
     public void applyFilter(String filter) {
         List<TableEntry> filteredData = this.tableData.getEntries()
-                                                        .stream()
-                                                        .filter(row -> row.getColumns().get(this.filterIndex).getText().contains(filter))
-                                                        .toList();
+                .stream()
+                .filter(row -> {
+                    for (int index : filterIndices) {
+                        if (row.getColumns().get(index).getText().contains(filter)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                })
+                .toList();
+
         displayPages(filteredData);
     }
 
-    public void setFilterIndex(int filterIndex) {
-        this.filterIndex = filterIndex;
+    public void setFilterIndices(List<Integer> filterIndices) {
+        this.filterIndices = filterIndices;
     }
 
     public void setColumnAlignment(int columnIdx, Pos pos) {
@@ -185,7 +192,7 @@ public class Table extends TabPane {
             GridPane tableGrid = (GridPane) pageTab.getContent();
 
             for (var node : tableGrid.getChildren())
-                if(GridPane.getColumnIndex(node) == columnIdx) {
+                if (GridPane.getColumnIndex(node) == columnIdx) {
                     HBox cell = (HBox) node;
                     cell.setAlignment(pos);
                 }

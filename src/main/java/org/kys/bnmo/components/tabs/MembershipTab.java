@@ -106,7 +106,7 @@ public class MembershipTab extends TabContainer {
 
         // Set table data
         TableData tableData = new TableData(tableHeadings, tableContent, handlers, contextMenus);
-        tableBuilder.setTableData(tableData, 1);
+        tableBuilder.setTableData(tableData, List.of(1));
 
         // Add search bar
         tableBuilder.addSearchBar();

@@ -85,7 +85,7 @@ public class TableSandbox extends Application {
 
         TableData tableData1 = new TableData(heading, data, images, 1, handlers, null);
 
-        table.setTableData(tableData1, 1);
+        table.setTableData(tableData1, List.of(1));  // Applies search filter to "hi" column
 
         table.addSearchBar();
         table.addAddItemButton("Add Item", e -> {
@@ -95,7 +95,7 @@ public class TableSandbox extends Application {
         Parent table1 = table.getAndResetComponent();
 
         TableData tableData2 = new TableData(heading, data, images, 1, null, contextMenus);
-        table.setTableData(tableData2, 1);
+        table.setTableData(tableData2, List.of(1, 2)); // Applies search filter to "hi" and "hello" columns
         table.addSearchBar();
         table.addAddItemButton("Add Item", e -> {
             System.out.println("hello");
