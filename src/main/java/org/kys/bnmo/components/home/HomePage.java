@@ -1,12 +1,10 @@
 package org.kys.bnmo.components.home;
 
-
 import javafx.animation.AnimationTimer;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import org.kys.bnmo.components.ComponentFactory;
-import org.kys.bnmo.helpers.StyleLoadHelper;
-
+import org.kys.bnmo.helpers.loaders.StyleLoadHelper;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 

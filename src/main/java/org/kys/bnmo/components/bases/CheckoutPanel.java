@@ -9,7 +9,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import org.kys.bnmo.components.ComponentFactory;
-import org.kys.bnmo.helpers.StyleLoadHelper;
+import org.kys.bnmo.helpers.loaders.StyleLoadHelper;
 
 // TESTING
 class Item {

@@ -2,12 +2,10 @@ package org.kys.bnmo.components.documents;
 import javafx.geometry.HPos;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import org.kys.bnmo.components.ComponentBuilder;
 import org.kys.bnmo.helpers.DocumentBuilderHelper;
+import org.kys.bnmo.helpers.loaders.StyleLoadHelper;
 
 import java.util.Arrays;
 
@@ -225,6 +223,10 @@ public class BillPageBuilder extends ComponentBuilder {
         documentPageBuilder.addFooterRow(getFooterContent());
         documentPageBuilder.addFooterRow(getFooterEnd());
         documentPageBuilder.setTable(getColumnProperties());
-        setRoot(documentPageBuilder.getAndResetComponent());
+
+        Pane root = documentPageBuilder.getAndResetComponent();
+        StyleLoadHelper helper = new StyleLoadHelper("/styles/bill.css");
+        helper.load(root);
+        setRoot(root);
     }
 }

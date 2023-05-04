@@ -13,6 +13,14 @@ public class Member extends Customer {
     // @NonNull
     private String status; // "Active" or "Inactive"
 
+    public Member (UUID customerID, String name, String phoneNumber) {
+        super(customerID);
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.points = 0;
+        this.status = "Active";
+    }
+
     public Member(String name, String phoneNumber) {
         super();
         this.name = name;
@@ -69,7 +77,12 @@ public class Member extends Customer {
         // TODO: throw exception if status is already inactive
     }
 
+    @Override
+    public String getCustomerClass() {
+        return "Member";
+    }
+
     private VIP promote() {
-        return new VIP(this.name, this.phoneNumber);
+        return new VIP(this.getCustomerID(), this.name, this.phoneNumber);
     }
 }
