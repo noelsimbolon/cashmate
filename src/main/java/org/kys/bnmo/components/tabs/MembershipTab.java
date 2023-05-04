@@ -28,7 +28,7 @@ public class MembershipTab extends TabContainer {
     @Override
     protected Pane getContent() {
 
-        // TODO: Fill table with customer data in DataStore
+        // TOD O: Fill table with customer data in DataStore
         // List<Customer> customers = customerController.fetchAll();
 
         // Create temporary customer data
@@ -49,8 +49,10 @@ public class MembershipTab extends TabContainer {
             }
         }
 
+        System.out.println(customers);
+
         // Table heading
-        List<String> tableHeadings = new ArrayList<>(Arrays.asList("Name", "Phone", "Status", "Class", "Action"));
+        List<String> tableHeadings = new ArrayList<>(Arrays.asList("Customer ID", "Name", "Phone", "Status", "Class", "Action"));
 
         // List of table content
         List<List<String>> tableContent = new ArrayList<>();
@@ -63,6 +65,7 @@ public class MembershipTab extends TabContainer {
 
         for (Customer customer : customers) {
             List<String> row = new ArrayList<>();
+            row.add(String.valueOf(customer.getCustomerID()));
             if (customer instanceof Member) {
                 row.add(((Member) customer).getName());
                 row.add(((Member) customer).getPhoneNumber());
@@ -92,6 +95,10 @@ public class MembershipTab extends TabContainer {
                 }
 
                 if (customer instanceof VIP) {
+                    // Add event listener
+                    item1.setOnAction(e -> {
+                        System.out.println("Edit VIP");
+                    });
                     menu = new ContextMenu(item1, item2);
                 } else {
                     MenuItem item3 = new MenuItem("Promote");
@@ -105,14 +112,20 @@ public class MembershipTab extends TabContainer {
         }
 
         // Set table data
-        TableData tableData = new TableData(tableHeadings, tableContent, handlers, contextMenus);
+        TableData tableData = new TableData(tableHeadings, tableContent, null, contextMenus);
         tableBuilder.setTableData(tableData, 1);
 
         // Add search bar
         tableBuilder.addSearchBar();
 
-        // Set column alignment for header
+        // Set content column alignments as center left
+        for (int i = 0; i < tableHeadings.size(); i++) {
+            tableBuilder.setColumnAlignment(i, Pos.CENTER_LEFT);
+        }
+
+        // Set ID and action alignment as center
         tableBuilder.setColumnAlignment(0, Pos.CENTER);
+        tableBuilder.setColumnAlignment(tableHeadings.size() - 1, Pos.CENTER);
 
         // Set the root
         Pane root = tableBuilder.getAndResetComponent();

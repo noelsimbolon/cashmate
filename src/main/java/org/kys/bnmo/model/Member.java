@@ -13,7 +13,7 @@ public class Member extends Customer {
     // @NonNull
     private String status; // "Active" or "Inactive"
 
-    public Member (UUID customerID, String name, String phoneNumber) {
+    public Member (int customerID, String name, String phoneNumber) {
         super(customerID);
         this.name = name;
         this.phoneNumber = phoneNumber;
