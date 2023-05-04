@@ -32,6 +32,6 @@ public class MembershipTab extends TabContainer {
 //        getHeader().getChildren().add(0, backButton);
 
         getRoot().getStyleClass().add("fill-tab-content");
-        addHeaderTitle("Member List");
+        addHeaderTitle("Customer List");
     }
 }

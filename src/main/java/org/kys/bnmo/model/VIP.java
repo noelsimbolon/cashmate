@@ -10,8 +10,4 @@ public class VIP extends Member {
     public double getDiscount() {
         return DISCOUNT_RATE;
     }
-
-    private Member demote() {
-        return new Member(this.getName(), this.getPhoneNumber());
-    }
 }

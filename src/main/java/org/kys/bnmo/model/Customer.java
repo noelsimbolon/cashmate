@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class Customer {
-    private UUID customerID;
+    private final UUID customerID;
     
     // Transaction history
     private ArrayList<Transaction> transactionHistory;
@@ -15,6 +15,7 @@ public class Customer {
     }
 
     public Customer(UUID customerID) {
+        // Set predefined id
         this.customerID = customerID;
     }
 

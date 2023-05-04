@@ -13,6 +13,14 @@ public class Member extends Customer {
     // @NonNull
     private String status; // "Active" or "Inactive"
 
+    public Member (UUID customerID, String name, String phoneNumber) {
+        super(customerID);
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.points = 0;
+        this.status = "Active";
+    }
+
     public Member(String name, String phoneNumber) {
         super();
         this.name = name;
