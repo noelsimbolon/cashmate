@@ -4,7 +4,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import org.kys.bnmo.components.ComponentFactory;
-import org.kys.bnmo.helpers.StyleLoadHelper;
+import org.kys.bnmo.helpers.loaders.StyleLoadHelper;
 
 public class ReportDocument implements ComponentFactory {
 
@@ -28,7 +28,7 @@ public class ReportDocument implements ComponentFactory {
         scrollPane.setContent(pages);
 
         StyleLoadHelper helper = new StyleLoadHelper(
-                "/styles/document.css", "/styles/report.css");
+                "/styles/document.css");
         helper.load(scrollPane);
 
         root.getChildren().add(scrollPane);

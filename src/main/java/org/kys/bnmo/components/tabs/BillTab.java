@@ -14,6 +14,7 @@ public class BillTab extends TabContainer{
         Pane root = billDocumentFactory.getComponent();
         return root;
     }
+
     public void setContent() {
 
     }

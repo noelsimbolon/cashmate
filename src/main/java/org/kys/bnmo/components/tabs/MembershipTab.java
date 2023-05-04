@@ -11,8 +11,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
 import org.kys.bnmo.components.bases.TableBuilder;
-import org.kys.bnmo.helpers.IconButtonHelper;
-import org.kys.bnmo.helpers.StyleLoadHelper;
 import org.kys.bnmo.helpers.Table.TableData;
 import org.kys.bnmo.model.Customer;
 import org.kys.bnmo.model.Member;
@@ -28,7 +26,7 @@ public class MembershipTab extends TabContainer {
     @Override
     protected Pane getContent() {
 
-        // TOD O: Fill table with customer data in DataStore
+        // TODO: Fill table with customer data in DataStore
         // List<Customer> customers = customerController.fetchAll();
 
         // Create temporary customer data
@@ -57,9 +55,6 @@ public class MembershipTab extends TabContainer {
         // List of table content
         List<List<String>> tableContent = new ArrayList<>();
 
-        // List of event listeners for action column
-        List<EventHandler<MouseEvent>> handlers = new ArrayList<>();
-
         // List of context menus for action column
         List<ContextMenu> contextMenus = new ArrayList<>();
 
@@ -79,9 +74,6 @@ public class MembershipTab extends TabContainer {
             }
 
             tableContent.add(row);
-            handlers.add(e -> {
-                System.out.println("Worked!");
-            });
 
             // Action menu
             ContextMenu menu;
@@ -113,7 +105,9 @@ public class MembershipTab extends TabContainer {
 
         // Set table data
         TableData tableData = new TableData(tableHeadings, tableContent, null, contextMenus);
-        tableBuilder.setTableData(tableData, 1);
+        List<Integer> indices = new ArrayList<>();
+        indices.add(1);
+        tableBuilder.setTableData(tableData, indices);
 
         // Add search bar
         tableBuilder.addSearchBar();

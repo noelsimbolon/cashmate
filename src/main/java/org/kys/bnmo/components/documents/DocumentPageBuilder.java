@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import org.kys.bnmo.components.ComponentBuilder;
 import org.kys.bnmo.helpers.DocumentBuilderHelper;
+import org.kys.bnmo.helpers.loaders.StyleLoadHelper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -171,6 +172,9 @@ public class DocumentPageBuilder extends ComponentBuilder {
         footer = getFooter();
         root.getChildren().addAll(mainComponent, footer);
         root.getStyleClass().add("page");
+
+        StyleLoadHelper helper = new StyleLoadHelper("/styles/documentPage.css");
+        helper.load(root);
 
         setRoot(root);
     }
