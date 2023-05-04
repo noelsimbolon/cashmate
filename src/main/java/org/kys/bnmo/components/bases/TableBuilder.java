@@ -126,16 +126,19 @@ public class TableBuilder extends ComponentBuilder {
         table.setCurrentPageIndex(currentPage - 1);
     }
 
-    public void setTableData(TableData data, int  filterIndex) {
+    public void setTableData(TableData data, List<Integer>  filterIndices) {
         VBox root = (VBox) getRoot();
         ComboBox<String> entriesComboBox = (ComboBox<String>) getRoot().lookup(".entries-combo-box");
-        Table table = new Table(data, filterIndex, Integer.parseInt(entriesComboBox.getValue()));
+
+        Table table = new Table(data, filterIndices, Integer.parseInt(entriesComboBox.getValue()));
         this.currentTable = table;
+
         entriesComboBox.valueProperty().addListener((ov, oldValue, newValue) -> {
             table.setShowNEntries(Integer.parseInt(newValue));
             int currentPage = table.getSelectionModel().getSelectedIndex() + 1;
             updatePageNumbering(root, table, (currentPage - 1) * table.getShowNEntries() / Integer.parseInt(newValue) + 1);
         });
+
         root.getChildren().add(1, table);
         updatePageNumbering(root, table, 1);
     }

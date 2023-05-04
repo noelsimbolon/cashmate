@@ -27,6 +27,10 @@ public class Customer {
         return this.transactionHistory;
     }
 
+    public String getCustomerClass() {
+        return "Customer";
+    }
+
     public void addTransaction(Transaction transaction) {
         this.transactionHistory.add(transaction);
     }

@@ -156,7 +156,7 @@ public class BnmoApplication extends Application {
         helper.load(root);
 
         Scene scene = new Scene(root, 1290, 650);
-        stage.setTitle("My JavaFX App");
+        stage.setTitle("Cashmate.");
         stage.setScene(scene);
 
         stage.show();

@@ -77,6 +77,11 @@ public class Member extends Customer {
         // TODO: throw exception if status is already inactive
     }
 
+    @Override
+    public String getCustomerClass() {
+        return "Member";
+    }
+
     private VIP promote() {
         return new VIP(this.getCustomerID(), this.name, this.phoneNumber);
     }
