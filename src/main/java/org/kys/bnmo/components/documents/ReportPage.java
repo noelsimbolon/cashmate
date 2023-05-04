@@ -3,8 +3,10 @@ package org.kys.bnmo.components.documents;
 import javafx.geometry.HPos;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import org.kys.bnmo.components.ComponentBuilder;
+import org.kys.bnmo.helpers.loaders.StyleLoadHelper;
 
 public class ReportPage extends ComponentBuilder {
     private static final DocumentPageBuilder documentPageBuilder = new DocumentPageBuilder();
@@ -117,6 +119,11 @@ public class ReportPage extends ComponentBuilder {
         documentPageBuilder.addHeaderRow(getPeriodSegment());
         documentPageBuilder.addHeaderRow(getTotalSegment());
         documentPageBuilder.setTable(getColumnProperties());
-        setRoot(documentPageBuilder.getAndResetComponent());
+
+        Pane root = documentPageBuilder.getAndResetComponent();
+        StyleLoadHelper helper = new StyleLoadHelper("/styles/report.css");
+        helper.load(root);
+
+        setRoot(root);
     }
 }

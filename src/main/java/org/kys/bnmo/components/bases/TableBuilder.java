@@ -10,10 +10,9 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import org.kys.bnmo.components.ComponentBuilder;
 import org.kys.bnmo.helpers.IconButtonHelper;
-import org.kys.bnmo.helpers.StyleLoadHelper;
+import org.kys.bnmo.helpers.loaders.StyleLoadHelper;
 import org.kys.bnmo.helpers.Table.TableData;
 
-import java.util.List;
 import java.util.Objects;
 
 public class TableBuilder extends ComponentBuilder {

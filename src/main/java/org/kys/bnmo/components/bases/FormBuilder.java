@@ -13,7 +13,7 @@ import javafx.beans.binding.Bindings;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.kys.bnmo.components.ComponentBuilder;
-import org.kys.bnmo.helpers.StyleLoadHelper;
+import org.kys.bnmo.helpers.loaders.StyleLoadHelper;
 
 import java.io.File;
 

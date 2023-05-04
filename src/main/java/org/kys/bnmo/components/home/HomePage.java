@@ -1,13 +1,9 @@
 package org.kys.bnmo.components.home;
 
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import org.kys.bnmo.components.ComponentFactory;
-import org.kys.bnmo.components.bases.FormBuilder;
-import org.kys.bnmo.helpers.StyleLoadHelper;
+import org.kys.bnmo.helpers.loaders.StyleLoadHelper;
 
 public class HomePage implements ComponentFactory {
 
