@@ -51,7 +51,7 @@ public class CatalogueTab extends TabContainer {
 
         // Set table data
         TableData inventoryItems = new TableData(heading, data, images, 0, null, contextMenus);
-        tableBuilder.setTableData(inventoryItems, List.of(1, 2, 4));
+        tableBuilder.setTableData(inventoryItems, List.of(0, 1, 3));
 
         // Add Item button with its event handler
         tableBuilder.addAddItemButton("Add Item", e -> {
