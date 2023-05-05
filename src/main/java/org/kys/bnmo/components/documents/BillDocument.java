@@ -5,7 +5,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import org.jetbrains.annotations.NotNull;
 import org.kys.bnmo.components.ComponentFactory;
-import org.kys.bnmo.helpers.StyleLoadHelper;
+import org.kys.bnmo.helpers.loaders.StyleLoadHelper;
 
 public class BillDocument implements ComponentFactory {
 
@@ -30,7 +30,7 @@ public class BillDocument implements ComponentFactory {
         scrollPane.setContent(pages);
 
         StyleLoadHelper helper = new StyleLoadHelper(
-                "/styles/document.css", "/styles/bill.css");
+                "/styles/document.css");
         helper.load(scrollPane);
 
         VBox root = new VBox();

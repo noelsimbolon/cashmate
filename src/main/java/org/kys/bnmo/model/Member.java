@@ -4,8 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.UUID;
-
 public class Member extends Customer {
 
     @Getter
@@ -25,7 +23,7 @@ public class Member extends Customer {
     @NotNull
     private String status; // "Active" or "Inactive"
 
-    public Member(UUID customerID, @NotNull String name, @NotNull String phoneNumber) {
+    public Member(int customerID, @NotNull String name, @NotNull String phoneNumber) {
         super(customerID);
         this.name = name;
         this.phoneNumber = phoneNumber;

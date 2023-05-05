@@ -9,18 +9,21 @@ import java.util.UUID;
 public class Customer {
 
     @Getter
-    @NotNull
-    private final UUID customerID;
+    private final int customerID;
+
+    // Customer count
+    public static int customerCount = 0;
     
     @Getter
     private ArrayList<Transaction> transactionHistory;
 
     public Customer() {
-        // Set random id
-        this.customerID = UUID.randomUUID();
+        // Set incremental id
+        customerCount++;
+        this.customerID = customerCount;
     }
 
-    public Customer(UUID customerID) {
+    public Customer(int customerID) {
         // Set predefined id
         this.customerID = customerID;
     }
