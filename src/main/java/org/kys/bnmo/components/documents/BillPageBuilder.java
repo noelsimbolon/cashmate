@@ -1,14 +1,13 @@
 package org.kys.bnmo.components.documents;
+
 import javafx.geometry.HPos;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import org.jetbrains.annotations.NotNull;
 import org.kys.bnmo.components.ComponentBuilder;
 import org.kys.bnmo.helpers.DocumentBuilderHelper;
+import org.kys.bnmo.helpers.loaders.StyleLoadHelper;
 
 import java.util.Arrays;
 
@@ -19,8 +18,7 @@ public class BillPageBuilder extends ComponentBuilder {
     private GridPane footerHeader;
     private GridPane footerContent;
 
-    private @NotNull Parent getDateIdSegment()
-    {
+    private @NotNull Parent getDateIdSegment() {
         Label dateTitle = new Label("Date:");
         Label dateValue = new Label("June 3, 2020");
         dateTitle.getStyleClass().addAll("small-text", "dark");
@@ -46,8 +44,7 @@ public class BillPageBuilder extends ComponentBuilder {
         return dateIdSegment;
     }
 
-    private @NotNull Parent getCustomerSegment()
-    {
+    private @NotNull Parent getCustomerSegment() {
         Label customerTitle = new Label("BILL TO");
         Label customerName = new Label("Client Name");
         customerTitle.getStyleClass().addAll("very-small-text", "light");
@@ -58,8 +55,7 @@ public class BillPageBuilder extends ComponentBuilder {
         return customerSegment;
     }
 
-    private void addInformationRow(GridPane root, int row, String label, String value)
-    {
+    private void addInformationRow(GridPane root, int row, String label, String value) {
         Label column1 = new Label(label);
         Label column2 = new Label(": " + value);
 
@@ -68,8 +64,8 @@ public class BillPageBuilder extends ComponentBuilder {
 
         documentBuilderHelper.addGridRow(root, row, Arrays.asList(column1, column2));
     }
-    private @NotNull GridPane getFooterInformation()
-    {
+
+    private @NotNull GridPane getFooterInformation() {
         GridPane root = new GridPane();
         addInformationRow(root, 0, "Costumer ID", "0000-000");
         addInformationRow(root, 1, "Membership", "VIP");
@@ -80,8 +76,8 @@ public class BillPageBuilder extends ComponentBuilder {
         root.getStyleClass().add("footer-information");
         return root;
     }
-    private GridPane getFooterContent()
-    {
+
+    private GridPane getFooterContent() {
         footerContent = documentBuilderHelper.getSpaceBetweenColumnTemplate();
         GridPane contentColumn1 = getFooterInformation();
         documentBuilderHelper.addGridRow(footerContent, 0, Arrays.asList(contentColumn1));
@@ -90,8 +86,7 @@ public class BillPageBuilder extends ComponentBuilder {
         return footerContent;
     }
 
-    private GridPane getFooterHeader()
-    {
+    private GridPane getFooterHeader() {
         footerHeader = documentBuilderHelper.getSpaceBetweenColumnTemplate();
         Label headerColumn1 = new Label("Additional Information");
 
@@ -101,8 +96,7 @@ public class BillPageBuilder extends ComponentBuilder {
         return footerHeader;
     }
 
-    private @NotNull GridPane getFooterEnd()
-    {
+    private @NotNull GridPane getFooterEnd() {
         GridPane footerEnd = documentBuilderHelper.getSpaceBetweenColumnTemplate();
         Label endColumn1 = new Label("Thank you! — yourename@gmail.com");
         Label endColumn2 = new Label("$CAD");
@@ -115,8 +109,7 @@ public class BillPageBuilder extends ComponentBuilder {
         return footerEnd;
     }
 
-    private void addSummaryRow(GridPane root, int row, String label, String value, boolean isBold)
-    {
+    private void addSummaryRow(GridPane root, int row, String label, String value, boolean isBold) {
         Label column1 = new Label(label);
         Label column2 = new Label(":");
         Label column3 = new Label(value);
@@ -125,14 +118,14 @@ public class BillPageBuilder extends ComponentBuilder {
         column2.getStyleClass().addAll("medium-text");
         column3.getStyleClass().addAll("medium-text");
 
-        if (isBold)
-        {
+        if (isBold) {
             column1.getStyleClass().addAll("dark");
             column2.getStyleClass().addAll("dark");
             column3.getStyleClass().addAll("dark");
         }
         documentBuilderHelper.addGridRow(root, row, Arrays.asList(column1, column2, column3));
     }
+
     public void addSummary() {
 
         Label headerColumn2 = new Label("Totals");
@@ -160,8 +153,7 @@ public class BillPageBuilder extends ComponentBuilder {
         footerContent.getChildren().add(summary);
     }
 
-    private @NotNull DocumentPageBuilder.ColumnProperty[] getColumnProperties()
-    {
+    private @NotNull DocumentPageBuilder.ColumnProperty[] getColumnProperties() {
         DocumentPageBuilder.ColumnProperty property1 = new DocumentPageBuilder.ColumnProperty(
                 "Description",
                 50,
@@ -186,7 +178,7 @@ public class BillPageBuilder extends ComponentBuilder {
                 HPos.RIGHT
         );
 
-        return new DocumentPageBuilder.ColumnProperty[] {
+        return new DocumentPageBuilder.ColumnProperty[]{
                 property1,
                 property2,
                 property3,
@@ -194,10 +186,8 @@ public class BillPageBuilder extends ComponentBuilder {
         };
     }
 
-    public void addRows()
-    {
-        for (int i = 0; i < 10; i++)
-        {
+    public void addRows() {
+        for (int i = 0; i < 10; i++) {
             VBox firstColumnContent = new VBox();
             Label row1 = new Label("Line Item Title");
             Label row2 = new Label("Description");
@@ -226,6 +216,10 @@ public class BillPageBuilder extends ComponentBuilder {
         documentPageBuilder.addFooterRow(getFooterContent());
         documentPageBuilder.addFooterRow(getFooterEnd());
         documentPageBuilder.setTable(getColumnProperties());
-        setRoot(documentPageBuilder.getAndResetComponent());
+
+        Pane root = documentPageBuilder.getAndResetComponent();
+        StyleLoadHelper helper = new StyleLoadHelper("/styles/bill.css");
+        helper.load(root);
+        setRoot(root);
     }
 }

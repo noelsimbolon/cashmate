@@ -1,4 +1,4 @@
-package org.kys.bnmo.helpers;
+package org.kys.bnmo.helpers.loaders;
 
 import javafx.scene.Parent;
 import org.jetbrains.annotations.NotNull;

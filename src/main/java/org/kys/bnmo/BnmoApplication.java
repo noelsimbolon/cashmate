@@ -5,22 +5,20 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Parent;
+import javafx.print.PrinterJob;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import org.kys.bnmo.components.documents.BillDocument;
 import org.kys.bnmo.components.tabs.*;
+import org.kys.bnmo.helpers.DocumentPrinter;
 import org.kys.bnmo.helpers.IconButtonHelper;
-import org.kys.bnmo.helpers.StyleLoadHelper;
+import org.kys.bnmo.helpers.loaders.StyleLoadHelper;
 import org.kys.bnmo.views.Page;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -155,6 +153,14 @@ public class BnmoApplication extends Application {
                 .selectedItemProperty()
                 .addListener(new TabChangeListener(navbarButtons));
 
+        Tab a = new Tab("a");
+        a.setContent(new BillTab().getComponent());
+        tabPane.getTabs().add(a);
+
+        Tab b = new Tab("a");
+        b.setContent(new ReportTab().getComponent());
+        tabPane.getTabs().add(b);
+
         // styles
         StyleLoadHelper helper = new StyleLoadHelper("/styles/global.css");
         helper.load(root);
@@ -162,7 +168,13 @@ public class BnmoApplication extends Application {
         Scene scene = new Scene(root, 1290, 650);
         stage.setTitle("Cashmate.");
         stage.setScene(scene);
+
         stage.show();
+
+        DocumentPrinter printer = new DocumentPrinter(stage);
+        VBox B = new VBox();
+        B.getChildren().addAll(new Label("33"), new Label("33"));
+        printer.printElement((Pane)((ScrollPane)(new BillDocument().getComponent()).getChildren().get(0)).getContent());
     }
 
 // Checkout panel testing

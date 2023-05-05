@@ -7,13 +7,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import org.kys.bnmo.components.ComponentBuilder;
-import org.kys.bnmo.components.ComponentFactory;
 import org.kys.bnmo.helpers.IconButtonHelper;
-import org.kys.bnmo.helpers.StyleLoadHelper;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import org.kys.bnmo.helpers.loaders.StyleLoadHelper;
 
 public class Navbar extends ComponentBuilder {
 

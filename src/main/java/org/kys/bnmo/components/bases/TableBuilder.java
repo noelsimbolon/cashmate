@@ -11,7 +11,7 @@ import javafx.scene.text.Text;
 import org.jetbrains.annotations.NotNull;
 import org.kys.bnmo.components.ComponentBuilder;
 import org.kys.bnmo.helpers.IconButtonHelper;
-import org.kys.bnmo.helpers.StyleLoadHelper;
+import org.kys.bnmo.helpers.loaders.StyleLoadHelper;
 import org.kys.bnmo.helpers.Table.TableData;
 
 import java.util.List;
@@ -128,7 +128,7 @@ public class TableBuilder extends ComponentBuilder {
         table.setCurrentPageIndex(currentPage - 1);
     }
 
-    public void setTableData(TableData data, List<Integer>  filterIndices) {
+    public void setTableData(TableData data, List<Integer> filterIndices) {
         VBox root = (VBox) getRoot();
         ComboBox<String> entriesComboBox = (ComboBox<String>) getRoot().lookup(".entries-combo-box");
 
