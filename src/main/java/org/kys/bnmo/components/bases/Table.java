@@ -11,6 +11,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Text;
+import lombok.Getter;
+import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 import org.kys.bnmo.helpers.IconButtonHelper;
 import org.kys.bnmo.helpers.Table.TableCell;
 import org.kys.bnmo.helpers.Table.TableData;
@@ -20,11 +23,17 @@ import java.util.List;
 
 public class Table extends TabPane {
     private final TableData tableData;
+
+    @Getter
     private int showNEntries;
+
+    @Getter
     private int nPages;
+
+    @Setter
     private List<Integer> filterIndices;
 
-    public Table(TableData tableData, List<Integer> filterIndices, int showNEntries) {
+    public Table(@NotNull TableData tableData, List<Integer> filterIndices, int showNEntries) {
         super();
         this.getStyleClass().add("table-tab-pane");
         this.showNEntries = showNEntries;
@@ -34,7 +43,7 @@ public class Table extends TabPane {
         displayPages(tableData.getEntries());
     }
 
-    private void displayPages(List<TableEntry> entries) {
+    private void displayPages(@NotNull List<TableEntry> entries) {
         this.nPages = (entries.size() + showNEntries - 1) / showNEntries;
         this.getTabs().clear();
         int currentEntryIdx = 1;
@@ -150,14 +159,6 @@ public class Table extends TabPane {
             }
     }
 
-    public int getNPages() {
-        return this.nPages;
-    }
-
-    public int getShowNEntries() {
-        return showNEntries;
-    }
-
     public void setShowNEntries(int showNEntries) {
         this.showNEntries = showNEntries;
         displayPages(this.tableData.getEntries());
@@ -181,10 +182,6 @@ public class Table extends TabPane {
                 .toList();
 
         displayPages(filteredData);
-    }
-
-    public void setFilterIndices(List<Integer> filterIndices) {
-        this.filterIndices = filterIndices;
     }
 
     public void setColumnAlignment(int columnIdx, Pos pos) {

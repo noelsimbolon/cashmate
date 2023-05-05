@@ -11,7 +11,9 @@ import org.kys.bnmo.components.bases.TableBuilder;
 public class CashierTab extends TabContainer {
 
     private static final CheckoutPanel checkoutPanelFactory = new CheckoutPanel();
+
     private static final TableBuilder tableBuilder = new TableBuilder();
+
     @Override
     protected Pane getContent() {
 
@@ -39,6 +41,7 @@ public class CashierTab extends TabContainer {
         return root;
 
     }
+
     @Override
     protected void additionalAction()
     {

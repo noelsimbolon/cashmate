@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
+import org.jetbrains.annotations.NotNull;
 import org.kys.bnmo.components.ComponentBuilder;
 import org.kys.bnmo.helpers.IconButtonHelper;
 import org.kys.bnmo.helpers.StyleLoadHelper;
@@ -95,7 +96,7 @@ public class TableBuilder extends ComponentBuilder {
         helper.load(root);
     }
 
-    private void updatePageNumbering(Parent root, Table table, int currentPage) {
+    private void updatePageNumbering(@NotNull Parent root, @NotNull Table table, int currentPage) {
         HBox paginationNumberBox = (HBox) root.lookup(".pagination-number-box");
         paginationNumberBox.getChildren().clear();
 

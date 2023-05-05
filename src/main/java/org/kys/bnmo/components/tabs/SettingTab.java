@@ -8,6 +8,7 @@ public class SettingTab extends TabContainer {
     private static final FormBuilder formBuilder = new FormBuilder();
 
     private Stage stage;
+
     public SettingTab(Stage stage)
     {
         this.stage = stage;
@@ -23,6 +24,7 @@ public class SettingTab extends TabContainer {
 
         return formBuilder.getAndResetComponent();
     }
+
     @Override
     protected void additionalAction()
     {

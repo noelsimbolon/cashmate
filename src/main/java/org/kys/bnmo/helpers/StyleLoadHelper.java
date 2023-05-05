@@ -1,10 +1,14 @@
 package org.kys.bnmo.helpers;
 
 import javafx.scene.Parent;
+import org.jetbrains.annotations.NotNull;
 
 public class StyleLoadHelper extends LoadHelper {
+
     private String path;
+
     public StyleLoadHelper() {}
+
     public StyleLoadHelper(String ... paths)
     {
         super(paths);
@@ -25,8 +29,9 @@ public class StyleLoadHelper extends LoadHelper {
             }
         }
     }
+
     @Override
-    public void setResourcePath(String ... paths) {
+    public void setResourcePath(@NotNull String ... paths) {
         for (String path: paths)
         {
             this.paths.add(path);

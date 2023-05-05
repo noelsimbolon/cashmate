@@ -7,6 +7,7 @@ import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import org.jetbrains.annotations.NotNull;
 import org.kys.bnmo.components.ComponentBuilder;
 import org.kys.bnmo.helpers.DocumentBuilderHelper;
 
@@ -39,6 +40,7 @@ public class DocumentPageBuilder extends ComponentBuilder {
         reset();
     }
 
+    @NotNull
     private VBox getHeader()
     {
         Label title = new Label();
@@ -66,7 +68,8 @@ public class DocumentPageBuilder extends ComponentBuilder {
     }
 
 
-    private GridPane getListColumnTemplate(ColumnProperty ... properties)
+    @NotNull
+    private GridPane getListColumnTemplate(@NotNull ColumnProperty ... properties)
     {
         GridPane header = new GridPane();
 
@@ -81,13 +84,15 @@ public class DocumentPageBuilder extends ComponentBuilder {
         return header;
     }
 
+    @NotNull
     private String[] getTitles(ColumnProperty ... properties)
     {
         return Arrays.stream(properties)
                 .map(property -> property.title)
-                .toArray(size -> new String[size]);
+                .toArray(String[]::new);
     }
 
+    @NotNull
     private GridPane getContentHeader(ColumnProperty ... properties)
     {
         GridPane header = getListColumnTemplate(properties);
@@ -112,6 +117,7 @@ public class DocumentPageBuilder extends ComponentBuilder {
         return contentParent;
     }
 
+    @NotNull
     private VBox getFooter()
     {
         VBox root = new VBox();
@@ -174,5 +180,4 @@ public class DocumentPageBuilder extends ComponentBuilder {
 
         setRoot(root);
     }
-
 }

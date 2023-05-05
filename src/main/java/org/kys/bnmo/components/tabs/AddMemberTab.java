@@ -10,8 +10,11 @@ import org.kys.bnmo.helpers.IconButtonHelper;
 import org.kys.bnmo.helpers.StyleLoadHelper;
 
 public class AddMemberTab extends TabContainer {
+
     private static final FormBuilder formBuilder = new FormBuilder();
+
     private static final IconButtonHelper iconButtonHelper = new IconButtonHelper();
+
     @Override
     protected Pane getContent() {
 

@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class JSONAdapter implements Adapter {
+
     private final ObjectMapper objectMapper;
 
     public JSONAdapter() {

@@ -6,6 +6,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import org.jetbrains.annotations.NotNull;
 import org.kys.bnmo.components.ComponentBuilder;
 import org.kys.bnmo.helpers.DocumentBuilderHelper;
 
@@ -18,7 +19,7 @@ public class BillPageBuilder extends ComponentBuilder {
     private GridPane footerHeader;
     private GridPane footerContent;
 
-    private Parent getDateIdSegment()
+    private @NotNull Parent getDateIdSegment()
     {
         Label dateTitle = new Label("Date:");
         Label dateValue = new Label("June 3, 2020");
@@ -45,7 +46,7 @@ public class BillPageBuilder extends ComponentBuilder {
         return dateIdSegment;
     }
 
-    private Parent getCustomerSegment()
+    private @NotNull Parent getCustomerSegment()
     {
         Label customerTitle = new Label("BILL TO");
         Label customerName = new Label("Client Name");
@@ -67,7 +68,7 @@ public class BillPageBuilder extends ComponentBuilder {
 
         documentBuilderHelper.addGridRow(root, row, Arrays.asList(column1, column2));
     }
-    private GridPane getFooterInformation()
+    private @NotNull GridPane getFooterInformation()
     {
         GridPane root = new GridPane();
         addInformationRow(root, 0, "Costumer ID", "0000-000");
@@ -100,7 +101,7 @@ public class BillPageBuilder extends ComponentBuilder {
         return footerHeader;
     }
 
-    private GridPane getFooterEnd()
+    private @NotNull GridPane getFooterEnd()
     {
         GridPane footerEnd = documentBuilderHelper.getSpaceBetweenColumnTemplate();
         Label endColumn1 = new Label("Thank you! — yourename@gmail.com");
@@ -159,7 +160,7 @@ public class BillPageBuilder extends ComponentBuilder {
         footerContent.getChildren().add(summary);
     }
 
-    private DocumentPageBuilder.ColumnProperty[] getColumnProperties()
+    private @NotNull DocumentPageBuilder.ColumnProperty[] getColumnProperties()
     {
         DocumentPageBuilder.ColumnProperty property1 = new DocumentPageBuilder.ColumnProperty(
                 "Description",

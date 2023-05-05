@@ -4,11 +4,13 @@ import javafx.geometry.HPos;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import org.jetbrains.annotations.NotNull;
 import org.kys.bnmo.components.ComponentBuilder;
 
 public class ReportPage extends ComponentBuilder {
     private static final DocumentPageBuilder documentPageBuilder = new DocumentPageBuilder();
 
+    @NotNull
     private Parent getPeriodSegment() {
         VBox root = new VBox();
 
@@ -21,6 +23,7 @@ public class ReportPage extends ComponentBuilder {
         return root;
     }
 
+    @NotNull
     private Parent getTotalSegment() {
         VBox root = new VBox();
 
@@ -32,6 +35,8 @@ public class ReportPage extends ComponentBuilder {
         root.getChildren().addAll(periodTitle, periodValue);
         return root;
     }
+
+    @NotNull
     private DocumentPageBuilder.ColumnProperty[] getColumnProperties()
     {
         DocumentPageBuilder.ColumnProperty property1 = new DocumentPageBuilder.ColumnProperty(

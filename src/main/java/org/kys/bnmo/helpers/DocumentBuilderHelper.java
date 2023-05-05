@@ -5,12 +5,13 @@ import javafx.scene.Parent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 public class DocumentBuilderHelper {
 
-    public void addGridRow(GridPane gridpane, int row, List<Parent> elements)
+    public void addGridRow(GridPane gridpane, int row, @NotNull List<Parent> elements)
     {
         for (int i = 0; i < elements.size(); i++)
         {
@@ -24,6 +25,7 @@ public class DocumentBuilderHelper {
         addGridRow(gridpane, row, elements);
         gridpane.getRowConstraints().add(constraint);
     }
+
     public GridPane getSpaceBetweenColumnTemplate()
     {
         GridPane gridpane = new GridPane();
@@ -39,6 +41,4 @@ public class DocumentBuilderHelper {
 
         return gridpane;
     }
-
-
 }

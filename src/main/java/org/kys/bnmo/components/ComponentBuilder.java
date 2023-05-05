@@ -1,26 +1,21 @@
 package org.kys.bnmo.components;
+
 import javafx.scene.layout.Pane;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 
 public abstract class ComponentBuilder {
 
+    @Getter(AccessLevel.PROTECTED)
+    @Setter(AccessLevel.PROTECTED)
     private Pane root;
 
-    protected void setRoot(Pane root)
-    {
-        this.root = root;
-    }
-
-    protected Pane getRoot()
-    {
-        return this.root;
-    }
-
-    public ComponentBuilder()
-    {
+    public ComponentBuilder() {
         reset();
     }
-    public Pane getAndResetComponent()
-    {
+
+    public Pane getAndResetComponent() {
         Pane rootResult = root;
         reset();
         return rootResult;

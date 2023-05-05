@@ -1,14 +1,28 @@
 package org.kys.bnmo.model;
 
+import lombok.Getter;
+
 import java.util.Date;
 import java.util.UUID;
 
 public class Transaction {
+
+    @Getter
     private final UUID transactionID;
+
+    @Getter
     private Customer customer;
+
+    @Getter
     private InventoryItem item;
+
+    @Getter
     private int quantity;
+
+    @Getter
     private int totalPrice;
+
+    @Getter
     private Date date;
 
     public Transaction(Customer customer, InventoryItem item, int quantity, int totalPrice, Date date) {
@@ -19,30 +33,4 @@ public class Transaction {
         this.totalPrice = totalPrice;
         this.date = date;
     }
-
-    // Getters
-    public UUID getTransactionID() {
-        return transactionID;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public InventoryItem getItem() {
-        return item;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public int getTotalPrice() {
-        return totalPrice;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
 }

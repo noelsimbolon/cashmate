@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class XMLAdapter implements Adapter {
+
     private final ObjectMapper objectMapper;
+
     private final XmlMapper xmlMapper;
 
     public XMLAdapter() {

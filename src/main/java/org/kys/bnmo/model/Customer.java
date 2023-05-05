@@ -1,12 +1,18 @@
 package org.kys.bnmo.model;
 
+import lombok.Getter;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.UUID;
 
 public class Customer {
+
+    @Getter
+    @NotNull
     private final UUID customerID;
     
-    // Transaction history
+    @Getter
     private ArrayList<Transaction> transactionHistory;
 
     public Customer() {
@@ -19,14 +25,6 @@ public class Customer {
         this.customerID = customerID;
     }
 
-    public UUID getCustomerID() {
-        return this.customerID;
-    }
-
-    public ArrayList<Transaction> getTransactionHistory() {
-        return this.transactionHistory;
-    }
-
     public String getCustomerClass() {
         return "Customer";
     }
@@ -35,6 +33,7 @@ public class Customer {
         this.transactionHistory.add(transaction);
     }
 
+    @NotNull
     private Member applyMembership(String name, String phoneNumber) {
         return new Member(this.customerID, name, phoneNumber);
     }

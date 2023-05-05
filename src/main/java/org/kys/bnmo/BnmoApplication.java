@@ -22,13 +22,18 @@ import org.kys.bnmo.views.Page;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class BnmoApplication extends Application {
 
     private final static IconButtonHelper navbarHelper = new IconButtonHelper();
+
     private List<Tab> defaultTabs = new ArrayList();
+
     private Pane root;
+
     private List<Button> navbarButtons;
+
     private TabPane tabPane;
 
     private class NavbarButtonHandler implements EventHandler<ActionEvent> {
@@ -46,11 +51,11 @@ public class BnmoApplication extends Application {
             Tab selectedTab = tabPane.getSelectionModel().getSelectedItem();
 
             if (selectedTab != null
-                    && button.getId() == tabPane.getSelectionModel().getSelectedItem().getId()) return;
+                    && Objects.equals(button.getId(), tabPane.getSelectionModel().getSelectedItem().getId())) return;
 
             for (Tab tab: tabs)
             {
-                if (tab.getId() == button.getId())
+                if (Objects.equals(tab.getId(), button.getId()))
                 {
                     tabPane.getSelectionModel().select(tab);
                     return;
@@ -59,7 +64,7 @@ public class BnmoApplication extends Application {
 
             for (Tab tab: defaultTabs)
             {
-                if (tab.getId() == button.getId())
+                if (Objects.equals(tab.getId(), button.getId()))
                 {
                     tabPane.getTabs().add(tab);
                     tabPane.getSelectionModel().select(tab);
@@ -70,10 +75,13 @@ public class BnmoApplication extends Application {
     }
 
     private class TabChangeListener implements ChangeListener<Tab> {
+
         private List<Button> buttons;
+
         public TabChangeListener(List<Button> buttons) {
             this.buttons = buttons;
         }
+
         @Override
         public void changed(ObservableValue<? extends Tab> observable, Tab oldTab, Tab newTab) {
             if (newTab != null) {
@@ -106,7 +114,9 @@ public class BnmoApplication extends Application {
         }
     }
 
-    private TabPane getTabPane() {return ((TabPane)root.lookup("#parent-tab-pane"));}
+    private TabPane getTabPane() {
+        return ((TabPane)root.lookup("#parent-tab-pane"));
+    }
 
     private List<Button> getNavbarButtons()
     {

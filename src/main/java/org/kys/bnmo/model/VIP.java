@@ -8,6 +8,7 @@ public class VIP extends Member {
     public VIP(UUID customerID, String name, String phoneNumber) {
         super(customerID, name, phoneNumber);
     }
+
     public VIP(String name, String phoneNumber) {
         super(name, phoneNumber);
     }

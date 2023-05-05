@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import org.jetbrains.annotations.NotNull;
 import org.kys.bnmo.components.ComponentFactory;
 import org.kys.bnmo.components.bases.FormBuilder;
 import org.kys.bnmo.helpers.StyleLoadHelper;
@@ -13,12 +14,10 @@ public class HomePage implements ComponentFactory {
 
     private Pane root;
 
-    public HomePage() {
-    }
-
+    @NotNull
     public Pane getComponent() {
         // Initialize root
-        Pane root = new Pane();
+        root = new Pane();
 
 
         Label programTitle = new Label("CashMate.");
@@ -77,10 +76,4 @@ public class HomePage implements ComponentFactory {
 
         return root;
     }
-
-
-
-
-
-
 }

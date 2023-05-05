@@ -1,9 +1,17 @@
 package org.kys.bnmo.helpers.Table;
 
 import javafx.scene.image.Image;
+import lombok.Getter;
+import lombok.Setter;
 
 public class TableCell {
+
+    @Getter
+    @Setter
     private Image image;
+
+    @Getter
+    @Setter
     private String text;
 
     public TableCell(String str) {
@@ -19,21 +27,5 @@ public class TableCell {
     public TableCell(Image image) {
         this.text = null;
         this.image = image;
-    }
-
-    public Image getImage() {
-        return image;
-    }
-
-    public void setImage(Image image) {
-        this.image = image;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
     }
 }

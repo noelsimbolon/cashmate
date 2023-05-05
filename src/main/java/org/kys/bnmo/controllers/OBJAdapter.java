@@ -1,10 +1,10 @@
 package org.kys.bnmo.controllers;
 
 import java.io.*;
-import java.text.FieldPosition;
 import java.util.ArrayList;
 
 public class OBJAdapter implements Adapter {
+
     @Override
     public <T> ArrayList<T> readFile(String filePath, Class<T> type) {
         ArrayList<T> objectList = new ArrayList<>();

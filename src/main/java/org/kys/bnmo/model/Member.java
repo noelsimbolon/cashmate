@@ -1,19 +1,31 @@
 package org.kys.bnmo.model;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.UUID;
 
-// import lombok.NonNull;
-
 public class Member extends Customer {
-    // @NonNull
+
+    @Getter
+    @Setter
+    @NotNull
     private String name;
-    // @NonNull
+
+    @Getter
+    @Setter
+    @NotNull
     private String phoneNumber;
+
+    @Getter
     private int points;
-    // @NonNull
+
+    @Getter
+    @NotNull
     private String status; // "Active" or "Inactive"
 
-    public Member (UUID customerID, String name, String phoneNumber) {
+    public Member(UUID customerID, @NotNull String name, @NotNull String phoneNumber) {
         super(customerID);
         this.name = name;
         this.phoneNumber = phoneNumber;
@@ -21,28 +33,12 @@ public class Member extends Customer {
         this.status = "Active";
     }
 
-    public Member(String name, String phoneNumber) {
+    public Member(@NotNull String name, @NotNull String phoneNumber) {
         super();
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.points = 0;
         this.status = "Active";
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public String getPhoneNumber() {
-        return this.phoneNumber;
-    }
-
-    public int getPoints() {
-        return this.points;
-    }
-
-    public String getStatus() {
-        return this.status;
     }
 
     public void addPoints(int points) {
@@ -51,14 +47,6 @@ public class Member extends Customer {
 
     public void deductPoints(int points) {
         this.points -= points;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     public void activate() {
@@ -82,6 +70,7 @@ public class Member extends Customer {
         return "Member";
     }
 
+    @NotNull
     private VIP promote() {
         return new VIP(this.getCustomerID(), this.name, this.phoneNumber);
     }

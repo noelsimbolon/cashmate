@@ -5,7 +5,9 @@ import org.kys.bnmo.components.documents.BillDocument;
 import org.kys.bnmo.components.documents.ReportDocument;
 
 public class ReportTab extends TabContainer {
+
     private static final ReportDocument reportDocumentFactory = new ReportDocument();
+
     @Override
     protected Pane getContent() {
         Pane root = reportDocumentFactory.getComponent();
@@ -15,6 +17,7 @@ public class ReportTab extends TabContainer {
     public void setContent() {
 
     }
+
     @Override
     protected void additionalAction()
     {

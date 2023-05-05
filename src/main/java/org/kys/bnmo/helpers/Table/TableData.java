@@ -4,12 +4,22 @@ import javafx.event.EventHandler;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import lombok.Getter;
+import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TableData {
+
+    @Getter
+    @Setter
     private List<TableEntry> entries;
+
+    @Getter
+    @Setter
     private TableEntry heading;
 
     public TableData() {
@@ -22,7 +32,7 @@ public class TableData {
         this.heading = new TableEntry(heading);
     }
 
-    public TableData(List<String> heading, List<List<String>> content) {
+    public TableData(List<String> heading, @NotNull List<List<String>> content) {
         this.entries = new ArrayList<>();
         this.heading = new TableEntry(heading);
         for (var row: content) {
@@ -34,7 +44,7 @@ public class TableData {
         }
     }
 
-    public TableData(List<String> heading, List<List<String>> content, List<EventHandler<MouseEvent>> handlers) {
+    public TableData(List<String> heading, @NotNull List<List<String>> content, List<EventHandler<MouseEvent>> handlers) {
         this.entries = new ArrayList<>();
         this.heading = new TableEntry(heading);
         for (int i = 0;i < content.size();i++) {
@@ -48,7 +58,7 @@ public class TableData {
         }
     }
 
-    public TableData(List<String> heading, List<List<String>> content, List<EventHandler<MouseEvent>> handlers, List<ContextMenu> contextMenus) {
+    public TableData(List<String> heading, @NotNull List<List<String>> content, @Nullable List<EventHandler<MouseEvent>> handlers, @Nullable List<ContextMenu> contextMenus) {
         this.entries = new ArrayList<>();
         this.heading = new TableEntry(heading);
         for (int i = 0;i < content.size();i++) {
@@ -65,7 +75,7 @@ public class TableData {
         }
     }
 
-    public TableData(List<String> heading, List<List<String>> content, List<Image> images, int imageColumnIndex) {
+    public TableData(List<String> heading, @NotNull List<List<String>> content, List<Image> images, int imageColumnIndex) {
         this.entries = new ArrayList<>();
         this.heading = new TableEntry(heading);
         for (var row: content) {
@@ -80,7 +90,7 @@ public class TableData {
     }
 
 
-    public TableData(List<String> heading, List<List<String>> content, List<Image> images, int imageColumnIndex, List<EventHandler<MouseEvent>> handlers, List<ContextMenu> contextMenus) {
+    public TableData(List<String> heading, @NotNull List<List<String>> content, List<Image> images, int imageColumnIndex, @Nullable List<EventHandler<MouseEvent>> handlers, @Nullable List<ContextMenu> contextMenus) {
         this.entries = new ArrayList<>();
         this.heading = new TableEntry(heading);
         for (int i = 0;i < content.size();i++) {
@@ -104,21 +114,5 @@ public class TableData {
             if (i < images.size())
                 entries.get(i).getColumns().get(columnIndex).setImage(images.get(i));
         }
-    }
-
-    public List<TableEntry> getEntries() {
-        return entries;
-    }
-
-    public void setEntries(List<TableEntry> entries) {
-        this.entries = entries;
-    }
-
-    public TableEntry getHeading() {
-        return heading;
-    }
-
-    public void setHeading(TableEntry heading) {
-        this.heading = heading;
     }
 }

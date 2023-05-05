@@ -8,6 +8,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import org.jetbrains.annotations.NotNull;
 import org.kys.bnmo.components.ComponentFactory;
 import org.kys.bnmo.helpers.StyleLoadHelper;
 
@@ -31,6 +32,7 @@ public class CheckoutPanel implements ComponentFactory {
     public CheckoutPanel() {
     }
 
+    @NotNull
     public Pane getComponent() {
         // Initialize root
         root = new VBox();
@@ -224,7 +226,7 @@ public class CheckoutPanel implements ComponentFactory {
         }
     }
 
-    private HBox createItemCard(Item item, String currency) {
+    private @NotNull HBox createItemCard(@NotNull Item item, String currency) {
         // Loop through the itemList and create a food frame for each item
         var roundedRectangle = new Button();
         roundedRectangle.setId("rounded-rectangle");

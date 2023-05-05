@@ -7,39 +7,38 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import lombok.AccessLevel;
+import lombok.Getter;
+import org.jetbrains.annotations.NotNull;
 import org.kys.bnmo.components.ComponentBuilder;
 import org.kys.bnmo.components.ComponentFactory;
 
 public abstract class TabContainer implements ComponentFactory {
 
     private StringProperty headerProperty;
+
     private Pane content;
+
     private Label headerTitle;
+
+    @Getter(AccessLevel.PROTECTED)
     private HBox header;
+
+    @Getter(AccessLevel.PROTECTED)
     private Pane root;
 
-    protected Pane getRoot()
-    {
-        return root;
-    }
-
-    protected  HBox getHeader()
-    {
-        return header;
-    }
-
     protected abstract Pane getContent();
+
     protected void addHeaderTitle(String title)
     {
         headerProperty.set(title);
         header.getChildren().add(headerTitle);
     }
 
-    protected void additionalAction()
-    {
+    protected void additionalAction() {}
 
-    }
     @Override
+    @NotNull
     public Pane getComponent() {
         header = new HBox();
         header.getStyleClass().add("tab-header");
@@ -61,5 +60,4 @@ public abstract class TabContainer implements ComponentFactory {
 
         return root;
     }
-
 }

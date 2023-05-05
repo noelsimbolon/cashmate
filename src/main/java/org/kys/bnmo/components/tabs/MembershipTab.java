@@ -24,7 +24,9 @@ import java.util.List;
 public class MembershipTab extends TabContainer {
 
     private static final TableBuilder tableBuilder = new TableBuilder();
+
     // private static final CustomerController customerController = new CustomerController();
+
     @Override
     protected Pane getContent() {
 
