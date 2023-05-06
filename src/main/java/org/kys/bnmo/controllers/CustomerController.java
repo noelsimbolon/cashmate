@@ -23,4 +23,8 @@ public class CustomerController {
                 .filter(c -> c.getCustomerID() == id)
                 .collect(Collectors.toList());
     }
+
+    public void save(ArrayList<Customer> data) {
+        dataStore.writeData("customer", data);
+    }
 }

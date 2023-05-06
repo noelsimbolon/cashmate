@@ -43,10 +43,12 @@ public class MemberController {
      }
 
      public void save(ArrayList<Member> data) {
-        dataStore.writeData("member", data);
+         dataStore.writeData("member", data);
      }
 
-     public void updateById(ArrayList<Member> data, int id, String name, String phoneNumber) {
+     public void updateById(int id, String name, String phoneNumber) {
+         ArrayList<Member> data = fetchAll();
+
          for (Member member: data) {
              if (member.getCustomerID() == id) {
                  member.setName(name);
