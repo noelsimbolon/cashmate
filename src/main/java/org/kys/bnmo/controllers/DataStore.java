@@ -1,5 +1,6 @@
 package org.kys.bnmo.controllers;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -7,6 +8,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+
+import javax.imageio.ImageIO;
 
 public class DataStore {
     private static String folderPath = System.getProperty("user.dir");
@@ -66,14 +69,34 @@ public class DataStore {
     }
 
     public <T> ArrayList<T> readData(String filename, Class<T> dataType) {
-        setAdapter(filename);
-        return adapter.readFile(folderPath + "\\" + filename, dataType);
+        File file = new File(folderPath + "\\" + filename);
+        setAdapter(file.getName());
+        return adapter.readFile(file.getAbsolutePath(), dataType);
     }
 
     public void writeData(String filename, ArrayList<?> data) {
-        setAdapter(filename);
-        File folder = new File(folderPath);
-        if (!folder.exists()) folder.mkdirs();
-        adapter.writeFile(folderPath + "\\" + filename, data);
+        File file = new File(folderPath + "\\" + filename);
+        setAdapter(file.getName());
+
+        File parentFolder = file.getParentFile();
+        if (!parentFolder.exists()) parentFolder.mkdirs();
+        adapter.writeFile(file.getAbsolutePath(), data);
+    }
+
+    public BufferedImage readImage(String filename) throws IOException {
+        File file = new File(folderPath + "\\images\\" + filename);
+        return ImageIO.read(file);
+    }
+
+    public void writeImage(String filename, BufferedImage image) {
+        File file = new File(folderPath + "\\images\\" + filename);
+        File parentFolder = file.getParentFile();
+        if (!parentFolder.exists()) parentFolder.mkdirs();
+
+        try {
+            ImageIO.write(image, "png", file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
