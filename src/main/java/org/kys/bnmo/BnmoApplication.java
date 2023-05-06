@@ -220,9 +220,9 @@ public class BnmoApplication extends Application {
 
         setDefaultTabs(
                 new DefaultTab(membershipTabFactory, tabPane.getTabs().get(0)),
-                new DefaultTab(membershipTabFactory, tabPane.getTabs().get(1)),
-                new DefaultTab(membershipTabFactory, tabPane.getTabs().get(2)),
-                new DefaultTab(membershipTabFactory, tabPane.getTabs().get(3))
+                new DefaultTab(cashierTabFactory, tabPane.getTabs().get(1)),
+                new DefaultTab(catalogueTabFactory, tabPane.getTabs().get(2)),
+                new DefaultTab(settingTabFactory, tabPane.getTabs().get(3))
         );
 
         tabPane.getTabs().clear();

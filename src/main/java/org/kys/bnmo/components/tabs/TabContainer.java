@@ -57,7 +57,7 @@ public abstract class TabContainer implements ComponentFactory {
         root.getStyleClass().add("tab-content");
 
         additionalAction();
-        
+
         return root;
     }
 }
