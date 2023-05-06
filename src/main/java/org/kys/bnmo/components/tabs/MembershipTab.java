@@ -2,7 +2,6 @@ package org.kys.bnmo.components.tabs;
 
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
@@ -11,7 +10,6 @@ import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
 import org.kys.bnmo.components.bases.TableBuilder;
 import org.kys.bnmo.events.NavigationHandler;
-import org.kys.bnmo.helpers.views.IconButtonHelper;
 import org.kys.bnmo.helpers.views.tables.TableData;
 import org.kys.bnmo.model.Customer;
 import org.kys.bnmo.model.Member;
@@ -26,11 +24,11 @@ public class MembershipTab extends TabContainer {
 
     // private static final CustomerController customerController = new CustomerController();
 
-    private NavigationHandler editMemberHandler;
-    private EventHandler<ActionEvent> backHandler;
-    public MembershipTab(NavigationHandler editMemberHandler, EventHandler<ActionEvent> backHandler)
+    private final NavigationHandler memberActionHandler;
+    private final EventHandler<ActionEvent> backHandler;
+    public MembershipTab(NavigationHandler memberActionHandler, EventHandler<ActionEvent> backHandler)
     {
-        this.editMemberHandler = editMemberHandler;
+        this.memberActionHandler = memberActionHandler;
         this.backHandler = backHandler;
     }
     @Override
@@ -90,26 +88,66 @@ public class MembershipTab extends TabContainer {
             // Action menu
             ContextMenu menu;
             if (customer instanceof Member) {
+
+                // Set menu item action
+                // Edit button
                 MenuItem item1 = new MenuItem("Edit");
+                item1.setOnAction(e -> {
+                    memberActionHandler.getEventHandler(
+                            new MemberFormTab("Edit member", (Member) customer, backHandler)
+                    ).handle(e);
+                });
+
+                // Activate/Deactivate button
+                // TODO: Update DataStore to activate or deactivate member
                 MenuItem item2;
                 if (((Member) customer).getStatus().equals("Active")) {
                     item2 = new MenuItem("Deactivate");
+                    item2.setOnAction(e -> {
+                        System.out.println("Deactivate member");
+                    });
                 } else {
                     item2 = new MenuItem("Activate");
+                    item2.setOnAction(e -> {
+                        System.out.println("Activate member");
+                    });
                 }
 
+                // Transaction history button
+                // TODO: Show transaction history
+                MenuItem item4 = new MenuItem("Transaction History");
+                item4.setOnAction(e -> {
+                    memberActionHandler.getEventHandler(
+                            new BillTab(customer.getCustomerID()),
+                            "Customer " + customer.getCustomerID() + "Transaction History"
+                    ).handle(e);
+                });
+
+                // Promote/Demote button
+                // TODO: Update DataStore to promote or demote member
+                MenuItem item3;
                 if (customer.getMemberLevel().equals("VIP")) {
-                    // Add event listener
-                    item1.setOnAction(e -> {
-                        System.out.println("Edit VIP");
+                    item3 = new MenuItem("Demote");
+                    item3.setOnAction(e -> {
+                        System.out.println("Demote member");
                     });
-                    menu = new ContextMenu(item1, item2);
                 } else {
-                    MenuItem item3 = new MenuItem("Promote");
-                    menu = new ContextMenu(item1, item2, item3);
+                    item3 = new MenuItem("Promote");
+                    item3.setOnAction(e -> {
+                        System.out.println("Promote member");
+                    });
                 }
+
+                // Add menu items to menu
+                menu = new ContextMenu(item1, item2, item3, item4);
+
             } else {
                 MenuItem item1 = new MenuItem("Apply Membership");
+                item1.setOnAction(e -> {
+                    memberActionHandler.getEventHandler(
+                            new MemberFormTab("Apply membership", customer.getCustomerID(), backHandler)
+                    ).handle(e);
+                });
                 menu = new ContextMenu(item1);
             }
             contextMenus.add(menu);
@@ -144,19 +182,6 @@ public class MembershipTab extends TabContainer {
     @Override
     protected void additionalAction()
     {
-        Button backButton = new Button();
-        new IconButtonHelper().setButtonGraphic(backButton, "/icon/BackArrow.png", 20, 20);
-        backButton.setOnAction(
-                editMemberHandler.getEventHandler(
-
-                        // TODO: Change to actual customer data fetched from DataStore
-                        new MemberFormTab("Edit member", new Member(69, "Hello", "0821123456789", "Member"), backHandler),
-                        "Membership")
-        );
-
-        backButton.getStyleClass().add("back-button");
-        getHeader().getChildren().add(0, backButton);
-
         getRoot().getStyleClass().add("fill-tab-content");
         addHeaderTitle("Customer List");
     }

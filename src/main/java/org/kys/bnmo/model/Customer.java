@@ -31,9 +31,4 @@ public class Customer implements Serializable {
     public String getMemberLevel() {
         return "Customer";
     }
-
-    @NotNull
-    private Member applyMembership(String name, String phoneNumber) {
-        return new Member(this.customerID, name, phoneNumber, "Member");
-    }
 }
