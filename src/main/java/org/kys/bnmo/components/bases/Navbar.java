@@ -47,12 +47,12 @@ public class Navbar extends ComponentBuilder {
         buttonScrollPane.setId("navbar-scroll-panel");
         buttonScrollPane.getStyleClass().add("navbar-scroll-panel");
         root.getChildren().add(buttonScrollPane);
+        root.getStyleClass().add("navbar");
 
         // Load CSS File
         StyleLoadHelper helper = new StyleLoadHelper("/styles/navBar.css");
         helper.load(root);
 
-        root.getStyleClass().add("navbar");
         setRoot(root);
     }
 }

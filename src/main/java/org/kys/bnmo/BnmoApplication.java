@@ -5,7 +5,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.print.PrinterJob;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
@@ -20,6 +19,7 @@ import org.kys.bnmo.views.Page;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class BnmoApplication extends Application {
@@ -33,6 +33,7 @@ public class BnmoApplication extends Application {
     private List<Button> navbarButtons;
 
     private TabPane tabPane;
+    private Map<String, Integer> tabOrders;
 
     private class NavbarButtonHandler implements EventHandler<ActionEvent> {
         private Button button;
@@ -125,6 +126,11 @@ public class BnmoApplication extends Application {
                 .toList();
     }
 
+    private void replaceTab(String name, int order)
+    {
+
+    }
+
     @Override
     public void start(Stage stage) {
 
@@ -153,13 +159,13 @@ public class BnmoApplication extends Application {
                 .selectedItemProperty()
                 .addListener(new TabChangeListener(navbarButtons));
 
-        Tab a = new Tab("a");
-        a.setContent(new BillTab().getComponent());
-        tabPane.getTabs().add(a);
-
-        Tab b = new Tab("a");
-        b.setContent(new ReportTab().getComponent());
-        tabPane.getTabs().add(b);
+//        Tab a = new Tab("a");
+//        a.setContent(new BillTab().getComponent());
+//        tabPane.getTabs().add(a);
+//
+//        Tab b = new Tab("a");
+//        b.setContent(new ReportTab().getComponent());
+//        tabPane.getTabs().add(b);
 
         // styles
         StyleLoadHelper helper = new StyleLoadHelper("/styles/global.css");
@@ -171,10 +177,10 @@ public class BnmoApplication extends Application {
 
         stage.show();
 
-        DocumentPrinter printer = new DocumentPrinter(stage);
-        VBox B = new VBox();
-        B.getChildren().addAll(new Label("33"), new Label("33"));
-        printer.printElement((Pane)((ScrollPane)(new BillDocument().getComponent()).getChildren().get(0)).getContent());
+//        DocumentPrinter printer = new DocumentPrinter(stage);
+//        VBox B = new VBox();
+//        B.getChildren().addAll(new Label("33"), new Label("33"));
+//        printer.printElement((Pane)((ScrollPane)(new BillDocument().getComponent()).getChildren().get(0)).getContent());
     }
 
 // Checkout panel testing

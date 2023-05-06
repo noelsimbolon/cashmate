@@ -1,7 +1,6 @@
 .page {
-    -fx-pref-width: 200px;
+    -fx-pref-width: 600px;
     -fx-background-color: white;
-    -fx-pref-height: 400px;
 }
 
 .dark {

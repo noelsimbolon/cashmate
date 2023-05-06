@@ -1,3 +1,6 @@
+.navbar {
+    -fx-min-width: 300px;
+}
 .program-title {
     -fx-font-family: "Inter";
     -fx-text-fill: #FCA311;
