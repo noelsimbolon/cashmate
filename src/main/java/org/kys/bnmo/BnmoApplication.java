@@ -188,6 +188,7 @@ public class BnmoApplication extends Application {
     {
         this.defaultTabs.addAll(Arrays.stream(defaultTabs).toList());
     }
+
     private void initiateRoot(Stage stage)
     {
 
@@ -229,11 +230,7 @@ public class BnmoApplication extends Application {
 
     }
 
-    @Override
-    public void start(Stage stage) {
-
-        initiateRoot(stage);
-
+    private void handleNavigation() {
         // navbar handler
         navbarButtons = getNavbarButtons();
         navbarButtons.forEach(button -> {
@@ -244,6 +241,13 @@ public class BnmoApplication extends Application {
         tabPane.getSelectionModel()
                 .selectedItemProperty()
                 .addListener(new TabChangeListener());
+    }
+
+    @Override
+    public void start(Stage stage) {
+
+        initiateRoot(stage);
+        handleNavigation();
 
         // styles
         StyleLoadHelper helper = new StyleLoadHelper("/styles/global.css");

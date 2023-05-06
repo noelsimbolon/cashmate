@@ -1,5 +1,4 @@
 package org.kys.bnmo.components.tabs;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
