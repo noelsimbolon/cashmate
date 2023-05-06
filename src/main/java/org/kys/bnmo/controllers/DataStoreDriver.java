@@ -28,13 +28,12 @@ public class DataStoreDriver {
             // Work
             ArrayList<InventoryItem> items = new ArrayList<>();
             for (int i = 0; i < 5; i++) {
-                items.add(new InventoryItem(10, "item " + (i + 1), 100, "Food", "food.png"));
+                items.add(new InventoryItem("item " + (i + 1), "Food" , 10, 250, 100, "food.png"));
             }
 
             dataStore.setFileFormat("xml", false);
             dataStore.writeData("inventory-item", items);
             ArrayList<InventoryItem> readItems = dataStore.readData("inventory-item", InventoryItem.class);
-            InventoryItem.itemCountSequence = readItems.get(readItems.size() - 1).getItemID();
 
             for (int i = 0; i < 5; i++) {
                 System.out.println(items.get(i).getItemID());
