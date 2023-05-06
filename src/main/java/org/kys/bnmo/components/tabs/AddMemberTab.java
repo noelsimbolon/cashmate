@@ -1,5 +1,6 @@
 package org.kys.bnmo.components.tabs;
-
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import org.kys.bnmo.components.bases.FormBuilder;
@@ -10,6 +11,13 @@ public class AddMemberTab extends TabContainer {
     private static final FormBuilder formBuilder = new FormBuilder();
 
     private static final IconButtonHelper iconButtonHelper = new IconButtonHelper();
+
+    EventHandler<ActionEvent> backButtonAction;
+
+    public AddMemberTab(EventHandler<ActionEvent> backButtonAction)
+    {
+        this.backButtonAction = backButtonAction;
+    }
 
     @Override
     protected Pane getContent() {
@@ -29,8 +37,9 @@ public class AddMemberTab extends TabContainer {
     protected void additionalAction()
     {
         Button backButton = new Button();
-        new IconButtonHelper().setButtonGraphic(backButton, "/icon/BackArrow.png", 20, 20);
+        iconButtonHelper.setButtonGraphic(backButton, "/icon/BackArrow.png", 20, 20);
         backButton.getStyleClass().add("back-button");
+        backButton.setOnAction(backButtonAction);
         getHeader().getChildren().add(0, backButton);
 
         getRoot().getStyleClass().add("fill-tab-content");

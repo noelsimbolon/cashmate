@@ -1,5 +1,6 @@
 package org.kys.bnmo.components.tabs;
 
+import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
@@ -11,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
 import org.kys.bnmo.components.bases.TableBuilder;
+import org.kys.bnmo.helpers.IconButtonHelper;
 import org.kys.bnmo.helpers.Table.TableData;
 import org.kys.bnmo.model.Customer;
 import org.kys.bnmo.model.Member;
@@ -25,6 +27,11 @@ public class MembershipTab extends TabContainer {
 
     // private static final CustomerController customerController = new CustomerController();
 
+    private EventHandler<ActionEvent> editMemberAction;
+    public MembershipTab(EventHandler<ActionEvent> editMemberAction)
+    {
+        this.editMemberAction = editMemberAction;
+    }
     @Override
     protected Pane getContent() {
 
@@ -133,10 +140,11 @@ public class MembershipTab extends TabContainer {
     @Override
     protected void additionalAction()
     {
-//        Button backButton = new Button();
-//        new IconButtonHelper().setButtonGraphic(backButton, "/icon/BackArrow.png", 20, 20);
-//        backButton.getStyleClass().add("back-button");
-//        getHeader().getChildren().add(0, backButton);
+        Button backButton = new Button();
+        new IconButtonHelper().setButtonGraphic(backButton, "/icon/BackArrow.png", 20, 20);
+        backButton.setOnAction(editMemberAction);
+        backButton.getStyleClass().add("back-button");
+        getHeader().getChildren().add(0, backButton);
 
         getRoot().getStyleClass().add("fill-tab-content");
         addHeaderTitle("Customer List");
