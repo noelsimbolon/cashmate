@@ -2,7 +2,6 @@ package org.kys.bnmo.components.tabs;
 
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
@@ -11,7 +10,6 @@ import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
 import org.kys.bnmo.components.bases.TableBuilder;
 import org.kys.bnmo.events.NavigationHandler;
-import org.kys.bnmo.helpers.views.IconButtonHelper;
 import org.kys.bnmo.helpers.views.tables.TableData;
 import org.kys.bnmo.model.Customer;
 import org.kys.bnmo.model.Member;
@@ -26,11 +24,11 @@ public class MembershipTab extends TabContainer {
 
     // private static final CustomerController customerController = new CustomerController();
 
-    private NavigationHandler editMemberHandler;
-    private EventHandler<ActionEvent> backHandler;
-    public MembershipTab(NavigationHandler editMemberHandler, EventHandler<ActionEvent> backHandler)
+    private final NavigationHandler memberFormHandler;
+    private final EventHandler<ActionEvent> backHandler;
+    public MembershipTab(NavigationHandler memberFormHandler, EventHandler<ActionEvent> backHandler)
     {
-        this.editMemberHandler = editMemberHandler;
+        this.memberFormHandler = memberFormHandler;
         this.backHandler = backHandler;
     }
     @Override
@@ -90,21 +88,12 @@ public class MembershipTab extends TabContainer {
             // Action menu
             ContextMenu menu;
             if (customer instanceof Member) {
-                MenuItem item1 = new MenuItem("Edit");
-                MenuItem item2;
-                if (((Member) customer).getStatus().equals("Active")) {
-                    item2 = new MenuItem("Deactivate");
-                } else {
-                    item2 = new MenuItem("Activate");
-                }
-
-                MenuItem item3 = new MenuItem("Demote");
-                MenuItem item4 = new MenuItem("Transaction History");
 
                 // Set menu item action
                 // Edit button
+                MenuItem item1 = new MenuItem("Edit");
                 item1.setOnAction(e -> {
-                    editMemberHandler.getEventHandler(
+                    memberFormHandler.getEventHandler(
                             new MemberFormTab("Edit member", (Member) customer, backHandler),
                             "Membership"
                     ).handle(e);
@@ -112,11 +101,14 @@ public class MembershipTab extends TabContainer {
 
                 // Activate/Deactivate button
                 // TODO: Update DataStore to activate or deactivate member
+                MenuItem item2;
                 if (((Member) customer).getStatus().equals("Active")) {
+                    item2 = new MenuItem("Deactivate");
                     item2.setOnAction(e -> {
                         System.out.println("Deactivate member");
                     });
                 } else {
+                    item2 = new MenuItem("Activate");
                     item2.setOnAction(e -> {
                         System.out.println("Activate member");
                     });
@@ -124,17 +116,21 @@ public class MembershipTab extends TabContainer {
 
                 // Transaction history button
                 // TODO: Show transaction history
+                MenuItem item4 = new MenuItem("Transaction History");
                 item4.setOnAction(e -> {
                     System.out.println("Transaction history");
                 });
 
                 // Promote/Demote button
                 // TODO: Update DataStore to promote or demote member
+                MenuItem item3;
                 if (customer.getMemberLevel().equals("VIP")) {
+                    item3 = new MenuItem("Demote");
                     item3.setOnAction(e -> {
                         System.out.println("Demote member");
                     });
                 } else {
+                    item3 = new MenuItem("Promote");
                     item3.setOnAction(e -> {
                         System.out.println("Promote member");
                     });
@@ -146,7 +142,7 @@ public class MembershipTab extends TabContainer {
             } else {
                 MenuItem item1 = new MenuItem("Apply Membership");
                 item1.setOnAction(e -> {
-                    editMemberHandler.getEventHandler(
+                    memberFormHandler.getEventHandler(
                             new MemberFormTab("Apply membership", customer.getCustomerID(), backHandler),
                             "Membership"
                     ).handle(e);
