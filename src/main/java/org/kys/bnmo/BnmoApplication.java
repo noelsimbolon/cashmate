@@ -115,15 +115,15 @@ public class BnmoApplication extends Application {
 
     private class ReplaceTabAction implements EventHandler<ActionEvent> {
         private String title;
-        private Parent replacement;
-        public ReplaceTabAction(Parent replacement, String title) {
+        private TabContainer defaultFactory;
+        public ReplaceTabAction(TabContainer defaultFactory, String title) {
             this.title = title;
-            this.replacement = replacement;
+            this.defaultFactory = defaultFactory;
         }
         @Override
         public void handle(ActionEvent event) {
 
-            Tab newTab = Page.getTemplateTab(replacement, title);
+            Tab newTab = Page.getTemplateTab(defaultFactory.getComponent(), title);
 
             List<Tab> tabs = tabPane.getTabs();
 
@@ -198,7 +198,7 @@ public class BnmoApplication extends Application {
         );
         MembershipTab membershipTabFactory = new MembershipTab(
                 new ReplaceTabAction(
-                        addMemberTabFactory.getComponent(),
+                        addMemberTabFactory,
                         "Membership"
                 )
         );
