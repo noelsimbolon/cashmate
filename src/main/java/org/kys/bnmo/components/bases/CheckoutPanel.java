@@ -37,7 +37,6 @@ public class CheckoutPanel extends VBox {
         @Getter
         private InventoryItem item;
         @Getter
-        @Setter
         private IntegerProperty quantity;
 
         public Order(InventoryItem item, int quantity) {
@@ -93,6 +92,9 @@ public class CheckoutPanel extends VBox {
         addItemScrollPane();
         checkoutButton = new Button("Charge");
         addCheckoutButton();
+        checkoutButton.setOnMouseClicked(e -> {
+            checkoutCurrentBill();
+        });
 
         // Add the checkout panel to the root
         this.getChildren().add(checkoutPanelContainer);
@@ -347,9 +349,26 @@ public class CheckoutPanel extends VBox {
             customerDropdown.getItems().add("Customer-" + customer.getCustomerID());
             customerDropdown.getSelectionModel().select(customerDropdown.getItems().size() - 1);
         }
-        int currentIdx = customerDropdown.getSelectionModel().getSelectedIndex();
-        Order order = new Order(item, 1);
-        temporaryBills.get(currentIdx).getOrders().add(order);
-        addItemCard(createItemCard(order, "Rp"));
+
+        List<Order> orders = temporaryBills.get(customerDropdown.getSelectionModel().getSelectedIndex()).getOrders();
+        int existsIdx = IntStream.range(0, orders.size())
+                .filter(i -> item.equals(orders.get(i).getItem()))
+                .findFirst()
+                .orElse(-1);
+
+        if (existsIdx == -1) {
+            int currentIdx = customerDropdown.getSelectionModel().getSelectedIndex();
+            Order order = new Order(item, 1);
+            temporaryBills.get(currentIdx).getOrders().add(order);
+            addItemCard(createItemCard(order, "Rp"));
+        } else {
+            var items = (VBox) checkoutPanelContainer.lookup("#items");
+            Spinner<Integer> spinner = (Spinner<Integer>) items.getChildren().get(existsIdx).lookup("#quantity-spinner");
+            spinner.increment();
+        }
+    }
+
+    private void checkoutCurrentBill() {
+
     }
 }
