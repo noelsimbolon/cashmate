@@ -26,12 +26,12 @@ public class Customer implements Serializable {
         this.customerID = customerID;
     }
 
-    public String getCustomerClass() {
+    public String getMemberLevel() {
         return "Customer";
     }
 
     @NotNull
     private Member applyMembership(String name, String phoneNumber) {
-        return new Member(this.customerID, name, phoneNumber);
+        return new Member(this.customerID, name, phoneNumber, "Member");
     }
 }
