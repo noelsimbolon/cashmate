@@ -9,6 +9,7 @@ import org.kys.bnmo.helpers.views.loaders.StyleLoadHelper;
 
 public class BillDocument implements ComponentFactory {
 
+    // TODO : TRANSACTION CONTROLLER
     private static final BillPageBuilder billPageBuilder = new BillPageBuilder();
     private int customerID;
     public BillDocument(int customerID)
@@ -27,8 +28,11 @@ public class BillDocument implements ComponentFactory {
         ScrollPane scrollPane = new ScrollPane();
         VBox pages = new VBox();
 
+        // TODO: GET DATA FROM TRANSACTION CONTROLLER
+        // TODO: LOOP FOR EVERY 10 ENTRIES
         for (int i = 0; i < 2; i++)
         {
+            // TODO: PASS ARRAYLIST OF TRANSACTION MODELS INSIDE ADDROWS (MAX 10 LENGTH)
             billPageBuilder.addRows();
             billPageBuilder.addSummary();
             pages.getChildren().add(billPageBuilder.getAndResetComponent());

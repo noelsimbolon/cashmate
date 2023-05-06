@@ -134,23 +134,40 @@ public class BnmoApplication extends Application {
 
                 List<Tab> tabs = tabPane.getTabs();
 
+                boolean found = false;
+
                 for (int i = 0; i < tabs.size(); i++)
                 {
                     if (tabs.get(i).getId() == newTab.getId())
                     {
                         tabPane.getTabs().remove(i);
                         tabPane.getTabs().add(i, newTab);
+                        found = true;
                         break;
                     }
                 }
 
-                for (Button button: navbarButtons)
+                if (found)
                 {
-                    if (button.getId() == newTab.getId()) button.fire();
+                    for (Button button: navbarButtons)
+                    {
+                        if (button.getId() == newTab.getId()) button.fire();
+                    }
+                }
+
+                else
+                {
+                    tabPane.getTabs().add(newTab);
                 }
 
             }
         }
+
+        @Override
+        public EventHandler<ActionEvent> getEventHandler(TabContainer factory) {
+            return new ReplaceTabAction(factory, title);
+        }
+
         @Override
         public EventHandler<ActionEvent> getEventHandler(TabContainer factory, String title) {
             return new ReplaceTabAction(factory, title);
