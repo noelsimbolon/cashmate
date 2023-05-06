@@ -11,11 +11,8 @@ public class ReportTab extends TabContainer {
     @Override
     protected Pane getContent() {
         Pane root = reportDocumentFactory.getComponent();
-        root.getStyleClass().add("center-tab-content");
+//        root.getStyleClass().add("center-tab-content");
         return root;
-    }
-    public void setContent() {
-
     }
 
     @Override
