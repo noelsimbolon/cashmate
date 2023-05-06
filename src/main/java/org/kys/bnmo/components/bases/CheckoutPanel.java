@@ -2,43 +2,75 @@ package org.kys.bnmo.components.bases;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.transformation.FilteredList;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import lombok.Getter;
+import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 import org.kys.bnmo.components.ComponentFactory;
 import org.kys.bnmo.helpers.loaders.StyleLoadHelper;
+import org.kys.bnmo.model.Customer;
+import org.kys.bnmo.model.InventoryItem;
+import org.kys.bnmo.model.Member;
+import org.kys.bnmo.model.VIP;
 
-// TESTING
-class Item {
-    public String name;
-    public double price;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-    public Item(String name, double price) {
-        this.name = name;
-        this.price = price;
+public class CheckoutPanel extends VBox {
+    private final VBox inputFields;
+
+    private class Order {
+        @Getter
+        private InventoryItem item;
+        @Getter
+        @Setter
+        private IntegerProperty quantity;
+
+        public Order(InventoryItem item, int quantity) {
+            this.item = item;
+            this.quantity = new SimpleIntegerProperty(quantity);
+        }
     }
-}
-// TESTING
 
-public class CheckoutPanel implements ComponentFactory {
+    private class TemporaryBill {
+        @Getter
+        private final List<Order> orders;
+        @Getter
+        private final Customer customer;
 
-    private VBox root;
-    private VBox inputFields;
-
-    public CheckoutPanel() {
+        public TemporaryBill(Customer customer) {
+            orders = new ArrayList<>();
+            this.customer = customer;
+        }
     }
 
-    @NotNull
-    public Pane getComponent() {
-        // Initialize root
-        root = new VBox();
+    private List<TemporaryBill> temporaryBills;
+    private List<Member> members;
+    private ComboBox<String> customerDropdown;
+    private VBox checkoutPanelContainer;
+    private Button checkoutButton;
+
+    public CheckoutPanel(List<Member> members) {
+        super();
+        this.members = new ArrayList<>(members);
+        this.temporaryBills = new ArrayList<>();
 
         // Initialize checkout panel container
-        VBox checkoutPanelContainer = new VBox();
+        checkoutPanelContainer = new VBox();
         checkoutPanelContainer.setId("checkout-panel-container");
 
         // Initialize input fields
@@ -52,42 +84,21 @@ public class CheckoutPanel implements ComponentFactory {
         StyleLoadHelper helper = new StyleLoadHelper("/styles/CheckoutPanel.css");
         helper.load(checkoutPanelContainer);
 
-        addButtonAndTextField("Enter customer name");
-        addCustomerDropdown("Select customer", null);
+        addButtonAndTextField();
+        customerDropdown = new ComboBox<>();
+        addCustomerDropdown();
         // you can also create items in the customer dropdown when providing the second argument like the following
         // addCustomerDropdown("Select customer", new String[] {"Customer 1", "Jojo", "Fio"});
 
         addItemScrollPane();
+        checkoutButton = new Button("Charge");
         addCheckoutButton();
 
         // Add the checkout panel to the root
-        root.getChildren().add(checkoutPanelContainer);
-
-        // This method must be called to add event handler to the plusButton
-        // and the call is AFTER the root is initialized
-        addPlusButtonEventHandler();
-
-        // TODO:
-        //  - Add event handlers for quantity spinner and checkout button to update the checkout price
-        //  - Implement customer text field recommendation
-        //  - Most event handlers and business logic is not implemented yet, must wait for data store
-
-        // TESTING
-        HBox item1 = createItemCard(new Item("Item 1", 60000), "Rp");
-        HBox item2 = createItemCard(new Item("Item 2", 60000), "Rp");
-        HBox item3 = createItemCard(new Item("Item 3", 60000), "Rp");
-        HBox item4 = createItemCard(new Item("Item 4", 60000), "Rp");
-        addItemCard(item1);
-        addItemCard(item2);
-        addItemCard(item3);
-        addItemCard(item4);
-        removeItemCard(item3);
-        // TESTING
-
-        return root;
+        this.getChildren().add(checkoutPanelContainer);
     }
 
-    private void addButtonAndTextField(String placeholder) {
+    private void addButtonAndTextField() {
         // Container to hold the plusButton and customerTextField
         var buttonAndTextFieldContainer = new HBox();
 
@@ -95,36 +106,64 @@ public class CheckoutPanel implements ComponentFactory {
         var plusLabel = new Label("+");
         plusLabel.setId("plus-label");
 
+        // Create a combo box
+        ComboBox<String> customerComboBox = new ComboBox<>();
+        customerComboBox.getItems().addAll(members.stream().map(Member::getName).toList());
+        customerComboBox.setEditable(true);
+        customerComboBox.setPromptText("Enter customer name");
+        customerComboBox.setId("customer-editable");
+        customerComboBox.getStyleClass().add("customer-dropdown");
+
+        HBox.setHgrow(customerComboBox, Priority.ALWAYS);
+        customerComboBox.setMaxWidth(Double.MAX_VALUE);
+
         // Create button
         var plusButton = new Button();
         plusButton.setId("plus-button");
         plusButton.setGraphic(plusLabel);
-
-        // Create a text field
-        TextField customerTextField = new TextField();
-        customerTextField.setPromptText(placeholder);
-        customerTextField.setId("customer-text-field");
-        HBox.setHgrow(customerTextField, Priority.ALWAYS);
+        plusButton.setOnMouseClicked(e -> {
+            if (customerComboBox.getValue() == null)
+                customerComboBox.setValue("");
+            int memberIdx = IntStream.range(0, members.size())
+                    .filter(i -> customerComboBox.getValue().equalsIgnoreCase(members.get(i).getName()))
+                    .findFirst()
+                    .orElse(-1);
+            int existsIdx = IntStream.range(0, customerDropdown.getItems().size())
+                    .filter(i -> customerComboBox.getValue().equalsIgnoreCase(customerDropdown.getItems().get(i)))
+                    .findFirst()
+                    .orElse(-1);
+            if (memberIdx != -1 && existsIdx == -1) {
+                temporaryBills.add(new TemporaryBill(members.get(memberIdx)));
+                customerDropdown.getItems().add(members.get(memberIdx).getName());
+                customerDropdown.getSelectionModel().select(customerDropdown.getItems().size() - 1);
+                customerComboBox.setValue(null);
+            } else if (existsIdx == -1) {
+                Customer customer = new Customer();
+                temporaryBills.add(new TemporaryBill(customer));
+                customerDropdown.getItems().add("Customer-" + customer.getCustomerID());
+                customerDropdown.getSelectionModel().select(customerDropdown.getItems().size() - 1);
+                customerComboBox.setValue(null);
+            } else if (memberIdx != -1) {
+                customerDropdown.getSelectionModel().select(existsIdx);
+                customerComboBox.setValue(null);
+            }
+        });
 
         // Add plusButton and customerTextField to buttonAndTextFieldContainer
-        buttonAndTextFieldContainer.getChildren().addAll(plusButton, customerTextField);
+        buttonAndTextFieldContainer.getChildren().addAll(plusButton, customerComboBox);
         buttonAndTextFieldContainer.setId("button-and-text-field-container");
 
         inputFields.getChildren().add(buttonAndTextFieldContainer);
     }
 
-    private void addCustomerDropdown(String placeholder, String[] items) {
+    private void addCustomerDropdown() {
         // Container to hold the customer dropdown
         HBox customerDropdownContainer = new HBox();
         HBox.setHgrow(customerDropdownContainer, Priority.ALWAYS);
 
         // Dropdown
-        var customerDropdown = new ComboBox<String>();
-        customerDropdown.setPromptText(placeholder);
+        customerDropdown.setPromptText("Select customer");
         customerDropdown.setId("customer-dropdown");
-        if (items != null) {
-            customerDropdown.getItems().addAll(items);
-        }
 
         // Bind the preferred width of the dropdown container to the available space
         DoubleBinding customerDropdownContainerWidth = Bindings.createDoubleBinding(customerDropdownContainer::getWidth,
@@ -164,7 +203,6 @@ public class CheckoutPanel implements ComponentFactory {
 
     private void addCheckoutButton() {
         // Create button
-        var checkoutButton = new Button("Charge");
         checkoutButton.setId("checkout-button");
         checkoutButton.setAlignment(Pos.CENTER);
         checkoutButton.setMaxWidth(Double.MAX_VALUE);
@@ -177,33 +215,8 @@ public class CheckoutPanel implements ComponentFactory {
         inputFields.getChildren().add(checkoutButtonContainer);
     }
 
-    // Add event handler for plusButton that adds a new customer
-    // to the dropdown when the button is clicked.
-    // This method must only be called then the root is initialized.
-    private void addPlusButtonEventHandler() {
-        var checkoutPanelContainer = (VBox) root.lookup("#checkout-panel-container");
-
-        if (checkoutPanelContainer != null) {
-            var plusButton = (Button) checkoutPanelContainer.lookup("#plus-button");
-            var customerTextField = (TextField) checkoutPanelContainer.lookup("#customer-text-field");
-
-            if (plusButton != null && customerTextField != null) {
-                // This event handler might want to be refactored in the future
-                // to implement more validation.
-                plusButton.setOnAction(event -> {
-                    String newCustomer = customerTextField.getText().trim();
-                    if (!newCustomer.isEmpty()) {
-                        addCustomerDropdownItem(newCustomer);
-                        customerTextField.clear();
-                    }
-                    customerTextField.clear();
-                });
-            }
-        }
-    }
-
     private void addCustomerDropdownItem(String item) {
-        var checkoutPanelContainer = (VBox) root.lookup("#checkout-panel-container");
+        var checkoutPanelContainer = (VBox) this.lookup("#checkout-panel-container");
 
         if (checkoutPanelContainer != null) {
             var customerDropdown = (ComboBox<String>) checkoutPanelContainer.lookup("#customer-dropdown");
@@ -215,7 +228,7 @@ public class CheckoutPanel implements ComponentFactory {
     }
 
     private void removeCustomerDropdownItem(String item) {
-        var checkoutPanelContainer = (VBox) root.lookup("#checkout-panel-container");
+        var checkoutPanelContainer = (VBox) this.lookup("#checkout-panel-container");
 
         if (checkoutPanelContainer != null) {
             var customerDropdown = (ComboBox<String>) checkoutPanelContainer.lookup("#customer-dropdown");
@@ -226,15 +239,26 @@ public class CheckoutPanel implements ComponentFactory {
         }
     }
 
-    private @NotNull HBox createItemCard(@NotNull Item item, String currency) {
+    private @NotNull HBox createItemCard(@NotNull Order order, String currency) {
+        var itemCard = new HBox();
+        itemCard.setAlignment(Pos.CENTER_LEFT);
+        itemCard.setId("item-container");
+        HBox.setHgrow(itemCard, Priority.ALWAYS);
+
+
         // Loop through the itemList and create a food frame for each item
         var roundedRectangle = new Button();
         roundedRectangle.setId("rounded-rectangle");
 
         // Labels to hold the item name and its price
-        var nameLabel = new Label(item.name);
+        var nameLabel = new Label(order.item.getItemName());
         nameLabel.setId("item-name-label");
-        var priceLabel = new Label(currency + item.price);
+        var priceLabel = new Label();
+        priceLabel.textProperty().bind(Bindings.createStringBinding(() -> {
+            int quantity = order.getQuantity().get();
+            double price = order.getItem().getPrice();
+            return String.format("%s%d", currency, quantity * order.getItem().getPrice());
+        }, order.getQuantity()));
         priceLabel.setId("item-price-label");
 
         // VBox to hold the labels
@@ -250,17 +274,21 @@ public class CheckoutPanel implements ComponentFactory {
         itemDescriptionContainer.setId("item-description-container");
 
         // Spinner that controls the quantity of the item
-        var quantitySpinner = new Spinner<Integer>(1, 99, 1, 1);
+        var quantitySpinner = new Spinner<Integer>(0, 99, order.getQuantity().get(), 1);
         quantitySpinner.setId("quantity-spinner");
+        quantitySpinner.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue == 0) {
+                temporaryBills.get(customerDropdown.getSelectionModel().getSelectedIndex()).getOrders().remove(order);
+                var items = (VBox) this.lookup("#items");
+                items.getChildren().remove(itemCard);
+            }
+            order.getQuantity().set(newValue);
+            updateCheckoutPrice();
+        });
 
         var quantitySpinnerContainer = new HBox(quantitySpinner);
         quantitySpinnerContainer.setAlignment(Pos.CENTER_RIGHT);
         quantitySpinnerContainer.setId("quantity-spinner-container");
-
-        var itemCard = new HBox();
-        itemCard.setAlignment(Pos.CENTER_LEFT);
-        itemCard.setId("item-container");
-        HBox.setHgrow(itemCard, Priority.ALWAYS);
         HBox.setHgrow(itemDescriptionContainer, Priority.ALWAYS);
         HBox.setHgrow(quantitySpinnerContainer, Priority.NEVER);
 
@@ -275,39 +303,14 @@ public class CheckoutPanel implements ComponentFactory {
     // This method might want to be refactored to adjust
     // with the data structure.
     private void addItemCard(HBox itemCard) {
-        var checkoutPanelContainer = (VBox) root.lookup("#checkout-panel-container");
+        var itemScrollPane = (ScrollPane) checkoutPanelContainer.lookup("#item-scroll-pane");
 
-        if (checkoutPanelContainer != null) {
-            var itemScrollPane = (ScrollPane) checkoutPanelContainer.lookup("#item-scroll-pane");
+        if (itemScrollPane != null) {
+            var items = (VBox) itemScrollPane.getContent().lookup("#items");
 
-            if (itemScrollPane != null) {
-                var items = (VBox) itemScrollPane.getContent().lookup("#items");
-
-                if (items != null) {
-                    // Add the item frame to the container
-                    items.getChildren().add(itemCard);
-                }
-            }
-        }
-
-        updateCheckoutPrice();
-    }
-
-    // This method might want to be refactored to adjust
-    // with the data structure.
-    private void removeItemCard(HBox itemCard) {
-        var checkoutPanelContainer = (VBox) root.lookup("#checkout-panel-container");
-
-        if (checkoutPanelContainer != null) {
-            var itemScrollPane = (ScrollPane) checkoutPanelContainer.lookup("#item-scroll-pane");
-
-            if (itemScrollPane != null) {
-                var items = (VBox) itemScrollPane.getContent().lookup("#items");
-
-                if (items != null) {
-                    // Add the item frame to the container
-                    items.getChildren().remove(itemCard);
-                }
+            if (items != null) {
+                // Add the item frame to the container
+                items.getChildren().add(itemCard);
             }
         }
 
@@ -315,6 +318,38 @@ public class CheckoutPanel implements ComponentFactory {
     }
 
     private void updateCheckoutPrice() {
-        // Implement the update of the checkout price
+        Locale localeID = new Locale("in", "ID");
+
+        NumberFormat rupiahFormat = NumberFormat.getCurrencyInstance(localeID);
+        int amount = 0;
+        for (Order order : temporaryBills.get(customerDropdown.getSelectionModel().getSelectedIndex()).getOrders()) {
+            amount += order.quantity.get() * order.item.getPrice();
+        }
+
+        Customer customer =temporaryBills.get(customerDropdown.getSelectionModel().getSelectedIndex()).customer;
+        if (customer instanceof Member member) {
+            amount -= Math.min(amount, member.getPoints());
+        }
+
+        if (customer instanceof VIP) {
+            amount *= 0.9;
+        }
+
+        String formattedAmount = rupiahFormat.format(amount);
+
+        checkoutButton.setText("Charge: " + formattedAmount);
+    }
+
+    public void addItem(InventoryItem item) {
+        if (customerDropdown.getItems().size() == 0) {
+            Customer customer = new Customer();
+            temporaryBills.add(new TemporaryBill(customer));
+            customerDropdown.getItems().add("Customer-" + customer.getCustomerID());
+            customerDropdown.getSelectionModel().select(customerDropdown.getItems().size() - 1);
+        }
+        int currentIdx = customerDropdown.getSelectionModel().getSelectedIndex();
+        Order order = new Order(item, 1);
+        temporaryBills.get(currentIdx).getOrders().add(order);
+        addItemCard(createItemCard(order, "Rp"));
     }
 }
