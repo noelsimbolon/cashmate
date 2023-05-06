@@ -110,11 +110,15 @@ public class BnmoApplication extends Application {
 
     private class TabNavigationHandler implements NavigationHandler {
 
+        private String title;
+
+        TabNavigationHandler(String title)
+        {
+            this.title = title;
+        }
         private class ReplaceTabAction implements EventHandler<ActionEvent> {
-            private String title;
             private TabContainer defaultFactory;
             public ReplaceTabAction(TabContainer defaultFactory, String title) {
-                this.title = title;
                 this.defaultFactory = defaultFactory;
             }
             @Override
@@ -198,7 +202,7 @@ public class BnmoApplication extends Application {
         // initialize factory
 //        ReplaceTabAction(new BillTab(id), "Bill[idcostumer]");
         MembershipTab membershipTabFactory = new MembershipTab(
-                new TabNavigationHandler(),
+                new TabNavigationHandler("Membership"),
                 new BackTabAction("Membership")
         );
 
