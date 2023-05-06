@@ -14,11 +14,11 @@ import org.kys.bnmo.helpers.views.IconButtonHelper;
 public class MemberFormTab extends TabContainer {
 
     private static final FormBuilder formBuilder = new FormBuilder();
-
     private static final IconButtonHelper iconButtonHelper = new IconButtonHelper();
 
     String formTitle;
     Member existingMember;
+
     EventHandler<ActionEvent> backButtonAction;
     EventHandler<ActionEvent> saveButtonAction;
 
