@@ -28,6 +28,18 @@ public class Page extends ComponentBuilder {
             Arrays.asList("Membership", "Cashier", "Catalogue", "Settings"));
     private TabPane tabPane;
 
+    public static final String getTemplateId(String title)
+    {
+        return title.replaceAll("\\s+","");
+    }
+    public static final Tab getTemplateTab(Parent content, String title)
+    {
+        Tab tab = new Tab(title);
+        tab.setContent(content);
+        tab.setId(title.replaceAll("\\s+",""));
+
+        return tab;
+    }
     private Pane getNavbar()
     {
         // Create Button List
@@ -77,11 +89,7 @@ public class Page extends ComponentBuilder {
     }
     public void addTab(Parent content, String title)
     {
-        Tab tab = new Tab(title);
-        tab.setContent(content);
-        tab.setId(title.replaceAll("\\s+",""));
-
-        tabPane.getTabs().add(tab);
+        tabPane.getTabs().add(getTemplateTab(content, title));
     }
 
     @Override
