@@ -1,40 +1,34 @@
 package org.kys.bnmo;
+
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.kys.bnmo.components.documents.BillDocument;
 import org.kys.bnmo.components.tabs.*;
 import org.kys.bnmo.events.NavigationHandler;
 import org.kys.bnmo.helpers.plugins.PluginLoader;
-import org.kys.bnmo.helpers.views.DocumentPrinter;
 import org.kys.bnmo.helpers.views.IconButtonHelper;
 import org.kys.bnmo.helpers.views.loaders.StyleLoadHelper;
 import org.kys.bnmo.plugins.adapters.PageAdapter;
 import org.kys.bnmo.views.Page;
 
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 public class BnmoApplication extends Application {
-    private class DefaultTab {
-        public TabContainer factory;
-        public Tab tab;
-        public DefaultTab(TabContainer factory, Tab tab)
-        {
-            this.factory = factory;
-            this.tab = tab;
-        }
-    }
-
-    private List<DefaultTab> defaultTabs = new ArrayList<>();
     private final static IconButtonHelper navbarHelper = new IconButtonHelper();
+    private List<DefaultTab> defaultTabs = new ArrayList<>();
     private Pane root;
     private List<Button> navbarButtons;
     private TabPane tabPane;
@@ -199,28 +193,26 @@ public class BnmoApplication extends Application {
                 if (button.getId() == Page.getTemplateId(title)) button.fire();
             }
         }
+
     }
 
     private TabPane getTabPane() {
-        return ((TabPane)root.lookup("#parent-tab-pane"));
+        return ((TabPane) root.lookup("#parent-tab-pane"));
     }
 
-    private List<Button> getNavbarButtons()
-    {
-        return ((Pane)((ScrollPane)root.lookup("#navbar-scroll-panel")).getContent())
+    private List<Button> getNavbarButtons() {
+        return ((Pane) ((ScrollPane) root.lookup("#navbar-scroll-panel")).getContent())
                 .getChildren()
                 .stream()
                 .map(button -> (Button) button)
                 .toList();
     }
 
-    private void setDefaultTabs(DefaultTab ...defaultTabs)
-    {
+    private void setDefaultTabs(DefaultTab... defaultTabs) {
         this.defaultTabs.addAll(Arrays.stream(defaultTabs).toList());
     }
 
-    private void initiateRoot(Stage stage)
-    {
+    private void initiateRoot(Stage stage) {
 
         // initialize factory
         MembershipTab membershipTabFactory = new MembershipTab(
@@ -229,7 +221,12 @@ public class BnmoApplication extends Application {
         );
 
         CashierTab cashierTabFactory = new CashierTab();
-        CatalogueTab catalogueTabFactory = new CatalogueTab();
+
+        CatalogueTab catalogueTabFactory = new CatalogueTab(
+                new TabNavigationHandler("Catalogue"),
+                new BackTabAction("Catalogue")
+        );
+
         SettingTab settingTabFactory = new SettingTab(stage);
 
         // initialize page
@@ -242,18 +239,14 @@ public class BnmoApplication extends Application {
         PluginLoader pluginLoader = new PluginLoader();
         List<Class> plugins = pluginLoader.loadClasses();
 
-        for(Class plugin: plugins)
-        {
+        for (Class plugin : plugins) {
             try {
                 Object instance = plugin.getDeclaredConstructor(PageAdapter.class)
                         .newInstance(new PageAdapter(page));
 
                 Method pluginMethod = plugin.getMethod("onLoad");
                 pluginMethod.invoke(instance);
-            }
-
-            catch (Exception e)
-            {
+            } catch (Exception e) {
 
             }
         }
@@ -311,6 +304,121 @@ public class BnmoApplication extends Application {
 //        printer.printElement((Pane)((ScrollPane)(new BillDocument(3).getComponent()).getChildren().get(0)).getContent());
     }
 
+    private class DefaultTab {
+        public TabContainer factory;
+        public Tab tab;
+
+        public DefaultTab(TabContainer factory, Tab tab) {
+            this.factory = factory;
+            this.tab = tab;
+        }
+    }
+
+    private class NavbarButtonHandler implements EventHandler<ActionEvent> {
+        private Button button;
+
+        public NavbarButtonHandler(Button button) {
+            this.button = button;
+        }
+
+        @Override
+        public void handle(ActionEvent event) {
+            List<Tab> tabs = tabPane.getTabs();
+
+            Tab selectedTab = tabPane.getSelectionModel().getSelectedItem();
+
+            if (selectedTab != null
+                    && Objects.equals(button.getId(), tabPane.getSelectionModel().getSelectedItem().getId())) return;
+
+            for (Tab tab : tabs) {
+                if (Objects.equals(tab.getId(), button.getId())) {
+                    tabPane.getSelectionModel().select(tab);
+                    return;
+                }
+            }
+
+            for (DefaultTab defaultTab : defaultTabs) {
+                defaultTab.tab = Page.getTemplateTab(
+                        defaultTab.factory.getComponent(),
+                        defaultTab.tab.getId()
+                );
+
+                if (Objects.equals(defaultTab.tab.getId(), button.getId())) {
+                    tabPane.getTabs().add(defaultTab.tab);
+                    tabPane.getSelectionModel().select(defaultTab.tab);
+                    return;
+                }
+            }
+        }
+    }
+
+    private class TabChangeListener implements ChangeListener<Tab> {
+
+        @Override
+        public void changed(ObservableValue<? extends Tab> observable, Tab oldTab, Tab newTab) {
+            if (newTab != null) {
+                for (Button button : navbarButtons) {
+                    if (button.getId() == newTab.getId()) {
+                        button.fire();
+                        return;
+                    } else {
+                        navbarHelper.unselectButton(button);
+                    }
+                }
+            } else if (oldTab != null) {
+                for (Button button : navbarButtons) {
+                    if (button.getId() == oldTab.getId()) {
+                        navbarHelper.unselectButton(button);
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    private class TabNavigationHandler implements NavigationHandler {
+
+        private String title;
+
+        TabNavigationHandler(String title) {
+            this.title = title;
+        }
+
+        @Override
+        public EventHandler<ActionEvent> getEventHandler(TabContainer factory, String title) {
+            return new ReplaceTabAction(factory, title);
+        }
+
+        private class ReplaceTabAction implements EventHandler<ActionEvent> {
+            private TabContainer defaultFactory;
+
+            public ReplaceTabAction(TabContainer defaultFactory, String title) {
+                this.defaultFactory = defaultFactory;
+            }
+
+            @Override
+            public void handle(ActionEvent event) {
+
+                Tab newTab = Page.getTemplateTab(defaultFactory.getComponent(), title);
+
+                List<Tab> tabs = tabPane.getTabs();
+
+                for (int i = 0; i < tabs.size(); i++) {
+                    if (tabs.get(i).getId() == newTab.getId()) {
+                        tabPane.getTabs().remove(i);
+                        tabPane.getTabs().add(i, newTab);
+                        break;
+                    }
+                }
+
+                for (Button button : navbarButtons) {
+                    if (button.getId() == newTab.getId()) button.fire();
+                }
+
+            }
+        }
+    }
+
 // Checkout panel testing
 //    @Override
 //    public void start(Stage primaryStage) throws Exception {
@@ -325,7 +433,28 @@ public class BnmoApplication extends Application {
 //        primaryStage.show();
 //    }
 
-    public static void main(String[] args) {
-        launch(args);
+    private class BackTabAction implements EventHandler<ActionEvent> {
+        private String title;
+
+        public BackTabAction(String title) {
+            this.title = title;
+        }
+
+        @Override
+        public void handle(ActionEvent event) {
+
+            List<Tab> tabs = tabPane.getTabs();
+
+            for (int i = 0; i < tabs.size(); i++) {
+                if (tabs.get(i).getId() == Page.getTemplateId(title)) {
+                    tabPane.getTabs().remove(i);
+                    break;
+                }
+            }
+
+            for (Button button : navbarButtons) {
+                if (button.getId() == Page.getTemplateId(title)) button.fire();
+            }
+        }
     }
 }

@@ -14,7 +14,7 @@ public class DataStoreDriver {
         try {
             // Load and Set Folder Path
             // Work
-            dataStore.loadFolderPath();
+            dataStore.loadConfig();
             String dataTestFolderPath = (new File("test\\data")).getAbsolutePath();
             dataStore.setFolderPath(dataTestFolderPath, false);
 
@@ -28,12 +28,12 @@ public class DataStoreDriver {
             // Work
             ArrayList<InventoryItem> items = new ArrayList<>();
             for (int i = 0; i < 5; i++) {
-                items.add(new InventoryItem(10, "item " + (i + 1), 100, "Food", "food.png"));
+                items.add(new InventoryItem("item " + (i + 1), "Food" , 10, 250, 100, "food.png"));
             }
 
-            dataStore.writeData("inventory-item.xml", items);
-            ArrayList<InventoryItem> readItems = dataStore.readData("inventory-item.xml", InventoryItem.class);
-            InventoryItem.itemCountSequence = readItems.get(readItems.size() - 1).getItemID();
+            dataStore.setFileFormat("xml", false);
+            dataStore.writeData("inventory-item", items);
+            ArrayList<InventoryItem> readItems = dataStore.readData("inventory-item", InventoryItem.class);
 
             for (int i = 0; i < 5; i++) {
                 System.out.println(items.get(i).getItemID());
@@ -42,11 +42,17 @@ public class DataStoreDriver {
 
             // Customer
             // Belum Work
-            // ArrayList<Customer> customers = new ArrayList<>();
-            // for (int i = 0; i < 5; i++) {
-            //     customers.add(new Customer());
-            // }
+             ArrayList<Customer> customers = new ArrayList<>();
+             for (int i = 0; i < 5; i++) {
+                 customers.add(new Customer());
+             }
 
+             dataStore.writeData("customer", customers);
+             ArrayList<Customer> readCustomers = dataStore.readData("customer", Customer.class);
+             for (int i = 0; i < 5; i++) {
+                 System.out.println(customers.get(i).getCustomerID());
+                 System.out.println(readCustomers.get(i).getCustomerID());
+             }
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -15,7 +15,7 @@ import org.kys.bnmo.helpers.views.IconButtonHelper;
 import org.kys.bnmo.helpers.views.tables.TableData;
 import org.kys.bnmo.model.Customer;
 import org.kys.bnmo.model.Member;
-import org.kys.bnmo.model.VIP;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -48,11 +48,11 @@ public class MembershipTab extends TabContainer {
                 customers.add(c);
             } else if (i % 3 == 1) {
                 // Create member customer
-                Member c = new Member("Member " + i, "08123456789");
+                Member c = new Member("Member " + i, "08123456789", "Member");
                 customers.add(c);
             } else {
                 // Create VIP customer
-                VIP c = new VIP("VIP " + i, "08123456789");
+                Member c = new Member("VIP " + i, "08123456789", "VIP");
                 customers.add(c);
             }
         }
@@ -60,7 +60,7 @@ public class MembershipTab extends TabContainer {
         System.out.println(customers);
 
         // Table heading
-        List<String> tableHeadings = new ArrayList<>(Arrays.asList("Customer ID", "Name", "Phone", "Status", "Class", "Action"));
+        List<String> tableHeadings = new ArrayList<>(Arrays.asList("Customer ID", "Name", "Phone", "Status", "Level", "Points", "Action"));
 
         // List of table content
         List<List<String>> tableContent = new ArrayList<>();
@@ -75,12 +75,14 @@ public class MembershipTab extends TabContainer {
                 row.add(((Member) customer).getName());
                 row.add(((Member) customer).getPhoneNumber());
                 row.add(((Member) customer).getStatus());
-                row.add(customer.getCustomerClass());
+                row.add(customer.getMemberLevel());
+                row.add(String.valueOf(((Member) customer).getPoints()));
             } else {
                 row.add("N/A");
                 row.add("N/A");
                 row.add("N/A");
-                row.add(customer.getCustomerClass());
+                row.add(customer.getMemberLevel());
+                row.add("0");
             }
 
             tableContent.add(row);
@@ -96,7 +98,7 @@ public class MembershipTab extends TabContainer {
                     item2 = new MenuItem("Activate");
                 }
 
-                if (customer instanceof VIP) {
+                if (customer.getMemberLevel().equals("VIP")) {
                     // Add event listener
                     item1.setOnAction(e -> {
                         System.out.println("Edit VIP");
@@ -127,9 +129,10 @@ public class MembershipTab extends TabContainer {
             tableBuilder.setColumnAlignment(i, Pos.CENTER_LEFT);
         }
 
-        // Set ID and action alignment as center
+        // Set ID, action, and points alignment as center
         tableBuilder.setColumnAlignment(0, Pos.CENTER);
         tableBuilder.setColumnAlignment(tableHeadings.size() - 1, Pos.CENTER);
+        tableBuilder.setColumnAlignment(tableHeadings.size() - 2, Pos.CENTER);
 
         // Set the root
         Pane root = tableBuilder.getAndResetComponent();
@@ -145,7 +148,10 @@ public class MembershipTab extends TabContainer {
         new IconButtonHelper().setButtonGraphic(backButton, "/icon/BackArrow.png", 20, 20);
         backButton.setOnAction(
                 editMemberHandler.getEventHandler(
-                        new MemberFormTab("Edit member", new Member(69, "Hello", "0821123456789"), backHandler))
+
+                        // TODO: Change to actual customer data fetched from DataStore
+                        new MemberFormTab("Edit member", new Member(69, "Hello", "0821123456789", "Member"), backHandler),
+                        "Membership")
         );
 
         backButton.getStyleClass().add("back-button");
