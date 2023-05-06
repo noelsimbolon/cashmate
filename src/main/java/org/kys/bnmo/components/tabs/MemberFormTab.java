@@ -12,10 +12,12 @@ public class MemberFormTab extends TabContainer {
 
     private static final IconButtonHelper iconButtonHelper = new IconButtonHelper();
 
+    private int customerID;
     EventHandler<ActionEvent> backButtonAction;
 
-    public MemberFormTab(EventHandler<ActionEvent> backButtonAction)
+    public MemberFormTab(int customerID, EventHandler<ActionEvent> backButtonAction)
     {
+        this.customerID = customerID;
         this.backButtonAction = backButtonAction;
     }
 

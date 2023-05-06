@@ -10,6 +10,15 @@ import org.kys.bnmo.helpers.views.loaders.StyleLoadHelper;
 public class BillDocument implements ComponentFactory {
 
     private static final BillPageBuilder billPageBuilder = new BillPageBuilder();
+    private int customerID;
+    public BillDocument(int customerID)
+    {
+        this.customerID = customerID;
+    }
+
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
+    }
 
     @Override
     @NotNull

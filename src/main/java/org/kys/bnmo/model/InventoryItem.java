@@ -1,11 +1,12 @@
 package org.kys.bnmo.model;
 
+import java.io.Serializable;
 import java.util.UUID;
 import javafx.scene.image.Image;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
-public class InventoryItem {
+public class InventoryItem implements Serializable {
 
     @Getter
     @NotNull

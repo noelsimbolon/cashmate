@@ -2,10 +2,11 @@ package org.kys.bnmo.model;
 
 import lombok.Getter;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
-public class Transaction {
+public class Transaction implements Serializable {
 
     @Getter
     private final UUID transactionID;
