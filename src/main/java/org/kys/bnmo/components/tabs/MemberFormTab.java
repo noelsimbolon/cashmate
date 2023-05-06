@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import org.kys.bnmo.components.bases.FormBuilder;
+import org.kys.bnmo.model.Customer;
 import org.kys.bnmo.model.Member;
 import org.kys.bnmo.helpers.views.IconButtonHelper;
 
@@ -27,7 +28,7 @@ public class MemberFormTab extends TabContainer {
     private final Property<String> memberLevel;
     private final StringProperty points;
 
-    public MemberFormTab(String title, EventHandler<ActionEvent> backButtonAction)
+    public MemberFormTab(String title, int customerId, EventHandler<ActionEvent> backButtonAction)
     {
         this.formTitle = title;
         this.existingMember = null;
@@ -37,7 +38,10 @@ public class MemberFormTab extends TabContainer {
         this.points = new SimpleStringProperty();
         this.memberLevel = new SimpleStringProperty();
 
+        System.out.println("Customer ID: " + customerId);
+
         // Set save button action to show states
+        // TODO: Change this to save to database
         this.saveButtonAction = (event) -> {
             System.out.println("Name: " + name.getValue());
             System.out.println("Telephone: " + telephone.getValue());
@@ -57,6 +61,7 @@ public class MemberFormTab extends TabContainer {
         this.memberLevel = new SimpleStringProperty(existingMember.getMemberLevel());
 
         // Set save button action to show states
+        // TODO: Change this to save to database
         this.saveButtonAction = (event) -> {
             System.out.println("Name: " + name.getValue());
             System.out.println("Telephone: " + telephone.getValue());

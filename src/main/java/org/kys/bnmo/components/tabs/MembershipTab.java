@@ -99,17 +99,85 @@ public class MembershipTab extends TabContainer {
                 }
 
                 if (customer.getMemberLevel().equals("VIP")) {
-                    // Add event listener
+                    MenuItem item3 = new MenuItem("Demote");
+                    MenuItem item4 = new MenuItem("Transaction History");
+
+                    // Set menu item action
+                    // Edit button
                     item1.setOnAction(e -> {
-                        System.out.println("Edit VIP");
+                        editMemberHandler.getEventHandler(
+                                new MemberFormTab("Edit member", (Member) customer, backHandler),
+                                "Membership"
+                        ).handle(e);
                     });
-                    menu = new ContextMenu(item1, item2);
+                    // Activate button
+                    // TODO: Update DataStore to activate or deactivate member
+                    if (((Member) customer).getStatus().equals("Active")) {
+                        item2.setOnAction(e -> {
+                            System.out.println("Deactivate member");
+                        });
+                    } else {
+                        item2.setOnAction(e -> {
+                            System.out.println("Activate member");
+                        });
+                    }
+                    // Demote button
+                    // TODO: Update DataStore to demote member
+                    item3.setOnAction(e -> {
+                        System.out.println("Demote member");
+                    });
+
+                    // Transaction history button
+                    // TODO: Show transaction history
+                    item4.setOnAction(e -> {
+                        System.out.println("Transaction history");
+                    });
+
+                    menu = new ContextMenu(item1, item2, item3, item4);
                 } else {
                     MenuItem item3 = new MenuItem("Promote");
-                    menu = new ContextMenu(item1, item2, item3);
+                    MenuItem item4 = new MenuItem("Transaction History");
+
+                    // Set menu item action
+                    // Edit button
+                    item1.setOnAction(e -> {
+                        editMemberHandler.getEventHandler(
+                                new MemberFormTab("Edit member", (Member) customer, backHandler),
+                                "Membership"
+                        ).handle(e);
+                    });
+                    // Activate button
+                    // TODO: Update DataStore to activate or deactivate member
+                    if (((Member) customer).getStatus().equals("Active")) {
+                        item2.setOnAction(e -> {
+                            System.out.println("Deactivate member");
+                        });
+                    } else {
+                        item2.setOnAction(e -> {
+                            System.out.println("Activate member");
+                        });
+                    }
+                    // Promote button
+                    // TODO: Update DataStore to promote member
+                    item3.setOnAction(e -> {
+                        System.out.println("Promote member");
+                    });
+                    // Transaction history button
+                    // TODO: Show transaction history
+                    item4.setOnAction(e -> {
+                        System.out.println("Transaction history");
+                    });
+
+                    menu = new ContextMenu(item1, item2, item3, item4);
                 }
             } else {
                 MenuItem item1 = new MenuItem("Apply Membership");
+                item1.setOnAction(e -> {
+                    editMemberHandler.getEventHandler(
+                            new MemberFormTab("Apply membership", customer.getCustomerID(), backHandler),
+                            "Membership"
+                    ).handle(e);
+                });
                 menu = new ContextMenu(item1);
             }
             contextMenus.add(menu);
@@ -144,19 +212,6 @@ public class MembershipTab extends TabContainer {
     @Override
     protected void additionalAction()
     {
-        Button backButton = new Button();
-        new IconButtonHelper().setButtonGraphic(backButton, "/icon/BackArrow.png", 20, 20);
-        backButton.setOnAction(
-                editMemberHandler.getEventHandler(
-
-                        // TODO: Change to actual customer data fetched from DataStore
-                        new MemberFormTab("Edit member", new Member(69, "Hello", "0821123456789", "Member"), backHandler),
-                        "Membership")
-        );
-
-        backButton.getStyleClass().add("back-button");
-        getHeader().getChildren().add(0, backButton);
-
         getRoot().getStyleClass().add("fill-tab-content");
         addHeaderTitle("Customer List");
     }
