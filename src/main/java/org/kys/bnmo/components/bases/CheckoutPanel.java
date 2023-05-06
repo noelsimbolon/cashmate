@@ -4,10 +4,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import org.jetbrains.annotations.NotNull;
 import org.kys.bnmo.components.ComponentFactory;
 import org.kys.bnmo.helpers.views.loaders.StyleLoadHelper;
@@ -58,6 +55,7 @@ public class CheckoutPanel implements ComponentFactory {
         // addCustomerDropdown("Select customer", new String[] {"Customer 1", "Jojo", "Fio"});
 
         addItemScrollPane();
+        addDiscount(20000, "Rp");
         addCheckoutButton();
 
         // Add the checkout panel to the root
@@ -312,6 +310,22 @@ public class CheckoutPanel implements ComponentFactory {
         }
 
         updateCheckoutPrice();
+    }
+
+    private void addDiscount(double discount, String currency) {
+        var discountContainer = new HBox();
+
+        var discountLabel = new Label("Discounts:");
+        discountLabel.setId("discount-label");
+
+        var spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+
+        var discountAmount = new Label( currency + discount);
+        discountAmount.setId("discount-amount");
+
+        discountContainer.getChildren().addAll(discountLabel, spacer, discountAmount);
+        inputFields.getChildren().add(discountContainer);
     }
 
     private void updateCheckoutPrice() {
