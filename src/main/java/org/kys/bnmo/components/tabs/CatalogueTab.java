@@ -22,7 +22,7 @@ public class CatalogueTab extends TabContainer {
     @Override
     protected Pane getContent() {
         // Initialize objects
-        var image = new Image(Objects.requireNonNull(getClass().getResource("/categories/pastry.png")).toExternalForm(), 34, 34, false, true);
+        var image = new Image(Objects.requireNonNull(getClass().getResource("/categories/food.png")).toExternalForm(), 34, 34, false, true);
         List<String> heading = new ArrayList<>(Arrays.asList("Item", "Category", "Stock", "Price", "Purchase Price", "Actions"));
         List<Image> images = new ArrayList<>();
         List<List<String>> data = new ArrayList<>();
