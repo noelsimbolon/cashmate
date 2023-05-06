@@ -24,11 +24,11 @@ public class MembershipTab extends TabContainer {
 
     // private static final CustomerController customerController = new CustomerController();
 
-    private final NavigationHandler memberFormHandler;
+    private final NavigationHandler memberActionHandler;
     private final EventHandler<ActionEvent> backHandler;
-    public MembershipTab(NavigationHandler memberFormHandler, EventHandler<ActionEvent> backHandler)
+    public MembershipTab(NavigationHandler memberActionHandler, EventHandler<ActionEvent> backHandler)
     {
-        this.memberFormHandler = memberFormHandler;
+        this.memberActionHandler = memberActionHandler;
         this.backHandler = backHandler;
     }
     @Override
@@ -93,9 +93,8 @@ public class MembershipTab extends TabContainer {
                 // Edit button
                 MenuItem item1 = new MenuItem("Edit");
                 item1.setOnAction(e -> {
-                    memberFormHandler.getEventHandler(
-                            new MemberFormTab("Edit member", (Member) customer, backHandler),
-                            "Membership"
+                    memberActionHandler.getEventHandler(
+                            new MemberFormTab("Edit member", (Member) customer, backHandler)
                     ).handle(e);
                 });
 
@@ -118,7 +117,10 @@ public class MembershipTab extends TabContainer {
                 // TODO: Show transaction history
                 MenuItem item4 = new MenuItem("Transaction History");
                 item4.setOnAction(e -> {
-                    System.out.println("Transaction history");
+                    memberActionHandler.getEventHandler(
+                            new BillTab(customer.getCustomerID()),
+                            "Customer " + customer.getCustomerID() + "Transaction History"
+                    ).handle(e);
                 });
 
                 // Promote/Demote button
@@ -142,9 +144,8 @@ public class MembershipTab extends TabContainer {
             } else {
                 MenuItem item1 = new MenuItem("Apply Membership");
                 item1.setOnAction(e -> {
-                    memberFormHandler.getEventHandler(
-                            new MemberFormTab("Apply membership", customer.getCustomerID(), backHandler),
-                            "Membership"
+                    memberActionHandler.getEventHandler(
+                            new MemberFormTab("Apply membership", customer.getCustomerID(), backHandler)
                     ).handle(e);
                 });
                 menu = new ContextMenu(item1);
