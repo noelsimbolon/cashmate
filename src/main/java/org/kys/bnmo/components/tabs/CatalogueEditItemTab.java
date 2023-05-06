@@ -49,8 +49,8 @@ public class CatalogueEditItemTab extends TabContainer {
             editedItem.setItemName(name.getValue());
             editedItem.setCategory(category.getValue());
             editedItem.setStock(Integer.parseInt(stock.getValue()));
-            editedItem.setPrice(Integer.parseInt(price.getValue()));
-            editedItem.setPurchasePrice(Integer.parseInt(purchasePrice.getValue()));
+            editedItem.setPrice(Double.parseDouble(price.getValue()));
+            editedItem.setPurchasePrice(Double.parseDouble(purchasePrice.getValue()));
             editedItem.setImageFileName(category.getValue().toLowerCase() + ".png");
 
             inventoryItems.add(editedItemIndex, editedItem);

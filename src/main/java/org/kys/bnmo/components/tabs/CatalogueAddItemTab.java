@@ -41,8 +41,8 @@ public class CatalogueAddItemTab extends TabContainer {
                     name.getValue(),
                     category.getValue(),
                     Integer.parseInt(stock.getValue()),
-                    Integer.parseInt(price.getValue()),
-                    Integer.parseInt(purchasePrice.getValue()),
+                    Double.parseDouble(price.getValue()),
+                    Double.parseDouble(purchasePrice.getValue()),
                     category.getValue().toLowerCase() + ".png"
             );
 
