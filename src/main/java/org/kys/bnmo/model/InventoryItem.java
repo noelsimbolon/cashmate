@@ -36,7 +36,7 @@ public class InventoryItem implements Serializable {
 
     public static int itemCountSequence = 0;
 
-    public InventoryItem(int stock, @NotNull String itemName, int price, @NotNull String category, @NotNull Image image) {
+    public InventoryItem(int stock, @NotNull String itemName, int price, @NotNull String category, @NotNull String imageFileName) {
         itemCountSequence++;
         this.itemID = itemCountSequence;
         this.stock = stock;

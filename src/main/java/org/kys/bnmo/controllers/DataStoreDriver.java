@@ -33,6 +33,7 @@ public class DataStoreDriver {
 
             dataStore.writeData("inventory-item.xml", items);
             ArrayList<InventoryItem> readItems = dataStore.readData("inventory-item.xml", InventoryItem.class);
+            InventoryItem.itemCountSequence = readItems.get(readItems.size() - 1).getItemID();
 
             for (int i = 0; i < 5; i++) {
                 System.out.println(items.get(i).getItemID());
@@ -45,7 +46,6 @@ public class DataStoreDriver {
             // for (int i = 0; i < 5; i++) {
             //     customers.add(new Customer());
             // }
-
 
         } catch (Exception e) {
             e.printStackTrace();
