@@ -1,5 +1,7 @@
 package org.kys.bnmo.components.bases;
 
+import javafx.beans.property.Property;
+import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -17,6 +19,7 @@ import org.kys.bnmo.components.ComponentBuilder;
 import org.kys.bnmo.helpers.views.loaders.StyleLoadHelper;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,6 +45,7 @@ public class FormBuilder extends ComponentBuilder {
         getRoot().getChildren().add(0, titleLabel);
     }
 
+    // Text fields
     public void addTextBox(String label, String placeholder) {
         // Layout
         HBox row = new HBox();
@@ -84,6 +88,56 @@ public class FormBuilder extends ComponentBuilder {
         inputFields.getChildren().add(row);
     }
 
+    // Text field with string property binding
+    public void addTextBox(String label, String placeholder, StringProperty property) {
+        // Layout
+        HBox row = new HBox();
+        row.setAlignment(Pos.CENTER_LEFT);
+
+        // Label
+        Label labelComponent = new Label(label);
+        labelComponent.getStyleClass().add("form-label");
+
+        // Text field
+        TextField textField = new TextField();
+        textField.setPromptText(placeholder);
+        textField.getStyleClass().add("form-text-field");
+        HBox.setHgrow(textField, Priority.ALWAYS);
+
+        // Bind text property to parameter
+        textField.textProperty().bindBidirectional(property);
+
+        // Add components to root
+        row.getChildren().addAll(labelComponent, textField);
+        row.getStyleClass().add("form-input");
+        inputFields.getChildren().add(row);
+    }
+
+    public void addTextBox(String label, String placeholder, String defaultValue, StringProperty property) {
+        // Layout
+        HBox row = new HBox();
+        row.setAlignment(Pos.CENTER_LEFT);
+
+        // Label
+        Label labelComponent = new Label(label);
+        labelComponent.getStyleClass().add("form-label");
+
+        // Text field
+        TextField textField = new TextField(defaultValue);
+        textField.setPromptText(placeholder);
+        textField.getStyleClass().add("form-text-field");
+        HBox.setHgrow(textField, Priority.ALWAYS);
+
+        // Bind text property to parameter
+        textField.textProperty().bindBidirectional(property);
+
+        // Add components to root
+        row.getChildren().addAll(labelComponent, textField);
+        row.getStyleClass().add("form-input");
+        inputFields.getChildren().add(row);
+    }
+
+    // Dropdowns
     public void addDropdown(String label, String placeholder, String[] items) {
         // Layout
         HBox row = new HBox();
@@ -141,6 +195,39 @@ public class FormBuilder extends ComponentBuilder {
         inputFields.getChildren().add(row);
     }
 
+    // Dropdown with string property binding
+
+    public void addDropdown(String label, String placeholder, String[] items, Property<String> selectedValue) {
+        // Layout
+        HBox row = new HBox();
+        row.setAlignment(Pos.CENTER_LEFT);
+
+        // Label
+        Label labelComponent = new Label(label);
+        labelComponent.getStyleClass().add("form-label");
+
+        // Dropdown
+        ComboBox<String> comboBox = new ComboBox<>();
+        comboBox.setPromptText(placeholder);
+        comboBox.getStyleClass().add("form-dropdown");
+        comboBox.getItems().addAll(items);
+
+        // Bind the preferred width of the dropdown to the available space
+        DoubleBinding comboBoxWidth = Bindings.createDoubleBinding(() ->
+                        row.getWidth() - labelComponent.getWidth() - row.getSpacing(),
+                row.widthProperty(), labelComponent.widthProperty());
+
+        comboBox.prefWidthProperty().bind(comboBoxWidth);
+
+        // Bind the value property of the ComboBox to the selectedValue property
+        comboBox.valueProperty().bindBidirectional(selectedValue);
+
+        // Add components to root
+        row.getChildren().addAll(labelComponent, comboBox);
+        row.getStyleClass().add("form-input");
+        inputFields.getChildren().add(row);
+    }
+
     public void addFilePicker(String label, Stage stage) {
 
         // Layout
@@ -184,7 +271,7 @@ public class FormBuilder extends ComponentBuilder {
         row.getStyleClass().add("form-input");
         inputFields.getChildren().add(row);
     }
-    public void addButton(String label) {
+    public void addButton(String label, EventHandler<ActionEvent> eventHandler) {
         // Create button
         Button button = new Button(label);
         button.getStyleClass().add("form-button");
@@ -193,6 +280,9 @@ public class FormBuilder extends ComponentBuilder {
         // Spacer
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
+
+        // Add event handler
+        button.setOnAction(eventHandler);
 
         // Add components to root
         HBox row = new HBox(spacer, button);
