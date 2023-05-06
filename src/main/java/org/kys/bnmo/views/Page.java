@@ -78,7 +78,9 @@ public class Page extends ComponentBuilder {
     public void addTab(Parent content, String title)
     {
         Tab tab = new Tab(title);
-        tab.setContent(content);
+        ScrollPane sp = new ScrollPane(content);
+        sp.setFitToWidth(true);
+        tab.setContent(sp);
         tab.setId(title.replaceAll("\\s+",""));
 
         tabPane.getTabs().add(tab);
