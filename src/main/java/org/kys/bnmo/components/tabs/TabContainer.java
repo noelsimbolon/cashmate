@@ -5,7 +5,6 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -49,7 +48,6 @@ public abstract class TabContainer implements ComponentFactory {
 
         headerProperty = new SimpleStringProperty("");
         headerTitle.textProperty().bind(headerProperty);
-
         content = getContent();
 
         root = new VBox();

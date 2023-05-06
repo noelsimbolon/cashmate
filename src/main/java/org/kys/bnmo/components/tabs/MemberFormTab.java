@@ -9,9 +9,7 @@ import org.kys.bnmo.helpers.views.IconButtonHelper;
 public class MemberFormTab extends TabContainer {
 
     private static final FormBuilder formBuilder = new FormBuilder();
-
     private static final IconButtonHelper iconButtonHelper = new IconButtonHelper();
-
     private int customerID;
     EventHandler<ActionEvent> backButtonAction;
 

@@ -95,15 +95,17 @@
                             <goal>jar</goal>
                         </goals>
                         <configuration>
-                            <classesDirectory>$src/main/java/org/kys/bnmo/plugins/test</classesDirectory>
+                            <classesDirectory>$src/main/java/org/kys/bnmo/plugins</classesDirectory>
                             <archive>
                                 <manifest>
                                     <addClasspath>true</addClasspath>
-                                    <mainClass>Hello</mainClass>
+                                    <mainClass>PieChartPlugin</mainClass>
                                 </manifest>
                             </archive>
                             <includes>
-                                <include>Hello</include>
+                                <include>test/PieChartPlugin</include>
+                                <include>BasePlugin</include>
+                                <include>PluginInterface</include>
                             </includes>
                             <outputDirectory>$plugins</outputDirectory>
                             <finalName>plugin</finalName>

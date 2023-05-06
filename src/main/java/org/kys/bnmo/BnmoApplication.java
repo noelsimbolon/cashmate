@@ -7,13 +7,19 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.kys.bnmo.components.documents.BillDocument;
 import org.kys.bnmo.components.tabs.*;
 import org.kys.bnmo.events.NavigationHandler;
+import org.kys.bnmo.helpers.plugins.PluginLoader;
+import org.kys.bnmo.helpers.views.DocumentPrinter;
 import org.kys.bnmo.helpers.views.IconButtonHelper;
 import org.kys.bnmo.helpers.views.loaders.StyleLoadHelper;
+import org.kys.bnmo.plugins.adapters.PageAdapter;
 import org.kys.bnmo.views.Page;
 
+import java.lang.reflect.Method;
 import java.util.*;
 
 public class BnmoApplication extends Application {
@@ -217,6 +223,25 @@ public class BnmoApplication extends Application {
         page.addTab(catalogueTabFactory.getComponent(), "Catalogue");
         page.addTab(settingTabFactory.getComponent(), "Settings");
 
+        PluginLoader pluginLoader = new PluginLoader();
+        List<Class> plugins = pluginLoader.loadClasses();
+
+        for(Class plugin: plugins)
+        {
+            try {
+                Object instance = plugin.getDeclaredConstructor(PageAdapter.class)
+                        .newInstance(new PageAdapter(page));
+
+                Method pluginMethod = plugin.getMethod("onLoad");
+                pluginMethod.invoke(instance);
+            }
+
+            catch (Exception e)
+            {
+
+            }
+        }
+
         root = page.getAndResetComponent();
         tabPane = getTabPane();
 
@@ -227,7 +252,7 @@ public class BnmoApplication extends Application {
                 new DefaultTab(settingTabFactory, tabPane.getTabs().get(3))
         );
 
-        tabPane.getTabs().clear();
+//        tabPane.getTabs().clear();
 
     }
 
@@ -260,14 +285,14 @@ public class BnmoApplication extends Application {
 
         stage.show();
 
-//        Tab a = new Tab("Transaction history for Customer [ID]");
-//        a.setContent(new BillTab().getComponent());
-//        tabPane.getTabs().add(a);
+        Tab a = new Tab("Transaction history for Customer [ID]");
+        a.setContent(new ReportTab().getComponent());
+        tabPane.getTabs().add(a);
 
 //        DocumentPrinter printer = new DocumentPrinter(stage);
 //        VBox B = new VBox();
 //        B.getChildren().addAll(new Label("33"), new Label("33"));
-//        printer.printElement((Pane)((ScrollPane)(new BillDocument().getComponent()).getChildren().get(0)).getContent());
+//        printer.printElement((Pane)((ScrollPane)(new BillDocument(3).getComponent()).getChildren().get(0)).getContent());
     }
 
 // Checkout panel testing

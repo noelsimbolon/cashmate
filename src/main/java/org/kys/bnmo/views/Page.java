@@ -97,11 +97,10 @@ public class Page extends ComponentBuilder {
     @Override
     public void reset() {
         HBox root = new HBox();
-
         tabPane = new TabPane();
         tabPane.setId("parent-tab-pane");
 
-        Pane homeDisplay = new HomeDisplay().getComponent();
+        Pane homeDisplay = homeDisplayFactory.getComponent();
         BooleanBinding bb = Bindings.isEmpty(tabPane.getTabs());
 
         homeDisplay.visibleProperty().bind(bb);

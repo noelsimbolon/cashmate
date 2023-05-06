@@ -18,8 +18,7 @@ public class DocumentPrinter {
         PrinterJob printerJob = PrinterJob.createPrinterJob();
 
         for (Node pageNode : root.getChildren()) {
-            VBox container = new VBox();
-            printerJob.printPage(container);
+            printerJob.printPage(pageNode);
         }
 
         printerJob.endJob();
