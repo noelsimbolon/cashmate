@@ -14,7 +14,7 @@ public class DataStoreDriver {
         try {
             // Load and Set Folder Path
             // Work
-            dataStore.loadFolderPath();
+            dataStore.loadConfig();
             String dataTestFolderPath = (new File("test\\data")).getAbsolutePath();
             dataStore.setFolderPath(dataTestFolderPath, false);
 
@@ -31,8 +31,9 @@ public class DataStoreDriver {
                 items.add(new InventoryItem(10, "item " + (i + 1), 100, "Food", "food.png"));
             }
 
-            dataStore.writeData("inventory-item.xml", items);
-            ArrayList<InventoryItem> readItems = dataStore.readData("inventory-item.xml", InventoryItem.class);
+            dataStore.setFileFormat("xml", false);
+            dataStore.writeData("inventory-item", items);
+            ArrayList<InventoryItem> readItems = dataStore.readData("inventory-item", InventoryItem.class);
             InventoryItem.itemCountSequence = readItems.get(readItems.size() - 1).getItemID();
 
             for (int i = 0; i < 5; i++) {

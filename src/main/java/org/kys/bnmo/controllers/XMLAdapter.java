@@ -10,12 +10,9 @@ import java.util.ArrayList;
 
 public class XMLAdapter implements Adapter {
 
-    private final ObjectMapper objectMapper;
-
     private final XmlMapper xmlMapper;
 
     public XMLAdapter() {
-        objectMapper = new ObjectMapper();
         xmlMapper = new XmlMapper();
     }
 
@@ -24,7 +21,7 @@ public class XMLAdapter implements Adapter {
         ArrayList<T> objectList = new ArrayList<>();
 
         try {
-            CollectionType listType = objectMapper.getTypeFactory().constructCollectionType(ArrayList.class, type);
+            CollectionType listType = xmlMapper.getTypeFactory().constructCollectionType(ArrayList.class, type);
             objectList = xmlMapper.readValue(new File(filePath), listType);
         } catch (IOException e) {
             e.printStackTrace();
