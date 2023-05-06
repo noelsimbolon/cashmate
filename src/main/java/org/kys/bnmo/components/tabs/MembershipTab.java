@@ -98,78 +98,51 @@ public class MembershipTab extends TabContainer {
                     item2 = new MenuItem("Activate");
                 }
 
-                if (customer.getMemberLevel().equals("VIP")) {
-                    MenuItem item3 = new MenuItem("Demote");
-                    MenuItem item4 = new MenuItem("Transaction History");
+                MenuItem item3 = new MenuItem("Demote");
+                MenuItem item4 = new MenuItem("Transaction History");
 
-                    // Set menu item action
-                    // Edit button
-                    item1.setOnAction(e -> {
-                        editMemberHandler.getEventHandler(
-                                new MemberFormTab("Edit member", (Member) customer, backHandler),
-                                "Membership"
-                        ).handle(e);
+                // Set menu item action
+                // Edit button
+                item1.setOnAction(e -> {
+                    editMemberHandler.getEventHandler(
+                            new MemberFormTab("Edit member", (Member) customer, backHandler),
+                            "Membership"
+                    ).handle(e);
+                });
+
+                // Activate/Deactivate button
+                // TODO: Update DataStore to activate or deactivate member
+                if (((Member) customer).getStatus().equals("Active")) {
+                    item2.setOnAction(e -> {
+                        System.out.println("Deactivate member");
                     });
-                    // Activate button
-                    // TODO: Update DataStore to activate or deactivate member
-                    if (((Member) customer).getStatus().equals("Active")) {
-                        item2.setOnAction(e -> {
-                            System.out.println("Deactivate member");
-                        });
-                    } else {
-                        item2.setOnAction(e -> {
-                            System.out.println("Activate member");
-                        });
-                    }
-                    // Demote button
-                    // TODO: Update DataStore to demote member
+                } else {
+                    item2.setOnAction(e -> {
+                        System.out.println("Activate member");
+                    });
+                }
+
+                // Transaction history button
+                // TODO: Show transaction history
+                item4.setOnAction(e -> {
+                    System.out.println("Transaction history");
+                });
+
+                // Promote/Demote button
+                // TODO: Update DataStore to promote or demote member
+                if (customer.getMemberLevel().equals("VIP")) {
                     item3.setOnAction(e -> {
                         System.out.println("Demote member");
                     });
-
-                    // Transaction history button
-                    // TODO: Show transaction history
-                    item4.setOnAction(e -> {
-                        System.out.println("Transaction history");
-                    });
-
-                    menu = new ContextMenu(item1, item2, item3, item4);
                 } else {
-                    MenuItem item3 = new MenuItem("Promote");
-                    MenuItem item4 = new MenuItem("Transaction History");
-
-                    // Set menu item action
-                    // Edit button
-                    item1.setOnAction(e -> {
-                        editMemberHandler.getEventHandler(
-                                new MemberFormTab("Edit member", (Member) customer, backHandler),
-                                "Membership"
-                        ).handle(e);
-                    });
-                    // Activate button
-                    // TODO: Update DataStore to activate or deactivate member
-                    if (((Member) customer).getStatus().equals("Active")) {
-                        item2.setOnAction(e -> {
-                            System.out.println("Deactivate member");
-                        });
-                    } else {
-                        item2.setOnAction(e -> {
-                            System.out.println("Activate member");
-                        });
-                    }
-                    // Promote button
-                    // TODO: Update DataStore to promote member
                     item3.setOnAction(e -> {
                         System.out.println("Promote member");
                     });
-                    // Transaction history button
-                    // TODO: Show transaction history
-                    item4.setOnAction(e -> {
-                        System.out.println("Transaction history");
-                    });
-
-                    menu = new ContextMenu(item1, item2, item3, item4);
                 }
+
+                // Add menu items to menu
+                menu = new ContextMenu(item1, item2, item3, item4);
+
             } else {
                 MenuItem item1 = new MenuItem("Apply Membership");
                 item1.setOnAction(e -> {
