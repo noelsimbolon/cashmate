@@ -10,9 +10,9 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import org.jetbrains.annotations.NotNull;
 import org.kys.bnmo.components.ComponentBuilder;
-import org.kys.bnmo.helpers.IconButtonHelper;
-import org.kys.bnmo.helpers.loaders.StyleLoadHelper;
-import org.kys.bnmo.helpers.Table.TableData;
+import org.kys.bnmo.helpers.views.IconButtonHelper;
+import org.kys.bnmo.helpers.views.loaders.StyleLoadHelper;
+import org.kys.bnmo.helpers.views.tables.TableData;
 
 import java.util.List;
 import java.util.Objects;

@@ -7,7 +7,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import org.jetbrains.annotations.NotNull;
 import org.kys.bnmo.components.ComponentBuilder;
-import org.kys.bnmo.helpers.loaders.StyleLoadHelper;
+import org.kys.bnmo.helpers.views.loaders.StyleLoadHelper;
 
 public class ReportPage extends ComponentBuilder {
     private static final DocumentPageBuilder documentPageBuilder = new DocumentPageBuilder();

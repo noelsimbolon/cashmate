@@ -6,7 +6,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import org.jetbrains.annotations.NotNull;
 import org.kys.bnmo.components.ComponentFactory;
-import org.kys.bnmo.helpers.loaders.StyleLoadHelper;
+import org.kys.bnmo.helpers.views.loaders.StyleLoadHelper;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

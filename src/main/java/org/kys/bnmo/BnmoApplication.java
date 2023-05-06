@@ -5,17 +5,13 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.kys.bnmo.components.documents.BillDocument;
 import org.kys.bnmo.components.tabs.*;
-import org.kys.bnmo.helpers.DocumentPrinter;
-import org.kys.bnmo.helpers.IconButtonHelper;
-import org.kys.bnmo.helpers.loaders.StyleLoadHelper;
+import org.kys.bnmo.helpers.views.IconButtonHelper;
+import org.kys.bnmo.helpers.views.loaders.StyleLoadHelper;
 import org.kys.bnmo.views.Page;
 
 import java.util.*;
@@ -32,7 +28,6 @@ public class BnmoApplication extends Application {
     }
 
     private List<DefaultTab> defaultTabs = new ArrayList<>();
-
     private final static IconButtonHelper navbarHelper = new IconButtonHelper();
     private Pane root;
     private List<Button> navbarButtons;
@@ -197,6 +192,8 @@ public class BnmoApplication extends Application {
         AddMemberTab addMemberTabFactory = new AddMemberTab(
                 new BackTabAction("Membership")
         );
+
+//        ReplaceTabAction(new BillTab(id), "Bill[idcostumer]");
         MembershipTab membershipTabFactory = new MembershipTab(
                 new ReplaceTabAction(
                         addMemberTabFactory,

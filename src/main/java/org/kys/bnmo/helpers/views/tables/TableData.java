@@ -1,4 +1,4 @@
-package org.kys.bnmo.helpers.Table;
+package org.kys.bnmo.helpers.views.tables;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.ContextMenu;

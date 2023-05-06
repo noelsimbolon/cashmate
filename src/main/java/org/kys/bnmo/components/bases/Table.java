@@ -14,10 +14,10 @@ import javafx.scene.text.Text;
 import lombok.Getter;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
-import org.kys.bnmo.helpers.IconButtonHelper;
-import org.kys.bnmo.helpers.Table.TableCell;
-import org.kys.bnmo.helpers.Table.TableData;
-import org.kys.bnmo.helpers.Table.TableEntry;
+import org.kys.bnmo.helpers.views.IconButtonHelper;
+import org.kys.bnmo.helpers.views.tables.TableCell;
+import org.kys.bnmo.helpers.views.tables.TableData;
+import org.kys.bnmo.helpers.views.tables.TableEntry;
 
 import java.util.List;
 

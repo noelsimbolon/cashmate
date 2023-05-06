@@ -1,4 +1,4 @@
-package org.kys.bnmo.helpers;
+package org.kys.bnmo.helpers.views;
 
 import javafx.geometry.HPos;
 import javafx.scene.Parent;

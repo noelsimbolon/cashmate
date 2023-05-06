@@ -4,7 +4,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import org.kys.bnmo.components.bases.FormBuilder;
-import org.kys.bnmo.helpers.IconButtonHelper;
+import org.kys.bnmo.helpers.views.IconButtonHelper;
 
 public class AddMemberTab extends TabContainer {
 
