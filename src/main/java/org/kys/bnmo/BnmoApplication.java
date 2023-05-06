@@ -17,6 +17,8 @@ import org.kys.bnmo.helpers.views.DocumentPrinter;
 import org.kys.bnmo.helpers.views.IconButtonHelper;
 import org.kys.bnmo.helpers.views.loaders.StyleLoadHelper;
 import org.kys.bnmo.plugins.adapters.PageAdapter;
+import org.kys.bnmo.plugins.base.PluginService;
+import org.kys.bnmo.plugins.interfaces.PluginServiceInterface;
 import org.kys.bnmo.views.Page;
 
 import java.lang.reflect.Method;
@@ -248,8 +250,9 @@ public class BnmoApplication extends Application {
 
         for (Class plugin : plugins) {
             try {
-                Object instance = plugin.getDeclaredConstructor(PageAdapter.class)
-                        .newInstance(new PageAdapter(page));
+                System.out.println(plugin.getName());
+                Object instance = plugin.getDeclaredConstructor(PluginServiceInterface.class)
+                        .newInstance(new PluginService(new PageAdapter(page)));
 
                 Method pluginMethod = plugin.getMethod("onLoad");
                 pluginMethod.invoke(instance);

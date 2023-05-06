@@ -89,35 +89,46 @@
 
     <build>
         <plugins>
-            <plugin>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.3.0</version>
-                <executions>
-                    <execution>
-                        <id>init-jar</id>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                        <configuration>
-                            <classesDirectory>$src/main/java/org/kys/bnmo/plugins</classesDirectory>
-                            <archive>
-                                <manifest>
-                                    <addClasspath>true</addClasspath>
-                                    <mainClass>PieChartPlugin</mainClass>
-                                </manifest>
-                            </archive>
-                            <includes>
-                                <include>test/PieChartPlugin</include>
-                                <include>BasePlugin</include>
-                                <include>PluginInterface</include>
-                            </includes>
-                            <outputDirectory>$plugins</outputDirectory>
-                            <finalName>plugin</finalName>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-compiler-plugin</artifactId>-->
+<!--                <version>3.10.1</version>-->
+<!--                <configuration>-->
+<!--                    <source>17</source>-->
+<!--                    <target>17</target>-->
+<!--                    <compileSourceRoots>-->
+<!--                        <compileSourceRoot>src/main/java/org/kys/bnmo/plugins/interfaces</compileSourceRoot>-->
+<!--                        <compileSourceRoot>src/main/java/org/kys/bnmo/userPlugins/test</compileSourceRoot>-->
+<!--                    </compileSourceRoots>-->
+<!--                    <outputDirectory>compiledPlugins</outputDirectory>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-jar-plugin</artifactId>-->
+<!--                <version>3.3.0</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>init-jar</id>-->
+<!--                        <phase>initialize</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>jar</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <classesDirectory>compiledPlugins</classesDirectory>-->
+<!--                            <archive>-->
+<!--                                <manifest>-->
+<!--                                    <addClasspath>true</addClasspath>-->
+<!--                                    <mainClass>org.kys.bnmo.userPlugins.test.PieChartPlugin</mainClass>-->
+<!--                                </manifest>-->
+<!--                            </archive>-->
+<!--                            <outputDirectory>$plugins</outputDirectory>-->
+<!--                            <finalName>plugin</finalName>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
