@@ -145,6 +145,7 @@ public class MembershipTab extends TabContainer {
         new IconButtonHelper().setButtonGraphic(backButton, "/icon/BackArrow.png", 20, 20);
         backButton.setOnAction(
                 editMemberHandler.getEventHandler(
+                        // TODO: Change to actual customer data fetched from DataStore
                         new MemberFormTab("Edit member", new Member(69, "Hello", "0821123456789"), backHandler),
                         "Membership")
         );

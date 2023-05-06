@@ -20,7 +20,7 @@ public class SettingTab extends TabContainer {
         // Initialize form to add member
         formBuilder.addFilePicker("Folder Location", stage);
         formBuilder.addDropdown("Save file format", "Select the member level", new String[] {"JSON", "XML", "OBJ"});
-        formBuilder.addButton("Save");
+        formBuilder.addButton("Save", null);
 
         // TODO: Connect save button to save the settings
 
