@@ -13,9 +13,6 @@ public class Customer {
 
     // Customer count
     public static int customerCount = 0;
-    
-    @Getter
-    private ArrayList<Transaction> transactionHistory;
 
     public Customer() {
         // Set incremental id
@@ -30,10 +27,6 @@ public class Customer {
 
     public String getCustomerClass() {
         return "Customer";
-    }
-
-    public void addTransaction(Transaction transaction) {
-        this.transactionHistory.add(transaction);
     }
 
     @NotNull

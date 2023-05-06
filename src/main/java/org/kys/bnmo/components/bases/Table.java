@@ -14,11 +14,12 @@ import javafx.scene.text.Text;
 import lombok.Getter;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
-import org.kys.bnmo.helpers.IconButtonHelper;
-import org.kys.bnmo.helpers.Table.TableCell;
-import org.kys.bnmo.helpers.Table.TableData;
-import org.kys.bnmo.helpers.Table.TableEntry;
+import org.kys.bnmo.helpers.views.IconButtonHelper;
+import org.kys.bnmo.helpers.views.tables.TableCell;
+import org.kys.bnmo.helpers.views.tables.TableData;
+import org.kys.bnmo.helpers.views.tables.TableEntry;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Table extends TabPane {
@@ -33,12 +34,20 @@ public class Table extends TabPane {
     @Setter
     private List<Integer> filterIndices;
 
+    @Getter
+    private List<Pos> cellAglignment;
+
     public Table(@NotNull TableData tableData, List<Integer> filterIndices, int showNEntries) {
         super();
         this.getStyleClass().add("table-tab-pane");
         this.showNEntries = showNEntries;
         this.filterIndices = filterIndices;
         this.tableData = tableData;
+        this.cellAglignment = new ArrayList<>();
+
+        for (int i = 0; i < tableData.getHeading().getColumns().size() + 1; i++) {
+            cellAglignment.add(Pos.CENTER_LEFT);
+        }
 
         displayPages(tableData.getEntries());
     }
@@ -46,7 +55,7 @@ public class Table extends TabPane {
     private void displayPages(@NotNull List<TableEntry> entries) {
         this.nPages = (entries.size() + showNEntries - 1) / showNEntries;
         this.getTabs().clear();
-        int currentEntryIdx = 1;
+        int currentEntryIdx = 0;
         int currentEntryRow = 1;
         GridPane currentTablePage = new GridPane();
         while (currentEntryIdx < entries.size()) {
@@ -59,7 +68,7 @@ public class Table extends TabPane {
 
             for (int j = 0; j < entries.get(currentEntryIdx).getColumns().size(); j++) {
                 HBox cell = new HBox();
-                cell.setAlignment(Pos.CENTER_LEFT);
+                cell.setAlignment(cellAglignment.get(j));
                 cell.setSpacing(8);
                 TableCell cellData = entries.get(currentEntryIdx).getColumns().get(j);
                 cell.getStyleClass().add("cell");
@@ -82,6 +91,7 @@ public class Table extends TabPane {
 
             if (entries.get(currentEntryIdx).getAddHandler() != null) {
                 HBox cell = new HBox();
+                cellAglignment.set(entries.get(currentEntryIdx).getColumns().size(), Pos.CENTER);
                 cell.setAlignment(Pos.CENTER);
                 cell.getStyleClass().add("cell");
                 Button addButton = new Button();
@@ -97,6 +107,7 @@ public class Table extends TabPane {
 
             if (entries.get(currentEntryIdx).getContextMenu() != null) {
                 HBox cell = new HBox();
+                cellAglignment.set(entries.get(currentEntryIdx).getColumns().size(), Pos.CENTER);
                 cell.setAlignment(Pos.CENTER);
                 cell.getStyleClass().add("cell");
                 Button addButton = new Button();
@@ -118,7 +129,7 @@ public class Table extends TabPane {
             currentEntryRow++;
         }
 
-        while (currentEntryRow % showNEntries == 0) {
+        while (currentEntryRow % showNEntries != 1 && this.getTabs().size() > 1) {
             for (int j = 0; j < tableData.getHeading().getColumns().size(); j++) {
                 HBox cell = new HBox();
                 cell.getStyleClass().add("cell");
@@ -136,10 +147,7 @@ public class Table extends TabPane {
                 currentTablePage = (GridPane) pageTab.getContent();
                 for (int j = 0; j < tableData.getHeading().getColumns().size(); j++) {
                     HBox cell = new HBox();
-                    if ((entries.get(0).getAddHandler() != null || entries.get(0).getContextMenu() != null) && j == tableData.getHeading().getColumns().size() - 1)
-                        cell.setAlignment(Pos.CENTER);
-                    if ((entries.get(0).getAddHandler() != null && entries.get(0).getContextMenu() != null) && j == tableData.getHeading().getColumns().size() - 2)
-                        cell.setAlignment(Pos.CENTER);
+                    cell.setAlignment(cellAglignment.get(j));
                     cell.getStyleClass().add("cell");
                     Text text = new Text(tableData.getHeading().getColumns().get(j).getText());
                     text.getStyleClass().add("text");
@@ -173,7 +181,7 @@ public class Table extends TabPane {
                 .stream()
                 .filter(row -> {
                     for (int index : filterIndices) {
-                        if (row.getColumns().get(index).getText().contains(filter)) {
+                        if (row.getColumns().get(index).getText().toLowerCase().contains(filter)) {
                             return true;
                         }
                     }
@@ -185,6 +193,7 @@ public class Table extends TabPane {
     }
 
     public void setColumnAlignment(int columnIdx, Pos pos) {
+        cellAglignment.set(columnIdx, pos);
         for (Tab pageTab : this.getTabs()) {
             GridPane tableGrid = (GridPane) pageTab.getContent();
 

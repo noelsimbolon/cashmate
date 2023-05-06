@@ -4,16 +4,15 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.scene.input.MouseEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
 import org.kys.bnmo.components.bases.TableBuilder;
-import org.kys.bnmo.helpers.IconButtonHelper;
-import org.kys.bnmo.helpers.Table.TableData;
+import org.kys.bnmo.events.NavigationHandler;
+import org.kys.bnmo.helpers.views.IconButtonHelper;
+import org.kys.bnmo.helpers.views.tables.TableData;
 import org.kys.bnmo.model.Customer;
 import org.kys.bnmo.model.Member;
 import org.kys.bnmo.model.VIP;
@@ -27,10 +26,12 @@ public class MembershipTab extends TabContainer {
 
     // private static final CustomerController customerController = new CustomerController();
 
-    private EventHandler<ActionEvent> editMemberAction;
-    public MembershipTab(EventHandler<ActionEvent> editMemberAction)
+    private NavigationHandler editMemberHandler;
+    private EventHandler<ActionEvent> backHandler;
+    public MembershipTab(NavigationHandler editMemberHandler, EventHandler<ActionEvent> backHandler)
     {
-        this.editMemberAction = editMemberAction;
+        this.editMemberHandler = editMemberHandler;
+        this.backHandler = backHandler;
     }
     @Override
     protected Pane getContent() {
@@ -142,7 +143,11 @@ public class MembershipTab extends TabContainer {
     {
         Button backButton = new Button();
         new IconButtonHelper().setButtonGraphic(backButton, "/icon/BackArrow.png", 20, 20);
-        backButton.setOnAction(editMemberAction);
+        backButton.setOnAction(
+                editMemberHandler.getEventHandler(
+                        new MemberFormTab(32943, backHandler),
+                        "Membership")
+        );
         backButton.getStyleClass().add("back-button");
         getHeader().getChildren().add(0, backButton);
 

@@ -13,8 +13,8 @@ import javafx.scene.layout.VBox;
 import org.kys.bnmo.components.*;
 import org.kys.bnmo.components.bases.Navbar;
 import org.kys.bnmo.components.home.HomeDisplay;
-import org.kys.bnmo.helpers.IconButtonHelper;
-import org.kys.bnmo.helpers.loaders.StyleLoadHelper;
+import org.kys.bnmo.helpers.views.IconButtonHelper;
+import org.kys.bnmo.helpers.views.loaders.StyleLoadHelper;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -35,7 +35,9 @@ public class Page extends ComponentBuilder {
     public static final Tab getTemplateTab(Parent content, String title)
     {
         Tab tab = new Tab(title);
-        tab.setContent(content);
+        ScrollPane sp = new ScrollPane(content);
+        sp.setFitToWidth(true);
+        tab.setContent(sp);
         tab.setId(title.replaceAll("\\s+",""));
 
         return tab;

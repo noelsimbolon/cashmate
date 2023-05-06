@@ -4,18 +4,20 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import org.kys.bnmo.components.bases.FormBuilder;
-import org.kys.bnmo.helpers.IconButtonHelper;
+import org.kys.bnmo.helpers.views.IconButtonHelper;
 
-public class AddMemberTab extends TabContainer {
+public class MemberFormTab extends TabContainer {
 
     private static final FormBuilder formBuilder = new FormBuilder();
 
     private static final IconButtonHelper iconButtonHelper = new IconButtonHelper();
 
+    private int customerID;
     EventHandler<ActionEvent> backButtonAction;
 
-    public AddMemberTab(EventHandler<ActionEvent> backButtonAction)
+    public MemberFormTab(int customerID, EventHandler<ActionEvent> backButtonAction)
     {
+        this.customerID = customerID;
         this.backButtonAction = backButtonAction;
     }
 

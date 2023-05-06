@@ -1,4 +1,4 @@
-package org.kys.bnmo.helpers;
+package org.kys.bnmo.helpers.views;
 
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
