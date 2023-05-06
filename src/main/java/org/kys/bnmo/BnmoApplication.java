@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import org.kys.bnmo.components.tabs.*;
 import org.kys.bnmo.helpers.IconButtonHelper;
 import org.kys.bnmo.helpers.loaders.StyleLoadHelper;
+import org.kys.bnmo.model.Member;
 import org.kys.bnmo.views.Page;
 
 import java.util.*;
@@ -190,12 +191,22 @@ public class BnmoApplication extends Application {
 
         // initialize factory
 
-        MemberFormTab memberFormTabFactory = new MemberFormTab(
+        // To add member
+//        MemberFormTab addMemberTabFactory = new MemberFormTab(
+//                "Add Member",
+//                new BackTabAction("Membership")
+//        );
+
+        // To edit member
+        MemberFormTab editMemberTabFactory = new MemberFormTab(
+                "Edit Member",
+                new Member(69, "Nomnom", "0821123456789"),
                 new BackTabAction("Membership")
         );
+
         MembershipTab membershipTabFactory = new MembershipTab(
                 new ReplaceTabAction(
-                        memberFormTabFactory,
+                        editMemberTabFactory,
                         "Membership"
                 )
         );
