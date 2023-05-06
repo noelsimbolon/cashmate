@@ -29,7 +29,7 @@
 .form-text-field {
     -fx-background-color: #565B61;
     -fx-text-fill: #F2F3F5;
-    -fx-prompt-text-fill: #E0E1DD;
+    -fx-prompt-text-fill: #898D91;
     -fx-border-radius: 8px;
     -fx-font-size: 20px;
 }
@@ -50,7 +50,7 @@
 }
 
 .form-dropdown .list-cell {
-    -fx-prompt-text-fill: #E0E1DD;
+    -fx-prompt-text-fill: #898D91;
     -fx-background-color: #565B61;
     -fx-text-fill: #F2F3F5;
 }
