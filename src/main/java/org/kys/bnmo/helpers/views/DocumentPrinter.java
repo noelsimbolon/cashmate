@@ -1,4 +1,4 @@
-package org.kys.bnmo.helpers;
+package org.kys.bnmo.helpers.views;
 
 import javafx.print.PrinterJob;
 import javafx.scene.Node;

@@ -3,10 +3,11 @@ package org.kys.bnmo.model;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class Customer {
+public class Customer implements Serializable {
 
     @Getter
     private final int customerID;

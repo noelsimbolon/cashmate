@@ -1,18 +1,14 @@
 package org.kys.bnmo.components.tabs;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import org.kys.bnmo.components.bases.TableBuilder;
-import org.kys.bnmo.helpers.Table.TableData;
+import org.kys.bnmo.helpers.views.tables.TableData;
 
 import java.util.ArrayList;
 import java.util.Arrays;

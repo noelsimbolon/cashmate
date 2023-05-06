@@ -80,10 +80,43 @@
             <artifactId>jackson-dataformat-xml</artifactId>
             <version>2.14.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-swing</artifactId>
+            <version>21-ea+5</version>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>init-jar</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <classesDirectory>$src/main/java/org/kys/bnmo/plugins/test</classesDirectory>
+                            <archive>
+                                <manifest>
+                                    <addClasspath>true</addClasspath>
+                                    <mainClass>Hello</mainClass>
+                                </manifest>
+                            </archive>
+                            <includes>
+                                <include>Hello</include>
+                            </includes>
+                            <outputDirectory>$plugins</outputDirectory>
+                            <finalName>plugin</finalName>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

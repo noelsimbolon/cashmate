@@ -13,8 +13,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.kys.bnmo.components.bases.TableBuilder;
-import org.kys.bnmo.helpers.loaders.StyleLoadHelper;
-import org.kys.bnmo.helpers.Table.TableData;
+import org.kys.bnmo.helpers.views.loaders.StyleLoadHelper;
+import org.kys.bnmo.helpers.views.tables.TableData;
 
 import java.util.ArrayList;
 import java.util.Arrays;

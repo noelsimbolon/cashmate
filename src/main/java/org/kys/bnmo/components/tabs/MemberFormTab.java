@@ -4,10 +4,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import org.kys.bnmo.components.bases.FormBuilder;
-import org.kys.bnmo.helpers.IconButtonHelper;
 import org.kys.bnmo.model.Member;
-
-import java.util.Map;
+import org.kys.bnmo.helpers.views.IconButtonHelper;
 
 public class MemberFormTab extends TabContainer {
 
@@ -18,7 +16,6 @@ public class MemberFormTab extends TabContainer {
     String formTitle;
     Member existingMember;
     EventHandler<ActionEvent> backButtonAction;
-    EventHandler<ActionEvent> saveButtonAction;
 
     public MemberFormTab(String title, EventHandler<ActionEvent> backButtonAction)
     {
@@ -33,6 +30,13 @@ public class MemberFormTab extends TabContainer {
         this.existingMember = existingMember;
         this.backButtonAction = backButtonAction;
     }
+
+
+//    public MemberFormTab(int customerID, EventHandler<ActionEvent> backButtonAction)
+//    {
+//        this.customerID = customerID;
+//        this.backButtonAction = backButtonAction;
+//    }
 
     @Override
     protected Pane getContent() {

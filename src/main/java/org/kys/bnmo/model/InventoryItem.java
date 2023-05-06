@@ -1,15 +1,14 @@
 package org.kys.bnmo.model;
 
-import java.util.UUID;
+import java.io.Serializable;
 import javafx.scene.image.Image;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
-public class InventoryItem {
+public class InventoryItem implements Serializable {
 
     @Getter
-    @NotNull
-    private final UUID itemID;
+    private final int itemID;
 
     @Getter
     @NotNull
@@ -31,16 +30,18 @@ public class InventoryItem {
     @NotNull
     private Image image;
 
+    public static int itemCountSequence = 0;
+
     public InventoryItem(int stock, @NotNull String itemName, int price, @NotNull String category, @NotNull Image image) {
-        this.itemID = UUID.randomUUID();
+        itemCountSequence++;
+        this.itemID = itemCountSequence;
         this.stock = stock;
         this.itemName = itemName;
         this.price = price;
         this.category = category;
         this.image = image;
     }
-
-    // Getters and Setters
+    
     public void setStock(int stock) {
         if (stock < 0) {
             throw new IllegalArgumentException("Stock cannot be negative");

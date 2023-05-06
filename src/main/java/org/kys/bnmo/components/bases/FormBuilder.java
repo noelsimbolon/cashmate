@@ -14,7 +14,7 @@ import javafx.beans.binding.Bindings;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.kys.bnmo.components.ComponentBuilder;
-import org.kys.bnmo.helpers.loaders.StyleLoadHelper;
+import org.kys.bnmo.helpers.views.loaders.StyleLoadHelper;
 
 import java.io.File;
 import java.util.HashMap;
