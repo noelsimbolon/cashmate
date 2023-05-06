@@ -42,6 +42,10 @@ public class MemberController {
                  .collect(Collectors.toList());
      }
 
+     public void save(ArrayList<Member> data) {
+        dataStore.writeData("member", data);
+     }
+
      public void updateById(ArrayList<Member> data, int id, String name, String phoneNumber) {
          for (Member member: data) {
              if (member.getCustomerID() == id) {
@@ -49,5 +53,7 @@ public class MemberController {
                  member.setPhoneNumber(phoneNumber);
              }
          }
+
+         save(data);
      }
 }
