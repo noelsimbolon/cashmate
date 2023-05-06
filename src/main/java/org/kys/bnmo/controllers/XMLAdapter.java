@@ -1,6 +1,5 @@
 package org.kys.bnmo.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
 

@@ -3,10 +3,9 @@ package org.kys.bnmo.controllers;
 import org.kys.bnmo.model.Customer;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class CustomerController {
-    // TODO: Nyesuain sama model baru kalau udah dipush
-
     private DataStore dataStore;
     private String fileName;
 
@@ -15,7 +14,13 @@ public class CustomerController {
         fileName = "customer";
     }
 
-//    public ArrayList<Customer> fetchAll() {
-//        return dataStore.readData("")
-//    }
+    public ArrayList<Customer> fetchAll() {
+        return dataStore.readData(fileName, Customer.class);
+    }
+
+    public ArrayList<Customer> fetchByID(int id) {
+        return (ArrayList<Customer>) fetchAll().stream()
+                .filter(c -> c.getCustomerID() == id)
+                .collect(Collectors.toList());
+    }
 }

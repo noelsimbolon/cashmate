@@ -43,11 +43,17 @@ public class DataStoreDriver {
 
             // Customer
             // Belum Work
-            // ArrayList<Customer> customers = new ArrayList<>();
-            // for (int i = 0; i < 5; i++) {
-            //     customers.add(new Customer());
-            // }
+             ArrayList<Customer> customers = new ArrayList<>();
+             for (int i = 0; i < 5; i++) {
+                 customers.add(new Customer());
+             }
 
+             dataStore.writeData("customer", customers);
+             ArrayList<Customer> readCustomers = dataStore.readData("customer", Customer.class);
+             for (int i = 0; i < 5; i++) {
+                 System.out.println(customers.get(i).getCustomerID());
+                 System.out.println(readCustomers.get(i).getCustomerID());
+             }
         } catch (Exception e) {
             e.printStackTrace();
         }

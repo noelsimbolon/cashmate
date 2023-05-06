@@ -2,6 +2,7 @@ package org.kys.bnmo.controllers;
 
 import org.kys.bnmo.model.Customer;
 import org.kys.bnmo.model.InventoryItem;
+import org.kys.bnmo.model.Member;
 import org.kys.bnmo.model.Transaction;
 
 import java.awt.image.BufferedImage;
@@ -32,6 +33,7 @@ public class DataStore {
 
     private static final Map<String, Class> classFileNameMap = new HashMap<>() {{
         put("customer", Customer.class);
+        put("member", Member.class);
         put("inventory-item", InventoryItem.class);
         put("transaction", Transaction.class);
     }};
