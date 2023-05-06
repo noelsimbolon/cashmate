@@ -1,4 +1,5 @@
 package org.kys.bnmo.components.bases;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -169,10 +170,10 @@ public class TableBuilder extends ComponentBuilder {
         searchBox.getChildren().add(searchBarInput);
     }
 
-    public void addAddItemButton(String buttonText, EventHandler<? super MouseEvent> eventHandler) {
+    public void addAddItemButton(String buttonText, EventHandler<ActionEvent> eventHandler) {
         Button button = new Button(buttonText);
         button.getStyleClass().add("table-add-item-button");
-        button.setOnMouseClicked(eventHandler);
+        button.setOnAction(eventHandler);
         IconButtonHelper iconButtonHelper = new IconButtonHelper();
         iconButtonHelper.setButtonGraphic(button, "/icon/PlusIconDark.png");
         HBox rightTopBox = (HBox) getRoot().lookup(".right-top-box");

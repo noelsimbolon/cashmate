@@ -271,6 +271,7 @@ public class FormBuilder extends ComponentBuilder {
         row.getStyleClass().add("form-input");
         inputFields.getChildren().add(row);
     }
+
     public void addButton(String label, EventHandler<ActionEvent> eventHandler) {
         // Create button
         Button button = new Button(label);
