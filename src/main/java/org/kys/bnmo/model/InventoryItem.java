@@ -2,7 +2,7 @@ package org.kys.bnmo.model;
 
 import java.io.Serializable;
 import java.util.UUID;
-import javafx.scene.image.Image;
+
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
@@ -30,15 +30,19 @@ public class InventoryItem implements Serializable {
 
     @Getter
     @NotNull
-    private Image image;
+    private String imageFileName;
 
-    public InventoryItem(int stock, @NotNull String itemName, int price, @NotNull String category, @NotNull Image image) {
+    public InventoryItem() {
+        this(0, "", 0, "", "");
+    }
+
+    public InventoryItem(int stock, @NotNull String itemName, int price, @NotNull String category, @NotNull String imageFileName) {
         this.itemID = UUID.randomUUID();
         this.stock = stock;
         this.itemName = itemName;
         this.price = price;
         this.category = category;
-        this.image = image;
+        this.imageFileName = imageFileName;
     }
 
     // Getters and Setters
@@ -81,7 +85,7 @@ public class InventoryItem implements Serializable {
         this.category = category;
     }
 
-    public void setImage(@NotNull(value = "Image cannot be null.") Image image) {
-        this.image = image;
+    public void setImageFileName(@NotNull(value = "Image cannot be null.") String imageFileName) {
+        this.imageFileName = imageFileName;
     }
 }
