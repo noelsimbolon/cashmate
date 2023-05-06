@@ -1,15 +1,14 @@
 package org.kys.bnmo.model;
 
-import java.util.UUID;
-import javafx.scene.image.Image;
+import java.io.Serializable;
+
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
-public class InventoryItem {
+public class InventoryItem implements Serializable {
 
     @Getter
-    @NotNull
-    private final UUID itemID;
+    private final int itemID;
 
     @Getter
     @NotNull
@@ -29,18 +28,24 @@ public class InventoryItem {
 
     @Getter
     @NotNull
-    private Image image;
+    private String imageFileName;
 
-    public InventoryItem(int stock, @NotNull String itemName, int price, @NotNull String category, @NotNull Image image) {
-        this.itemID = UUID.randomUUID();
+    public InventoryItem() {
+        this(0, "", 0, "", "");
+    }
+
+    public static int itemCountSequence = 0;
+
+    public InventoryItem(int stock, @NotNull String itemName, int price, @NotNull String category, @NotNull String imageFileName) {
+        itemCountSequence++;
+        this.itemID = itemCountSequence;
         this.stock = stock;
         this.itemName = itemName;
         this.price = price;
         this.category = category;
-        this.image = image;
+        this.imageFileName = imageFileName;
     }
-
-    // Getters and Setters
+    
     public void setStock(int stock) {
         if (stock < 0) {
             throw new IllegalArgumentException("Stock cannot be negative");
@@ -80,7 +85,7 @@ public class InventoryItem {
         this.category = category;
     }
 
-    public void setImage(@NotNull(value = "Image cannot be null.") Image image) {
-        this.image = image;
+    public void setImageFileName(@NotNull(value = "Image cannot be null.") String imageFileName) {
+        this.imageFileName = imageFileName;
     }
 }

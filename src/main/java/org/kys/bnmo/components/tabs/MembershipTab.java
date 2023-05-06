@@ -145,7 +145,7 @@ public class MembershipTab extends TabContainer {
         new IconButtonHelper().setButtonGraphic(backButton, "/icon/BackArrow.png", 20, 20);
         backButton.setOnAction(
                 editMemberHandler.getEventHandler(
-                        new MemberFormTab(32943, backHandler),
+                        new MemberFormTab("Edit member", new Member(69, "Hello", "0821123456789"), backHandler),
                         "Membership")
         );
         backButton.getStyleClass().add("back-button");

@@ -206,7 +206,6 @@ public class BnmoApplication extends Application {
     {
 
         // initialize factory
-//        ReplaceTabAction(new BillTab(id), "Bill[idcostumer]");
         MembershipTab membershipTabFactory = new MembershipTab(
                 new TabNavigationHandler("Membership"),
                 new BackTabAction("Membership")
