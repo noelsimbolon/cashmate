@@ -48,17 +48,17 @@ public class DataStore {
     }
 
     public void loadConfig() throws IOException {
-        File configFile = new File("config.json");
+        File configFile = new File("config.xml");
 
         folderPath = System.getProperty("user.dir");
         if (configFile.exists()) {
-            fileFormat = "json";
+            fileFormat = "xml";
             ArrayList<String> config = readData("config", String.class);
             folderPath = config.get(0);
             fileFormat = config.get(1);
         } else {
-            fileFormat = "json";
-            writeData("config", defaultConfig);
+            fileFormat = "xml";
+            writeData("config", new ArrayList<>(defaultConfig));
             folderPath = defaultConfig.get(0);
             fileFormat = defaultConfig.get(1);
         }
@@ -83,12 +83,12 @@ public class DataStore {
     public void setFolderPath(String newFolderPath, boolean moveData) throws IOException {
         if (moveData) moveData(newFolderPath);
 
-        File configFile = new File("config.json");
+        File configFile = new File("config.xml");
         if (!configFile.exists()) loadConfig();
 
         String tempFileFormat = fileFormat;
         folderPath = System.getProperty("user.dir");
-        fileFormat = "json";
+        fileFormat = "xml";
 
         ArrayList<String> config = readData("config", String.class);
         config.set(0, newFolderPath);
@@ -120,12 +120,12 @@ public class DataStore {
     public void setFileFormat(String newFileFormat, boolean changeData) throws IOException {
         if (changeData) changeDatabaseFormat(newFileFormat);
 
-        File configFile = new File("config.json");
+        File configFile = new File("config.xml");
         if (!configFile.exists()) loadConfig();
 
         String tempFolderPath = folderPath;
         folderPath = System.getProperty("user.dir");
-        fileFormat = "json";
+        fileFormat = "xml";
 
         ArrayList<String> config = readData("config", String.class);
         config.set(1, newFileFormat);
@@ -147,6 +147,7 @@ public class DataStore {
 
         File parentFolder = file.getParentFile();
         if (!parentFolder.exists()) parentFolder.mkdirs();
+
         adapter.writeFile(file.getAbsolutePath(), data);
     }
 
