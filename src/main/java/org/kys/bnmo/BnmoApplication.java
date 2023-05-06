@@ -189,14 +189,14 @@ public class BnmoApplication extends Application {
 
         // initialize factory
 
-        AddMemberTab addMemberTabFactory = new AddMemberTab(
+        MemberFormTab memberFormTabFactory = new MemberFormTab(
                 new BackTabAction("Membership")
         );
 
 //        ReplaceTabAction(new BillTab(id), "Bill[idcostumer]");
         MembershipTab membershipTabFactory = new MembershipTab(
                 new ReplaceTabAction(
-                        addMemberTabFactory,
+                        memberFormTabFactory,
                         "Membership"
                 )
         );
@@ -256,13 +256,9 @@ public class BnmoApplication extends Application {
 
         stage.show();
 
-//        Tab a = new Tab("a");
+//        Tab a = new Tab("Transaction history for Customer [ID]");
 //        a.setContent(new BillTab().getComponent());
 //        tabPane.getTabs().add(a);
-//
-//        Tab b = new Tab("a");
-//        b.setContent(new ReportTab().getComponent());
-//        tabPane.getTabs().add(b);
 
 //        DocumentPrinter printer = new DocumentPrinter(stage);
 //        VBox B = new VBox();

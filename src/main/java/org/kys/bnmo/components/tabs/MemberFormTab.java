@@ -6,7 +6,7 @@ import javafx.scene.layout.Pane;
 import org.kys.bnmo.components.bases.FormBuilder;
 import org.kys.bnmo.helpers.views.IconButtonHelper;
 
-public class AddMemberTab extends TabContainer {
+public class MemberFormTab extends TabContainer {
 
     private static final FormBuilder formBuilder = new FormBuilder();
 
@@ -14,7 +14,7 @@ public class AddMemberTab extends TabContainer {
 
     EventHandler<ActionEvent> backButtonAction;
 
-    public AddMemberTab(EventHandler<ActionEvent> backButtonAction)
+    public MemberFormTab(EventHandler<ActionEvent> backButtonAction)
     {
         this.backButtonAction = backButtonAction;
     }
