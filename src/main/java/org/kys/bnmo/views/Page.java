@@ -35,7 +35,9 @@ public class Page extends ComponentBuilder {
     public static final Tab getTemplateTab(Parent content, String title)
     {
         Tab tab = new Tab(title);
-        tab.setContent(content);
+        ScrollPane sp = new ScrollPane(content);
+        sp.setFitToWidth(true);
+        tab.setContent(sp);
         tab.setId(title.replaceAll("\\s+",""));
 
         return tab;
