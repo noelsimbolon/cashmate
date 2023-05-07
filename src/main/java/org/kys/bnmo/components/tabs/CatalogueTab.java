@@ -9,9 +9,12 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import org.kys.bnmo.components.bases.TableBuilder;
+import org.kys.bnmo.components.documents.ReportDocument;
 import org.kys.bnmo.controllers.InventoryItemController;
 import org.kys.bnmo.events.NavigationHandler;
+import org.kys.bnmo.helpers.views.DocumentPrinter;
 import org.kys.bnmo.helpers.views.tables.TableData;
 import org.kys.bnmo.model.InventoryItem;
 
@@ -95,8 +98,16 @@ public class CatalogueTab extends TabContainer {
         ));
 
         // Additional button at table to print sales report
-        tableBuilder.addAdditionalButton("Print Sales Report", (event) -> {
-                    System.out.println("Printed Sales Report");
+        tableBuilder.addAdditionalButton("Print Transaction Report", (printEvent) -> {
+                    var reportDocumentFactory = new ReportDocument();
+                    Pane report = reportDocumentFactory.getComponent();
+                    var printer = new DocumentPrinter((Stage) this.getRoot().getScene().getWindow());
+
+                    try {
+                        printer.printElement(report, "transaction-report");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
         );
 
