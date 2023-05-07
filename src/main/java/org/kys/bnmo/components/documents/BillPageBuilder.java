@@ -221,9 +221,9 @@ public class BillPageBuilder extends ComponentBuilder {
         row2.getStyleClass().addAll("very-small-text", "dark");
         firstColumnContent.getChildren().addAll(row1, row2);
 
-        Label columnLabel2 = new Label("Rp" + order.getItem().getPrice());
+        Label columnLabel2 = new Label("Rp" + order.getPurchasePrice());
         Label columnLabel3 = new Label(Integer.toString(order.getQuantity()));
-        Label columnLabel4 = new Label("Rp" + (order.getItem().getPrice() * order.getQuantity()));
+        Label columnLabel4 = new Label("Rp" + (order.getPurchasePrice() * order.getQuantity()));
 
         documentPageBuilder.addTableRow(
                 firstColumnContent,

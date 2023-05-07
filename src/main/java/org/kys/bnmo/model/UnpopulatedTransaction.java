@@ -26,6 +26,15 @@ public class UnpopulatedTransaction {
     @Getter
     private int discount;
 
+    public UnpopulatedTransaction() {
+        this.transactionID = 0;
+        this.customerID = 0;
+        this.discount = 0;
+        this.orderIDs = new ArrayList<>();
+        this.totalPrice = 0.0;
+        this.date = new Date();
+    }
+
     public UnpopulatedTransaction(int transactionID, int customerID, List<Integer> orderIDs, double totalPrice, Date date, int discount) {
         this.transactionID = transactionID;
         this.customerID = customerID;

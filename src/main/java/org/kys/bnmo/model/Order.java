@@ -16,17 +16,21 @@ public class Order {
     private InventoryItem item;
     @Getter
     private int quantity;
+    @Getter
+    private int purchasePrice;
 
-    public Order(InventoryItem item, int quantity) {
+    public Order(InventoryItem item, int purchasePrice, int quantity) {
         this.item = item;
         this.quantity = quantity;
         this.orderID = orderCount;
+        this.purchasePrice = purchasePrice;
         orderCount++;
     }
 
-    public Order(int orderID,InventoryItem item, int quantity) {
+    public Order(int orderID, InventoryItem item, int purchasePrice, int quantity) {
         this.item = item;
         this.quantity = quantity;
         this.orderID = orderID;
+        this.purchasePrice = purchasePrice;
     }
 }

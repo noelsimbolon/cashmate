@@ -72,7 +72,8 @@ public class DataStoreDriver {
             dataStore.writeData("order", emptyOrders);
 
             TransactionController transactionController = new TransactionController();
-             transactionController.save(transactions);
+            ArrayList<Transaction> emptyTransaction = new ArrayList<>();
+             transactionController.save(emptyTransaction);
         } catch (Exception e) {
             e.printStackTrace();
         }
