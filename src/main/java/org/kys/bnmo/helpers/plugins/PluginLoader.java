@@ -1,6 +1,5 @@
 package org.kys.bnmo.helpers.plugins;
 import org.kys.bnmo.plugins.interfaces.BasePlugin;
-import org.kys.bnmo.plugins.interfaces.PluginInterface;
 
 import java.io.File;
 import java.net.URL;

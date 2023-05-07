@@ -39,4 +39,5 @@ public class ControllerAdapter implements ControllerAdapterInterface {
     public List<Transaction> getTransactions() {
         return transactionController.fetchAll();
     }
+
 }
