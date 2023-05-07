@@ -3,6 +3,7 @@ package org.kys.bnmo.plugins.adapters;
 import org.kys.bnmo.controllers.CustomerController;
 import org.kys.bnmo.controllers.InventoryItemController;
 import org.kys.bnmo.controllers.MemberController;
+import org.kys.bnmo.controllers.TransactionController;
 import org.kys.bnmo.model.Customer;
 import org.kys.bnmo.model.InventoryItem;
 import org.kys.bnmo.model.Member;
@@ -16,6 +17,8 @@ public class ControllerAdapter implements ControllerAdapterInterface {
     private static final CustomerController customerController = new CustomerController();
     private static final MemberController memberController = new MemberController();
     private static final InventoryItemController inventoryItemController = new InventoryItemController();
+    private static final TransactionController transactionController = new TransactionController();
+
     @Override
     public List<Member> getMembers() {
         return memberController.fetchAll();
@@ -34,6 +37,6 @@ public class ControllerAdapter implements ControllerAdapterInterface {
 
     @Override
     public List<Transaction> getTransactions() {
-        return null;
+        return transactionController.fetchAll();
     }
 }
