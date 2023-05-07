@@ -20,22 +20,21 @@ public class OrderController {
         fileName = "order";
     }
 
-    private void processGetData(List<Order> orders)
-    {
+    private void processGetData(List<Order> orders) {
         PluginLoader pluginLoader = new PluginLoader();
         pluginLoader.runClasses(new PluginService(null , null, new Modifiable(null, null, orders, true)));
 
     }
 
-    private void processSetData(List<Order> orders)
-    {
+    private void processSetData(List<Order> orders) {
         PluginLoader pluginLoader = new PluginLoader();
         pluginLoader.runClasses(new PluginService(null , null, new Modifiable(null, null, orders, false)));
-
     }
 
     public ArrayList<Order> fetchAll() {
-        return dataStore.readData(fileName, Order.class);
+        ArrayList<Order> data = dataStore.readData(fileName, Order.class);
+        processGetData(data);
+        return data;
     }
 
     public ArrayList<Order> fetchByID(int id) {
@@ -45,6 +44,7 @@ public class OrderController {
     }
 
     public void save(ArrayList<Order> data) {
+        processSetData(data);
         dataStore.writeData(fileName, data);
     }
 
