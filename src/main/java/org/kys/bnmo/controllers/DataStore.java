@@ -1,10 +1,7 @@
 package org.kys.bnmo.controllers;
 
 import lombok.Getter;
-import org.kys.bnmo.model.Customer;
-import org.kys.bnmo.model.InventoryItem;
-import org.kys.bnmo.model.Member;
-import org.kys.bnmo.model.Transaction;
+import org.kys.bnmo.model.*;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -42,7 +39,7 @@ public class DataStore {
         put("customer", Customer.class);
         put("member", Member.class);
         put("inventory-item", InventoryItem.class);
-        put("transaction", Transaction.class);
+        put("transaction", UnpopulatedTransaction.class);
     }};
 
     private void setAdapter(String filename) {
