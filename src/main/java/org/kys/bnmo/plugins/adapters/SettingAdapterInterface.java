@@ -15,5 +15,13 @@ public interface SettingAdapterInterface {
             String placeholder,
             String[] items,
             String defaultValue,
-            Property<String> selectedValue);
+            Property<String> selectedValue
+    );
+
+    public void addTextBox(
+            String label,
+            String placeholder,
+            String defaultValue,
+            StringProperty property
+    );
 }

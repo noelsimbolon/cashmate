@@ -1,6 +1,7 @@
 package org.kys.bnmo.plugins.base;
 
 import javafx.beans.property.Property;
+import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.layout.Pane;
@@ -82,5 +83,15 @@ public class PluginService implements PluginServiceInterface {
     @Override
     public void addSettingSaveAction(EventHandler<ActionEvent> handler) {
         settingSaveActions.add(handler);
+    }
+
+    @Override
+    public void addTextBoxSetting(
+            String label,
+            String placeholder,
+            String defaultValue,
+            StringProperty property
+    ) {
+        settingBuilder.addTextBox(label, placeholder, defaultValue, property);
     }
 }

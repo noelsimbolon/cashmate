@@ -9,6 +9,7 @@ import org.kys.bnmo.model.InventoryItem;
 import org.kys.bnmo.model.Member;
 import org.kys.bnmo.model.Transaction;
 import org.kys.bnmo.plugins.interfaces.ControllerAdapterInterface;
+import org.kys.bnmo.plugins.interfaces.DatastoreAdapterInterface;
 
 import java.util.List;
 
