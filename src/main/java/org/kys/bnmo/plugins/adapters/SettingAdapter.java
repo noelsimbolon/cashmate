@@ -18,6 +18,15 @@ public class SettingAdapter implements SettingAdapterInterface{
             String label,
             String placeholder,
             String[] items,
+            String defaultValue,
             Property<String> selectedValue) {
+
+        settingBuilder.addDropdown(
+                label,
+                placeholder,
+                items,
+                defaultValue,
+                selectedValue
+        );
     }
 }

@@ -14,7 +14,7 @@ public class OBJAdapter implements Adapter {
             objectList = (ArrayList<T>) readStream.readObject();
             readStream.close();
         } catch (ClassNotFoundException | IOException e) {
-            e.printStackTrace();
+            return new ArrayList<>();
         }
 
         return objectList;

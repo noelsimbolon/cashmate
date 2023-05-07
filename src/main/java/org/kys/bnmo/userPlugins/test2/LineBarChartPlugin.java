@@ -1,11 +1,17 @@
 package org.kys.bnmo.userPlugins.test2;
+
 import javafx.scene.chart.*;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import org.kys.bnmo.model.Transaction;
 import org.kys.bnmo.plugins.interfaces.BasePlugin;
 import org.kys.bnmo.plugins.interfaces.PluginServiceInterface;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 public class LineBarChartPlugin extends BasePlugin {
 
@@ -16,31 +22,42 @@ public class LineBarChartPlugin extends BasePlugin {
 
     private Chart getLineChart()
     {
-        final NumberAxis xAxis = new NumberAxis();
+        final CategoryAxis xAxis = new CategoryAxis();
+        xAxis.setLabel("Month");
+        xAxis.lookup(".axis-label").setStyle("-fx-text-fill: #ffffff;");
+
         final NumberAxis yAxis = new NumberAxis();
-        xAxis.setLabel("Number of Month");
+        yAxis.setLabel("Transaction Count");
+        yAxis.lookup(".axis-label").setStyle("-fx-text-fill: #ffffff;");
 
-        final LineChart<Number,Number> lineChart =
-                new LineChart(xAxis, yAxis);
+        final LineChart<String, Number> lineChart = new LineChart<>(xAxis, yAxis);
+        lineChart.setTitle("Transaction Count by Months");
+        lineChart.lookup(".chart-title").setStyle("-fx-text-fill: #ffffff;");
 
-        lineChart.setTitle("Stock Monitoring, 2010");
-        //defining a series
-        XYChart.Series series = new XYChart.Series();
-        series.setName("My portfolio");
-        //populating the series with data
-        series.getData().add(new XYChart.Data(1, 23));
-        series.getData().add(new XYChart.Data(2, 14));
-        series.getData().add(new XYChart.Data(3, 15));
-        series.getData().add(new XYChart.Data(4, 24));
-        series.getData().add(new XYChart.Data(5, 34));
-        series.getData().add(new XYChart.Data(6, 36));
-        series.getData().add(new XYChart.Data(7, 22));
-        series.getData().add(new XYChart.Data(8, 45));
-        series.getData().add(new XYChart.Data(9, 43));
-        series.getData().add(new XYChart.Data(10, 17));
-        series.getData().add(new XYChart.Data(11, 29));
-        series.getData().add(new XYChart.Data(12, 25));
+        // Defining a series
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Transaction Count");
 
+        // Mapping Month Number to Month Name
+        String[] monthNames = new String[] {
+                "January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+        };
+
+        // Get Transaction Count
+        int[] transactionCount = new int[12];
+        ArrayList<Transaction> transactions = (ArrayList<Transaction>) getService().getController().getTransactions();
+
+        for (Transaction transaction: transactions) {
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(transaction.getDate());
+            transactionCount[cal.get(Calendar.MONTH)]++;
+        }
+
+        // Populating the series with data
+        for (int i = 0; i < 12; i++) {
+            series.getData().add(new XYChart.Data<>(monthNames[i], transactionCount[i]));
+        }
         lineChart.getData().add(series);
 
         return lineChart;
@@ -49,30 +66,56 @@ public class LineBarChartPlugin extends BasePlugin {
     private Chart getBarChart()
     {
         final CategoryAxis xAxis = new CategoryAxis();
-        final NumberAxis yAxis = new NumberAxis();
-        final BarChart<String,Number> bc = new BarChart(xAxis,yAxis);
-        bc.setTitle("Country Summary");
         xAxis.setLabel("Country");
+        xAxis.lookup(".axis-label").setStyle("-fx-text-fill: #ffffff;");
+
+        final NumberAxis yAxis = new NumberAxis();
         yAxis.setLabel("Value");
+        yAxis.lookup(".axis-label").setStyle("-fx-text-fill: #ffffff;");
 
-        XYChart.Series series1 = new XYChart.Series();
-        series1.setName("2003");
-        series1.getData().add(new XYChart.Data("austria", 25601.34));
-        series1.getData().add(new XYChart.Data("brazil", 20148.82));
-        series1.getData().add(new XYChart.Data("france", 10000));
-        series1.getData().add(new XYChart.Data("italy", 35407.15));
-        series1.getData().add(new XYChart.Data("usa", 12000));
+        final BarChart<String, Number> bc = new BarChart<>(xAxis, yAxis);
+        bc.setTitle("Transaction by Membership Level for The Last 5 Years");
+        bc.lookup(".chart-title").setStyle("-fx-text-fill: #ffffff;");
 
-        XYChart.Series series2 = new XYChart.Series();
-        series2.setName("2004");
-        series2.getData().add(new XYChart.Data("austria", 57401.85));
-        series2.getData().add(new XYChart.Data("brazil", 41941.19));
-        series2.getData().add(new XYChart.Data("france", 45263.37));
-        series2.getData().add(new XYChart.Data("italy", 117320.16));
-        series2.getData().add(new XYChart.Data("usa", 14845.27));
+        XYChart.Series<String, Number> series1 = new XYChart.Series<>();
+        series1.setName("Customer");
+        XYChart.Series<String, Number> series2 = new XYChart.Series<>();
+        series2.setName("Member");
+        XYChart.Series<String, Number> series3 = new XYChart.Series<>();
+        series3.setName("VIP");
 
-        bc.getData().addAll(series1, series2);
+        int[][] transactionCount = new int[5][3];
+        ArrayList<Transaction> transactions = (ArrayList<Transaction>) getService().getController().getTransactions();
 
+        for (Transaction transaction: transactions) {
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(transaction.getDate());
+            int year = cal.get(Calendar.YEAR);
+//            System.out.println(year);
+
+            int yearIndex = year - LocalDate.now().getYear() + 4;
+            if (yearIndex < 0 || yearIndex >= 5) continue;
+
+            String memberLevel = transaction.getCustomer().getMemberLevel();
+            if (memberLevel.equals("Customer")) {
+                transactionCount[yearIndex][0]++;
+            } else if (memberLevel.equals("Member")) {
+                transactionCount[yearIndex][1]++;
+            } else {
+                transactionCount[yearIndex][2]++;
+            }
+        }
+
+        // Add the data to the chart
+        for (int i = 0; i < 5; i++) {
+            series1.getData().add(new XYChart.Data<>(Integer.toString(LocalDate.now().getYear() - 4 + i), transactionCount[i][0]));
+            series2.getData().add(new XYChart.Data<>(Integer.toString(LocalDate.now().getYear() - 4 + i), transactionCount[i][1]));
+            series3.getData().add(new XYChart.Data<>(Integer.toString(LocalDate.now().getYear() - 4 + i), transactionCount[i][2]));
+        }
+
+        bc.getData().add(series1);
+        bc.getData().add(series2);
+        bc.getData().add(series3);
         bc.lookup(".chart-legend").setStyle("-fx-background-color: white; -fx-pref-height: 50px; -fx-pref-width: 100px");
 
         return bc;
@@ -94,7 +137,7 @@ public class LineBarChartPlugin extends BasePlugin {
         header.getStyleClass().add("tab-header");
         header.setPrefWidth(Double.MAX_VALUE);
 
-        Label headerTitle = new Label("Pie Chart");
+        Label headerTitle = new Label("Line Bar Chart");
         headerTitle.getStyleClass().add("add-member-title");
 
         header.getChildren().add(headerTitle);

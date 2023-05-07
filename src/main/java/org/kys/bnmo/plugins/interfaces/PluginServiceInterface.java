@@ -13,5 +13,6 @@ public interface PluginServiceInterface {
             String label,
             String placeholder,
             String[] items,
+            String defaultValue,
             Property<String> selectedValue);
 }

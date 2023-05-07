@@ -247,20 +247,7 @@ public class BnmoApplication extends Application {
         page.addTab(settingTabFactory.getComponent(), "Settings");
 
         PluginLoader pluginLoader = new PluginLoader();
-        List<Class> plugins = pluginLoader.loadClasses();
-
-        for (Class plugin : plugins) {
-            try {
-                System.out.println(plugin.getName());
-                Object instance = plugin.getDeclaredConstructor(PluginServiceInterface.class)
-                        .newInstance(new PluginService(new PageAdapter(page), null, null));
-
-                Method pluginMethod = plugin.getMethod("onLoad");
-                pluginMethod.invoke(instance);
-            } catch (Exception e) {
-
-            }
-        }
+        pluginLoader.runClasses(new PluginService(new PageAdapter(page), null, null));
 
         root = page.getAndResetComponent();
         tabPane = getTabPane();

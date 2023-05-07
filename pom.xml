@@ -104,7 +104,7 @@
 <!--                    <target>17</target>-->
 <!--                    <compileSourceRoots>-->
 <!--                        <compileSourceRoot>src/main/java/org/kys/bnmo/plugins/interfaces</compileSourceRoot>-->
-<!--                        <compileSourceRoot>src/main/java/org/kys/bnmo/userPlugins/test</compileSourceRoot>-->
+<!--                        <compileSourceRoot>src/main/java/org/kys/bnmo/userPlugins/test3</compileSourceRoot>-->
 <!--                        <compileSourceRoot>src/main/java/org/kys/bnmo/model</compileSourceRoot>-->
 <!--                    </compileSourceRoots>-->
 <!--                    <outputDirectory>compiledPlugins</outputDirectory>-->
@@ -127,11 +127,11 @@
 <!--                            <archive>-->
 <!--                                <manifest>-->
 <!--                                    <addClasspath>true</addClasspath>-->
-<!--                                    <mainClass>org.kys.bnmo.userPlugins.test.PieChartPlugin</mainClass>-->
+<!--                                    <mainClass>org.kys.bnmo.userPlugins.test3.CurrencyPlugin</mainClass>-->
 <!--                                </manifest>-->
 <!--                            </archive>-->
 <!--                            <outputDirectory>$plugins</outputDirectory>-->
-<!--                            <finalName>plugin1</finalName>-->
+<!--                            <finalName>plugin3</finalName>-->
 <!--                        </configuration>-->
 <!--                    </execution>-->
 <!--                </executions>-->
