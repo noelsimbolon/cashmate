@@ -1,11 +1,9 @@
 package org.kys.bnmo;
-
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
@@ -13,11 +11,17 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.kys.bnmo.components.documents.BillDocument;
 import org.kys.bnmo.components.tabs.*;
-import org.kys.bnmo.helpers.DocumentPrinter;
-import org.kys.bnmo.helpers.IconButtonHelper;
-import org.kys.bnmo.helpers.loaders.StyleLoadHelper;
+import org.kys.bnmo.events.NavigationHandler;
+import org.kys.bnmo.helpers.plugins.PluginLoader;
+import org.kys.bnmo.helpers.views.DocumentPrinter;
+import org.kys.bnmo.helpers.views.IconButtonHelper;
+import org.kys.bnmo.helpers.views.loaders.StyleLoadHelper;
+import org.kys.bnmo.plugins.adapters.PageAdapter;
+import org.kys.bnmo.plugins.base.PluginService;
+import org.kys.bnmo.plugins.interfaces.PluginServiceInterface;
 import org.kys.bnmo.views.Page;
 
+import java.lang.reflect.Method;
 import java.util.*;
 
 public class BnmoApplication extends Application {
@@ -32,7 +36,6 @@ public class BnmoApplication extends Application {
     }
 
     private List<DefaultTab> defaultTabs = new ArrayList<>();
-
     private final static IconButtonHelper navbarHelper = new IconButtonHelper();
     private Pane root;
     private List<Button> navbarButtons;
@@ -113,35 +116,63 @@ public class BnmoApplication extends Application {
         }
     }
 
-    private class ReplaceTabAction implements EventHandler<ActionEvent> {
+    private class TabNavigationHandler implements NavigationHandler {
+
         private String title;
-        private TabContainer defaultFactory;
-        public ReplaceTabAction(TabContainer defaultFactory, String title) {
+
+        TabNavigationHandler(String title)
+        {
             this.title = title;
-            this.defaultFactory = defaultFactory;
         }
-        @Override
-        public void handle(ActionEvent event) {
+        private class ReplaceTabAction implements EventHandler<ActionEvent> {
+            private TabContainer defaultFactory;
+            public ReplaceTabAction(TabContainer defaultFactory, String title) {
+                this.defaultFactory = defaultFactory;
+            }
+            @Override
+            public void handle(ActionEvent event) {
 
-            Tab newTab = Page.getTemplateTab(defaultFactory.getComponent(), title);
+                Tab newTab = Page.getTemplateTab(defaultFactory.getComponent(), title);
 
-            List<Tab> tabs = tabPane.getTabs();
+                List<Tab> tabs = tabPane.getTabs();
 
-            for (int i = 0; i < tabs.size(); i++)
-            {
-                if (tabs.get(i).getId() == newTab.getId())
+                boolean found = false;
+
+                for (int i = 0; i < tabs.size(); i++)
                 {
-                    tabPane.getTabs().remove(i);
-                    tabPane.getTabs().add(i, newTab);
-                    break;
+                    if (tabs.get(i).getId() == newTab.getId())
+                    {
+                        tabPane.getTabs().remove(i);
+                        tabPane.getTabs().add(i, newTab);
+                        found = true;
+                        break;
+                    }
                 }
-            }
 
-            for (Button button: navbarButtons)
-            {
-                if (button.getId() == newTab.getId()) button.fire();
-            }
+                if (found)
+                {
+                    for (Button button: navbarButtons)
+                    {
+                        if (button.getId() == newTab.getId()) button.fire();
+                    }
+                }
 
+                else
+                {
+                    tabPane.getTabs().add(newTab);
+                }
+
+            }
+        }
+
+        @Override
+        public EventHandler<ActionEvent> getEventHandler(TabContainer factory) {
+            return new ReplaceTabAction(factory, title);
+        }
+
+        @Override
+        public EventHandler<ActionEvent> getEventHandler(TabContainer factory, String title) {
+            return new ReplaceTabAction(factory, title);
         }
     }
 
@@ -193,21 +224,19 @@ public class BnmoApplication extends Application {
     {
 
         // initialize factory
-
-        AddMemberTab addMemberTabFactory = new AddMemberTab(
-                new BackTabAction("Membership")
-        );
         MembershipTab membershipTabFactory = new MembershipTab(
-                new ReplaceTabAction(
-                        addMemberTabFactory,
-                        "Membership"
-                )
+                new TabNavigationHandler("Membership"),
+                new BackTabAction("Membership")
         );
 
         CashierTab cashierTabFactory = new CashierTab();
-        CatalogueTab catalogueTabFactory = new CatalogueTab();
-        SettingTab settingTabFactory = new SettingTab(stage);
 
+        CatalogueTab catalogueTabFactory = new CatalogueTab(
+                new TabNavigationHandler("Catalogue"),
+                new BackTabAction("Catalogue")
+        );
+
+        SettingTab settingTabFactory = new SettingTab(stage);
 
         // initialize page
         Page page = new Page();
@@ -215,6 +244,22 @@ public class BnmoApplication extends Application {
         page.addTab(cashierTabFactory.getComponent(), "Cashier");
         page.addTab(catalogueTabFactory.getComponent(), "Catalogue");
         page.addTab(settingTabFactory.getComponent(), "Settings");
+
+        PluginLoader pluginLoader = new PluginLoader();
+        List<Class> plugins = pluginLoader.loadClasses();
+
+        for (Class plugin : plugins) {
+            try {
+                System.out.println(plugin.getName());
+                Object instance = plugin.getDeclaredConstructor(PluginServiceInterface.class)
+                        .newInstance(new PluginService(new PageAdapter(page)));
+
+                Method pluginMethod = plugin.getMethod("onLoad");
+                pluginMethod.invoke(instance);
+            } catch (Exception e) {
+
+            }
+        }
 
         root = page.getAndResetComponent();
         tabPane = getTabPane();
@@ -226,7 +271,7 @@ public class BnmoApplication extends Application {
                 new DefaultTab(settingTabFactory, tabPane.getTabs().get(3))
         );
 
-        tabPane.getTabs().clear();
+//        tabPane.getTabs().clear();
 
     }
 
@@ -259,18 +304,14 @@ public class BnmoApplication extends Application {
 
         stage.show();
 
-//        Tab a = new Tab("a");
-//        a.setContent(new BillTab().getComponent());
-//        tabPane.getTabs().add(a);
-//
-//        Tab b = new Tab("a");
-//        b.setContent(new ReportTab().getComponent());
-//        tabPane.getTabs().add(b);
+        Tab a = new Tab("Transaction history for Customer [ID]");
+        a.setContent(new ReportTab().getComponent());
+        tabPane.getTabs().add(a);
 
 //        DocumentPrinter printer = new DocumentPrinter(stage);
 //        VBox B = new VBox();
 //        B.getChildren().addAll(new Label("33"), new Label("33"));
-//        printer.printElement((Pane)((ScrollPane)(new BillDocument().getComponent()).getChildren().get(0)).getContent());
+//        printer.printElement((Pane)((ScrollPane)(new BillDocument(3).getComponent()).getChildren().get(0)).getContent());
     }
 
 // Checkout panel testing

@@ -9,8 +9,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import org.jetbrains.annotations.NotNull;
 import org.kys.bnmo.components.ComponentBuilder;
-import org.kys.bnmo.helpers.DocumentBuilderHelper;
-import org.kys.bnmo.helpers.loaders.StyleLoadHelper;
+import org.kys.bnmo.helpers.views.DocumentBuilderHelper;
+import org.kys.bnmo.helpers.views.loaders.StyleLoadHelper;
 
 import java.util.ArrayList;
 import java.util.Arrays;

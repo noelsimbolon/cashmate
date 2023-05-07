@@ -1,6 +1,5 @@
 package org.kys.bnmo.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
 
@@ -10,12 +9,9 @@ import java.util.ArrayList;
 
 public class XMLAdapter implements Adapter {
 
-    private final ObjectMapper objectMapper;
-
     private final XmlMapper xmlMapper;
 
     public XMLAdapter() {
-        objectMapper = new ObjectMapper();
         xmlMapper = new XmlMapper();
     }
 
@@ -24,7 +20,7 @@ public class XMLAdapter implements Adapter {
         ArrayList<T> objectList = new ArrayList<>();
 
         try {
-            CollectionType listType = objectMapper.getTypeFactory().constructCollectionType(ArrayList.class, type);
+            CollectionType listType = xmlMapper.getTypeFactory().constructCollectionType(ArrayList.class, type);
             objectList = xmlMapper.readValue(new File(filePath), listType);
         } catch (IOException e) {
             e.printStackTrace();
@@ -36,7 +32,11 @@ public class XMLAdapter implements Adapter {
     @Override
     public void writeFile(String filePath, ArrayList<?> data) {
         try {
-            xmlMapper.writeValue(new File(filePath), data);
+            File file = new File(filePath);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            xmlMapper.writeValue(file, data);
         } catch (IOException e) {
             e.printStackTrace();
         }

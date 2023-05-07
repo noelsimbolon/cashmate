@@ -1,4 +1,4 @@
-package org.kys.bnmo.helpers;
+package org.kys.bnmo.helpers.views;
 
 import javafx.print.PrinterJob;
 import javafx.scene.Node;
@@ -18,8 +18,7 @@ public class DocumentPrinter {
         PrinterJob printerJob = PrinterJob.createPrinterJob();
 
         for (Node pageNode : root.getChildren()) {
-            VBox container = new VBox();
-            printerJob.printPage(container);
+            printerJob.printPage(pageNode);
         }
 
         printerJob.endJob();

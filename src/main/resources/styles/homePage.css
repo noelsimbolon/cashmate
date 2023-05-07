@@ -1,16 +1,15 @@
 .add-member-container {
-    -fx-fill-width: true;
+    /*-fx-fill-width: true;*/
     -fx-background-color: #262F39;
-    -fx-padding: 20px;
+    /*-fx-padding: 20px;*/
     -fx-spacing: 10px;
     -fx-alignment: center;
-    -fx-translate-y: -25px;
 }
 
 .project-members {
-    -fx-padding: 0 0 40px 0;
-    -fx-alignment: center;
+    -fx-padding: 40 0 100 0;
     -fx-spacing: 10px;
+    -fx-alignment: center;
 }
 
 .add-member-title {
@@ -18,28 +17,23 @@
     -fx-text-fill: #FCA311;
     -fx-font-size: 40px;
     -fx-font-weight: bold;
-    -fx-padding: 49 0 40 0;
-    -fx-alignment: center;
+    -fx-padding: 0 0 20 0;
 }
 
 .member-title {
     -fx-font-family: "Inter";
     -fx-text-fill: White;
     -fx-font-size: 18px;
-    -fx-alignment: center;
 }
 
-.program-title {
-    -fx-font-family: "Inter";
-    -fx-text-fill: #FCA311;
-    -fx-font-size: 35px;
-    -fx-font-weight: bold;
-    -fx-padding: 49 0 20 0;
-}
-
-.date-time-label{
+.date-time-label {
     -fx-font-size: 25px;
     -fx-font-weight: bold;
     -fx-text-fill: White;
 }
 
+.date-time-label-2 {
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+    -fx-text-fill: White;
+}

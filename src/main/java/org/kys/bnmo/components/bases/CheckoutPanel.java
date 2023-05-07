@@ -8,15 +8,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 import org.kys.bnmo.components.ComponentFactory;
-import org.kys.bnmo.helpers.loaders.StyleLoadHelper;
+import org.kys.bnmo.helpers.views.loaders.StyleLoadHelper;
 import org.kys.bnmo.model.Customer;
 import org.kys.bnmo.model.InventoryItem;
 import org.kys.bnmo.model.Member;
@@ -90,6 +87,7 @@ public class CheckoutPanel extends VBox {
         // addCustomerDropdown("Select customer", new String[] {"Customer 1", "Jojo", "Fio"});
 
         addItemScrollPane();
+        addDiscount(20000, "Rp");
         checkoutButton = new Button("Charge");
         addCheckoutButton();
         checkoutButton.setOnMouseClicked(e -> {
@@ -317,6 +315,22 @@ public class CheckoutPanel extends VBox {
         }
 
         updateCheckoutPrice();
+    }
+
+    private void addDiscount(double discount, String currency) {
+        var discountContainer = new HBox();
+
+        var discountLabel = new Label("Discounts:");
+        discountLabel.setId("discount-label");
+
+        var spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+
+        var discountAmount = new Label( currency + discount);
+        discountAmount.setId("discount-amount");
+
+        discountContainer.getChildren().addAll(discountLabel, spacer, discountAmount);
+        inputFields.getChildren().add(discountContainer);
     }
 
     private void updateCheckoutPrice() {

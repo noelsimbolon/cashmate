@@ -1,9 +1,11 @@
 package org.kys.bnmo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Member extends Customer {
 
     @Getter
@@ -23,20 +25,25 @@ public class Member extends Customer {
     @NotNull
     private String status; // "Active" or "Inactive"
 
-    public Member(int customerID, @NotNull String name, @NotNull String phoneNumber) {
+    @NotNull
+    private String memberLevel; // "Member" or "VIP"
+
+    public Member(int customerID, @NotNull String name, @NotNull String phoneNumber, @NotNull String memberLevel) {
         super(customerID);
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.points = 0;
         this.status = "Active";
+        this.memberLevel = memberLevel;
     }
 
-    public Member(@NotNull String name, @NotNull String phoneNumber) {
+    public Member(@NotNull String name, @NotNull String phoneNumber, @NotNull String memberLevel) {
         super();
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.points = 0;
         this.status = "Active";
+        this.memberLevel = memberLevel;
     }
 
     public void addPoints(int points) {
@@ -63,13 +70,19 @@ public class Member extends Customer {
         // TODO: throw exception if status is already inactive
     }
 
-    @Override
-    public String getCustomerClass() {
-        return "Member";
+    public @NotNull String getMemberLevel() {
+        return memberLevel;
     }
 
-    @NotNull
-    private VIP promote() {
-        return new VIP(this.getCustomerID(), this.name, this.phoneNumber);
+    private void promote() {
+        if (memberLevel.equals("Member")) {
+            memberLevel = "VIP";
+        }
+    }
+
+    private void demote() {
+        if (memberLevel.equals("VIP")) {
+            memberLevel = "Member";
+        }
     }
 }

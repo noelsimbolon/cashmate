@@ -32,7 +32,11 @@ public class JSONAdapter implements Adapter {
     @Override
     public void writeFile(String filePath, ArrayList<?> data) {
         try {
-            objectMapper.writeValue(new File(filePath), data);
+            File file = new File(filePath);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            objectMapper.writeValue(file, data);
         } catch (IOException e) {
             e.printStackTrace();
         }

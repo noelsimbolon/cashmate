@@ -1,4 +1,4 @@
-package org.kys.bnmo.helpers.Table;
+package org.kys.bnmo.helpers.views.tables;
 
 import javafx.scene.image.Image;
 import lombok.Getter;

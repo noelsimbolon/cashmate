@@ -1,18 +1,24 @@
 package org.kys.bnmo.components.bases;
+
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.jetbrains.annotations.NotNull;
 import org.kys.bnmo.components.ComponentBuilder;
-import org.kys.bnmo.helpers.IconButtonHelper;
-import org.kys.bnmo.helpers.loaders.StyleLoadHelper;
-import org.kys.bnmo.helpers.Table.TableData;
+import org.kys.bnmo.helpers.views.IconButtonHelper;
+import org.kys.bnmo.helpers.views.loaders.StyleLoadHelper;
+import org.kys.bnmo.helpers.views.tables.TableData;
 
 import java.util.List;
 import java.util.Objects;
@@ -169,10 +175,10 @@ public class TableBuilder extends ComponentBuilder {
         searchBox.getChildren().add(searchBarInput);
     }
 
-    public void addAddItemButton(String buttonText, EventHandler<? super MouseEvent> eventHandler) {
+    public void addAddItemButton(String buttonText, EventHandler<ActionEvent> eventHandler) {
         Button button = new Button(buttonText);
         button.getStyleClass().add("table-add-item-button");
-        button.setOnMouseClicked(eventHandler);
+        button.setOnAction(eventHandler);
         IconButtonHelper iconButtonHelper = new IconButtonHelper();
         iconButtonHelper.setButtonGraphic(button, "/icon/PlusIconDark.png");
         HBox rightTopBox = (HBox) getRoot().lookup(".right-top-box");
