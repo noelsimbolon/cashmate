@@ -3,7 +3,7 @@
     <itemID>3035c83d-8800-4c88-bc42-9e6d48910e41</itemID>
     <itemName>item 1</itemName>
     <category>Food</category>
-    <stock>8</stock>
+    <stock>7</stock>
     <price>250.0</price>
     <purchasePrice>100.0</purchasePrice>
     <imageFileName>food.png</imageFileName>
@@ -12,7 +12,7 @@
     <itemID>030f57c8-3842-4925-9531-b7864ed69c4e</itemID>
     <itemName>item 2</itemName>
     <category>Food</category>
-    <stock>8</stock>
+    <stock>7</stock>
     <price>250.0</price>
     <purchasePrice>100.0</purchasePrice>
     <imageFileName>food.png</imageFileName>

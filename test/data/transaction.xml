@@ -21,4 +21,15 @@
     </orderIDs>
     <discount>0</discount>
   </item>
+  <item>
+    <transactionID>81a43475-068b-4d94-b94b-469b6715cadc</transactionID>
+    <customerID>ed3cac29-0192-4046-b4a4-9b85992dac9f</customerID>
+    <totalPrice>500.0</totalPrice>
+    <date>1683478634434</date>
+    <orderIDs>
+      <orderIDs>7f392983-458f-434c-b670-a4a599ba6153</orderIDs>
+      <orderIDs>9b66b5a5-c7d0-4781-84fb-be0f90613288</orderIDs>
+    </orderIDs>
+    <discount>0</discount>
+  </item>
 </ArrayList>
