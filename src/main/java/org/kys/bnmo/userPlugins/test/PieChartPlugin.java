@@ -25,6 +25,8 @@ import java.util.List;
 
 public class PieChartPlugin extends BasePlugin {
 
+    private Timeline timeline;
+
     public PieChartPlugin(PluginServiceInterface service) {
         super(service);
     }
@@ -76,7 +78,7 @@ public class PieChartPlugin extends BasePlugin {
         chart.setLabelsVisible(false);
 
         // Set up a Timeline to update the chart data every 5 seconds
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
+        timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
             List<Customer> customersUpdated = controller.getCustomers();
             List<Member> membersUpdated = controller.getMembers();
 
@@ -94,7 +96,6 @@ public class PieChartPlugin extends BasePlugin {
         }));
 
         timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
 
         return chart;
     }
@@ -126,6 +127,6 @@ public class PieChartPlugin extends BasePlugin {
 
     @Override
     public void onLoad() {
-        getService().addTab(getTabContainer(), "Pie Chart");
+        getService().addTab(getTabContainer(), "Pie Chart", timeline);
     }
 }
