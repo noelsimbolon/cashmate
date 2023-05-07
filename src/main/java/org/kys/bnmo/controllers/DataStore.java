@@ -1,9 +1,9 @@
 package org.kys.bnmo.controllers;
 
 import lombok.Getter;
+import org.jetbrains.annotations.NotNull;
 import org.kys.bnmo.model.*;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,29 +12,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import javax.imageio.ImageIO;
-
 public class DataStore {
-
-    @Getter
-    private static String folderPath;
-
-    @Getter
-    private static String fileFormat;
 
     private final static ArrayList<String> defaultConfig = new ArrayList<>() {{
         add(System.getProperty("user.dir") + "\\data");  // Data Location
         add("json");  // Data Format
     }};
-
-    private Adapter adapter;
-
     private static final Map<String, Adapter> adapterMap = new HashMap<>() {{
         put("json", new JSONAdapter());
         put("obj", new OBJAdapter());
         put("xml", new XMLAdapter());
     }};
-
     private static final Map<String, Class> classFileNameMap = new HashMap<>() {{
         put("customer", Customer.class);
         put("inventory-item", InventoryItem.class);
@@ -42,6 +30,11 @@ public class DataStore {
         put("order", Order.class);
         put("transaction", UnpopulatedTransaction.class);
     }};
+    @Getter
+    private static String folderPath;
+    @Getter
+    private static String fileFormat;
+    private Adapter adapter;
 
     private void setAdapter(String filename) {
         this.adapter = getSuitableAdapter(fileFormat);
@@ -71,7 +64,7 @@ public class DataStore {
         }
     }
 
-    public void writeConfigAPI(String filename, String content) throws Exception {
+    public void writeConfigAPI(@NotNull String filename, String content) throws Exception {
         if (filename.equals("config")) throw new Exception("Unallowed to overwrite default config file");
 
         String oldFolderPath = folderPath;
@@ -81,13 +74,15 @@ public class DataStore {
         fileFormat = "xml";
 
         File file = new File(filename);
-        writeData(filename, new ArrayList<>() {{add(content);}});
+        writeData(filename, new ArrayList<>() {{
+            add(content);
+        }});
 
         folderPath = oldFolderPath;
         fileFormat = oldFormat;
     }
 
-    public String loadConfigAPI(String filename) throws Exception {
+    public String loadConfigAPI(@NotNull String filename) throws Exception {
         if (filename.equals("config")) throw new Exception("Unallowed to read default config file");
 
         String oldFolderPath = folderPath;
@@ -152,7 +147,7 @@ public class DataStore {
         if (files == null) return;
 
         String oldFormat = fileFormat;
-        for (File file: files) {
+        for (File file : files) {
             if (file.getName().endsWith(oldFormat)) {
                 String fileName = file.getName().replaceFirst("[.][^.]+$", "");
                 ArrayList<?> data = readData(fileName, classFileNameMap.get(fileName));
@@ -169,7 +164,13 @@ public class DataStore {
         }
     }
 
-    public void setFileFormat(String newFileFormat, boolean changeData) {
+    public void setFileFormat(@NotNull String newFileFormat, boolean changeData) throws IllegalArgumentException {
+        if (!newFileFormat.equals("xml") &&
+                !newFileFormat.equals("json") &&
+                !newFileFormat.equals("obj")) {
+            throw new IllegalArgumentException("Not a valid file format.");
+        }
+
         if (changeData) changeDatabaseFormat(newFileFormat);
 
         File configFile = new File("config.xml");
@@ -201,22 +202,5 @@ public class DataStore {
         if (!parentFolder.exists()) parentFolder.mkdirs();
 
         adapter.writeFile(file.getAbsolutePath(), data);
-    }
-
-    public BufferedImage readImage(String filename) throws IOException {
-        File file = new File(folderPath + "\\images\\" + filename);
-        return ImageIO.read(file);
-    }
-
-    public void writeImage(String filename, BufferedImage image) {
-        File file = new File(folderPath + "\\images\\" + filename);
-        File parentFolder = file.getParentFile();
-        if (!parentFolder.exists()) parentFolder.mkdirs();
-
-        try {
-            ImageIO.write(image, "png", file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
