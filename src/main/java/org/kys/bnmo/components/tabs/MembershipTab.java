@@ -49,24 +49,6 @@ public class MembershipTab extends TabContainer {
         // Sort by customer ID
         customers.sort(Comparator.comparingInt(Customer::getCustomerID));
 
-        // Create temporary customer data
-//        List<Customer> customers = new ArrayList<>();
-//        for (int i = 0; i < 10; i++) {
-//            if (i % 3 == 0) {
-//                // Create normal customer
-//                Customer c = new Customer();
-//                customers.add(c);
-//            } else if (i % 3 == 1) {
-//                // Create member customer
-//                Member c = new Member("Member " + i, "08123456789", "Member");
-//                customers.add(c);
-//            } else {
-//                // Create VIP customer
-//                Member c = new Member("VIP " + i, "08123456789", "VIP");
-//                customers.add(c);
-//            }
-//        }
-
         // Table heading
         List<String> tableHeadings = new ArrayList<>(Arrays.asList("Customer ID", "Name", "Phone", "Status", "Level", "Points", "Action"));
 
@@ -194,12 +176,64 @@ public class MembershipTab extends TabContainer {
                 if (customer.getMemberLevel().equals("VIP")) {
                     item3 = new MenuItem("Demote");
                     item3.setOnAction(e -> {
-                        System.out.println("Demote member");
+                        // If customer is not found, then do not save but refresh the tab
+                        if (editedCustomerIndex == -1) {
+                            System.out.println("Customer not found");
+                            memberActionHandler.getEventHandler(
+                                    new MembershipTab(memberActionHandler, backHandler)
+                            ).handle(e);
+                        }
+
+                        // Get customer from list
+                        Member editedCustomer = members.get(editedCustomerIndex);
+
+                        // Delete customer from list
+                        members.remove(editedCustomerIndex);
+
+                        // Update customer member level
+                        editedCustomer.demote();
+
+                        // Add customer back to list
+                        members.add(editedCustomerIndex, editedCustomer);
+
+                        // Save to DataStore
+                        memberController.save(members);
+
+                        // Refresh tab
+                        memberActionHandler.getEventHandler(
+                                new MembershipTab(memberActionHandler, backHandler)
+                        ).handle(e);
                     });
                 } else {
                     item3 = new MenuItem("Promote");
                     item3.setOnAction(e -> {
-                        System.out.println("Promote member");
+                        // If customer is not found, then do not save but refresh the tab
+                        if (editedCustomerIndex == -1) {
+                            System.out.println("Customer not found");
+                            memberActionHandler.getEventHandler(
+                                    new MembershipTab(memberActionHandler, backHandler)
+                            ).handle(e);
+                        }
+
+                        // Get customer from list
+                        Member editedCustomer = members.get(editedCustomerIndex);
+
+                        // Delete customer from list
+                        members.remove(editedCustomerIndex);
+
+                        // Update customer member level
+                        editedCustomer.promote();
+
+                        // Add customer back to list
+                        members.add(editedCustomerIndex, editedCustomer);
+
+                        // Save to DataStore
+                        memberController.save(members);
+
+                        // Refresh tab
+                        memberActionHandler.getEventHandler(
+                                new MembershipTab(memberActionHandler, backHandler)
+                        ).handle(e);
                     });
                 }
 
