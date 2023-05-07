@@ -36,7 +36,7 @@ public class BillPageBuilder extends ComponentBuilder {
         dateRow.getStyleClass().add("label-row");
 
         Label idTitle = new Label("Invoice:");
-        Label idValue = new Label(transaction.getTransactionID().toString());
+        Label idValue = new Label(Integer.toString(transaction.getTransactionID()));
         idTitle.getStyleClass().addAll("small-text", "dark");
         idValue.getStyleClass().addAll("small-text", "light");
 
@@ -166,7 +166,7 @@ public class BillPageBuilder extends ComponentBuilder {
         column3.setHalignment(HPos.RIGHT);
         summary.getColumnConstraints().addAll(column1, column2, column3);
 
-        int total = transaction.getTotalPrice();
+        int total = (int) Math.round(transaction.getTotalPrice());
         String subtotalStr = "Rp" + Integer.toString(total);
         int discount = transaction.getDiscount();
         String discountStr = "Rp" + Integer.toString(discount);

@@ -4,16 +4,14 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.transformation.FilteredList;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import lombok.Getter;
-import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
-import org.kys.bnmo.components.ComponentFactory;
+import org.kys.bnmo.controllers.CustomerController;
+import org.kys.bnmo.controllers.InventoryItemController;
 import org.kys.bnmo.helpers.views.loaders.StyleLoadHelper;
 import org.kys.bnmo.model.Customer;
 import org.kys.bnmo.model.InventoryItem;
@@ -23,20 +21,18 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class CheckoutPanel extends VBox {
     private final VBox inputFields;
 
-    private class Order {
+    private class TemporaryOrder {
         @Getter
         private InventoryItem item;
         @Getter
         private IntegerProperty quantity;
 
-        public Order(InventoryItem item, int quantity) {
+        public TemporaryOrder(InventoryItem item, int quantity) {
             this.item = item;
             this.quantity = new SimpleIntegerProperty(quantity);
         }
@@ -44,7 +40,7 @@ public class CheckoutPanel extends VBox {
 
     private class TemporaryBill {
         @Getter
-        private final List<Order> orders;
+        private final List<TemporaryOrder> orders;
         @Getter
         private final Customer customer;
 
@@ -268,7 +264,7 @@ public class CheckoutPanel extends VBox {
         }
     }
 
-    private @NotNull HBox createItemCard(@NotNull Order order, String currency) {
+    private @NotNull HBox createItemCard(@NotNull CheckoutPanel.TemporaryOrder order, String currency) {
         var itemCard = new HBox();
         itemCard.setAlignment(Pos.CENTER_LEFT);
         itemCard.setId("item-container");
@@ -355,7 +351,7 @@ public class CheckoutPanel extends VBox {
 
         NumberFormat rupiahFormat = NumberFormat.getCurrencyInstance(localeID);
         int amount = 0;
-        for (Order order : temporaryBills.get(customerDropdown.getSelectionModel().getSelectedIndex()).getOrders()) {
+        for (TemporaryOrder order : temporaryBills.get(customerDropdown.getSelectionModel().getSelectedIndex()).getOrders()) {
             amount += order.quantity.get() * order.item.getPrice();
         }
         int initial = amount;
@@ -382,7 +378,7 @@ public class CheckoutPanel extends VBox {
             customerDropdown.getSelectionModel().select(customerDropdown.getItems().size() - 1);
         }
 
-        List<Order> orders = temporaryBills.get(customerDropdown.getSelectionModel().getSelectedIndex()).getOrders();
+        List<TemporaryOrder> orders = temporaryBills.get(customerDropdown.getSelectionModel().getSelectedIndex()).getOrders();
         int existsIdx = IntStream.range(0, orders.size())
                 .filter(i -> item.equals(orders.get(i).getItem()))
                 .findFirst()
@@ -390,7 +386,7 @@ public class CheckoutPanel extends VBox {
 
         if (existsIdx == -1) {
             int currentIdx = customerDropdown.getSelectionModel().getSelectedIndex();
-            Order order = new Order(item, 1);
+            TemporaryOrder order = new TemporaryOrder(item, 1);
             temporaryBills.get(currentIdx).getOrders().add(order);
             addItemCard(createItemCard(order, "Rp"));
         } else {
@@ -401,6 +397,12 @@ public class CheckoutPanel extends VBox {
     }
 
     private void checkoutCurrentBill() {
-
+//        TemporaryBill currentBill = temporaryBills.get(customerDropdown.getSelectionModel().getSelectedIndex());
+//
+//        CustomerController customerController = new CustomerController();
+//        List<Customer> dataStoreCustomers = customerController.fetchByID(currentBill.getCustomer().getCustomerID());
+//
+//        InventoryItemController inventoryItemController = new InventoryItemController();
+//        List<InventoryItem> dataStoreItems = inventoryItemController.
     }
 }

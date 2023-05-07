@@ -10,7 +10,9 @@ import java.util.UUID;
 public class Transaction implements Serializable {
 
     @Getter
-    private final UUID transactionID;
+    private final int transactionID;
+
+    private static int transactionCount = 0;
 
     @Getter
     private Customer customer;
@@ -30,7 +32,17 @@ public class Transaction implements Serializable {
     public Transaction(Customer customer, List<Order> orders, double totalPrice, Date date, int discount) {
         this.orders = orders;
         this.discount = discount;
-        this.transactionID = UUID.randomUUID();
+        this.transactionID = transactionCount;
+        this.customer = customer;
+        this.totalPrice = totalPrice;
+        this.date = date;
+        transactionCount++;
+    }
+
+    public Transaction(int transactionID, Customer customer, List<Order> orders, double totalPrice, Date date, int discount) {
+        this.orders = orders;
+        this.discount = discount;
+        this.transactionID = transactionID;
         this.customer = customer;
         this.totalPrice = totalPrice;
         this.date = date;
