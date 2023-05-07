@@ -1,0 +1,122 @@
+[
+  {
+    "customerID": 11,
+    "name": "Member1",
+    "phoneNumber": "0812121212",
+    "points": 0,
+    "status": "Active",
+    "memberLevel": "Member"
+  },
+  {
+    "customerID": 12,
+    "name": "Member2",
+    "phoneNumber": "0812121212",
+    "points": 0,
+    "status": "Active",
+    "memberLevel": "Member"
+  },
+  {
+    "customerID": 13,
+    "name": "Member3",
+    "phoneNumber": "0812121212",
+    "points": 0,
+    "status": "Active",
+    "memberLevel": "Member"
+  },
+  {
+    "customerID": 14,
+    "name": "Member4",
+    "phoneNumber": "0812121212",
+    "points": 0,
+    "status": "Active",
+    "memberLevel": "Member"
+  },
+  {
+    "customerID": 15,
+    "name": "Member5",
+    "phoneNumber": "0812121212",
+    "points": 0,
+    "status": "Active",
+    "memberLevel": "Member"
+  },
+  {
+    "customerID": 16,
+    "name": "Member6",
+    "phoneNumber": "0812121212",
+    "points": 0,
+    "status": "Active",
+    "memberLevel": "Member"
+  },
+  {
+    "customerID": 17,
+    "name": "Member7",
+    "phoneNumber": "0812121212",
+    "points": 0,
+    "status": "Active",
+    "memberLevel": "Member"
+  },
+  {
+    "customerID": 18,
+    "name": "Member8",
+    "phoneNumber": "0812121212",
+    "points": 0,
+    "status": "Active",
+    "memberLevel": "Member"
+  },
+  {
+    "customerID": 19,
+    "name": "Member9",
+    "phoneNumber": "0812121212",
+    "points": 0,
+    "status": "Active",
+    "memberLevel": "Member"
+  },
+  {
+    "customerID": 20,
+    "name": "Member10",
+    "phoneNumber": "0812121212",
+    "points": 0,
+    "status": "Active",
+    "memberLevel": "Member"
+  },
+  {
+    "customerID": 21,
+    "name": "VIP1",
+    "phoneNumber": "0812121212",
+    "points": 0,
+    "status": "Active",
+    "memberLevel": "VIP"
+  },
+  {
+    "customerID": 22,
+    "name": "VIP2",
+    "phoneNumber": "0812121212",
+    "points": 0,
+    "status": "Active",
+    "memberLevel": "VIP"
+  },
+  {
+    "customerID": 23,
+    "name": "VIP3",
+    "phoneNumber": "0812121212",
+    "points": 0,
+    "status": "Active",
+    "memberLevel": "VIP"
+  },
+  {
+    "customerID": 24,
+    "name": "VIP4",
+    "phoneNumber": "0812121212",
+    "points": 0,
+    "status": "Active",
+    "memberLevel": "VIP"
+  },
+  {
+    "customerID": 25,
+    "name": "VIP5",
+    "phoneNumber": "0812121212",
+    "points": 0,
+    "status": "Active",
+    "memberLevel": "VIP"
+  }
+]

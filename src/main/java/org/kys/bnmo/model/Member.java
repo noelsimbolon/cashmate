@@ -46,6 +46,10 @@ public class Member extends Customer {
         this.memberLevel = memberLevel;
     }
 
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
     public void addPoints(int points) {
         this.points += points;
     }
@@ -74,13 +78,13 @@ public class Member extends Customer {
         return memberLevel;
     }
 
-    private void promote() {
+    public void promote() {
         if (memberLevel.equals("Member")) {
             memberLevel = "VIP";
         }
     }
 
-    private void demote() {
+    public void demote() {
         if (memberLevel.equals("VIP")) {
             memberLevel = "Member";
         }

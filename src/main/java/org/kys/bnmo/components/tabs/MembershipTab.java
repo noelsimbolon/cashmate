@@ -9,6 +9,8 @@ import javafx.scene.layout.VBox;
 import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
 import org.kys.bnmo.components.bases.TableBuilder;
+import org.kys.bnmo.controllers.CustomerController;
+import org.kys.bnmo.controllers.MemberController;
 import org.kys.bnmo.events.NavigationHandler;
 import org.kys.bnmo.helpers.views.tables.TableData;
 import org.kys.bnmo.model.Customer;
@@ -16,13 +18,15 @@ import org.kys.bnmo.model.Member;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class MembershipTab extends TabContainer {
 
     private static final TableBuilder tableBuilder = new TableBuilder();
 
-    // private static final CustomerController customerController = new CustomerController();
+     private static final CustomerController customerController = new CustomerController();
+     private static final MemberController memberController = new MemberController();
 
     private final NavigationHandler memberActionHandler;
     private final EventHandler<ActionEvent> backHandler;
@@ -34,28 +38,42 @@ public class MembershipTab extends TabContainer {
     @Override
     protected Pane getContent() {
 
-        // TODO: Fill table with customer data in DataStore
-        // List<Customer> customers = customerController.fetchAll();
+        // Fetch customer data
+        List<Customer> customers = customerController.fetchAll();
 
-        // Create temporary customer data
-        List<Customer> customers = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            if (i % 3 == 0) {
-                // Create normal customer
-                Customer c = new Customer();
-                customers.add(c);
-            } else if (i % 3 == 1) {
-                // Create member customer
-                Member c = new Member("Member " + i, "08123456789", "Member");
-                customers.add(c);
-            } else {
-                // Create VIP customer
-                Member c = new Member("VIP " + i, "08123456789", "VIP");
-                customers.add(c);
-            }
+        // Concatenate with member data
+        List<Member> members = memberController.fetchAll();
+        customers.addAll(members);
+
+        // Print all customers
+        for (Customer customer : customers) {
+            System.out.println(customer.getCustomerID());
         }
 
-        System.out.println(customers);
+        // Print all members
+        for (Member member : members) {
+            System.out.println(member.getCustomerID());
+        }
+
+        // Sort by customer ID
+
+        // Create temporary customer data
+//        List<Customer> customers = new ArrayList<>();
+//        for (int i = 0; i < 10; i++) {
+//            if (i % 3 == 0) {
+//                // Create normal customer
+//                Customer c = new Customer();
+//                customers.add(c);
+//            } else if (i % 3 == 1) {
+//                // Create member customer
+//                Member c = new Member("Member " + i, "08123456789", "Member");
+//                customers.add(c);
+//            } else {
+//                // Create VIP customer
+//                Member c = new Member("VIP " + i, "08123456789", "VIP");
+//                customers.add(c);
+//            }
+//        }
 
         // Table heading
         List<String> tableHeadings = new ArrayList<>(Arrays.asList("Customer ID", "Name", "Phone", "Status", "Level", "Points", "Action"));

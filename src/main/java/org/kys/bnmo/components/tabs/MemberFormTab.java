@@ -7,14 +7,20 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import org.kys.bnmo.components.bases.FormBuilder;
+import org.kys.bnmo.controllers.CustomerController;
+import org.kys.bnmo.controllers.MemberController;
 import org.kys.bnmo.model.Customer;
 import org.kys.bnmo.model.Member;
 import org.kys.bnmo.helpers.views.IconButtonHelper;
+
+import java.util.ArrayList;
 
 public class MemberFormTab extends TabContainer {
 
     private static final FormBuilder formBuilder = new FormBuilder();
     private static final IconButtonHelper iconButtonHelper = new IconButtonHelper();
+    private static final CustomerController customerController = new CustomerController();
+    private static final MemberController memberController = new MemberController();
 
     String formTitle;
     Member existingMember;
@@ -28,6 +34,7 @@ public class MemberFormTab extends TabContainer {
     private final Property<String> memberLevel;
     private final StringProperty points;
 
+    // Apply membership form
     public MemberFormTab(String title, int customerId, EventHandler<ActionEvent> backButtonAction)
     {
         this.formTitle = title;
@@ -37,8 +44,6 @@ public class MemberFormTab extends TabContainer {
         this.telephone = new SimpleStringProperty();
         this.points = new SimpleStringProperty();
         this.memberLevel = new SimpleStringProperty();
-
-        System.out.println("Customer ID: " + customerId);
 
         // Set save button action to show states
         // TODO: Change this to save to database
@@ -50,8 +55,11 @@ public class MemberFormTab extends TabContainer {
         };
     }
 
+    // Edit existing member form
     public MemberFormTab(String title, Member existingMember, EventHandler<ActionEvent> backButtonAction)
     {
+        ArrayList<Member> members = memberController.fetchAll();
+
         this.formTitle = title;
         this.existingMember = existingMember;
         this.backButtonAction = backButtonAction;
@@ -63,10 +71,25 @@ public class MemberFormTab extends TabContainer {
         // Set save button action to show states
         // TODO: Change this to save to database
         this.saveButtonAction = (event) -> {
-            System.out.println("Name: " + name.getValue());
-            System.out.println("Telephone: " + telephone.getValue());
-            System.out.println("Points: " + points.getValue());
-            System.out.println("Member Level: " + memberLevel.getValue());
+            int editedCustomerIndex = members.indexOf(existingMember);
+            members.remove(existingMember);
+
+            existingMember.setName(name.getValue());
+            existingMember.setPhoneNumber(telephone.getValue());
+            existingMember.setPoints(Integer.parseInt(points.getValue()));
+
+            if (memberLevel.getValue().equals("Member")) {
+                existingMember.promote();
+            } else {
+                existingMember.demote();
+            }
+
+            members.add(editedCustomerIndex, existingMember);
+
+            memberController.save(members);
+
+            // Go back to previous page
+            backButtonAction.handle(event);
         };
     }
 
