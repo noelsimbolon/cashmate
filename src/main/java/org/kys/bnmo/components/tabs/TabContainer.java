@@ -9,8 +9,7 @@ import javafx.scene.layout.VBox;
 import lombok.AccessLevel;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
-import org.kys.bnmo.components.ComponentBuilder;
-import org.kys.bnmo.components.ComponentFactory;
+import org.kys.bnmo.components.interfaces.ComponentFactory;
 
 public abstract class TabContainer implements ComponentFactory {
 

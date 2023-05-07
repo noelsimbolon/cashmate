@@ -6,7 +6,7 @@ import javafx.scene.layout.VBox;
 import lombok.Getter;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
-import org.kys.bnmo.components.ComponentFactory;
+import org.kys.bnmo.components.interfaces.ComponentFactory;
 import org.kys.bnmo.helpers.views.loaders.StyleLoadHelper;
 import org.kys.bnmo.model.Customer;
 import org.kys.bnmo.model.InventoryItem;
