@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class MemberController {
-    private DataStore dataStore;
-    private String fileName;
+    private final DataStore dataStore;
+    private final String fileName;
 
     public MemberController() {
         dataStore = new DataStore();
