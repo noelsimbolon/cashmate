@@ -3,6 +3,7 @@ package org.kys.bnmo.controllers;
 import org.kys.bnmo.model.Member;
 
 import java.util.ArrayList;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class MemberController {
@@ -18,9 +19,9 @@ public class MemberController {
         return dataStore.readData(fileName, Member.class);
     }
 
-    public ArrayList<Member> fetchByID(int id) {
+    public ArrayList<Member> fetchByID(UUID id) {
         return (ArrayList<Member>) fetchAll().stream()
-                .filter(m -> m.getCustomerID() == id)
+                .filter(m -> m.getCustomerID().equals(id))
                 .collect(Collectors.toList());
     }
 
@@ -46,11 +47,11 @@ public class MemberController {
         dataStore.writeData("member", data);
     }
 
-    public void updateById(int id, String name, String phoneNumber) {
+    public void updateById(UUID id, String name, String phoneNumber) {
         ArrayList<Member> data = fetchAll();
 
         for (Member member: data) {
-            if (member.getCustomerID() == id) {
+            if (member.getCustomerID().equals(id)) {
                 member.setName(name);
                 member.setPhoneNumber(phoneNumber);
             }
@@ -59,11 +60,11 @@ public class MemberController {
         save(data);
     }
 
-    public void deleteById(int id) {
+    public void deleteById(UUID id) {
         ArrayList<Member> data = fetchAll();
 
         for (Member member: data) {
-            if (member.getCustomerID() == id) {
+            if (member.getCustomerID().equals(id)) {
                 data.remove(member);
                 break;
             }

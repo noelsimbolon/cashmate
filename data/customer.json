@@ -1,13 +1,19 @@
 [ {
-  "customerID" : 3,
+  "customerID" : "9beb23a2-e6b4-484d-b874-ad9c558f352a",
   "memberLevel" : "Customer"
 }, {
-  "customerID" : 4,
+  "customerID" : "6eaacd63-dee5-4650-bce5-8c56b649f4d2",
   "memberLevel" : "Customer"
 }, {
-  "customerID" : 5,
+  "customerID" : "a0979fa8-c583-47c1-86d4-ed444057bb0a",
   "memberLevel" : "Customer"
 }, {
-  "customerID" : 20,
+  "customerID" : "403e14ee-4b87-487f-a2c4-813fe9aa5210",
+  "memberLevel" : "Customer"
+}, {
+  "customerID" : "1c8df9be-66e2-4e32-b1f5-07bf4f040173",
+  "memberLevel" : "Customer"
+}, {
+  "customerID" : "eabe1fe3-8661-451b-8cc2-3254ce70f166",
   "memberLevel" : "Customer"
 } ]

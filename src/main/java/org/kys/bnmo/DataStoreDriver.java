@@ -61,9 +61,9 @@ public class DataStoreDriver {
              }
 
              ArrayList<Transaction> transactions = new ArrayList<>();
-             Order o1 = new Order(items.get(0), 3);
-             Order o2 = new Order(items.get(4), 1);
-             Order o3 = new Order(items.get(2), 5);
+             Order o1 = new Order(items.get(0), (int) Math.round(items.get(0).getPrice()), 3);
+             Order o2 = new Order(items.get(4), (int) Math.round(items.get(4).getPrice()), 1);
+             Order o3 = new Order(items.get(2), (int) Math.round(items.get(2).getPrice()), 5);
              List<Order> orders = new ArrayList<>(Arrays.asList(o1, o2, o3));
 
             Transaction transaction = new Transaction(customers.get(1), orders, 4500, new Date(), 1000);
@@ -73,7 +73,8 @@ public class DataStoreDriver {
             dataStore.writeData("order", emptyOrders);
 
             TransactionController transactionController = new TransactionController();
-             transactionController.save(transactions);
+            ArrayList<Transaction> emptyTransaction = new ArrayList<>();
+             transactionController.save(emptyTransaction);
         } catch (Exception e) {
             e.printStackTrace();
         }

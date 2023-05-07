@@ -36,9 +36,10 @@ public class TransactionController {
     public ArrayList<Transaction> fetchAll() {
         List<UnpopulatedTransaction> unpopulatedTransactions = dataStore.readData(fileName, UnpopulatedTransaction.class);
         ArrayList<Transaction> transactions = new ArrayList<>();
+
         for (UnpopulatedTransaction ut : unpopulatedTransactions) {
             List<Order> orders = new ArrayList<>();
-            for (int orderID : ut.getOrderIDs()) {
+            for (UUID orderID : ut.getOrderIDs()) {
                 orders.add(orderController.fetchByID(orderID).get(0));
             }
 
@@ -56,46 +57,47 @@ public class TransactionController {
             transactions.add(transaction);
         }
 
+        processGetData(transactions);
         return transactions;
     }
 
-    public ArrayList<Transaction> fetchByID(int uuid) {
+    public ArrayList<Transaction> fetchByID(UUID uuid) {
         return (ArrayList<Transaction>) fetchAll().stream()
-                .filter(t -> t.getTransactionID() == uuid)
+                .filter(t -> t.getTransactionID().equals(uuid))
                 .collect(Collectors.toList());
     }
 
-    public ArrayList<Transaction> fetchByCustomerID(int id) {
+    public ArrayList<Transaction> fetchByCustomerID(UUID id) {
         return (ArrayList<Transaction>) fetchAll().stream()
-                .filter(t -> t.getCustomer().getCustomerID() == id)
+                .filter(t -> t.getCustomer().getCustomerID().equals(id))
                 .collect(Collectors.toList());
     }
 
     public void save(ArrayList<Transaction> data) {
-        List<Order> orders = orderController.fetchAll();
+        processSetData(data);
+        ArrayList<Order> orders = orderController.fetchAll();
 
         ArrayList<UnpopulatedTransaction> uts = data.stream().map(t -> {
-            List<Integer> orderIDs = new ArrayList<>();
-            ArrayList<Order> unsavedOrders = new ArrayList<>();
+            List<UUID> orderIDs = new ArrayList<>();
 
             for (Order order: t.getOrders()) {
                 orderIDs.add(order.getOrderID());
                 if (orders.stream().filter(dataOrder -> dataOrder.getOrderID() == order.getOrderID()).toList().size() == 0)
-                    unsavedOrders.add(order);
+                    orders.add(order);
             }
-            orderController.save(unsavedOrders);
 
             return new UnpopulatedTransaction(t.getTransactionID(), t.getCustomer().getCustomerID(), orderIDs, t.getTotalPrice(), t.getDate(), t.getDiscount());
         }).collect(Collectors.toCollection(ArrayList::new));
+        orderController.save(orders);
 
         dataStore.writeData(fileName, uts);
     }
 
-    public void deleteById(int uuid) {
+    public void deleteById(UUID uuid) {
         ArrayList<Transaction> data = fetchAll();
 
         for (Transaction transaction: data) {
-            if (transaction.getTransactionID() == uuid) {
+            if (transaction.getTransactionID().equals(uuid)) {
                 data.remove(transaction);
                 break;
             }

@@ -12,7 +12,7 @@ public class Transaction implements Serializable {
 
     @Getter
     @Setter
-    private final int transactionID;
+    private final UUID transactionID;
 
     private static int transactionCount = 0;
 
@@ -39,14 +39,13 @@ public class Transaction implements Serializable {
     public Transaction(Customer customer, List<Order> orders, double totalPrice, Date date, int discount) {
         this.orders = orders;
         this.discount = discount;
-        this.transactionID = transactionCount;
+        this.transactionID = UUID.randomUUID();
         this.customer = customer;
         this.totalPrice = totalPrice;
         this.date = date;
-        transactionCount++;
     }
 
-    public Transaction(int transactionID, Customer customer, List<Order> orders, double totalPrice, Date date, int discount) {
+    public Transaction(UUID transactionID, Customer customer, List<Order> orders, double totalPrice, Date date, int discount) {
         this.orders = orders;
         this.discount = discount;
         this.transactionID = transactionID;

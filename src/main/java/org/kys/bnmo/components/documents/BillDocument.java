@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 import org.kys.bnmo.components.interfaces.ComponentFactory;
+import org.kys.bnmo.controllers.TransactionController;
 import org.kys.bnmo.helpers.views.loaders.StyleLoadHelper;
 import org.kys.bnmo.model.Customer;
 import org.kys.bnmo.model.InventoryItem;
@@ -22,10 +23,11 @@ public class BillDocument implements ComponentFactory {
 
     // TODO : TRANSACTION CONTROLLER
     private static final BillPageBuilder billPageBuilder = new BillPageBuilder();
+    private static final TransactionController transactionController = new TransactionController();
     @Setter
-    private int transactionID;
+    private UUID transactionID;
 
-    public BillDocument(int transactionID) {
+    public BillDocument(UUID transactionID) {
         this.transactionID = transactionID;
     }
 
@@ -37,12 +39,9 @@ public class BillDocument implements ComponentFactory {
         VBox pages = new VBox();
 
         // TODO: GET DATA FROM TRANSACTION CONTROLLER
+        ArrayList<Transaction> transactions = transactionController.fetchAll();
+        Transaction transaction = transactionController.fetchByID(transactionID).get(0);
 
-        List<Order> orders = new ArrayList<>();
-        for (int i = 0; i < 15; i++) {
-            orders.add(new Order(new InventoryItem("Babi", "Haram", 10, 12000, 12000, ""), 10));
-        }
-        Transaction transaction = new Transaction(new Customer(), orders, 1200000, new Date(), 120000);
         billPageBuilder.setTransaction(transaction);
 
         int orderIdx = 0;

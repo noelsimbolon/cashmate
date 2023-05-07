@@ -19,6 +19,7 @@ import javafx.event.EventHandler;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 public class HistoryTab  extends TabContainer {
     private static final TableBuilder tableBuilder = new TableBuilder();
@@ -26,10 +27,18 @@ public class HistoryTab  extends TabContainer {
     private static final IconButtonHelper iconButtonHelper = new IconButtonHelper();
     private final NavigationHandler historyActionHandler;
     private final EventHandler<ActionEvent> backHandler;
-    private final int customerId;
-
-    public HistoryTab(int customerId, NavigationHandler historyActionHandler, EventHandler<ActionEvent> backHandler) {
+    private final UUID customerId;
+    private final String customerName;
+    public HistoryTab(UUID customerId, NavigationHandler historyActionHandler, EventHandler<ActionEvent> backHandler) {
         this.customerId = customerId;
+        this.customerName = "Customer #" + customerId.toString().substring(0, 8) + "...";
+        this.historyActionHandler = historyActionHandler;
+        this.backHandler = backHandler;
+    }
+
+    public HistoryTab(UUID customerId, String customerName, NavigationHandler historyActionHandler, EventHandler<ActionEvent> backHandler) {
+        this.customerId = customerId;
+        this.customerName = customerName;
         this.historyActionHandler = historyActionHandler;
         this.backHandler = backHandler;
     }
@@ -40,7 +49,7 @@ public class HistoryTab  extends TabContainer {
         ArrayList<Transaction> transactions = transactionController.fetchByCustomerID(customerId);
 
         // Sort by transaction ID
-        transactions.sort((t1, t2) -> t2.getTransactionID() - t1.getTransactionID());
+//        transactions.sort((t1, t2) -> t2.getTransactionID() - t1.getTransactionID());
 
         // Table headings
         List<String> tableHeadings = new ArrayList<>(Arrays.asList("Transaction ID", "Date", "Total Price", "Discount", "Action"));
@@ -65,10 +74,9 @@ public class HistoryTab  extends TabContainer {
             MenuItem viewBill = new MenuItem("View Bill");
 
             viewBill.setOnAction(e -> {
-                System.out.println("View bill");
                 historyActionHandler.getEventHandler(
                         new BillTab(transaction.getTransactionID()),
-                        "Bill #" + transaction.getTransactionID()
+                        "Bill"
                 ).handle(e);
             });
 
@@ -112,6 +120,6 @@ public class HistoryTab  extends TabContainer {
         getHeader().getChildren().add(0, backButton);
 
         getRoot().getStyleClass().add("fill-tab-content");
-        addHeaderTitle("Transaction History of Customer #" + customerId);
+        addHeaderTitle("Transaction History for " + customerName);
     }
 }

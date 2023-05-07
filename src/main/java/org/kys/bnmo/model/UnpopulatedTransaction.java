@@ -9,10 +9,10 @@ import java.util.UUID;
 
 public class UnpopulatedTransaction {
     @Getter
-    private final int transactionID;
+    private final UUID transactionID;
 
     @Getter
-    private int customerID;
+    private UUID customerID;
 
     @Getter
     private Double totalPrice;
@@ -21,16 +21,16 @@ public class UnpopulatedTransaction {
     private Date date;
 
     @Getter
-    private List<Integer> orderIDs;
+    private List<UUID> orderIDs;
 
     @Getter
     private int discount;
 
     public UnpopulatedTransaction() {
-        this(0, 0, new ArrayList<>(), 0, new Date(), 0);
+        this(UUID.randomUUID(), UUID.randomUUID(), new ArrayList<>(), 0, new Date(), 0);
     }
 
-    public UnpopulatedTransaction(int transactionID, int customerID, List<Integer> orderIDs, double totalPrice, Date date, int discount) {
+    public UnpopulatedTransaction(UUID transactionID, UUID customerID, List<UUID> orderIDs, double totalPrice, Date date, int discount) {
         this.transactionID = transactionID;
         this.customerID = customerID;
         this.discount = discount;

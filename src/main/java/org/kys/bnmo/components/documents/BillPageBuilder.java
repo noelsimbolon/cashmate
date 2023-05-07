@@ -36,7 +36,7 @@ public class BillPageBuilder extends ComponentBuilder {
         dateRow.getStyleClass().add("label-row");
 
         Label idTitle = new Label("Invoice:");
-        Label idValue = new Label(Integer.toString(transaction.getTransactionID()));
+        Label idValue = new Label(transaction.getTransactionID().toString());
         idTitle.getStyleClass().addAll("small-text", "dark");
         idValue.getStyleClass().addAll("small-text", "light");
 
@@ -89,7 +89,7 @@ public class BillPageBuilder extends ComponentBuilder {
 
 
         GridPane root = new GridPane();
-        addInformationRow(root, 0, "Customer ID", Integer.toString(transaction.getCustomer().getCustomerID()));
+        addInformationRow(root, 0, "Customer ID", transaction.getCustomer().getCustomerID().toString());
         addInformationRow(root, 1, "Membership", transaction.getCustomer().getMemberLevel());
         addInformationRow(root, 2, "Status", status);
         addInformationRow(root, 3, "Phone Number", phone);
@@ -221,9 +221,9 @@ public class BillPageBuilder extends ComponentBuilder {
         row2.getStyleClass().addAll("very-small-text", "dark");
         firstColumnContent.getChildren().addAll(row1, row2);
 
-        Label columnLabel2 = new Label("Rp" + order.getItem().getPrice());
+        Label columnLabel2 = new Label("Rp" + order.getPurchasePrice());
         Label columnLabel3 = new Label(Integer.toString(order.getQuantity()));
-        Label columnLabel4 = new Label("Rp" + (order.getItem().getPrice() * order.getQuantity()));
+        Label columnLabel4 = new Label("Rp" + (order.getPurchasePrice() * order.getQuantity()));
 
         documentPageBuilder.addTableRow(
                 firstColumnContent,

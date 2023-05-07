@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.UUID;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Member extends Customer {
 
@@ -32,7 +34,7 @@ public class Member extends Customer {
         this("", "", "");
     }
 
-    public Member(int customerID, @NotNull String name, @NotNull String phoneNumber, @NotNull String memberLevel) {
+    public Member(UUID customerID, @NotNull String name, @NotNull String phoneNumber, @NotNull String memberLevel) {
         super(customerID);
         this.name = name;
         this.phoneNumber = phoneNumber;
@@ -66,16 +68,12 @@ public class Member extends Customer {
         if (this.status.equals("Inactive")) {
             this.status = "Active";
         }
-
-        // TODO: throw exception if status is already active
     }
 
     public void deactivate() {
         if (this.status.equals("Active")) {
             this.status = "Inactive";
         }
-
-        // TODO: throw exception if status is already inactive
     }
 
     public @NotNull String getMemberLevel() {
