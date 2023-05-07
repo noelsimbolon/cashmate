@@ -15,18 +15,17 @@ import org.kys.bnmo.events.NavigationHandler;
 import org.kys.bnmo.helpers.views.tables.TableData;
 import org.kys.bnmo.model.InventoryItem;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class CatalogueTab extends TabContainer {
-    private Pane root;
     private static final TableBuilder tableBuilder = new TableBuilder();
+    private static final InventoryItemController inventoryItemController = new InventoryItemController();
     private final NavigationHandler itemHandler;
     private final EventHandler<ActionEvent> backHandler;
-    private static final InventoryItemController inventoryItemController = new InventoryItemController();
+    private Pane root;
 
     public CatalogueTab(NavigationHandler itemHandler, EventHandler<ActionEvent> backHandler) {
         this.itemHandler = itemHandler;
@@ -94,6 +93,12 @@ public class CatalogueTab extends TabContainer {
                 new CatalogueAddItemTab(backHandler),
                 "Catalogue"
         ));
+
+        // Additional button at table to print sales report
+        tableBuilder.addAdditionalButton("Print Sales Report", (event) -> {
+                    System.out.println("Printed Sales Report");
+                }
+        );
 
         // Set column alignment for header
         tableBuilder.setColumnAlignment(0, Pos.CENTER);
