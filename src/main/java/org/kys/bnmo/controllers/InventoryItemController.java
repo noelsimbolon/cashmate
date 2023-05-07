@@ -35,10 +35,13 @@ public class InventoryItemController {
     }
 
     public ArrayList<InventoryItem> readInventoryItems() {
-        return dataStore.readData("inventory-item", InventoryItem.class);
+        ArrayList<InventoryItem> data = dataStore.readData("inventory-item", InventoryItem.class);
+        processGetData(data);
+        return data;
     }
 
     public void writeInventoryItems(ArrayList<InventoryItem> inventoryItems) {
+        processSetData(inventoryItems);
         dataStore.writeData("inventory-item", inventoryItems);
     }
 

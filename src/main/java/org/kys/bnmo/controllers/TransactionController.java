@@ -37,6 +37,7 @@ public class TransactionController {
     public ArrayList<Transaction> fetchAll() {
         List<UnpopulatedTransaction> unpopulatedTransactions = dataStore.readData(fileName, UnpopulatedTransaction.class);
         ArrayList<Transaction> transactions = new ArrayList<>();
+
         for (UnpopulatedTransaction ut : unpopulatedTransactions) {
             List<Order> orders = new ArrayList<>();
             for (UUID orderID : ut.getOrderIDs()) {
@@ -57,6 +58,7 @@ public class TransactionController {
             transactions.add(transaction);
         }
 
+        processGetData(transactions);
         return transactions;
     }
 
@@ -73,6 +75,7 @@ public class TransactionController {
     }
 
     public void save(ArrayList<Transaction> data) {
+        processSetData(data);
         ArrayList<Order> orders = orderController.fetchAll();
 
         ArrayList<UnpopulatedTransaction> uts = data.stream().map(t -> {

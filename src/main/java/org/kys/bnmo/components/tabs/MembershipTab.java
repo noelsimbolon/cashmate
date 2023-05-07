@@ -54,7 +54,9 @@ public class MembershipTab extends TabContainer {
 
         for (Customer customer : customers) {
             List<String> row = new ArrayList<>();
-            row.add(customer.getCustomerID().toString());
+
+            // Only show the first 8 characters of the UUID
+            row.add(customer.getCustomerID().toString().substring(0, 8) + "...");
             if (customer instanceof Member) {
                 row.add(((Member) customer).getName());
                 row.add(((Member) customer).getPhoneNumber());
@@ -159,7 +161,7 @@ public class MembershipTab extends TabContainer {
                 MenuItem item4 = new MenuItem("Transaction History");
                 item4.setOnAction(e -> {
                     memberActionHandler.getEventHandler(
-                            new HistoryTab(customer.getCustomerID(), memberActionHandler, backHandler)
+                            new HistoryTab(customer.getCustomerID(), ((Member) customer).getName(), memberActionHandler, backHandler)
                     ).handle(e);
                 });
 

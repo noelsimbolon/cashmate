@@ -23,18 +23,15 @@ public class OrderController {
         fileName = "order";
     }
 
-    private void processGetData(List<Order> orders)
-    {
+    private void processGetData(List<Order> orders) {
         PluginLoader pluginLoader = new PluginLoader();
         pluginLoader.runClasses(new PluginService(null , null, new Modifiable(null, null, orders, true)));
 
     }
 
-    private void processSetData(List<Order> orders)
-    {
+    private void processSetData(List<Order> orders) {
         PluginLoader pluginLoader = new PluginLoader();
         pluginLoader.runClasses(new PluginService(null , null, new Modifiable(null, null, orders, false)));
-
     }
 
     public ArrayList<Order> fetchAll() {
@@ -61,6 +58,7 @@ public class OrderController {
         ArrayList<UnpopulatedOrder> ups = data.stream().map(o -> {
             return new UnpopulatedOrder(o.getOrderID(), o.getItem().getItemID(), o.getPurchasePrice(), o.getQuantity());
         }).collect(Collectors.toCollection(ArrayList::new));
+        processSetData(data);
 
         dataStore.writeData(fileName, ups);
     }
