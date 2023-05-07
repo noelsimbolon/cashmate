@@ -13,6 +13,7 @@ import org.kys.bnmo.model.Customer;
 import org.kys.bnmo.model.Member;
 import org.kys.bnmo.helpers.views.IconButtonHelper;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MemberFormTab extends TabContainer {
@@ -37,6 +38,9 @@ public class MemberFormTab extends TabContainer {
     // Apply membership form
     public MemberFormTab(String title, int customerId, EventHandler<ActionEvent> backButtonAction)
     {
+        ArrayList<Customer> customers = customerController.fetchAll();
+        ArrayList<Member> members = memberController.fetchAll();
+
         this.formTitle = title;
         this.existingMember = null;
         this.backButtonAction = backButtonAction;
@@ -48,10 +52,57 @@ public class MemberFormTab extends TabContainer {
         // Set save button action to show states
         // TODO: Change this to save to database
         this.saveButtonAction = (event) -> {
+
+            int editedCustomerIndex = -1;
+            for (int i = 0; i < customers.size(); i++) {
+                if (customers.get(i).getCustomerID() == customerId) {
+                    editedCustomerIndex = i;
+                    break;
+                }
+            }
+
+            // TODO: Handle validations properly
+            // If customer is not found, then do not save
+            if (editedCustomerIndex == -1) {
+                System.out.println("Customer not found");
+                return;
+            }
+
+            // Print form values
             System.out.println("Name: " + name.getValue());
             System.out.println("Telephone: " + telephone.getValue());
             System.out.println("Points: " + points.getValue());
             System.out.println("Member Level: " + memberLevel.getValue());
+
+            // Validate form
+            if (validateForm(false)) {
+                System.out.println("Form is not valid");
+                return;
+            }
+
+            // Remove existing customer
+            customers.remove(editedCustomerIndex);
+
+            // Create new member with new values
+            Member newMember = new Member(
+                    customerId,
+                    name.getValue(),
+                    telephone.getValue(),
+                    memberLevel.getValue()
+            );
+
+            // Add new member to members list
+            members.add(newMember);
+
+            // Save members list
+            memberController.save(members);
+
+            // Save to datastore
+            customerController.save(customers);
+            memberController.save(members);
+
+            // Go back to previous page
+            backButtonAction.handle(event);
         };
     }
 
@@ -87,48 +138,31 @@ public class MemberFormTab extends TabContainer {
                 return;
             }
 
-            // If any of the fields are empty, then do not save
-            if (name.getValue().isEmpty() || telephone.getValue().isEmpty() || points.getValue().isEmpty()) {
-                System.out.println("Empty fields");
+            // Validate form
+            // If field is null, then do not save
+
+
+            if (validateForm(true)) {
+                System.out.println("Form is not valid");
                 return;
             }
 
-            // If points is not a number, then do not save
-            if (!points.getValue().matches("\\d+")) {
-                System.out.println("Points is not a number");
-                return;
-            }
-
-            // If telephone is not a number, then do not save
-            if (!telephone.getValue().matches("\\d+")) {
-                System.out.println("Telephone is not a number");
-                return;
-            }
-
-            // If points is negative, then do not save
-            if (Integer.parseInt(points.getValue()) < 0) {
-                System.out.println("Points is negative");
-                return;
-            }
-
-            // Remove existing customer
+            // Remove existing member
             members.remove(editedCustomerIndex);
 
-            // Create new customer with new values
+            // Create new member with new values
             existingMember.setName(name.getValue());
             existingMember.setPhoneNumber(telephone.getValue());
             existingMember.setPoints(Integer.parseInt(points.getValue()));
 
             // Promote or demote member
-            System.out.println(memberLevel.getValue());
             if (memberLevel.getValue().equals("Member") && existingMember.getMemberLevel().equals("VIP")) {
                 existingMember.demote();
             } else if (memberLevel.getValue().equals("VIP") && existingMember.getMemberLevel().equals("Member")) {
                 existingMember.promote();
             }
-            System.out.println(existingMember.getMemberLevel());
 
-            // Add new customer to the list
+            // Add new member to the list
             members.add(editedCustomerIndex, existingMember);
 
             // Save to datastore
@@ -137,6 +171,38 @@ public class MemberFormTab extends TabContainer {
             // Go back to previous page
             backButtonAction.handle(event);
         };
+    }
+
+    private boolean validateForm(boolean newMember) {
+
+        // If any of the fields are empty, then do not save
+        if (name.getValue().isEmpty() || telephone.getValue().isEmpty() || points.getValue().isEmpty()) {
+            System.out.println("Empty fields");
+            return true;
+        }
+
+
+        // If telephone is not a number, then do not save
+        if (!telephone.getValue().matches("\\d+")) {
+            System.out.println("Telephone is not a number");
+            return true;
+        }
+
+        // If membership is true, then validate points
+        if (newMember) {
+            // If points is not a number, then do not save
+            if (!points.getValue().matches("\\d+")) {
+                System.out.println("Points is not a number");
+                return true;
+            }
+            // If points is negative, then do not save
+            if (Integer.parseInt(points.getValue()) < 0) {
+                System.out.println("Points is negative");
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @Override
@@ -149,14 +215,13 @@ public class MemberFormTab extends TabContainer {
             formBuilder.addTextBox("Name", "Enter member name", existingMember.getName(), name);
             formBuilder.addTextBox("Telephone", "Enter telephone number", existingMember.getPhoneNumber(), telephone);
             formBuilder.addTextBox("Points", "Enter amount of points", String.valueOf(existingMember.getPoints()), points);
-            formBuilder.addDropdown("Member Level", "Select the member level", new String[] {"Member", "VIP"}, memberLevel);
+            formBuilder.addDropdown("Member Level", "Select the member level", new String[] {"Member", "VIP"}, existingMember.getMemberLevel(), memberLevel);
             formBuilder.addButton("Save", saveButtonAction);
         } else {
             // If it is a new customer, then create a new form
             formBuilder.addTitle("Member Details");
             formBuilder.addTextBox("Name", "Enter member name", name);
             formBuilder.addTextBox("Telephone", "Enter telephone number", telephone);
-            formBuilder.addTextBox("Points", "Enter amount of points", points);
             formBuilder.addDropdown("Member Level", "Select the member level", new String[] {"Member", "VIP"}, memberLevel);
             formBuilder.addButton("Save", saveButtonAction);
         }

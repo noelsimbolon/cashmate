@@ -59,23 +59,11 @@ public class SettingTab extends TabContainer {
         // Initialize form to add member
         formBuilder.addFolderPicker("Data Store Location", stage, folderPath);
         formBuilder.addDropdown("Data Store Format", "Select a Format", new String[]{"json", "xml", "obj"}, fileFormat);
-        formBuilder.addButton("Save", saveButtonAction);
-
         PluginLoader pluginLoader = new PluginLoader();
-        List<Class> plugins = pluginLoader.loadClasses();
+        pluginLoader.runClasses(new PluginService(null,  new SettingAdapter(formBuilder), null));
 
-        for (Class plugin : plugins) {
-            try {
-                System.out.println(plugin.getName());
-                Object instance = plugin.getDeclaredConstructor(PluginServiceInterface.class)
-                        .newInstance(new PluginService(null,  new SettingAdapter(formBuilder), null));
 
-                Method pluginMethod = plugin.getMethod("onLoad");
-                pluginMethod.invoke(instance);
-            } catch (Exception e) {
-
-            }
-        }
+        formBuilder.addButton("Save", saveButtonAction);
 
         return formBuilder.getAndResetComponent();
     }

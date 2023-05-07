@@ -4,10 +4,18 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.kys.bnmo.helpers.plugins.PluginLoader;
 import org.kys.bnmo.model.InventoryItem;
+import org.kys.bnmo.model.Member;
+import org.kys.bnmo.model.Modifiable;
+import org.kys.bnmo.plugins.adapters.PageAdapter;
+import org.kys.bnmo.plugins.base.PluginService;
+import org.kys.bnmo.plugins.interfaces.PluginServiceInterface;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class InventoryItemController {
@@ -15,6 +23,20 @@ public class InventoryItemController {
 
     public InventoryItemController() {
         dataStore = new DataStore();
+    }
+
+    private void processGetData(List<InventoryItem> items)
+    {
+        PluginLoader pluginLoader = new PluginLoader();
+        pluginLoader.runClasses(new PluginService(null , null, new Modifiable(null, items, true)));
+
+    }
+
+    private void processSetData(List<InventoryItem> items)
+    {
+        PluginLoader pluginLoader = new PluginLoader();
+        pluginLoader.runClasses(new PluginService(null , null, new Modifiable(null, items, false)));
+
     }
 
     public Image getFXImage(String fileName) throws IOException {
