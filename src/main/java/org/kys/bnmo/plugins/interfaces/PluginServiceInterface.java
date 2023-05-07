@@ -12,7 +12,7 @@ import org.kys.bnmo.model.Modifiable;
 public interface PluginServiceInterface {
 
     public void addTab(Pane content, String title);
-    public void addTab(Pane content, String title, Timeline timeline);
+    public void addTab(Pane content, String title, Timeline ... timelines);
     public ControllerAdapterInterface getController();
     public Modifiable getModifiable();
     public void addDropdownSetting(
