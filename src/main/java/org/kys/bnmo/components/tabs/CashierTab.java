@@ -47,14 +47,15 @@ public class CashierTab extends TabContainer {
             int randomIndex = random.nextInt(foodNames.size());
             String randomFoodName = foodNames.get(randomIndex);
             content.add(new ArrayList<>(Arrays.asList(Integer.toString(item_id), randomFoodName, "Rp12.000")));
-            items.add(new InventoryItem(randomFoodName, "Fast Food", 10, 12000, 12000, null));
+            items.add(new InventoryItem(randomFoodName, "Fast Food", 10, 12000, 12000, ""));
             int idx = i;
             handlers.add(e -> {
                 checkoutPanel.addItem(items.get(idx));
             });
             item_id++;
         }
-        TableData tableData = new TableData(headers, content, handlers, null);
+//        TableData tableData = new TableData(headers, content, handlers, null);
+        TableData tableData = loadTableData(checkoutPanel);
 
         tableBuilder.setTableData(tableData, List.of(0, 1, 3));
 
@@ -101,7 +102,7 @@ public class CashierTab extends TabContainer {
         InventoryItemController inventoryItemController = new InventoryItemController();
 
         try {
-            inventoryItemController.loadDataStore();
+            inventoryItemController.loadConfig();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -110,7 +111,7 @@ public class CashierTab extends TabContainer {
         ArrayList<InventoryItem> inventoryItems = inventoryItemController.readInventoryItems();
 
         // Initialize objects
-        List<String> heading = new ArrayList<>(Arrays.asList("Item", "Category", "Stock", "Price", "Purchase Price", "Actions"));
+        List<String> heading = new ArrayList<>(Arrays.asList("Item", "Category", "Stock", "Price", "Actions"));
         List<Image> images = new ArrayList<>();
         List<List<String>> data = new ArrayList<>();
         List<EventHandler<MouseEvent>> handlers = new ArrayList<>();
@@ -123,7 +124,6 @@ public class CashierTab extends TabContainer {
             row.add(inventoryItem.getCategory());
             row.add(inventoryItem.getStock().toString());
             row.add(inventoryItem.getPrice().toString());
-            row.add(inventoryItem.getPurchasePrice().toString());
 
             data.add(row);
 

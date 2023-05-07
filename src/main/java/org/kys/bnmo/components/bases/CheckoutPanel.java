@@ -97,7 +97,7 @@ public class CheckoutPanel extends VBox {
         var spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
-        discountAmountLabel = new Text( "Rp" + 0);
+        discountAmountLabel = new Text("Rp" + 0);
         discountAmountLabel.setId("discount-amount");
 
         discountContainer.getChildren().addAll(discountLabel, spacer, discountAmountLabel);
@@ -179,6 +179,20 @@ public class CheckoutPanel extends VBox {
         // Dropdown
         customerDropdown.setPromptText("Select customer");
         customerDropdown.setId("customer-dropdown");
+        customerDropdown.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (oldValue == null || !oldValue.equalsIgnoreCase(newValue)) {
+                ScrollPane itemScrollPane = (ScrollPane) checkoutPanelContainer.lookup("#item-scroll-pane");
+                VBox cardBox = (VBox) itemScrollPane.getContent();
+
+                cardBox.getChildren().clear();
+                temporaryBills.get(customerDropdown.getSelectionModel().getSelectedIndex())
+                        .getOrders()
+                        .forEach(order -> {
+                            addItemCard(createItemCard(order, "Rp"));
+                        });
+                updateCheckoutPrice();
+            }
+        });
 
         // Bind the preferred width of the dropdown container to the available space
         DoubleBinding customerDropdownContainerWidth = Bindings.createDoubleBinding(customerDropdownContainer::getWidth,
@@ -272,7 +286,7 @@ public class CheckoutPanel extends VBox {
         priceLabel.textProperty().bind(Bindings.createStringBinding(() -> {
             int quantity = order.getQuantity().get();
             double price = order.getItem().getPrice();
-            return String.format("%s%d", currency, quantity * order.getItem().getPrice());
+            return String.format("%s%d", currency, Math.round(quantity * order.getItem().getPrice()));
         }, order.getQuantity()));
         priceLabel.setId("item-price-label");
 
@@ -346,14 +360,14 @@ public class CheckoutPanel extends VBox {
         }
         int initial = amount;
 
-        Customer customer =temporaryBills.get(customerDropdown.getSelectionModel().getSelectedIndex()).customer;
+        Customer customer = temporaryBills.get(customerDropdown.getSelectionModel().getSelectedIndex()).customer;
         if (customer instanceof Member member) {
             amount -= Math.min(amount, member.getPoints());
             if (member.getMemberLevel().equalsIgnoreCase("vip"))
                 amount *= 0.9;
         }
 
-        discountAmountLabel.setText("Rp"+ (initial - amount));
+        discountAmountLabel.setText("Rp" + (initial - amount));
 
         String formattedAmount = rupiahFormat.format(amount);
 
