@@ -70,12 +70,21 @@ public class HistoryTab  extends TabContainer {
             // Action menu
             MenuItem viewBill = new MenuItem("View Bill");
 
-            viewBill.setOnAction(e -> {
-                historyActionHandler.getEventHandler(
-                        new BillTab(transaction.getTransactionID()),
-                        "Bill"
-                ).handle(e);
-            });
+            class viewBillHandler implements EventHandler<ActionEvent> {
+                private final UUID transactionId;
+                public viewBillHandler(UUID transactionId) {
+                    this.transactionId = transactionId;
+                }
+                @Override
+                public void handle(ActionEvent e) {
+                    historyActionHandler.getEventHandler(
+                            new BillTab(transactionId),
+                            "Bill"
+                    ).handle(e);
+                }
+            }
+
+            viewBill.setOnAction(new viewBillHandler(transaction.getTransactionID()));
 
             // Add action menu to context menu items
             ContextMenu contextMenu = new ContextMenu(viewBill);
