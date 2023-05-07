@@ -56,6 +56,9 @@ public class CatalogueEditItemTab extends TabContainer {
             inventoryItems.add(editedItemIndex, editedItem);
 
             inventoryItemController.writeInventoryItems(inventoryItems);
+
+            // Navigate back to catalogue tab
+            backButtonAction.handle(event);
         };
     }
 
