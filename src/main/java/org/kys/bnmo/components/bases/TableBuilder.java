@@ -56,7 +56,7 @@ public class TableBuilder extends ComponentBuilder {
         ComboBox<String> entriesComboBox = new ComboBox<>();
         entriesComboBox.getStyleClass().add("entries-combo-box");
         entriesComboBox.getItems().addAll("5", "10", "20", "50");
-        entriesComboBox.setValue("10");
+        entriesComboBox.setValue("5");
         showEntriesBox.getChildren().add(entriesComboBox);
 
         Text entriesText = new Text("Entries");

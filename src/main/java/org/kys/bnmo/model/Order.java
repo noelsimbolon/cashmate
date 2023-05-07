@@ -17,6 +17,10 @@ public class Order {
     @Getter
     private int quantity;
 
+    public Order() {
+        this(0, null, 0);
+    }
+
     public Order(InventoryItem item, int quantity) {
         this.item = item;
         this.quantity = quantity;

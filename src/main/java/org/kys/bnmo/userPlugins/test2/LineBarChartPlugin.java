@@ -74,15 +74,15 @@ public class LineBarChartPlugin extends BasePlugin {
     private Chart getBarChart()
     {
         final CategoryAxis xAxis = new CategoryAxis();
-        xAxis.setLabel("Country");
+        xAxis.setLabel("Year");
         xAxis.lookup(".axis-label").setStyle("-fx-text-fill: #ffffff;");
 
         final NumberAxis yAxis = new NumberAxis();
-        yAxis.setLabel("Value");
+        yAxis.setLabel("Transaction Count");
         yAxis.lookup(".axis-label").setStyle("-fx-text-fill: #ffffff;");
 
         final BarChart<String, Number> bc = new BarChart<>(xAxis, yAxis);
-        bc.setTitle("Transaction by Membership Level for The Last 5 Years");
+        bc.setTitle("Transaction Count by Membership Level for The Last 5 Years");
         bc.lookup(".chart-title").setStyle("-fx-text-fill: #ffffff;");
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
