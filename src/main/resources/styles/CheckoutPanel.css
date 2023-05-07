@@ -213,6 +213,20 @@
     -fx-background-color: #3D444D;
 }
 
+#discount-label {
+    -fx-text-fill: #F2F3F5;
+    -fx-font-family: "Poppins";
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+#discount-amount {
+    -fx-text-fill: #F2F3F5;
+    -fx-font-family: "Poppins";
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
 #checkout-button {
     -fx-background-color: #FCA311;
     -fx-background-insets: 0;

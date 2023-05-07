@@ -2,6 +2,9 @@
 $plugins/
 compiledPlugins/
 
+# User-specific config
+config.*
+
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/

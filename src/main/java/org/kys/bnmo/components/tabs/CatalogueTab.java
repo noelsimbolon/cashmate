@@ -10,26 +10,23 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import org.kys.bnmo.components.bases.TableBuilder;
-import org.kys.bnmo.controllers.DataStore;
+import org.kys.bnmo.controllers.InventoryItemController;
 import org.kys.bnmo.events.NavigationHandler;
 import org.kys.bnmo.helpers.views.tables.TableData;
 import org.kys.bnmo.model.InventoryItem;
 
-import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class CatalogueTab extends TabContainer {
-
+    private Pane root;
     private static final TableBuilder tableBuilder = new TableBuilder();
-
-    private static DataStore dataStore = new DataStore();
-
-    private NavigationHandler itemHandler;
-
-    private EventHandler<ActionEvent> backHandler;
+    private final NavigationHandler itemHandler;
+    private final EventHandler<ActionEvent> backHandler;
+    private static final InventoryItemController inventoryItemController = new InventoryItemController();
 
     public CatalogueTab(NavigationHandler itemHandler, EventHandler<ActionEvent> backHandler) {
         this.itemHandler = itemHandler;
@@ -39,13 +36,13 @@ public class CatalogueTab extends TabContainer {
     @Override
     protected Pane getContent() {
         try {
-            dataStore.loadConfig();
-            String dataTestFolderPath = (new File("test\\data")).getAbsolutePath();
-            dataStore.setFolderPath(dataTestFolderPath, false);
-            ArrayList<InventoryItem> inventoryItems = dataStore.readData("inventory-item", InventoryItem.class);
-        } catch (Exception e) {
+            inventoryItemController.loadConfig();
+        } catch (IOException e) {
             e.printStackTrace();
         }
+
+        // Read inventory items from data store
+        ArrayList<InventoryItem> inventoryItems = inventoryItemController.readInventoryItems();
 
         // Initialize objects
         List<String> heading = new ArrayList<>(Arrays.asList("Item", "Category", "Stock", "Price", "Purchase Price", "Actions"));
@@ -54,47 +51,47 @@ public class CatalogueTab extends TabContainer {
         List<ContextMenu> contextMenus = new ArrayList<>();
 
         // This loop fill the rows with data
-        for (int i = 0; i < 15; i++) {
-            // TESTING
-            var item = new InventoryItem("Croissant",
-                    "Food",
-                    10,
-                    20000,
-                    10000,
-                    "food.png");
-            // TESTING
-
+        for (InventoryItem inventoryItem : inventoryItems) {
             List<String> row = new ArrayList<>();
-            row.add(item.getItemName());
-            row.add(item.getCategory());
-            row.add(String.valueOf(item.getStock()));
-            row.add(String.valueOf(item.getPrice()));
-            row.add(String.valueOf(item.getPurchasePrice()));
 
-            List<String> copied = new ArrayList<>(row);
-            data.add(copied);
+            row.add(inventoryItem.getItemName());
+            row.add(inventoryItem.getCategory());
+            row.add(inventoryItem.getStock().toString());
+            row.add(inventoryItem.getPrice().toString());
+            row.add(inventoryItem.getPurchasePrice().toString());
 
-            var image = new Image(Objects.requireNonNull(getClass().getResource("/categories/" + item.getImageFileName())).toExternalForm(), 34, 34, false, true);
+            data.add(row);
 
-            images.add(image);
+            var itemImage = new Image(Objects.requireNonNull(getClass().getResource(
+                    "/categories/" + inventoryItem.getImageFileName()
+            )).toExternalForm(), 34, 34, false, true);
 
+            images.add(itemImage);
 
             MenuItem edit = new MenuItem("Edit");
             edit.setOnAction(itemHandler.getEventHandler(
-                    new CatalogueEditItemTab(item, backHandler),
+                    new CatalogueEditItemTab(inventoryItem.getItemID(), backHandler),
                     "Catalogue"
             ));
 
             MenuItem delete = new MenuItem("Delete");
-            delete.setOnAction(actionEvent -> System.out.println("Delete Pressed."));
+            delete.setOnAction(itemHandler.getEventHandler(
+                    new CatalogueDeleteConfirmationTab(inventoryItem.getItemID(), backHandler),
+                    "Catalogue"
+            ));
 
             ContextMenu cm = new ContextMenu(edit, delete);
             contextMenus.add(cm);
         }
 
-        // Set table data
-        TableData inventoryItems = new TableData(heading, data, images, 0, null, contextMenus);
-        tableBuilder.setTableData(inventoryItems, List.of(0, 1, 3));
+        if (!inventoryItems.isEmpty()) {
+            // Set table data
+            TableData inventoryData = new TableData(heading, data, images, 0, null, contextMenus);
+            tableBuilder.setTableData(inventoryData, List.of(0, 1, 3));
+
+            // Add search bar
+            tableBuilder.addSearchBar();
+        }
 
         // Add Item button with its event handler
         tableBuilder.addAddItemButton("Add Item", itemHandler.getEventHandler(
@@ -102,14 +99,11 @@ public class CatalogueTab extends TabContainer {
                 "Catalogue"
         ));
 
-        // Add search bar
-        tableBuilder.addSearchBar();
-
         // Set column alignment for header
         tableBuilder.setColumnAlignment(0, Pos.CENTER);
 
         // Table to hold all inventory items
-        Pane root = tableBuilder.getAndResetComponent();
+        root = tableBuilder.getAndResetComponent();
 
         VBox.setVgrow(root, Priority.ALWAYS);
         return root;

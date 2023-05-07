@@ -1,27 +1,27 @@
 package org.kys.bnmo.components.bases;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.Property;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.layout.*;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
-import javafx.beans.binding.DoubleBinding;
-import javafx.beans.binding.Bindings;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.kys.bnmo.components.ComponentBuilder;
 import org.kys.bnmo.helpers.views.loaders.StyleLoadHelper;
 
 import java.io.File;
-import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Map;
 
 public class FormBuilder extends ComponentBuilder {
     private VBox inputFields;
@@ -196,7 +196,6 @@ public class FormBuilder extends ComponentBuilder {
     }
 
     // Dropdown with string property binding
-
     public void addDropdown(String label, String placeholder, String[] items, Property<String> selectedValue) {
         // Layout
         HBox row = new HBox();
@@ -248,8 +247,7 @@ public class FormBuilder extends ComponentBuilder {
         // create an Event Handler
         EventHandler<ActionEvent> event =
                 new EventHandler<ActionEvent>() {
-                    public void handle(ActionEvent e)
-                    {
+                    public void handle(ActionEvent e) {
                         // get the file selected
                         File file = chooser.showOpenDialog(stage);
                         if (file != null) {
@@ -265,6 +263,53 @@ public class FormBuilder extends ComponentBuilder {
                 row.widthProperty(), labelComponent.widthProperty());
 
         button.prefWidthProperty().bind(comboBoxWidth);
+
+        // Add components to root
+        row.getChildren().addAll(labelComponent, button);
+        row.getStyleClass().add("form-input");
+        inputFields.getChildren().add(row);
+    }
+
+    public void addFolderPicker(String label, Stage stage, StringProperty path) {
+
+        // Layout
+        HBox row = new HBox();
+        row.setAlignment(Pos.CENTER_LEFT);
+
+        // Label
+        Label labelComponent = new Label(label);
+        labelComponent.getStyleClass().add("form-label");
+
+        // create a Button
+        Button button = new Button(label);
+        button.getStyleClass().add("file-picker-button");
+
+        // create a Directory chooser
+        DirectoryChooser chooser = new DirectoryChooser();
+        chooser.setTitle("Select a folder");
+        chooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+
+        // create an Event Handler
+        EventHandler<ActionEvent> event =
+                e -> {
+                    // get the folder selected
+                    File folder = chooser.showDialog(stage);
+                    if (folder != null) {
+                        button.setText(folder.getAbsolutePath());
+                    }
+                };
+
+        button.setOnAction(event);
+
+        // Bind the preferred width of the dropdown to the available space
+        DoubleBinding comboBoxWidth = Bindings.createDoubleBinding(() ->
+                        row.getWidth() - labelComponent.getWidth() - row.getSpacing(),
+                row.widthProperty(), labelComponent.widthProperty());
+
+        button.prefWidthProperty().bind(comboBoxWidth);
+
+        // Bind the text property of the button to the path property
+        button.textProperty().bindBidirectional(path);
 
         // Add components to root
         row.getChildren().addAll(labelComponent, button);

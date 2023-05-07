@@ -26,11 +26,11 @@ public class InventoryItem implements Serializable {
 
     @Getter
     @NotNull
-    private Integer price;
+    private Double price;
 
     @Getter
     @NotNull
-    private Integer purchasePrice;
+    private Double purchasePrice;
 
     @Getter
     @NotNull
@@ -40,7 +40,7 @@ public class InventoryItem implements Serializable {
         this("", "", 0, 0, 0, "");
     }
 
-    public InventoryItem(@NotNull String itemName, @NotNull String category, int stock, int price, int purchasePrice, @NotNull String imageFileName) {
+    public InventoryItem(@NotNull String itemName, @NotNull String category, int stock, double price, double purchasePrice, @NotNull String imageFileName) {
         this.itemID = UUID.randomUUID();
         this.itemName = itemName;
         this.category = category;
@@ -82,14 +82,14 @@ public class InventoryItem implements Serializable {
         this.stock -= stock;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         if (price < 0) {
             throw new IllegalArgumentException("Price cannot be negative.");
         }
         this.price = price;
     }
 
-    public void setPurchasePrice(int purchasePrice) {
+    public void setPurchasePrice(double purchasePrice) {
         if (purchasePrice < 0) {
             throw new IllegalArgumentException("Purchase price cannot be negative.");
         }
