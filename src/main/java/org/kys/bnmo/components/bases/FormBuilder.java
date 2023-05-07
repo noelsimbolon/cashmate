@@ -196,6 +196,38 @@ public class FormBuilder extends ComponentBuilder {
     }
 
     // Dropdown with string property binding
+    public void addDropdown(String label, String placeholder, String[] items, String defaultValue, Property<String> selectedValue) {
+        // Layout
+        HBox row = new HBox();
+        row.setAlignment(Pos.CENTER_LEFT);
+
+        // Label
+        Label labelComponent = new Label(label);
+        labelComponent.getStyleClass().add("form-label");
+
+        // Dropdown
+        ComboBox<String> comboBox = new ComboBox<>();
+        comboBox.setPromptText(placeholder);
+        comboBox.getStyleClass().add("form-dropdown");
+        comboBox.getItems().addAll(items);
+        comboBox.setValue(defaultValue);
+
+        // Bind the preferred width of the dropdown to the available space
+        DoubleBinding comboBoxWidth = Bindings.createDoubleBinding(() ->
+                        row.getWidth() - labelComponent.getWidth() - row.getSpacing(),
+                row.widthProperty(), labelComponent.widthProperty());
+
+        comboBox.prefWidthProperty().bind(comboBoxWidth);
+
+        // Bind the value property of the ComboBox to the selectedValue property
+        comboBox.valueProperty().bindBidirectional(selectedValue);
+
+        // Add components to root
+        row.getChildren().addAll(labelComponent, comboBox);
+        row.getStyleClass().add("form-input");
+        inputFields.getChildren().add(row);
+    }
+
     public void addDropdown(String label, String placeholder, String[] items, Property<String> selectedValue) {
         // Layout
         HBox row = new HBox();
