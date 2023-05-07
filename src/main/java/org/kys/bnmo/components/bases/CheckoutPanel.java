@@ -445,7 +445,7 @@ public class CheckoutPanel extends VBox {
         List<Order> orders = new ArrayList<>();
         int totalPrice = 0;
         for (TemporaryOrder t_order : currentBill.getOrders()) {
-            orders.add(new Order(t_order.getItem(), (int) Math.round(t_order.getItem().getPrice()), t_order.getQuantity().get()));
+            orders.add(new Order(t_order.getItem(), t_order.getItem().getPurchasePrice(), t_order.getQuantity().get()));
             totalPrice += t_order.getItem().getPrice() * t_order.getQuantity().get();
             InventoryItem matchedItem = dataStoreItems.stream().filter(dataItem -> dataItem.getItemID().equals(t_order.getItem().getItemID())).toList().get(0);
             matchedItem.setStock(matchedItem.getStock() - t_order.getQuantity().get());
