@@ -185,6 +185,15 @@ public class TableBuilder extends ComponentBuilder {
         rightTopBox.getChildren().add(button);
     }
 
+    public void addAdditionalButton(String buttonText, EventHandler<ActionEvent> eventHandler) {
+        Button button = new Button(buttonText);
+        button.getStyleClass().add("table-add-item-button");
+        button.setOnAction(eventHandler);
+
+        HBox rightTopBox = (HBox) getRoot().lookup(".right-top-box");
+        rightTopBox.getChildren().add(button);
+    }
+
     public void setColumnAlignment(int columnIdx, Pos pos) {
         if (currentTable != null) {
             Table table = currentTable;

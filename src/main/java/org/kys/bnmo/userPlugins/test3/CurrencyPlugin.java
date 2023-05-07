@@ -5,6 +5,7 @@ import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import org.kys.bnmo.model.InventoryItem;
+import org.kys.bnmo.model.Order;
 import org.kys.bnmo.model.Transaction;
 import org.kys.bnmo.plugins.interfaces.BasePlugin;
 import org.kys.bnmo.model.Modifiable;
@@ -111,6 +112,7 @@ public class CurrencyPlugin extends BasePlugin {
         Modifiable modifiable = getService().getModifiable();
         List<Transaction> transactions = modifiable.transactions;
         List<InventoryItem> inventoryItems = modifiable.inventoryItems;
+        List<Order> orders = modifiable.orders;
 
         double factor = currencyMap.get(value.getValue());
 
@@ -130,6 +132,15 @@ public class CurrencyPlugin extends BasePlugin {
             {
                 item.setPrice(item.getPrice() * factor);
                 item.setPurchasePrice(item.getPurchasePrice() * factor);
+            }
+        }
+
+        if (orders != null)
+        {
+            for (Order order: orders)
+            {
+//                order.setPrice(order.getPrice() * factor);
+//                order.setPurchasePrice(order.getPurchasePrice() * factor);
             }
         }
     }

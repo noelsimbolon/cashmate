@@ -12,7 +12,7 @@ import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 
 public class PluginLoader {
-    private String path = "D:/Tubes2Plugins";
+
     private static final List<Class> plugins = new ArrayList<>();
     static boolean isLoaded = false;
 

@@ -1,8 +1,4 @@
-package org.kys.bnmo.plugins.adapters;
-
-import org.kys.bnmo.controllers.DataStore;
-
-import java.lang.reflect.Array;
+package org.kys.bnmo.plugins.interfaces;
 import java.util.ArrayList;
 
 public interface DatastoreAdapterInterface {

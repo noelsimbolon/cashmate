@@ -4,7 +4,6 @@ import org.kys.bnmo.model.Customer;
 import org.kys.bnmo.model.InventoryItem;
 import org.kys.bnmo.model.Member;
 import org.kys.bnmo.model.Transaction;
-import org.kys.bnmo.plugins.adapters.DatastoreAdapterInterface;
 
 import java.util.List;
 
