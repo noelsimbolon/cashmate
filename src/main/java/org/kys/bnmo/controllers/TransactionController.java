@@ -68,9 +68,9 @@ public class TransactionController {
                 .collect(Collectors.toList());
     }
 
-    public ArrayList<Transaction> fetchByCustomerID(int id) {
+    public ArrayList<Transaction> fetchByCustomerID(UUID id) {
         return (ArrayList<Transaction>) fetchAll().stream()
-                .filter(t -> t.getCustomer().getCustomerID() == id)
+                .filter(t -> t.getCustomer().getCustomerID().equals(id))
                 .collect(Collectors.toList());
     }
 

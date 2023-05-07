@@ -14,6 +14,7 @@ import org.kys.bnmo.model.Member;
 import org.kys.bnmo.helpers.views.IconButtonHelper;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class MemberFormTab extends TabContainer {
 
@@ -35,7 +36,7 @@ public class MemberFormTab extends TabContainer {
     private final StringProperty points;
 
     // Apply membership form
-    public MemberFormTab(String title, int customerId, EventHandler<ActionEvent> backButtonAction)
+    public MemberFormTab(String title, UUID customerId, EventHandler<ActionEvent> backButtonAction)
     {
         ArrayList<Customer> customers = customerController.fetchAll();
         ArrayList<Member> members = memberController.fetchAll();
@@ -49,12 +50,11 @@ public class MemberFormTab extends TabContainer {
         this.memberLevel = new SimpleStringProperty();
 
         // Set save button action to show states
-        // TODO: Change this to save to database
         this.saveButtonAction = (event) -> {
 
             int editedCustomerIndex = -1;
             for (int i = 0; i < customers.size(); i++) {
-                if (customers.get(i).getCustomerID() == customerId) {
+                if (customers.get(i).getCustomerID().equals(customerId)) {
                     editedCustomerIndex = i;
                     break;
                 }
@@ -115,10 +115,10 @@ public class MemberFormTab extends TabContainer {
         // Set save button action to show states
         this.saveButtonAction = (event) -> {
 
-            int editedCustomerID = existingMember.getCustomerID();
+            UUID editedCustomerID = existingMember.getCustomerID();
             int editedCustomerIndex = -1;
             for (int i = 0; i < members.size(); i++) {
-                if (members.get(i).getCustomerID() == editedCustomerID) {
+                if (members.get(i).getCustomerID().equals(editedCustomerID)) {
                     editedCustomerIndex = i;
                     break;
                 }

@@ -16,10 +16,7 @@ import org.kys.bnmo.helpers.views.tables.TableData;
 import org.kys.bnmo.model.Customer;
 import org.kys.bnmo.model.Member;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.IntStream;
 
 public class MembershipTab extends TabContainer {
@@ -46,9 +43,6 @@ public class MembershipTab extends TabContainer {
         ArrayList<Member> members = memberController.fetchAll();
         customers.addAll(members);
 
-        // Sort by customer ID
-        customers.sort(Comparator.comparingInt(Customer::getCustomerID));
-
         // Table heading
         List<String> tableHeadings = new ArrayList<>(Arrays.asList("Customer ID", "Name", "Phone", "Status", "Level", "Points", "Action"));
 
@@ -60,7 +54,7 @@ public class MembershipTab extends TabContainer {
 
         for (Customer customer : customers) {
             List<String> row = new ArrayList<>();
-            row.add(String.valueOf(customer.getCustomerID()));
+            row.add(customer.getCustomerID().toString());
             if (customer instanceof Member) {
                 row.add(((Member) customer).getName());
                 row.add(((Member) customer).getPhoneNumber());
@@ -80,8 +74,8 @@ public class MembershipTab extends TabContainer {
             // Action menu
             ContextMenu menu;
             if (customer instanceof Member) {
-                int editedCustomerID = customer.getCustomerID();
-                int editedCustomerIndex = IntStream.range(0, members.size()).filter(i -> members.get(i).getCustomerID() == editedCustomerID).findFirst().orElse(-1);
+                UUID editedCustomerID = customer.getCustomerID();
+                int editedCustomerIndex = IntStream.range(0, members.size()).filter(i -> members.get(i).getCustomerID().equals(editedCustomerID)).findFirst().orElse(-1);
 
                 // Set menu item action
                 // Edit button
