@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class MembershipTab extends TabContainer {
 
@@ -39,32 +40,14 @@ public class MembershipTab extends TabContainer {
     protected Pane getContent() {
 
         // Fetch customer data
-        List<Customer> customers = customerController.fetchAll();
+        ArrayList<Customer> customers = customerController.fetchAll();
 
         // Concatenate with member data
-        List<Member> members = memberController.fetchAll();
+        ArrayList<Member> members = memberController.fetchAll();
         customers.addAll(members);
 
         // Sort by customer ID
         customers.sort(Comparator.comparingInt(Customer::getCustomerID));
-
-        // Create temporary customer data
-//        List<Customer> customers = new ArrayList<>();
-//        for (int i = 0; i < 10; i++) {
-//            if (i % 3 == 0) {
-//                // Create normal customer
-//                Customer c = new Customer();
-//                customers.add(c);
-//            } else if (i % 3 == 1) {
-//                // Create member customer
-//                Member c = new Member("Member " + i, "08123456789", "Member");
-//                customers.add(c);
-//            } else {
-//                // Create VIP customer
-//                Member c = new Member("VIP " + i, "08123456789", "VIP");
-//                customers.add(c);
-//            }
-//        }
 
         // Table heading
         List<String> tableHeadings = new ArrayList<>(Arrays.asList("Customer ID", "Name", "Phone", "Status", "Level", "Points", "Action"));
@@ -97,6 +80,8 @@ public class MembershipTab extends TabContainer {
             // Action menu
             ContextMenu menu;
             if (customer instanceof Member) {
+                int editedCustomerID = customer.getCustomerID();
+                int editedCustomerIndex = IntStream.range(0, members.size()).filter(i -> members.get(i).getCustomerID() == editedCustomerID).findFirst().orElse(-1);
 
                 // Set menu item action
                 // Edit button
@@ -108,17 +93,70 @@ public class MembershipTab extends TabContainer {
                 });
 
                 // Activate/Deactivate button
-                // TODO: Update DataStore to activate or deactivate member
                 MenuItem item2;
                 if (((Member) customer).getStatus().equals("Active")) {
                     item2 = new MenuItem("Deactivate");
                     item2.setOnAction(e -> {
-                        System.out.println("Deactivate member");
+
+                        // If customer is not found, then do not save but refresh the tab
+                        if (editedCustomerIndex == -1) {
+                            System.out.println("Customer not found");
+                            memberActionHandler.getEventHandler(
+                                    new MembershipTab(memberActionHandler, backHandler)
+                            ).handle(e);
+                        }
+
+                        // Get customer from list
+                        Member editedCustomer = members.get(editedCustomerIndex);
+
+                        // Delete customer from list
+                        members.remove(editedCustomerIndex);
+
+                        // Update customer status
+                        editedCustomer.deactivate();
+
+                        // Add customer back to list
+                        members.add(editedCustomerIndex, editedCustomer);
+
+                        // Save to DataStore
+                        memberController.save(members);
+
+                        // Refresh tab
+                        memberActionHandler.getEventHandler(
+                                new MembershipTab(memberActionHandler, backHandler)
+                        ).handle(e);
                     });
                 } else {
                     item2 = new MenuItem("Activate");
                     item2.setOnAction(e -> {
-                        System.out.println("Activate member");
+
+                        // If customer is not found, then do not save but refresh the tab
+                        if (editedCustomerIndex == -1) {
+                            System.out.println("Customer not found");
+                            memberActionHandler.getEventHandler(
+                                    new MembershipTab(memberActionHandler, backHandler)
+                            ).handle(e);
+                        }
+
+                        // Get customer from list
+                        Member editedCustomer = members.get(editedCustomerIndex);
+
+                        // Delete customer from list
+                        members.remove(editedCustomerIndex);
+
+                        // Update customer status
+                        editedCustomer.activate();
+
+                        // Add customer back to list
+                        members.add(editedCustomerIndex, editedCustomer);
+
+                        // Save to DataStore
+                        memberController.save(members);
+
+                        // Refresh tab
+                        memberActionHandler.getEventHandler(
+                                new MembershipTab(memberActionHandler, backHandler)
+                        ).handle(e);
                     });
                 }
 
@@ -138,12 +176,64 @@ public class MembershipTab extends TabContainer {
                 if (customer.getMemberLevel().equals("VIP")) {
                     item3 = new MenuItem("Demote");
                     item3.setOnAction(e -> {
-                        System.out.println("Demote member");
+                        // If customer is not found, then do not save but refresh the tab
+                        if (editedCustomerIndex == -1) {
+                            System.out.println("Customer not found");
+                            memberActionHandler.getEventHandler(
+                                    new MembershipTab(memberActionHandler, backHandler)
+                            ).handle(e);
+                        }
+
+                        // Get customer from list
+                        Member editedCustomer = members.get(editedCustomerIndex);
+
+                        // Delete customer from list
+                        members.remove(editedCustomerIndex);
+
+                        // Update customer member level
+                        editedCustomer.demote();
+
+                        // Add customer back to list
+                        members.add(editedCustomerIndex, editedCustomer);
+
+                        // Save to DataStore
+                        memberController.save(members);
+
+                        // Refresh tab
+                        memberActionHandler.getEventHandler(
+                                new MembershipTab(memberActionHandler, backHandler)
+                        ).handle(e);
                     });
                 } else {
                     item3 = new MenuItem("Promote");
                     item3.setOnAction(e -> {
-                        System.out.println("Promote member");
+                        // If customer is not found, then do not save but refresh the tab
+                        if (editedCustomerIndex == -1) {
+                            System.out.println("Customer not found");
+                            memberActionHandler.getEventHandler(
+                                    new MembershipTab(memberActionHandler, backHandler)
+                            ).handle(e);
+                        }
+
+                        // Get customer from list
+                        Member editedCustomer = members.get(editedCustomerIndex);
+
+                        // Delete customer from list
+                        members.remove(editedCustomerIndex);
+
+                        // Update customer member level
+                        editedCustomer.promote();
+
+                        // Add customer back to list
+                        members.add(editedCustomerIndex, editedCustomer);
+
+                        // Save to DataStore
+                        memberController.save(members);
+
+                        // Refresh tab
+                        memberActionHandler.getEventHandler(
+                                new MembershipTab(memberActionHandler, backHandler)
+                        ).handle(e);
                     });
                 }
 

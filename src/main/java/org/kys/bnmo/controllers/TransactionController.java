@@ -43,6 +43,12 @@ public class TransactionController {
                 .collect(Collectors.toList());
     }
 
+    public ArrayList<Transaction> fetchByCustomerID(int id) {
+        return (ArrayList<Transaction>) fetchAll().stream()
+                .filter(t -> t.getCustomer().getCustomerID() == id)
+                .collect(Collectors.toList());
+    }
+
     public void save(ArrayList<Transaction> data) {
         dataStore.writeData(fileName, data);
     }
