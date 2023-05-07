@@ -28,4 +28,17 @@ public class TransactionController {
     public void save(ArrayList<Transaction> data) {
         dataStore.writeData(fileName, data);
     }
+
+    public void deleteById(UUID uuid) {
+        ArrayList<Transaction> data = fetchAll();
+
+        for (Transaction transaction: data) {
+            if (transaction.getTransactionID().equals(uuid)) {
+                data.remove(transaction);
+                break;
+            }
+        }
+
+        save(data);
+    }
 }
