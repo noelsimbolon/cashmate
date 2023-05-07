@@ -1,4 +1,6 @@
 package org.kys.bnmo.helpers.plugins;
+import org.kys.bnmo.plugins.interfaces.PluginInterface;
+
 import java.io.File;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -36,7 +38,15 @@ public class PluginLoader {
                             new URL[]{new URL("file:" + file.getAbsolutePath())});
 
                     Class plugin = classLoader.loadClass(mainClassName);
-                    plugins.add(plugin);
+
+                    for (Class iface: plugin.getInterfaces())
+                    {
+                        if (iface.equals(PluginInterface.class))
+                        {
+                            plugins.add(plugin);
+                            break;
+                        }
+                    }
                 }
 
                 catch (Exception e)

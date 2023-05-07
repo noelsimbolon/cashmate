@@ -18,7 +18,7 @@ public class SettingTab extends TabContainer {
     protected Pane getContent() {
 
         // Initialize form to add member
-        formBuilder.addFilePicker("Folder Location", stage);
+        formBuilder.addFilePicker("Save Folder Location", stage);
         formBuilder.addDropdown("Save file format", "Select the member level", new String[] {"JSON", "XML", "OBJ"});
         formBuilder.addButton("Save", null);
 

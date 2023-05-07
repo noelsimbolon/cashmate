@@ -1,5 +1,6 @@
 # Plugins testing
 $plugins/
+compiledPlugins/
 
 target/
 !.mvn/wrapper/maven-wrapper.jar
