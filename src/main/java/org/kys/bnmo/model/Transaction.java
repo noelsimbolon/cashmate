@@ -26,6 +26,11 @@ public class Transaction implements Serializable {
     @Getter
     private Date date;
 
+
+    public Transaction() {
+        this(new Customer(), new InventoryItem(), 0, 0, new Date());
+    }
+
     public Transaction(Customer customer, InventoryItem item, int quantity, int totalPrice, Date date) {
         this.transactionID = UUID.randomUUID();
         this.customer = customer;
