@@ -13,6 +13,7 @@ import org.kys.bnmo.components.SingleComponent;
 import org.kys.bnmo.components.documents.BillDocument;
 import org.kys.bnmo.components.interfaces.ComponentFactory;
 import org.kys.bnmo.components.tabs.*;
+import org.kys.bnmo.controllers.DataStore;
 import org.kys.bnmo.events.NavigationHandler;
 import org.kys.bnmo.helpers.plugins.PluginLoader;
 import org.kys.bnmo.helpers.views.DocumentPrinter;
@@ -337,6 +338,7 @@ public class BnmoApplication extends Application {
 //    }
 
     public static void main(String[] args) {
+        (new DataStore()).loadConfig();
         launch(args);
     }
 }
