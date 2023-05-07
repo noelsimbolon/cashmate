@@ -30,9 +30,6 @@ public class SettingTab extends TabContainer {
         this.stage = stage;
 
         this.saveButtonAction = (event) -> {
-            System.out.println(folderPath.getValue());
-            System.out.println(fileFormat.getValue());
-
             settingsController.loadConfig();
 
             if (!Objects.equals(this.folderPath.getValue(), settingsController.getFolderPath())) {
