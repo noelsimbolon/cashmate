@@ -9,8 +9,15 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.kys.bnmo.components.bases.FormBuilder;
 import org.kys.bnmo.controllers.SettingsController;
+import org.kys.bnmo.helpers.plugins.PluginLoader;
+import org.kys.bnmo.plugins.adapters.PageAdapter;
+import org.kys.bnmo.plugins.adapters.SettingAdapter;
+import org.kys.bnmo.plugins.base.PluginService;
+import org.kys.bnmo.plugins.interfaces.PluginServiceInterface;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
+import java.util.List;
 import java.util.Objects;
 
 public class SettingTab extends TabContainer {
@@ -53,6 +60,22 @@ public class SettingTab extends TabContainer {
         formBuilder.addFolderPicker("Data Store Location", stage, folderPath);
         formBuilder.addDropdown("Data Store Format", "Select a Format", new String[]{"json", "xml", "obj"}, fileFormat);
         formBuilder.addButton("Save", saveButtonAction);
+
+        PluginLoader pluginLoader = new PluginLoader();
+        List<Class> plugins = pluginLoader.loadClasses();
+
+        for (Class plugin : plugins) {
+            try {
+                System.out.println(plugin.getName());
+                Object instance = plugin.getDeclaredConstructor(PluginServiceInterface.class)
+                        .newInstance(new PluginService(null,  new SettingAdapter(formBuilder), null));
+
+                Method pluginMethod = plugin.getMethod("onLoad");
+                pluginMethod.invoke(instance);
+            } catch (Exception e) {
+
+            }
+        }
 
         return formBuilder.getAndResetComponent();
     }

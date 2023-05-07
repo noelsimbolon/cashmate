@@ -1,6 +1,5 @@
 package org.kys.bnmo.plugins.adapters;
 import javafx.scene.Parent;
-import org.kys.bnmo.plugins.interfaces.PageAdapterInterface;
 import org.kys.bnmo.views.Page;
 
 public class PageAdapter implements PageAdapterInterface {

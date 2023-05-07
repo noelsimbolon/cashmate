@@ -1,4 +1,4 @@
-package org.kys.bnmo.plugins.interfaces;
+package org.kys.bnmo.plugins.adapters;
 import javafx.scene.Parent;
 
 public interface PageAdapterInterface {
