@@ -1,11 +1,10 @@
 package org.kys.bnmo.controllers;
 
-import org.kys.bnmo.model.*;
 import org.kys.bnmo.helpers.plugins.PluginLoader;
-import org.kys.bnmo.model.Customer;
 import org.kys.bnmo.model.InventoryItem;
 import org.kys.bnmo.model.Modifiable;
 import org.kys.bnmo.model.Order;
+import org.kys.bnmo.model.UnpopulatedOrder;
 import org.kys.bnmo.plugins.base.PluginService;
 
 import java.util.ArrayList;
@@ -26,7 +25,7 @@ public class OrderController {
     private void processGetData(List<Order> orders) {
         PluginLoader pluginLoader = new PluginLoader();
         pluginLoader.runClasses(new PluginService(
-                null ,
+                null,
                 null,
                 new Modifiable(
                         null,
@@ -41,7 +40,7 @@ public class OrderController {
     private void processSetData(List<Order> orders) {
         PluginLoader pluginLoader = new PluginLoader();
         pluginLoader.runClasses(new PluginService(
-                null ,
+                null,
                 null,
                 new Modifiable(
                         null,
@@ -85,7 +84,7 @@ public class OrderController {
     public void deleteById(UUID id) {
         ArrayList<Order> data = fetchAll();
 
-        for (Order order: data) {
+        for (Order order : data) {
             if (order.getOrderID().equals(id)) {
                 data.remove(order);
                 break;
