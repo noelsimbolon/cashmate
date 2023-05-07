@@ -36,6 +36,10 @@ public class PieChartPlugin implements PluginInterface {
         PieChart.Data data2 = new PieChart.Data("Members", membersCount.getValue());
         PieChart.Data data3 = new PieChart.Data("VIPs", vipsCount.getValue());
 
+        data1.pieValueProperty().bind(customersCount);
+        data2.pieValueProperty().bind(membersCount);
+        data3.pieValueProperty().bind(vipsCount);
+
         ObservableList<PieChart.Data> pieChartData =
             FXCollections.observableArrayList(
                 data1,
