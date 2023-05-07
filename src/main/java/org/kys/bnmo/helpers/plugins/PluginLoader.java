@@ -21,7 +21,7 @@ public class PluginLoader {
     private void readJar() {
         try {
             // Create a new ClassLoader instance
-            File pluginsFolder = new File("D:/Tubes2Plugins");
+            File pluginsFolder = new File("C:/Users/Fio/Downloads/plugins");
 
             if (!pluginsFolder.exists()) {
                 pluginsFolder.mkdirs();

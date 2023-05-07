@@ -43,7 +43,7 @@ public class HistoryTab  extends TabContainer {
         transactions.sort((t1, t2) -> t2.getTransactionID() - t1.getTransactionID());
 
         // Table headings
-        List<String> tableHeadings = new ArrayList<>(Arrays.asList("Transaction ID", "Total Price", "Date", "Discount"));
+        List<String> tableHeadings = new ArrayList<>(Arrays.asList("Transaction ID", "Date", "Total Price", "Discount", "Action"));
 
         // List of table content
         List<List<String>> tableContent = new ArrayList<>();
@@ -55,17 +55,17 @@ public class HistoryTab  extends TabContainer {
             List<String> row = new ArrayList<>();
 
             row.add(String.valueOf(transaction.getTransactionID()));
-            row.add(String.valueOf(transaction.getTotalPrice()));
             row.add(transaction.getDate().toString());
+            row.add(String.valueOf(transaction.getTotalPrice()));
             row.add(String.valueOf(transaction.getDiscount()));
 
             tableContent.add(row);
 
             // Action menu
-            ContextMenu contextMenu = new ContextMenu();
             MenuItem viewBill = new MenuItem("View Bill");
 
             viewBill.setOnAction(e -> {
+                System.out.println("View bill");
                 historyActionHandler.getEventHandler(
                         new BillTab(transaction.getTransactionID()),
                         "Bill #" + transaction.getTransactionID()
@@ -73,6 +73,7 @@ public class HistoryTab  extends TabContainer {
             });
 
             // Add action menu to context menu items
+            ContextMenu contextMenu = new ContextMenu(viewBill);
             contextMenuItems.add(contextMenu);
         }
 
