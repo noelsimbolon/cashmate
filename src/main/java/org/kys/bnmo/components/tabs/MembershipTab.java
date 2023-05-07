@@ -26,8 +26,8 @@ public class MembershipTab extends TabContainer {
 
     private static final TableBuilder tableBuilder = new TableBuilder();
 
-     private static final CustomerController customerController = new CustomerController();
-     private static final MemberController memberController = new MemberController();
+    private static final CustomerController customerController = new CustomerController();
+    private static final MemberController memberController = new MemberController();
 
     private final NavigationHandler memberActionHandler;
     private final EventHandler<ActionEvent> backHandler;
@@ -165,8 +165,7 @@ public class MembershipTab extends TabContainer {
                 MenuItem item4 = new MenuItem("Transaction History");
                 item4.setOnAction(e -> {
                     memberActionHandler.getEventHandler(
-                            new BillTab(customer.getCustomerID()),
-                            "Customer " + customer.getCustomerID() + "Transaction History"
+                            new HistoryTab(customer.getCustomerID(), memberActionHandler, backHandler)
                     ).handle(e);
                 });
 
@@ -246,8 +245,17 @@ public class MembershipTab extends TabContainer {
                             new MemberFormTab("Apply membership", customer.getCustomerID(), backHandler)
                     ).handle(e);
                 });
-                menu = new ContextMenu(item1);
+
+                MenuItem item2 = new MenuItem("Transaction History");
+                item2.setOnAction(e -> {
+                    memberActionHandler.getEventHandler(
+                            new HistoryTab(customer.getCustomerID(), memberActionHandler, backHandler)
+                    ).handle(e);
+                });
+
+                menu = new ContextMenu(item1, item2);
             }
+
             contextMenus.add(menu);
         }
 
