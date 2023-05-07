@@ -28,6 +28,10 @@ public class Member extends Customer {
     @NotNull
     private String memberLevel; // "Member" or "VIP"
 
+    public Member() {
+        this("", "", "");
+    }
+
     public Member(int customerID, @NotNull String name, @NotNull String phoneNumber, @NotNull String memberLevel) {
         super(customerID);
         this.name = name;
@@ -44,6 +48,10 @@ public class Member extends Customer {
         this.points = 0;
         this.status = "Active";
         this.memberLevel = memberLevel;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
     }
 
     public void addPoints(int points) {
@@ -74,13 +82,13 @@ public class Member extends Customer {
         return memberLevel;
     }
 
-    private void promote() {
+    public void promote() {
         if (memberLevel.equals("Member")) {
             memberLevel = "VIP";
         }
     }
 
-    private void demote() {
+    public void demote() {
         if (memberLevel.equals("VIP")) {
             memberLevel = "Member";
         }

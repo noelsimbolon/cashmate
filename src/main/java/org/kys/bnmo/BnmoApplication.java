@@ -253,7 +253,7 @@ public class BnmoApplication extends Application {
             try {
                 System.out.println(plugin.getName());
                 Object instance = plugin.getDeclaredConstructor(PluginServiceInterface.class)
-                        .newInstance(new PluginService(new PageAdapter(page)));
+                        .newInstance(new PluginService(new PageAdapter(page), null, null));
 
                 Method pluginMethod = plugin.getMethod("onLoad");
                 pluginMethod.invoke(instance);
@@ -271,7 +271,7 @@ public class BnmoApplication extends Application {
                 new DefaultTab(catalogueTabFactory, tabPane.getTabs().get(2)),
                 new DefaultTab(settingTabFactory, tabPane.getTabs().get(3))
         );
-
+// TODO: UNCOMMENT
 //        tabPane.getTabs().clear();
 
     }

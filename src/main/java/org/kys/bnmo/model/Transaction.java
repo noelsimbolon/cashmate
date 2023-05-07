@@ -16,7 +16,7 @@ public class Transaction implements Serializable {
     private Customer customer;
 
     @Getter
-    private int totalPrice;
+    private Double totalPrice;
 
     @Getter
     private Date date;
@@ -27,7 +27,7 @@ public class Transaction implements Serializable {
     @Getter
     private int discount;
 
-    public Transaction(Customer customer, List<Order> orders, int totalPrice, Date date, int discount) {
+    public Transaction(Customer customer, List<Order> orders, double totalPrice, Date date, int discount) {
         this.orders = orders;
         this.discount = discount;
         this.transactionID = UUID.randomUUID();
