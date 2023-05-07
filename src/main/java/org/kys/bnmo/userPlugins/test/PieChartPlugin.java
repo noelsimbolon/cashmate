@@ -12,21 +12,21 @@ import javafx.scene.control.Tab;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import org.kys.bnmo.plugins.interfaces.BasePlugin;
 import org.kys.bnmo.plugins.interfaces.ControllerAdapterInterface;
 import org.kys.bnmo.plugins.interfaces.PluginInterface;
 import org.kys.bnmo.plugins.interfaces.PluginServiceInterface;
 
-public class PieChartPlugin implements PluginInterface {
-    PluginServiceInterface service;
+public class PieChartPlugin extends BasePlugin {
 
     public PieChartPlugin(PluginServiceInterface service)
     {
-        this.service = service;
+        super(service);
     }
 
     private Chart getChart()
     {
-        ControllerAdapterInterface controller = service.getController();
+        ControllerAdapterInterface controller = getService().getController();
 
         IntegerProperty customersCount = new SimpleIntegerProperty();
         IntegerProperty membersCount = new SimpleIntegerProperty();
@@ -79,6 +79,6 @@ public class PieChartPlugin implements PluginInterface {
     }
     @Override
     public void onLoad() {
-        service.addTab(getTabContainer(), "Pie Chart");
+        getService().addTab(getTabContainer(), "Pie Chart");
     }
 }

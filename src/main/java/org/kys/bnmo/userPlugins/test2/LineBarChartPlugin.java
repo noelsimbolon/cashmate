@@ -4,15 +4,14 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import org.kys.bnmo.plugins.interfaces.PluginInterface;
+import org.kys.bnmo.plugins.interfaces.BasePlugin;
 import org.kys.bnmo.plugins.interfaces.PluginServiceInterface;
 
-public class LineBarChartPlugin implements PluginInterface {
-    PluginServiceInterface service;
+public class LineBarChartPlugin extends BasePlugin {
 
     public LineBarChartPlugin(PluginServiceInterface service)
     {
-        this.service = service;
+        super(service);
     }
 
     private Chart getLineChart()
@@ -108,6 +107,6 @@ public class LineBarChartPlugin implements PluginInterface {
     }
     @Override
     public void onLoad() {
-        service.addTab(getTabContainer(), "Line Bar Chart");
+        getService().addTab(getTabContainer(), "Line Bar Chart");
     }
 }

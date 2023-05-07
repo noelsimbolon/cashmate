@@ -1,4 +1,5 @@
 package org.kys.bnmo.helpers.plugins;
+import org.kys.bnmo.plugins.interfaces.BasePlugin;
 import org.kys.bnmo.plugins.interfaces.PluginInterface;
 
 import java.io.File;
@@ -28,7 +29,6 @@ public class PluginLoader {
             for (File file : jarFiles) {
 
                 try {
-
                     JarFile jarFile = new JarFile(file.getAbsolutePath());
 
                     Manifest manifest = jarFile.getManifest();
@@ -39,14 +39,11 @@ public class PluginLoader {
 
                     Class plugin = classLoader.loadClass(mainClassName);
 
-                    for (Class iface: plugin.getInterfaces())
+                    if (plugin.getSuperclass().equals(BasePlugin.class))
                     {
-                        if (iface.equals(PluginInterface.class))
-                        {
-                            plugins.add(plugin);
-                            break;
-                        }
+                        plugins.add(plugin);
                     }
+
                 }
 
                 catch (Exception e)
