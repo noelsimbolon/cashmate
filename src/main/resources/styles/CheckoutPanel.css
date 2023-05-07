@@ -286,3 +286,15 @@
 #checkout-button:hover {
     -fx-cursor: HAND;
 }
+
+.discount-container .label .text {
+    -fx-fill: #F2F3F5;
+    -fx-font-weight: bold;
+}
+
+.discount-container .text-field {
+    -fx-background-color: #565B61;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-text-fill: #F2F3F5;
+}

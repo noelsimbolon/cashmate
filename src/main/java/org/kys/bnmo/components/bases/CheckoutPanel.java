@@ -2,13 +2,13 @@ package org.kys.bnmo.components.bases;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.*;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 import lombok.Getter;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
@@ -61,6 +61,9 @@ public class CheckoutPanel extends VBox {
     private VBox checkoutPanelContainer;
     private Button checkoutButton;
     private Text discountAmountLabel;
+    private VBox discountContainer;
+    private List<Pair<String, DoubleProperty>> staticDiscounts;
+    private List<Pair<String, TextField>> dynamicDiscounts;
 
     @Getter
     @Setter
@@ -94,19 +97,13 @@ public class CheckoutPanel extends VBox {
 
         addItemScrollPane();
 
-        var discountContainer = new HBox();
-
-        var discountLabel = new Text("Discounts:");
-        discountLabel.setId("discount-label");
-
-        var spacer = new Region();
-        HBox.setHgrow(spacer, Priority.ALWAYS);
-
-        discountAmountLabel = new Text("Rp" + 0);
-        discountAmountLabel.setId("discount-amount");
-
-        discountContainer.getChildren().addAll(discountLabel, spacer, discountAmountLabel);
+        discountContainer = new VBox();
+        discountContainer.setSpacing(8);
+        discountContainer.getStyleClass().add("discount-container");
         inputFields.getChildren().add(discountContainer);
+        staticDiscounts = new ArrayList<>();
+        DoubleProperty doubleProp = new SimpleDoubleProperty(0.0);
+        addStaticDiscount("Discount", doubleProp);
 
         checkoutButton = new Button("Charge");
         addCheckoutButton();
@@ -452,16 +449,30 @@ public class CheckoutPanel extends VBox {
         }
         inventoryItemController.writeInventoryItems(dataStoreItems);
 
-        int subtotal = totalPrice;
-        int discount = 0;
+        double subtotal = totalPrice;
+        double discount = 0;
         int pointsUsed = 0;
         if (currentBill.getCustomer() instanceof Member member) {
             discount += Math.min(subtotal, member.getPoints());
-            pointsUsed = Math.min(subtotal, member.getPoints());
+            pointsUsed = (int) Math.round(Math.min(subtotal, member.getPoints()));
             subtotal -= discount;
             if (member.getMemberLevel().equalsIgnoreCase("vip"))
                 discount += subtotal * 0.1;
         }
+
+        for (int i = 1; i < staticDiscounts.size(); i++) {
+            subtotal -= staticDiscounts.get(i).getValue().get();
+        }
+
+        for (var pair : dynamicDiscounts) {
+            try {
+                subtotal -= Integer.parseInt(pair.getValue().getText());
+                discount += Integer.parseInt(pair.getValue().getText());
+            } catch (NumberFormatException e) {
+
+            }
+        }
+
         dataStoreCustomers.add(currentCustomer);
         if (currentCustomer instanceof Member member) {
             member.setPoints(member.getPoints() - pointsUsed);
@@ -470,7 +481,7 @@ public class CheckoutPanel extends VBox {
 
         TransactionController transactionController = new TransactionController();
         ArrayList<Transaction> transactions = transactionController.fetchAll();
-        Transaction newTransaction = new Transaction(currentBill.getCustomer(), orders, totalPrice, new Date(), discount);
+        Transaction newTransaction = new Transaction(currentBill.getCustomer(), orders, totalPrice, new Date(), (int) discount);
         transactions.add(newTransaction);
         transactionController.save(transactions);
 
@@ -492,5 +503,29 @@ public class CheckoutPanel extends VBox {
         temporaryBills.remove(temporaryBills.get(customerDropdown.getSelectionModel().getSelectedIndex()));
         customerDropdown.getItems().remove(customerDropdown.getItems().remove(customerDropdown.getSelectionModel().getSelectedIndex()));
         customerDropdown.setValue(null);
+    }
+
+    public void addStaticDiscount(String label, DoubleProperty property) {
+        HBox container = new HBox();
+        container.setAlignment(Pos.CENTER_LEFT);
+        Label text = new Label(label);
+        HBox spacer = new HBox();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+        Label discountValue = new Label();
+        discountValue.textProperty().bind(Bindings.format("Rp %.2f", property));
+        container.getChildren().addAll(text, spacer, discountValue);
+        discountContainer.getChildren().add(container);
+    }
+
+    public void addDynamicDiscount(String label, TextField field) {
+        HBox container = new HBox();
+        container.setAlignment(Pos.CENTER_LEFT);
+        Label text = new Label(label);
+        HBox spacer = new HBox();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+        Label discountValue = new Label();
+        field.setAlignment(Pos.CENTER_RIGHT);
+        container.getChildren().addAll(text, spacer, field);
+        discountContainer.getChildren().add(container);
     }
 }
