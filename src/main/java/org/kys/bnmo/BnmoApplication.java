@@ -128,8 +128,11 @@ public class BnmoApplication extends Application {
         }
         private class ReplaceTabAction implements EventHandler<ActionEvent> {
             private TabContainer defaultFactory;
+            private String title;
             public ReplaceTabAction(TabContainer defaultFactory, String title) {
+
                 this.defaultFactory = defaultFactory;
+                this.title = title;
             }
             @Override
             public void handle(ActionEvent event) {
