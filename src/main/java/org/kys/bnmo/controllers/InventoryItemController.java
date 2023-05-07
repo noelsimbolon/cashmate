@@ -43,4 +43,17 @@ public class InventoryItemController {
 
         return null;
     }
+
+    public void deleteInventoryItemByUUID(UUID uuid) {
+        ArrayList<InventoryItem> inventoryItems = readInventoryItems();
+
+        for (InventoryItem item : inventoryItems) {
+            if (item.getItemID().equals(uuid)) {
+                inventoryItems.remove(item);
+                break;
+            }
+        }
+
+        writeInventoryItems(inventoryItems);
+    }
 }

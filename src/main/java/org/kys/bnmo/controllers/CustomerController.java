@@ -27,4 +27,17 @@ public class CustomerController {
     public void save(ArrayList<Customer> data) {
         dataStore.writeData(fileName, data);
     }
+
+    public void deleteById(int id) {
+        ArrayList<Customer> data = fetchAll();
+
+        for (Customer customer: data) {
+            if (customer.getCustomerID() == id) {
+                data.remove(customer);
+                break;
+            }
+        }
+
+        save(data);
+    }
 }
