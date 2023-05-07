@@ -24,13 +24,13 @@ public class TransactionController {
     private void processGetData(List<Transaction> transactions)
     {
         PluginLoader pluginLoader = new PluginLoader();
-        pluginLoader.runClasses(new PluginService(null , null, new Modifiable(transactions,null, true)));
+        pluginLoader.runClasses(new PluginService(null , null, new Modifiable(transactions,null, null, true)));
     }
 
     private void processSetData(List<Transaction> transactions)
     {
         PluginLoader pluginLoader = new PluginLoader();
-        pluginLoader.runClasses(new PluginService(null , null, new Modifiable(transactions, null, false)));
+        pluginLoader.runClasses(new PluginService(null , null, new Modifiable(transactions, null, null, false)));
 
     }
 

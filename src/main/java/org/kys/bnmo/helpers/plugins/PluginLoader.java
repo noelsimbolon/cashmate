@@ -1,6 +1,4 @@
 package org.kys.bnmo.helpers.plugins;
-import org.kys.bnmo.plugins.adapters.PageAdapter;
-import org.kys.bnmo.plugins.base.PluginService;
 import org.kys.bnmo.plugins.interfaces.BasePlugin;
 import org.kys.bnmo.plugins.interfaces.PluginServiceInterface;
 

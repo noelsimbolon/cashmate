@@ -28,14 +28,14 @@ public class InventoryItemController {
     private void processGetData(List<InventoryItem> items)
     {
         PluginLoader pluginLoader = new PluginLoader();
-        pluginLoader.runClasses(new PluginService(null , null, new Modifiable(null, items, true)));
+        pluginLoader.runClasses(new PluginService(null , null, new Modifiable(null, items, null, true)));
 
     }
 
     private void processSetData(List<InventoryItem> items)
     {
         PluginLoader pluginLoader = new PluginLoader();
-        pluginLoader.runClasses(new PluginService(null , null, new Modifiable(null, items, false)));
+        pluginLoader.runClasses(new PluginService(null , null, new Modifiable(null, items, null,false)));
 
     }
 
