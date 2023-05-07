@@ -45,17 +45,8 @@ public class MembershipTab extends TabContainer {
         List<Member> members = memberController.fetchAll();
         customers.addAll(members);
 
-        // Print all customers
-        for (Customer customer : customers) {
-            System.out.println(customer.getCustomerID());
-        }
-
-        // Print all members
-        for (Member member : members) {
-            System.out.println(member.getCustomerID());
-        }
-
         // Sort by customer ID
+        customers.sort(Comparator.comparingInt(Customer::getCustomerID));
 
         // Create temporary customer data
 //        List<Customer> customers = new ArrayList<>();
