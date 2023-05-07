@@ -1,7 +1,8 @@
 package org.kys.bnmo.plugins.base;
 
 import javafx.beans.property.Property;
-import javafx.scene.Parent;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.layout.Pane;
 import lombok.Getter;
 import org.jetbrains.annotations.Nullable;
@@ -11,7 +12,6 @@ import org.kys.bnmo.plugins.interfaces.ControllerAdapterInterface;
 import org.kys.bnmo.plugins.adapters.PageAdapterInterface;
 import org.kys.bnmo.model.Modifiable;
 import org.kys.bnmo.plugins.interfaces.PluginServiceInterface;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +24,9 @@ public class PluginService implements PluginServiceInterface {
     @Getter
     private List<Pane> pageContainers;
 
+    @Getter
+    private List<EventHandler<ActionEvent>> settingSaveActions;
+
     public PluginService(
             @Nullable PageAdapterInterface pageBuilder,
             @Nullable SettingAdapterInterface settingBuilder,
@@ -35,6 +38,7 @@ public class PluginService implements PluginServiceInterface {
         this.modifiable = modifiable;
 
         pageContainers = new ArrayList<>();
+        settingSaveActions = new ArrayList<>();
     }
 
     @Override
@@ -73,5 +77,10 @@ public class PluginService implements PluginServiceInterface {
             settingBuilder.addDropdown(label, placeholder, items, defaultValue, selectedValue);
         }
 
+    }
+
+    @Override
+    public void addSettingSaveAction(EventHandler<ActionEvent> handler) {
+        settingSaveActions.add(handler);
     }
 }

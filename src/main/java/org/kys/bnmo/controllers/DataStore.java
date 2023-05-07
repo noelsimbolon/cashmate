@@ -5,6 +5,7 @@ import org.kys.bnmo.model.*;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -71,24 +72,22 @@ public class DataStore {
         }
     }
 
-    public void writeConfigAPI(String filename, String content) throws Exception {
-        if (filename.equals("config")) throw new Exception("Unallowed to overwrite default config file");
+    public void writeConfigAPI(String filename, ArrayList<String> contents) throws Exception {
+        if (filename.equals("config")) throw new Exception("Forbidden to overwrite default config file");
 
         String oldFolderPath = folderPath;
         String oldFormat = fileFormat;
 
         folderPath = System.getProperty("user.dir");
         fileFormat = "xml";
-
-        File file = new File(filename);
-        writeData(filename, new ArrayList<>() {{add(content);}});
+        writeData(filename, contents);
 
         folderPath = oldFolderPath;
         fileFormat = oldFormat;
     }
 
-    public String loadConfigAPI(String filename) throws Exception {
-        if (filename.equals("config")) throw new Exception("Unallowed to read default config file");
+    public ArrayList<String> loadConfigAPI(String filename) throws Exception {
+        if (filename.equals("config")) throw new Exception("Forbidden to read default config file");
 
         String oldFolderPath = folderPath;
         String oldFormat = fileFormat;
@@ -96,18 +95,16 @@ public class DataStore {
         folderPath = System.getProperty("user.dir");
         fileFormat = "xml";
 
-        File file = new File(filename);
+        File file = new File(filename + ".xml");
+
+        if (!file.exists()) throw new FileNotFoundException("Configuration file not found!");
 
         ArrayList<String> config = readData(filename, String.class);
 
         folderPath = oldFolderPath;
         fileFormat = oldFormat;
 
-        if (config.size() == 1) {
-            return config.get(0);
-        } else {
-            throw new Exception("Invalid Config Format");
-        }
+        return config;
     }
 
     private void moveData(String newFolderPath) throws IOException {

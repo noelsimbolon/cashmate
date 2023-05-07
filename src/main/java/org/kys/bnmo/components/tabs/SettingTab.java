@@ -17,6 +17,7 @@ import org.kys.bnmo.plugins.interfaces.PluginServiceInterface;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,7 +29,7 @@ public class SettingTab extends TabContainer {
     // State saver
     private StringProperty folderPath;
     private Property<String> fileFormat;
-    EventHandler<ActionEvent> saveButtonAction;
+    private EventHandler<ActionEvent> saveButtonAction;
 
     public SettingTab(Stage stage) {
         settingsController.loadConfig();
@@ -59,10 +60,17 @@ public class SettingTab extends TabContainer {
         // Initialize form to add member
         formBuilder.addFolderPicker("Data Store Location", stage, folderPath);
         formBuilder.addDropdown("Data Store Format", "Select a Format", new String[]{"json", "xml", "obj"}, fileFormat);
-        formBuilder.addButton("Save", saveButtonAction);
 
         PluginLoader pluginLoader = new PluginLoader();
-        pluginLoader.runClasses(new PluginService(null,  new SettingAdapter(formBuilder), null));
+
+        PluginService service = new PluginService(null, new SettingAdapter(formBuilder), null);
+
+        pluginLoader.runClasses(service);
+
+        List<EventHandler<ActionEvent>> handlers = new ArrayList<>(service.getSettingSaveActions());
+        handlers.add(saveButtonAction);
+
+        formBuilder.addButton("Save", handlers.toArray(new EventHandler[0]));
 
 
         return formBuilder.getAndResetComponent();
