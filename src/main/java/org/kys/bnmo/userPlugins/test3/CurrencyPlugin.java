@@ -27,8 +27,6 @@ public class CurrencyPlugin extends BasePlugin {
 
     private void addCurrencySetting()
     {
-        StringProperty value = new SimpleStringProperty();
-
         getService().addDropdownSetting(
                 "Currency",
                 "Select Currency",

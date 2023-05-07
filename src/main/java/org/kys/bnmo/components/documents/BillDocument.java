@@ -4,7 +4,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import org.jetbrains.annotations.NotNull;
-import org.kys.bnmo.components.ComponentFactory;
+import org.kys.bnmo.components.interfaces.ComponentFactory;
 import org.kys.bnmo.helpers.views.loaders.StyleLoadHelper;
 
 public class BillDocument implements ComponentFactory {

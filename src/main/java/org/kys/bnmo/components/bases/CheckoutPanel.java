@@ -6,7 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import org.jetbrains.annotations.NotNull;
-import org.kys.bnmo.components.ComponentFactory;
+import org.kys.bnmo.components.interfaces.ComponentFactory;
 import org.kys.bnmo.helpers.views.loaders.StyleLoadHelper;
 
 // TESTING
