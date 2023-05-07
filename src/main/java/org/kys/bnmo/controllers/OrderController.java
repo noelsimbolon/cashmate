@@ -25,13 +25,31 @@ public class OrderController {
 
     private void processGetData(List<Order> orders) {
         PluginLoader pluginLoader = new PluginLoader();
-        pluginLoader.runClasses(new PluginService(null , null, new Modifiable(null, null, orders, true)));
+        pluginLoader.runClasses(new PluginService(
+                null ,
+                null,
+                new Modifiable(
+                        null,
+                        null,
+                        orders,
+                        true
+                )
+        ));
 
     }
 
     private void processSetData(List<Order> orders) {
         PluginLoader pluginLoader = new PluginLoader();
-        pluginLoader.runClasses(new PluginService(null , null, new Modifiable(null, null, orders, false)));
+        pluginLoader.runClasses(new PluginService(
+                null ,
+                null,
+                new Modifiable(
+                        null,
+                        null,
+                        orders,
+                        false
+                )
+        ));
     }
 
     public ArrayList<Order> fetchAll() {

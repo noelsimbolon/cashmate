@@ -139,8 +139,8 @@ public class CurrencyPlugin extends BasePlugin {
         {
             for (Order order: orders)
             {
-//                order.setPrice(order.getPrice() * factor);
-//                order.setPurchasePrice(order.getPurchasePrice() * factor);
+                order.setPurchasePrice(order.getPurchasePrice() * factor);
+                order.setPurchasePrice(order.getPurchasePrice() * factor);
             }
         }
     }

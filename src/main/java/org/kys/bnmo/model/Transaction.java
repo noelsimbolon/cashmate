@@ -11,7 +11,6 @@ import java.util.UUID;
 public class Transaction implements Serializable {
 
     @Getter
-    @Setter
     private final UUID transactionID;
 
     private static int transactionCount = 0;

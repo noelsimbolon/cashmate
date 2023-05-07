@@ -3,6 +3,7 @@ package org.kys.bnmo.model;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.UUID;
 
@@ -13,11 +14,14 @@ public class Order {
     private static int orderCount = 0;
 
     @Getter
+    @Setter
     private InventoryItem item;
     @Getter
+    @Setter
     private int quantity;
     @Getter
-    private Double purchasePrice;
+    @Setter
+    private double purchasePrice;
 
     public Order() {
         this(null, 0.0, 0);
