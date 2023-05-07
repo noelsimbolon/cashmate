@@ -1,6 +1,12 @@
 package org.kys.bnmo.controllers;
 
 import org.kys.bnmo.model.*;
+import org.kys.bnmo.helpers.plugins.PluginLoader;
+import org.kys.bnmo.model.Customer;
+import org.kys.bnmo.model.InventoryItem;
+import org.kys.bnmo.model.Modifiable;
+import org.kys.bnmo.model.Order;
+import org.kys.bnmo.plugins.base.PluginService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +20,20 @@ public class OrderController {
     public OrderController() {
         dataStore = new DataStore();
         fileName = "order";
+    }
+
+    private void processGetData(List<Order> orders)
+    {
+        PluginLoader pluginLoader = new PluginLoader();
+        pluginLoader.runClasses(new PluginService(null , null, new Modifiable(null, null, orders, true)));
+
+    }
+
+    private void processSetData(List<Order> orders)
+    {
+        PluginLoader pluginLoader = new PluginLoader();
+        pluginLoader.runClasses(new PluginService(null , null, new Modifiable(null, null, orders, false)));
+
     }
 
     public ArrayList<Order> fetchAll() {

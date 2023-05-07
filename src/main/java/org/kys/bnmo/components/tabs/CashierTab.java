@@ -8,6 +8,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import org.jetbrains.annotations.NotNull;
 import org.kys.bnmo.components.bases.CheckoutPanel;
 import org.kys.bnmo.components.bases.TableBuilder;
 import org.kys.bnmo.controllers.InventoryItemController;
@@ -16,7 +17,6 @@ import org.kys.bnmo.helpers.views.tables.TableData;
 import org.kys.bnmo.model.InventoryItem;
 import org.kys.bnmo.model.Member;
 
-import java.io.IOException;
 import java.util.*;
 
 public class CashierTab extends TabContainer {
@@ -70,6 +70,7 @@ public class CashierTab extends TabContainer {
         wrapper.getChildren().add(itemTable);
     }
 
+    @NotNull
     private TableData loadTableData(CheckoutPanel checkoutPanel) {
         InventoryItemController inventoryItemController = new InventoryItemController();
 

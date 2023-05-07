@@ -9,8 +9,11 @@ import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.kys.bnmo.components.SingleComponent;
 import org.kys.bnmo.components.documents.BillDocument;
+import org.kys.bnmo.components.interfaces.ComponentFactory;
 import org.kys.bnmo.components.tabs.*;
+import org.kys.bnmo.controllers.DataStore;
 import org.kys.bnmo.events.NavigationHandler;
 import org.kys.bnmo.helpers.plugins.PluginLoader;
 import org.kys.bnmo.helpers.views.DocumentPrinter;
@@ -26,9 +29,9 @@ import java.util.*;
 
 public class BnmoApplication extends Application {
     private class DefaultTab {
-        public TabContainer factory;
+        public ComponentFactory factory;
         public Tab tab;
-        public DefaultTab(TabContainer factory, Tab tab)
+        public DefaultTab(ComponentFactory factory, Tab tab)
         {
             this.factory = factory;
             this.tab = tab;
@@ -126,8 +129,11 @@ public class BnmoApplication extends Application {
         }
         private class ReplaceTabAction implements EventHandler<ActionEvent> {
             private TabContainer defaultFactory;
+            private String title;
             public ReplaceTabAction(TabContainer defaultFactory, String title) {
+
                 this.defaultFactory = defaultFactory;
+                this.title = title;
             }
             @Override
             public void handle(ActionEvent event) {
@@ -245,21 +251,32 @@ public class BnmoApplication extends Application {
         page.addTab(cashierTabFactory.getComponent(), "Cashier");
         page.addTab(catalogueTabFactory.getComponent(), "Catalogue");
         page.addTab(settingTabFactory.getComponent(), "Settings");
-
         PluginLoader pluginLoader = new PluginLoader();
-        pluginLoader.runClasses(new PluginService(new PageAdapter(page), null, null));
+
+        PluginService pluginService = new PluginService(new PageAdapter(page), null, null);
+        pluginLoader.runClasses(pluginService);
 
         root = page.getAndResetComponent();
         tabPane = getTabPane();
 
-        setDefaultTabs(
-                new DefaultTab(membershipTabFactory, tabPane.getTabs().get(0)),
-                new DefaultTab(cashierTabFactory, tabPane.getTabs().get(1)),
-                new DefaultTab(catalogueTabFactory, tabPane.getTabs().get(2)),
-                new DefaultTab(settingTabFactory, tabPane.getTabs().get(3))
-        );
-// TODO: UNCOMMENT
-//        tabPane.getTabs().clear();
+        List<DefaultTab> defaultTabs = new ArrayList<>();
+
+        defaultTabs.add(new DefaultTab(membershipTabFactory, tabPane.getTabs().get(0)));
+        defaultTabs.add(new DefaultTab(cashierTabFactory, tabPane.getTabs().get(1)));
+        defaultTabs.add(new DefaultTab(catalogueTabFactory, tabPane.getTabs().get(2)));
+        defaultTabs.add(new DefaultTab(settingTabFactory, tabPane.getTabs().get(3)));
+
+        for (int i = 0; i < pluginService.getPageContainers().size(); i++)
+        {
+            defaultTabs.add(new DefaultTab(
+                            new SingleComponent(pluginService.getPageContainers().get(i)),
+                            tabPane.getTabs().get(i+4)));
+        }
+
+        setDefaultTabs(defaultTabs.toArray(new DefaultTab[0]));
+
+
+        tabPane.getTabs().clear();
 
     }
 
@@ -321,6 +338,7 @@ public class BnmoApplication extends Application {
 //    }
 
     public static void main(String[] args) {
+        (new DataStore()).loadConfig();
         launch(args);
     }
 }

@@ -1,1 +1,13 @@
-[{"customerID":1,"memberLevel":"Customer"},{"customerID":3,"memberLevel":"Customer"},{"customerID":4,"memberLevel":"Customer"},{"customerID":5,"memberLevel":"Customer"}]
+[ {
+  "customerID" : 3,
+  "memberLevel" : "Customer"
+}, {
+  "customerID" : 4,
+  "memberLevel" : "Customer"
+}, {
+  "customerID" : 5,
+  "memberLevel" : "Customer"
+}, {
+  "customerID" : 20,
+  "memberLevel" : "Customer"
+} ]

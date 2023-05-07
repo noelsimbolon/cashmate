@@ -16,18 +16,15 @@ import org.kys.bnmo.helpers.views.tables.TableData;
 import org.kys.bnmo.model.Customer;
 import org.kys.bnmo.model.Member;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.IntStream;
 
 public class MembershipTab extends TabContainer {
 
     private static final TableBuilder tableBuilder = new TableBuilder();
 
-     private static final CustomerController customerController = new CustomerController();
-     private static final MemberController memberController = new MemberController();
+    private static final CustomerController customerController = new CustomerController();
+    private static final MemberController memberController = new MemberController();
 
     private final NavigationHandler memberActionHandler;
     private final EventHandler<ActionEvent> backHandler;
@@ -46,9 +43,6 @@ public class MembershipTab extends TabContainer {
         ArrayList<Member> members = memberController.fetchAll();
         customers.addAll(members);
 
-        // Sort by customer ID
-        customers.sort(Comparator.comparingInt(Customer::getCustomerID));
-
         // Table heading
         List<String> tableHeadings = new ArrayList<>(Arrays.asList("Customer ID", "Name", "Phone", "Status", "Level", "Points", "Action"));
 
@@ -60,7 +54,7 @@ public class MembershipTab extends TabContainer {
 
         for (Customer customer : customers) {
             List<String> row = new ArrayList<>();
-            row.add(String.valueOf(customer.getCustomerID()));
+            row.add(customer.getCustomerID().toString());
             if (customer instanceof Member) {
                 row.add(((Member) customer).getName());
                 row.add(((Member) customer).getPhoneNumber());
@@ -80,8 +74,8 @@ public class MembershipTab extends TabContainer {
             // Action menu
             ContextMenu menu;
             if (customer instanceof Member) {
-                int editedCustomerID = customer.getCustomerID();
-                int editedCustomerIndex = IntStream.range(0, members.size()).filter(i -> members.get(i).getCustomerID() == editedCustomerID).findFirst().orElse(-1);
+                UUID editedCustomerID = customer.getCustomerID();
+                int editedCustomerIndex = IntStream.range(0, members.size()).filter(i -> members.get(i).getCustomerID().equals(editedCustomerID)).findFirst().orElse(-1);
 
                 // Set menu item action
                 // Edit button
@@ -165,13 +159,11 @@ public class MembershipTab extends TabContainer {
                 MenuItem item4 = new MenuItem("Transaction History");
                 item4.setOnAction(e -> {
                     memberActionHandler.getEventHandler(
-                            new BillTab(customer.getCustomerID()),
-                            "Customer " + customer.getCustomerID() + "Transaction History"
+                            new HistoryTab(customer.getCustomerID(), memberActionHandler, backHandler)
                     ).handle(e);
                 });
 
                 // Promote/Demote button
-                // TODO: Update DataStore to promote or demote member
                 MenuItem item3;
                 if (customer.getMemberLevel().equals("VIP")) {
                     item3 = new MenuItem("Demote");
@@ -247,8 +239,17 @@ public class MembershipTab extends TabContainer {
                             new MemberFormTab("Apply membership", customer.getCustomerID(), backHandler)
                     ).handle(e);
                 });
-                menu = new ContextMenu(item1);
+
+                MenuItem item2 = new MenuItem("Transaction History");
+                item2.setOnAction(e -> {
+                    memberActionHandler.getEventHandler(
+                            new HistoryTab(customer.getCustomerID(), memberActionHandler, backHandler)
+                    ).handle(e);
+                });
+
+                menu = new ContextMenu(item1, item2);
             }
+
             contextMenus.add(menu);
         }
 

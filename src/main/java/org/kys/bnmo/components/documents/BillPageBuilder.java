@@ -89,7 +89,7 @@ public class BillPageBuilder extends ComponentBuilder {
 
 
         GridPane root = new GridPane();
-        addInformationRow(root, 0, "Customer ID", Integer.toString(transaction.getCustomer().getCustomerID()));
+        addInformationRow(root, 0, "Customer ID", transaction.getCustomer().getCustomerID().toString());
         addInformationRow(root, 1, "Membership", transaction.getCustomer().getMemberLevel());
         addInformationRow(root, 2, "Status", status);
         addInformationRow(root, 3, "Phone Number", phone);

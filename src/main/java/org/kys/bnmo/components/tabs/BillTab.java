@@ -12,11 +12,6 @@ public class BillTab extends TabContainer{
         this.billDocumentFactory =  new BillDocument(transactionId);
     }
 
-    public void setCustomerID(int transactionId) {
-        this.transactionId = transactionId;
-        this.billDocumentFactory.setTransactionID(transactionId);
-    }
-
     @Override
     protected Pane getContent() {
         Pane root =  billDocumentFactory.getComponent();

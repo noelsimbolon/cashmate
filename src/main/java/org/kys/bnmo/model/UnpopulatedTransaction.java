@@ -12,7 +12,7 @@ public class UnpopulatedTransaction {
     private final int transactionID;
 
     @Getter
-    private int customerID;
+    private UUID customerID;
 
     @Getter
     private Double totalPrice;
@@ -27,15 +27,10 @@ public class UnpopulatedTransaction {
     private int discount;
 
     public UnpopulatedTransaction() {
-        this.transactionID = 0;
-        this.customerID = 0;
-        this.discount = 0;
-        this.orderIDs = new ArrayList<>();
-        this.totalPrice = 0.0;
-        this.date = new Date();
+        this(0, UUID.randomUUID(), new ArrayList<>(), 0, new Date(), 0);
     }
 
-    public UnpopulatedTransaction(int transactionID, int customerID, List<Integer> orderIDs, double totalPrice, Date date, int discount) {
+    public UnpopulatedTransaction(int transactionID, UUID customerID, List<Integer> orderIDs, double totalPrice, Date date, int discount) {
         this.transactionID = transactionID;
         this.customerID = customerID;
         this.discount = discount;

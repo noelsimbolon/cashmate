@@ -1,12 +1,7 @@
 package org.kys.bnmo.controllers;
 
-import org.kys.bnmo.model.Customer;
-import org.kys.bnmo.model.Order;
+import org.kys.bnmo.model.*;
 import org.kys.bnmo.helpers.plugins.PluginLoader;
-import org.kys.bnmo.model.InventoryItem;
-import org.kys.bnmo.model.Modifiable;
-import org.kys.bnmo.model.Transaction;
-import org.kys.bnmo.model.UnpopulatedTransaction;
 import org.kys.bnmo.plugins.base.PluginService;
 
 import java.util.ArrayList;
@@ -19,6 +14,7 @@ public class TransactionController {
     private final String fileName;
     private final OrderController orderController = new OrderController();
     private final CustomerController customerController = new CustomerController();
+    private final MemberController memberController = new MemberController();
 
     public TransactionController() {
         dataStore = new DataStore();
@@ -28,13 +24,13 @@ public class TransactionController {
     private void processGetData(List<Transaction> transactions)
     {
         PluginLoader pluginLoader = new PluginLoader();
-        pluginLoader.runClasses(new PluginService(null , null, new Modifiable(transactions,null, true)));
+        pluginLoader.runClasses(new PluginService(null , null, new Modifiable(transactions,null, null, true)));
     }
 
     private void processSetData(List<Transaction> transactions)
     {
         PluginLoader pluginLoader = new PluginLoader();
-        pluginLoader.runClasses(new PluginService(null , null, new Modifiable(transactions, null, false)));
+        pluginLoader.runClasses(new PluginService(null , null, new Modifiable(transactions, null, null, false)));
 
     }
 
@@ -47,7 +43,15 @@ public class TransactionController {
                 orders.add(orderController.fetchByID(orderID).get(0));
             }
 
-            Customer customer = customerController.fetchByID(ut.getCustomerID()).get(0);
+            Customer customer;
+            ArrayList<Customer> customerFetch = customerController.fetchByID(ut.getCustomerID());
+
+            if (customerFetch.size() > 0) {
+                customer = customerFetch.get(0);
+            } else {
+                ArrayList<Member> memberFetch = memberController.fetchByID(ut.getCustomerID());
+                customer = memberFetch.get(0);
+            }
 
             Transaction transaction = new Transaction(ut.getTransactionID(), customer, orders, ut.getTotalPrice(), ut.getDate(), ut.getDiscount());
             transactions.add(transaction);
@@ -59,6 +63,12 @@ public class TransactionController {
     public ArrayList<Transaction> fetchByID(int uuid) {
         return (ArrayList<Transaction>) fetchAll().stream()
                 .filter(t -> t.getTransactionID() == uuid)
+                .collect(Collectors.toList());
+    }
+
+    public ArrayList<Transaction> fetchByCustomerID(UUID id) {
+        return (ArrayList<Transaction>) fetchAll().stream()
+                .filter(t -> t.getCustomer().getCustomerID().equals(id))
                 .collect(Collectors.toList());
     }
 

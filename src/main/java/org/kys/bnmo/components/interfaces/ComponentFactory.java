@@ -1,4 +1,4 @@
-package org.kys.bnmo.components;
+package org.kys.bnmo.components.interfaces;
 import javafx.scene.layout.Pane;
 import org.jetbrains.annotations.NotNull;
 

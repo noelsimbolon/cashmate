@@ -10,15 +10,18 @@ public class Modifiable {
 
     public List<Transaction> transactions;
     public List<InventoryItem> inventoryItems;
+    public List<Order> orders;
     public boolean get;
     public Modifiable(
             @Nullable List<Transaction> transactions,
             @Nullable List<InventoryItem> inventoryItems,
+            @Nullable List<Order> orders,
             boolean get
             )
     {
         this.transactions = transactions;
         this.inventoryItems = inventoryItems;
+        this.orders = orders;
         this.get = get;
     }
 }

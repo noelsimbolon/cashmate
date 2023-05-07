@@ -6,6 +6,7 @@ import javafx.beans.property.Property;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -349,7 +350,7 @@ public class FormBuilder extends ComponentBuilder {
         inputFields.getChildren().add(row);
     }
 
-    public void addButton(String label, EventHandler<ActionEvent> eventHandler) {
+    public void addButton(String label, EventHandler<ActionEvent> ...eventHandler) {
         // Create button
         Button button = new Button(label);
         button.getStyleClass().add("form-button");
@@ -360,7 +361,10 @@ public class FormBuilder extends ComponentBuilder {
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
         // Add event handler
-        button.setOnAction(eventHandler);
+        for (EventHandler<ActionEvent> handler : eventHandler)
+        {
+            button.addEventHandler(ActionEvent.ACTION, handler);
+        }
 
         // Add components to root
         HBox row = new HBox(spacer, button);

@@ -1,1 +1,161 @@
-[]
+[ {
+  "itemID" : "6169d4e1-724f-435c-820d-18c7a0b3c3be",
+  "itemName" : "Item 1",
+  "category" : "Food",
+  "stock" : 75,
+  "price" : 100000.0,
+  "purchasePrice" : 90000.0,
+  "imageFileName" : "food.png"
+}, {
+  "itemID" : "2fac3c73-0813-42df-95b4-ea32336b7a4b",
+  "itemName" : "Item 2",
+  "category" : "Stationery",
+  "stock" : 46,
+  "price" : 111000.0,
+  "purchasePrice" : 100000.0,
+  "imageFileName" : "stationery.png"
+}, {
+  "itemID" : "4096e30e-33b8-444c-a9eb-7094ed4f1d12",
+  "itemName" : "Item 3",
+  "category" : "Stationery",
+  "stock" : 51,
+  "price" : 77000.0,
+  "purchasePrice" : 70000.0,
+  "imageFileName" : "stationery.png"
+}, {
+  "itemID" : "e742423b-824c-4308-959c-112a4f84be07",
+  "itemName" : "Item 4",
+  "category" : "Stationery",
+  "stock" : 38,
+  "price" : 22000.0,
+  "purchasePrice" : 20000.0,
+  "imageFileName" : "stationery.png"
+}, {
+  "itemID" : "e435771d-beb5-4223-b6d8-a6715e356426",
+  "itemName" : "Item 5",
+  "category" : "Stationery",
+  "stock" : 70,
+  "price" : 66000.0,
+  "purchasePrice" : 60000.0,
+  "imageFileName" : "stationery.png"
+}, {
+  "itemID" : "30d21d48-b96e-4f41-8917-ebfa0afbc941",
+  "itemName" : "Item 6",
+  "category" : "Food",
+  "stock" : 39,
+  "price" : 111000.0,
+  "purchasePrice" : 100000.0,
+  "imageFileName" : "food.png"
+}, {
+  "itemID" : "72a73440-cb0f-45b9-b584-87a798f1bdb2",
+  "itemName" : "Item 7",
+  "category" : "Food",
+  "stock" : 8,
+  "price" : 66000.0,
+  "purchasePrice" : 60000.0,
+  "imageFileName" : "food.png"
+}, {
+  "itemID" : "dffc2b97-cfe4-4a43-a79f-1c5aa24b7e0e",
+  "itemName" : "Item 8",
+  "category" : "Medicine",
+  "stock" : 75,
+  "price" : 66000.0,
+  "purchasePrice" : 60000.0,
+  "imageFileName" : "medicine.png"
+}, {
+  "itemID" : "e840558b-88b8-4f55-a552-4d8d9c47a3f3",
+  "itemName" : "Item 9",
+  "category" : "Beverage",
+  "stock" : 83,
+  "price" : 111000.0,
+  "purchasePrice" : 100000.0,
+  "imageFileName" : "beverage.png"
+}, {
+  "itemID" : "732e9d0e-2671-4302-aebb-35cf6768d043",
+  "itemName" : "Item 10",
+  "category" : "Food",
+  "stock" : 89,
+  "price" : 56000.0,
+  "purchasePrice" : 50000.0,
+  "imageFileName" : "food.png"
+}, {
+  "itemID" : "162aa607-9473-446b-8e76-9cc7c63915b6",
+  "itemName" : "Item 11",
+  "category" : "Medicine",
+  "stock" : 51,
+  "price" : 111000.0,
+  "purchasePrice" : 100000.0,
+  "imageFileName" : "medicine.png"
+}, {
+  "itemID" : "915d105b-fe5a-4605-9515-813e94bc1d7d",
+  "itemName" : "Item 12",
+  "category" : "Medicine",
+  "stock" : 61,
+  "price" : 11000.0,
+  "purchasePrice" : 10000.0,
+  "imageFileName" : "medicine.png"
+}, {
+  "itemID" : "b6de4aee-db96-412b-a661-f0bd021d97a0",
+  "itemName" : "Item 13",
+  "category" : "Medicine",
+  "stock" : 20,
+  "price" : 22000.0,
+  "purchasePrice" : 20000.0,
+  "imageFileName" : "medicine.png"
+}, {
+  "itemID" : "a4f2819f-b9db-489c-821f-631da462d031",
+  "itemName" : "Item 14",
+  "category" : "Food",
+  "stock" : 39,
+  "price" : 66000.0,
+  "purchasePrice" : 60000.0,
+  "imageFileName" : "food.png"
+}, {
+  "itemID" : "db0c42a2-3fbe-4ed4-a1c7-3f39cf8057f5",
+  "itemName" : "Item 15",
+  "category" : "Food",
+  "stock" : 25,
+  "price" : 56000.0,
+  "purchasePrice" : 50000.0,
+  "imageFileName" : "food.png"
+}, {
+  "itemID" : "2c008511-169e-48fe-bfee-89e5e36257dc",
+  "itemName" : "Item 16",
+  "category" : "Stationery",
+  "stock" : 18,
+  "price" : 88000.0,
+  "purchasePrice" : 80000.0,
+  "imageFileName" : "stationery.png"
+}, {
+  "itemID" : "2cc42dc2-630e-43c7-be98-bec9b890bfc5",
+  "itemName" : "Item 17",
+  "category" : "Beverage",
+  "stock" : 4,
+  "price" : 77000.0,
+  "purchasePrice" : 70000.0,
+  "imageFileName" : "beverage.png"
+}, {
+  "itemID" : "7ffffe28-d1db-480f-b1dd-80f5c2625dfc",
+  "itemName" : "Item 18",
+  "category" : "Beverage",
+  "stock" : 14,
+  "price" : 66000.0,
+  "purchasePrice" : 60000.0,
+  "imageFileName" : "beverage.png"
+}, {
+  "itemID" : "88b5c708-932d-42d7-907a-3ffc4813542a",
+  "itemName" : "Item 19",
+  "category" : "Medicine",
+  "stock" : 53,
+  "price" : 33000.0,
+  "purchasePrice" : 30000.0,
+  "imageFileName" : "medicine.png"
+}, {
+  "itemID" : "7225046c-a335-4139-91b2-f4edcc36a57d",
+  "itemName" : "Item 20",
+  "category" : "Medicine",
+  "stock" : 41,
+  "price" : 111000.0,
+  "purchasePrice" : 100000.0,
+  "imageFileName" : "medicine.png"
+} ]

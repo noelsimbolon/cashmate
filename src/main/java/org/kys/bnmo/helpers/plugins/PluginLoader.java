@@ -1,6 +1,4 @@
 package org.kys.bnmo.helpers.plugins;
-import org.kys.bnmo.plugins.adapters.PageAdapter;
-import org.kys.bnmo.plugins.base.PluginService;
 import org.kys.bnmo.plugins.interfaces.BasePlugin;
 import org.kys.bnmo.plugins.interfaces.PluginServiceInterface;
 
@@ -21,7 +19,7 @@ public class PluginLoader {
     private void readJar() {
         try {
             // Create a new ClassLoader instance
-            File pluginsFolder = new File("D:/Tubes2Plugins");
+            File pluginsFolder = new File("$plugins");
 
             if (!pluginsFolder.exists()) {
                 pluginsFolder.mkdirs();
