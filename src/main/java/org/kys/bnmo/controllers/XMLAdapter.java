@@ -1,5 +1,6 @@
 package org.kys.bnmo.controllers;
 
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
 
@@ -20,6 +21,7 @@ public class XMLAdapter implements Adapter {
         ArrayList<T> objectList = new ArrayList<>();
 
         try {
+            xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
             CollectionType listType = xmlMapper.getTypeFactory().constructCollectionType(ArrayList.class, type);
             objectList = xmlMapper.readValue(new File(filePath), listType);
         } catch (IOException e) {
