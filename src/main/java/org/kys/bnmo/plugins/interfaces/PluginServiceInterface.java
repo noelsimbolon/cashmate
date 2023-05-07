@@ -1,6 +1,7 @@
 package org.kys.bnmo.plugins.interfaces;
 
 import javafx.beans.property.Property;
+import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
@@ -20,4 +21,11 @@ public interface PluginServiceInterface {
             Property<String> selectedValue);
 
     public void addSettingSaveAction(EventHandler<ActionEvent> handler);
+
+    public void addTextBoxSetting(
+            String label,
+            String placeholder,
+            String defaultValue,
+            StringProperty property
+    );
 }

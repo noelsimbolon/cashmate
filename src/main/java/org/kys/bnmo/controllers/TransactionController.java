@@ -31,7 +31,6 @@ public class TransactionController {
     {
         PluginLoader pluginLoader = new PluginLoader();
         pluginLoader.runClasses(new PluginService(null , null, new Modifiable(transactions, null, null, false)));
-
     }
 
     public ArrayList<Transaction> fetchAll() {

@@ -1,6 +1,7 @@
 package org.kys.bnmo.plugins.adapters;
 
 import org.kys.bnmo.controllers.DataStore;
+import org.kys.bnmo.plugins.interfaces.DatastoreAdapterInterface;
 
 import java.util.ArrayList;
 
