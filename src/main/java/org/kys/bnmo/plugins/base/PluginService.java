@@ -36,8 +36,6 @@ public class PluginService implements PluginServiceInterface {
         }
     }
 
-
-
     @Override
     public ControllerAdapterInterface getController() {
         return new ControllerAdapter();
