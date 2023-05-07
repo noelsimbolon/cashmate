@@ -43,7 +43,7 @@ public class InventoryItemController {
         return SwingFXUtils.toFXImage(dataStore.readImage(fileName), null);
     }
 
-    public void loadConfig() throws IOException {
+    public void loadConfig() {
         dataStore.loadConfig();
     }
 

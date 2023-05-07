@@ -35,11 +35,7 @@ public class CatalogueTab extends TabContainer {
 
     @Override
     protected Pane getContent() {
-        try {
-            inventoryItemController.loadConfig();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        inventoryItemController.loadConfig();
 
         // Read inventory items from data store
         ArrayList<InventoryItem> inventoryItems = inventoryItemController.readInventoryItems();
