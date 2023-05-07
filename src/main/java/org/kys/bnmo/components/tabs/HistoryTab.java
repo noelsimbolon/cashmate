@@ -48,9 +48,6 @@ public class HistoryTab  extends TabContainer {
         // Fetch transaction data
         ArrayList<Transaction> transactions = transactionController.fetchByCustomerID(customerId);
 
-        // Sort by transaction ID
-//        transactions.sort((t1, t2) -> t2.getTransactionID() - t1.getTransactionID());
-
         // Table headings
         List<String> tableHeadings = new ArrayList<>(Arrays.asList("Transaction ID", "Date", "Total Price", "Discount", "Action"));
 
@@ -63,7 +60,7 @@ public class HistoryTab  extends TabContainer {
         for (Transaction transaction : transactions) {
             List<String> row = new ArrayList<>();
 
-            row.add(String.valueOf(transaction.getTransactionID()));
+            row.add(transaction.getTransactionID().toString().substring(0, 8) + "...");
             row.add(transaction.getDate().toString());
             row.add(String.valueOf(transaction.getTotalPrice()));
             row.add(String.valueOf(transaction.getDiscount()));
@@ -102,6 +99,7 @@ public class HistoryTab  extends TabContainer {
         // Set ID, and actions alignment as center
         tableBuilder.setColumnAlignment(0, Pos.CENTER);
         tableBuilder.setColumnAlignment(tableHeadings.size() - 1, Pos.CENTER);
+        tableBuilder.setColumnAlignment(tableHeadings.size() - 2, Pos.CENTER);
 
         // Set the root
         Pane root = tableBuilder.getAndResetComponent();

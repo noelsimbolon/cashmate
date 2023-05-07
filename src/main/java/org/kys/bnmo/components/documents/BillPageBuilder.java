@@ -120,7 +120,7 @@ public class BillPageBuilder extends ComponentBuilder {
 
     private @NotNull GridPane getFooterEnd() {
         GridPane footerEnd = documentBuilderHelper.getSpaceBetweenColumnTemplate();
-        Label endColumn1 = new Label("Thank you! — yourename@gmail.com");
+        Label endColumn1 = new Label("Thank you! — cashmate@gmail.com");
         Label endColumn2 = new Label("Rp IDR");
 
         footerEnd.getStyleClass().addAll("small-text");
