@@ -1,5 +1,8 @@
 package org.kys.bnmo.userPlugins.test;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.Chart;
@@ -9,6 +12,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import org.kys.bnmo.plugins.interfaces.ControllerAdapterInterface;
 import org.kys.bnmo.plugins.interfaces.PluginInterface;
 import org.kys.bnmo.plugins.interfaces.PluginServiceInterface;
 
@@ -22,13 +26,22 @@ public class PieChartPlugin implements PluginInterface {
 
     private Chart getChart()
     {
+        ControllerAdapterInterface controller = service.getController();
+
+        IntegerProperty customersCount = new SimpleIntegerProperty();
+        IntegerProperty membersCount = new SimpleIntegerProperty();
+        IntegerProperty vipsCount = new SimpleIntegerProperty();
+
+        PieChart.Data data1 = new PieChart.Data("Customers", customersCount.getValue());
+        PieChart.Data data2 = new PieChart.Data("Members", membersCount.getValue());
+        PieChart.Data data3 = new PieChart.Data("VIPs", vipsCount.getValue());
+
         ObservableList<PieChart.Data> pieChartData =
             FXCollections.observableArrayList(
-                new PieChart.Data("Grapefruit", 13),
-                new PieChart.Data("Oranges", 25),
-                new PieChart.Data("Plums", 10),
-                new PieChart.Data("Pears", 22),
-                new PieChart.Data("Apples", 30));
+                data1,
+                data2,
+                data3
+            );
 
         final PieChart chart = new PieChart(pieChartData);
         chart.setTitle("Imported Fruits");
