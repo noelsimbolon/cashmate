@@ -160,6 +160,7 @@ public class BnmoApplication extends Application {
                 else
                 {
                     tabPane.getTabs().add(newTab);
+                    tabPane.getSelectionModel().select(newTab);
                 }
 
             }

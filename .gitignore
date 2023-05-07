@@ -1,5 +1,6 @@
 # Plugins testing
 $plugins/
+compiledPlugins/
 
 # User-specific config
 config.*

@@ -11,18 +11,32 @@ public class IconButtonHelper {
 
     public void setButtonGraphic(@NotNull Button button, String path) {
         // Set Button Graphic to Image that Located in the Path
-        Image image = new Image(Objects.requireNonNull(getClass().getResource(path)).toExternalForm());
-        ImageView imageView = new ImageView(image);
-        button.setGraphic(imageView);
+
+        try {
+            Image image = new Image(Objects.requireNonNull(getClass().getResource(path)).toExternalForm());
+            ImageView imageView = new ImageView(image);
+            button.setGraphic(imageView);
+        }
+
+        catch (Exception e)
+        {
+        }
     }
 
     public void setButtonGraphic(@NotNull Button button, String path, int width, int height) {
         // Set Button Graphic to Image that Located in the Path
-        Image image = new Image(Objects.requireNonNull(getClass().getResource(path)).toExternalForm());
-        ImageView imageView = new ImageView(image);
-        imageView.setFitHeight(height);
-        imageView.setFitWidth(width);
-        button.setGraphic(imageView);
+
+        try {
+            Image image = new Image(Objects.requireNonNull(getClass().getResource(path)).toExternalForm());
+            ImageView imageView = new ImageView(image);
+            imageView.setFitHeight(height);
+            imageView.setFitWidth(width);
+            button.setGraphic(imageView);
+        }
+
+        catch (Exception e)
+        {
+        }
     }
 
     public void selectButton(@NotNull Button button)

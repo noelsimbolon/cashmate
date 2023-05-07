@@ -1,4 +1,7 @@
 package org.kys.bnmo.helpers.plugins;
+import org.kys.bnmo.plugins.interfaces.BasePlugin;
+import org.kys.bnmo.plugins.interfaces.PluginInterface;
+
 import java.io.File;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -26,7 +29,6 @@ public class PluginLoader {
             for (File file : jarFiles) {
 
                 try {
-
                     JarFile jarFile = new JarFile(file.getAbsolutePath());
 
                     Manifest manifest = jarFile.getManifest();
@@ -36,7 +38,12 @@ public class PluginLoader {
                             new URL[]{new URL("file:" + file.getAbsolutePath())});
 
                     Class plugin = classLoader.loadClass(mainClassName);
-                    plugins.add(plugin);
+
+                    if (plugin.getSuperclass().equals(BasePlugin.class))
+                    {
+                        plugins.add(plugin);
+                    }
+
                 }
 
                 catch (Exception e)

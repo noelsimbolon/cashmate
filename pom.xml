@@ -105,6 +105,7 @@
 <!--                    <compileSourceRoots>-->
 <!--                        <compileSourceRoot>src/main/java/org/kys/bnmo/plugins/interfaces</compileSourceRoot>-->
 <!--                        <compileSourceRoot>src/main/java/org/kys/bnmo/userPlugins/test</compileSourceRoot>-->
+<!--                        <compileSourceRoot>src/main/java/org/kys/bnmo/model</compileSourceRoot>-->
 <!--                    </compileSourceRoots>-->
 <!--                    <outputDirectory>compiledPlugins</outputDirectory>-->
 <!--                </configuration>-->
@@ -130,7 +131,7 @@
 <!--                                </manifest>-->
 <!--                            </archive>-->
 <!--                            <outputDirectory>$plugins</outputDirectory>-->
-<!--                            <finalName>plugin</finalName>-->
+<!--                            <finalName>plugin1</finalName>-->
 <!--                        </configuration>-->
 <!--                    </execution>-->
 <!--                </executions>-->

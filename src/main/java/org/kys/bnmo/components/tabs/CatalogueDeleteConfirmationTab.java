@@ -32,6 +32,7 @@ public class CatalogueDeleteConfirmationTab extends TabContainer {
                 inventoryItems.remove(deletedItem);
                 inventoryItemController.writeInventoryItems(inventoryItems);
             }
+            backButtonAction.handle(event);
         };
     }
 

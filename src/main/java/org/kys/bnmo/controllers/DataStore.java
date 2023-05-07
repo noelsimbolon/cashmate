@@ -1,5 +1,6 @@
 package org.kys.bnmo.controllers;
 
+import lombok.Getter;
 import org.kys.bnmo.model.Customer;
 import org.kys.bnmo.model.InventoryItem;
 import org.kys.bnmo.model.Member;
@@ -17,12 +18,18 @@ import java.util.Objects;
 import javax.imageio.ImageIO;
 
 public class DataStore {
+
+    @Getter
     private static String folderPath;
+
+    @Getter
     private static String fileFormat;
+
     private final static ArrayList<String> defaultConfig = new ArrayList<>() {{
         add(System.getProperty("user.dir") + "\\data");  // Data Location
         add("json");  // Data Format
     }};
+
     private Adapter adapter;
 
     private static final Map<String, Adapter> adapterMap = new HashMap<>() {{
@@ -49,7 +56,7 @@ public class DataStore {
         return adapterMap.get(format);
     }
 
-    public void loadConfig() throws IOException {
+    public void loadConfig() {
         File configFile = new File("config.xml");
 
         folderPath = System.getProperty("user.dir");
@@ -115,11 +122,17 @@ public class DataStore {
                 fileFormat = newFileFormat;
                 writeData(fileName, data);
                 fileFormat = oldFormat;
+
+                // Remove the old file
+                File oldFile = new File(folderPath, fileName + "." + oldFormat);
+                if (oldFile.exists()) {
+                    oldFile.delete();
+                }
             }
         }
     }
 
-    public void setFileFormat(String newFileFormat, boolean changeData) throws IOException {
+    public void setFileFormat(String newFileFormat, boolean changeData) {
         if (changeData) changeDatabaseFormat(newFileFormat);
 
         File configFile = new File("config.xml");

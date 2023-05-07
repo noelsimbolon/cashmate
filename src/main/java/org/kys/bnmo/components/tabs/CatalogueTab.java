@@ -15,7 +15,6 @@ import org.kys.bnmo.events.NavigationHandler;
 import org.kys.bnmo.helpers.views.tables.TableData;
 import org.kys.bnmo.model.InventoryItem;
 
-import java.beans.DefaultPersistenceDelegate;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,7 +36,7 @@ public class CatalogueTab extends TabContainer {
     @Override
     protected Pane getContent() {
         try {
-            inventoryItemController.loadDataStore();
+            inventoryItemController.loadConfig();
         } catch (IOException e) {
             e.printStackTrace();
         }
