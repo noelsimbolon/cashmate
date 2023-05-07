@@ -6,7 +6,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.kys.bnmo.model.InventoryItem;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -22,10 +21,8 @@ public class InventoryItemController {
         return SwingFXUtils.toFXImage(dataStore.readImage(fileName), null);
     }
 
-    public void loadDataStore() throws IOException {
+    public void loadConfig() throws IOException {
         dataStore.loadConfig();
-        String dataTestFolderPath = (new File("test\\data")).getAbsolutePath();
-        dataStore.setFolderPath(dataTestFolderPath, false);
     }
 
     public ArrayList<InventoryItem> readInventoryItems() {
