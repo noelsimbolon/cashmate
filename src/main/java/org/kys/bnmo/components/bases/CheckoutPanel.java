@@ -9,6 +9,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.text.Text;
 import lombok.Getter;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
@@ -17,7 +18,6 @@ import org.kys.bnmo.helpers.views.loaders.StyleLoadHelper;
 import org.kys.bnmo.model.Customer;
 import org.kys.bnmo.model.InventoryItem;
 import org.kys.bnmo.model.Member;
-import org.kys.bnmo.model.VIP;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -59,6 +59,7 @@ public class CheckoutPanel extends VBox {
     private ComboBox<String> customerDropdown;
     private VBox checkoutPanelContainer;
     private Button checkoutButton;
+    private Text discountAmountLabel;
 
     public CheckoutPanel(List<Member> members) {
         super();
@@ -87,7 +88,21 @@ public class CheckoutPanel extends VBox {
         // addCustomerDropdown("Select customer", new String[] {"Customer 1", "Jojo", "Fio"});
 
         addItemScrollPane();
-        addDiscount(20000, "Rp");
+
+        var discountContainer = new HBox();
+
+        var discountLabel = new Text("Discounts:");
+        discountLabel.setId("discount-label");
+
+        var spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+
+        discountAmountLabel = new Text( "Rp" + 0);
+        discountAmountLabel.setId("discount-amount");
+
+        discountContainer.getChildren().addAll(discountLabel, spacer, discountAmountLabel);
+        inputFields.getChildren().add(discountContainer);
+
         checkoutButton = new Button("Charge");
         addCheckoutButton();
         checkoutButton.setOnMouseClicked(e -> {
@@ -318,19 +333,7 @@ public class CheckoutPanel extends VBox {
     }
 
     private void addDiscount(double discount, String currency) {
-        var discountContainer = new HBox();
 
-        var discountLabel = new Label("Discounts:");
-        discountLabel.setId("discount-label");
-
-        var spacer = new Region();
-        HBox.setHgrow(spacer, Priority.ALWAYS);
-
-        var discountAmount = new Label( currency + discount);
-        discountAmount.setId("discount-amount");
-
-        discountContainer.getChildren().addAll(discountLabel, spacer, discountAmount);
-        inputFields.getChildren().add(discountContainer);
     }
 
     private void updateCheckoutPrice() {
@@ -341,15 +344,16 @@ public class CheckoutPanel extends VBox {
         for (Order order : temporaryBills.get(customerDropdown.getSelectionModel().getSelectedIndex()).getOrders()) {
             amount += order.quantity.get() * order.item.getPrice();
         }
+        int initial = amount;
 
         Customer customer =temporaryBills.get(customerDropdown.getSelectionModel().getSelectedIndex()).customer;
         if (customer instanceof Member member) {
             amount -= Math.min(amount, member.getPoints());
+            if (member.getMemberLevel().equalsIgnoreCase("vip"))
+                amount *= 0.9;
         }
 
-        if (customer instanceof VIP) {
-            amount *= 0.9;
-        }
+        discountAmountLabel.setText("Rp"+ (initial - amount));
 
         String formattedAmount = rupiahFormat.format(amount);
 

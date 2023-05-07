@@ -2,22 +2,22 @@ package org.kys.bnmo.components.tabs;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import org.kys.bnmo.components.bases.CheckoutPanel;
-import org.kys.bnmo.components.bases.FormBuilder;
 import org.kys.bnmo.components.bases.TableBuilder;
-import org.kys.bnmo.helpers.Table.TableData;
+import org.kys.bnmo.controllers.InventoryItemController;
+import org.kys.bnmo.controllers.MemberController;
+import org.kys.bnmo.helpers.views.tables.TableData;
 import org.kys.bnmo.model.InventoryItem;
 import org.kys.bnmo.model.Member;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.io.IOException;
+import java.util.*;
 
 public class CashierTab extends TabContainer {
 
@@ -26,10 +26,13 @@ public class CashierTab extends TabContainer {
     @Override
     protected Pane getContent() {
         List<Member> members = new ArrayList<>();
-        members.add(new Member("Fio", "+62-812-3456-891"));
-        members.add(new Member("Jojo", "+62-812-3456-891"));
-        members.add(new Member("Agus", "+62-812-3456-891"));
+        members.add(new Member("Fio", "+62-812-3456-891", "Member"));
+        members.add(new Member("Jojo", "+62-812-3456-891", "Member"));
+        members.add(new Member("Agus", "+62-812-3456-891", "VIP"));
         CheckoutPanel checkoutPanel = new CheckoutPanel(members);
+
+        // Set table data
+//        TableData inventoryData = loadTableData(checkoutPanel);
 
         List<String> headers = new ArrayList<>(Arrays.asList("Item ID", "Name", "Price", "Actions"));
         List<List<String>> content = new ArrayList<>();
@@ -44,7 +47,7 @@ public class CashierTab extends TabContainer {
             int randomIndex = random.nextInt(foodNames.size());
             String randomFoodName = foodNames.get(randomIndex);
             content.add(new ArrayList<>(Arrays.asList(Integer.toString(item_id), randomFoodName, "Rp12.000")));
-            items.add(new InventoryItem(10, randomFoodName, 12000, "Fast Food", null));
+            items.add(new InventoryItem(randomFoodName, "Fast Food", 10, 12000, 12000, null));
             int idx = i;
             handlers.add(e -> {
                 checkoutPanel.addItem(items.get(idx));
@@ -52,9 +55,14 @@ public class CashierTab extends TabContainer {
             item_id++;
         }
         TableData tableData = new TableData(headers, content, handlers, null);
-        tableBuilder.setTableData(tableData, new ArrayList<>(Arrays.asList(0, 1)));
-        tableBuilder.setColumnAlignment(0, Pos.CENTER);
+
+        tableBuilder.setTableData(tableData, List.of(0, 1, 3));
+
+        // Add search bar
         tableBuilder.addSearchBar();
+
+        // Set column alignment for header
+        tableBuilder.setColumnAlignment(0, Pos.CENTER);
 
         HBox root = new HBox();
 
@@ -75,6 +83,60 @@ public class CashierTab extends TabContainer {
         root.getStyleClass().add("tab-row");
         return root;
 
+    }
+
+//    private List<Member> loadMembers() {
+//        MemberController memberController = new MemberController();
+//
+//        try {
+//            memberController.fetchAll();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//    }
+
+    private TableData loadTableData(CheckoutPanel checkoutPanel) {
+        InventoryItemController inventoryItemController = new InventoryItemController();
+
+        try {
+            inventoryItemController.loadDataStore();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Read inventory items from data store
+        ArrayList<InventoryItem> inventoryItems = inventoryItemController.readInventoryItems();
+
+        // Initialize objects
+        List<String> heading = new ArrayList<>(Arrays.asList("Item", "Category", "Stock", "Price", "Purchase Price", "Actions"));
+        List<Image> images = new ArrayList<>();
+        List<List<String>> data = new ArrayList<>();
+        List<EventHandler<MouseEvent>> handlers = new ArrayList<>();
+
+        // This loop fill the rows with data
+        for (InventoryItem inventoryItem : inventoryItems) {
+            List<String> row = new ArrayList<>();
+
+            row.add(inventoryItem.getItemName());
+            row.add(inventoryItem.getCategory());
+            row.add(inventoryItem.getStock().toString());
+            row.add(inventoryItem.getPrice().toString());
+            row.add(inventoryItem.getPurchasePrice().toString());
+
+            data.add(row);
+
+            var itemImage = new Image(Objects.requireNonNull(getClass().getResource(
+                    "/categories/" + inventoryItem.getImageFileName()
+            )).toExternalForm(), 34, 34, false, true);
+
+            images.add(itemImage);
+
+            handlers.add(e -> {checkoutPanel.addItem(inventoryItem);});
+        }
+
+        return new TableData(heading, data, images, 0, handlers, null);
     }
 
     @Override

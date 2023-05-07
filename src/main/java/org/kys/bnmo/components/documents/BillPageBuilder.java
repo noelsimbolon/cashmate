@@ -4,12 +4,17 @@ import javafx.geometry.HPos;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 import org.kys.bnmo.components.ComponentBuilder;
 import org.kys.bnmo.helpers.views.DocumentBuilderHelper;
 import org.kys.bnmo.helpers.views.loaders.StyleLoadHelper;
+import org.kys.bnmo.model.*;
 
 import java.util.Arrays;
+import java.util.Date;
+import java.util.UUID;
 
 public class BillPageBuilder extends ComponentBuilder {
 
@@ -17,10 +22,12 @@ public class BillPageBuilder extends ComponentBuilder {
     private static final DocumentBuilderHelper documentBuilderHelper = new DocumentBuilderHelper();
     private GridPane footerHeader;
     private GridPane footerContent;
+    @Getter
+    private Transaction transaction;
 
     private @NotNull Parent getDateIdSegment() {
         Label dateTitle = new Label("Date:");
-        Label dateValue = new Label("June 3, 2020");
+        Label dateValue = new Label(new Date().toString());
         dateTitle.getStyleClass().addAll("small-text", "dark");
         dateValue.getStyleClass().addAll("small-text", "light");
 
@@ -29,7 +36,7 @@ public class BillPageBuilder extends ComponentBuilder {
         dateRow.getStyleClass().add("label-row");
 
         Label idTitle = new Label("Invoice:");
-        Label idValue = new Label("#0317");
+        Label idValue = new Label(transaction.getTransactionID().toString());
         idTitle.getStyleClass().addAll("small-text", "dark");
         idValue.getStyleClass().addAll("small-text", "light");
 
@@ -46,7 +53,11 @@ public class BillPageBuilder extends ComponentBuilder {
 
     private @NotNull Parent getCustomerSegment() {
         Label customerTitle = new Label("BILL TO");
-        Label customerName = new Label("Client Name");
+        Label customerName = new Label();
+        if (transaction.getCustomer() instanceof Member member)
+            customerName.setText(member.getName());
+        else
+            customerName.setText("Customer-" + transaction.getCustomer().getCustomerID());
         customerTitle.getStyleClass().addAll("very-small-text", "light");
         customerName.getStyleClass().addAll("small-text", "dark");
         VBox customerSegment = new VBox();
@@ -66,12 +77,23 @@ public class BillPageBuilder extends ComponentBuilder {
     }
 
     private @NotNull GridPane getFooterInformation() {
+        String status = "-";
+        String phone = "-";
+        String points = "0";
+        Customer customer = transaction.getCustomer();
+        if (customer instanceof Member member) {
+            phone = member.getPhoneNumber();
+            status = member.getStatus();
+            points = Integer.toString(member.getPoints());
+        }
+
+
         GridPane root = new GridPane();
-        addInformationRow(root, 0, "Costumer ID", "0000-000");
-        addInformationRow(root, 1, "Membership", "VIP");
-        addInformationRow(root, 2, "Status", "Active");
-        addInformationRow(root, 3, "Phone Number", "+00 000 000 0000");
-        addInformationRow(root, 4, "Point", "1000");
+        addInformationRow(root, 0, "Customer ID", Integer.toString(transaction.getCustomer().getCustomerID()));
+        addInformationRow(root, 1, "Membership", transaction.getCustomer().getMemberLevel());
+        addInformationRow(root, 2, "Status", status);
+        addInformationRow(root, 3, "Phone Number", phone);
+        addInformationRow(root, 4, "Point", points);
 
         root.getStyleClass().add("footer-information");
         return root;
@@ -99,7 +121,7 @@ public class BillPageBuilder extends ComponentBuilder {
     private @NotNull GridPane getFooterEnd() {
         GridPane footerEnd = documentBuilderHelper.getSpaceBetweenColumnTemplate();
         Label endColumn1 = new Label("Thank you! — yourename@gmail.com");
-        Label endColumn2 = new Label("$CAD");
+        Label endColumn2 = new Label("Rp IDR");
 
         footerEnd.getStyleClass().addAll("small-text");
         endColumn2.getStyleClass().addAll("dark");
@@ -144,10 +166,15 @@ public class BillPageBuilder extends ComponentBuilder {
         column3.setHalignment(HPos.RIGHT);
         summary.getColumnConstraints().addAll(column1, column2, column3);
 
-        addSummaryRow(summary, 0, "Subtotal", "$12,345.00", false);
-        addSummaryRow(summary, 1, "Discount", "$0.00", false);
-        addSummaryRow(summary, 2, "Tax", "$0.00", false);
-        addSummaryRow(summary, 3, "Total", "$12,345.00", true);
+        int total = transaction.getTotalPrice();
+        String subtotalStr = "Rp" + Integer.toString(total);
+        int discount = transaction.getDiscount();
+        String discountStr = "Rp" + Integer.toString(discount);
+        String totalStr = "Rp" + Integer.toString(total - discount);
+
+        addSummaryRow(summary, 0, "Subtotal", subtotalStr, false);
+        addSummaryRow(summary, 1, "Discount", discountStr, false);
+        addSummaryRow(summary, 3, "Total", totalStr, true);
 
         GridPane.setConstraints(summary, 1, 0);
         footerContent.getChildren().add(summary);
@@ -186,36 +213,51 @@ public class BillPageBuilder extends ComponentBuilder {
         };
     }
 
-    public void addRows() {
-        for (int i = 0; i < 10; i++) {
-            VBox firstColumnContent = new VBox();
-            Label row1 = new Label("Line Item Title");
-            Label row2 = new Label("Description");
-            row1.getStyleClass().addAll("small-text", "dark");
-            row2.getStyleClass().addAll("very-small-text", "dark");
-            firstColumnContent.getChildren().addAll(row1, row2);
+    public void addRows(Order order) {
+        VBox firstColumnContent = new VBox();
+        Label row1 = new Label(order.getItem().getItemName());
+        Label row2 = new Label(order.getItem().getCategory());
+        row1.getStyleClass().addAll("small-text", "dark");
+        row2.getStyleClass().addAll("very-small-text", "dark");
+        firstColumnContent.getChildren().addAll(row1, row2);
 
-            Label columnLabel2 = new Label("$ 12,345.00");
-            Label columnLabel3 = new Label("1");
-            Label columnLabel4 = new Label("$ 12,345.00");
+        Label columnLabel2 = new Label("Rp" + order.getItem().getPrice());
+        Label columnLabel3 = new Label(Integer.toString(order.getQuantity()));
+        Label columnLabel4 = new Label("Rp" + (order.getItem().getPrice() * order.getQuantity()));
 
-            documentPageBuilder.addTableRow(
-                    firstColumnContent,
-                    columnLabel2,
-                    columnLabel3,
-                    columnLabel4);
-        }
+        documentPageBuilder.addTableRow(
+                firstColumnContent,
+                columnLabel2,
+                columnLabel3,
+                columnLabel4);
+    }
+
+    public void addHeaders() {
+        documentPageBuilder.addTitle("Bill");
+
+        documentPageBuilder.addHeaderRow(getDateIdSegment());
+        documentPageBuilder.addHeaderRow(getCustomerSegment());
+    }
+
+    public void addFooters() {
+        documentPageBuilder.addFooterRow(getFooterHeader());
+        documentPageBuilder.addFooterRow(getFooterContent());
+        documentPageBuilder.addFooterRow(getFooterEnd());
+    }
+
+    public void setTransaction(Transaction transaction) {
+        this.transaction = transaction;
+        documentPageBuilder.setTable(getColumnProperties());
+
+        Pane root = documentPageBuilder.getAndResetComponent();
+        StyleLoadHelper helper = new StyleLoadHelper("/styles/bill.css");
+        helper.load(root);
+        setRoot(root);
     }
 
     @Override
     public void reset() {
-        documentPageBuilder.addTitle("Invoice");
-        documentPageBuilder.addHeaderRow(getDateIdSegment());
-        documentPageBuilder.addHeaderRow(getCustomerSegment());
-        documentPageBuilder.addFooterRow(getFooterHeader());
-        documentPageBuilder.addFooterRow(getFooterContent());
-        documentPageBuilder.addFooterRow(getFooterEnd());
-        documentPageBuilder.setTable(getColumnProperties());
+        documentPageBuilder.addTitle("Bill");
 
         Pane root = documentPageBuilder.getAndResetComponent();
         StyleLoadHelper helper = new StyleLoadHelper("/styles/bill.css");

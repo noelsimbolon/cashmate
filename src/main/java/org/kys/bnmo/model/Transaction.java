@@ -4,6 +4,7 @@ import lombok.Getter;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 public class Transaction implements Serializable {
@@ -15,22 +16,22 @@ public class Transaction implements Serializable {
     private Customer customer;
 
     @Getter
-    private InventoryItem item;
-
-    @Getter
-    private int quantity;
-
-    @Getter
     private int totalPrice;
 
     @Getter
     private Date date;
 
-    public Transaction(Customer customer, InventoryItem item, int quantity, int totalPrice, Date date) {
+    @Getter
+    private List<Order> orders;
+
+    @Getter
+    private int discount;
+
+    public Transaction(Customer customer, List<Order> orders, int totalPrice, Date date, int discount) {
+        this.orders = orders;
+        this.discount = discount;
         this.transactionID = UUID.randomUUID();
         this.customer = customer;
-        this.item = item;
-        this.quantity = quantity;
         this.totalPrice = totalPrice;
         this.date = date;
     }
