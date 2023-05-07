@@ -120,8 +120,8 @@ public class BillPageBuilder extends ComponentBuilder {
 
     private @NotNull GridPane getFooterEnd() {
         GridPane footerEnd = documentBuilderHelper.getSpaceBetweenColumnTemplate();
-        Label endColumn1 = new Label("Thank you! — cashmate@gmail.com");
-        Label endColumn2 = new Label("Rp IDR");
+        Label endColumn1 = new Label("Thank you! — service@cashmate.com");
+        Label endColumn2 = new Label("CashMate.com");
 
         footerEnd.getStyleClass().addAll("small-text");
         endColumn2.getStyleClass().addAll("dark");
@@ -167,10 +167,10 @@ public class BillPageBuilder extends ComponentBuilder {
         summary.getColumnConstraints().addAll(column1, column2, column3);
 
         int total = (int) Math.round(transaction.getTotalPrice());
-        String subtotalStr = "Rp" + Integer.toString(total);
+        String subtotalStr = Integer.toString(total);
         int discount = transaction.getDiscount();
-        String discountStr = "Rp" + Integer.toString(discount);
-        String totalStr = "Rp" + Integer.toString(total - discount);
+        String discountStr = Integer.toString(discount);
+        String totalStr = Integer.toString(total - discount);
 
         addSummaryRow(summary, 0, "Subtotal", subtotalStr, false);
         addSummaryRow(summary, 1, "Discount", discountStr, false);
@@ -221,9 +221,9 @@ public class BillPageBuilder extends ComponentBuilder {
         row2.getStyleClass().addAll("very-small-text", "dark");
         firstColumnContent.getChildren().addAll(row1, row2);
 
-        Label columnLabel2 = new Label("Rp" + order.getPurchasePrice());
+        Label columnLabel2 = new Label(String.valueOf(order.getPurchasePrice()));
         Label columnLabel3 = new Label(Integer.toString(order.getQuantity()));
-        Label columnLabel4 = new Label("Rp" + (order.getPurchasePrice() * order.getQuantity()));
+        Label columnLabel4 = new Label(String.valueOf(order.getPurchasePrice() * order.getQuantity()));
 
         documentPageBuilder.addTableRow(
                 firstColumnContent,

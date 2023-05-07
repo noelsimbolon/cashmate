@@ -58,8 +58,8 @@
   "customerID" : "42aa5c09-9ddf-4067-9939-6cc4d8a85cb7",
   "name" : "Didi",
   "phoneNumber" : "98765432",
-  "points" : 0,
-  "status" : "Inactive",
+  "points" : 9000000,
+  "status" : "Active",
   "memberLevel" : "VIP"
 }, {
   "customerID" : "13b2f636-bd8c-4401-b5a7-06d1f6c97016",
@@ -96,4 +96,11 @@
   "points" : 0,
   "status" : "Active",
   "memberLevel" : "VIP"
+}, {
+  "customerID" : "9beb23a2-e6b4-484d-b874-ad9c558f352a",
+  "name" : "Fourier",
+  "phoneNumber" : "1234567",
+  "points" : 0,
+  "status" : "Active",
+  "memberLevel" : "Member"
 } ]
