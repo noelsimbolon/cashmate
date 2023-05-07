@@ -6,6 +6,7 @@ module org.kys.bnmo {
     requires org.jetbrains.annotations;
     requires java.desktop;
     requires javafx.swing;
+    requires org.apache.pdfbox;
 
     opens org.kys.bnmo.model to com.fasterxml.jackson.databind;
 

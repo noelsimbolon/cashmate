@@ -25,17 +25,63 @@
     -fx-cursor: HAND;
 }
 
-#customer-text-field {
-    -fx-background-color: #565B61;
-    -fx-text-fill: #F2F3F5;
-    -fx-prompt-text-fill: #898D91;
-    -fx-border-radius: 8px;
-    -fx-background-radius: 8px;
-    -fx-font-family: "Poppins";
-}
-
 #button-and-text-field-container {
     -fx-spacing: 10;
+}
+
+#customer-editable {
+    -fx-background-color: #565B61;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-text-fill: #F2F3F5;
+}
+
+#customer-editable .text-field {
+    -fx-background-color: #565B61;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-text-fill: #F2F3F5;
+}
+
+#customer-editable .combo-box-popup .list-view .list-cell:selected {
+    -fx-text-fill: #F2F3F5; /* selected text color */
+}
+
+#customer-editable .list-cell {
+    -fx-background-color: #565B61;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-text-fill: #F2F3F5;
+}
+
+#customer-editable .combo-box-popup .list-view .list-cell {
+    -fx-text-fill: #F2F3F5;
+    -fx-border-radius: 0px;
+    -fx-background-radius: 0px;
+}
+
+#customer-editable .combo-box-popup .list-view .list-cell:hover {
+    -fx-cursor: HAND;
+    -fx-background-color: #6D7278;
+}
+
+#customer-editable .combo-box-popup .list-view .list-cell:armed {
+    -fx-background-color: #44484F;
+}
+
+#customer-editable .arrow-button {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-border-radius: 0 8px 8px 0;
+    -fx-background-radius: 0 8px 8px 0;
+}
+
+#customer-editable .arrow-button:hover {
+    -fx-cursor: HAND;
+}
+
+#customer-editable .arrow {
+    -fx-background-color: #E0E1DD;
 }
 
 #customer-dropdown {

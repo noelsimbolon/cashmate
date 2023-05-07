@@ -13,7 +13,6 @@ import org.kys.bnmo.model.Customer;
 import org.kys.bnmo.model.Member;
 import org.kys.bnmo.helpers.views.IconButtonHelper;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MemberFormTab extends TabContainer {
@@ -46,7 +45,7 @@ public class MemberFormTab extends TabContainer {
         this.backButtonAction = backButtonAction;
         this.name = new SimpleStringProperty();
         this.telephone = new SimpleStringProperty();
-        this.points = new SimpleStringProperty();
+        this.points = new SimpleStringProperty(String.valueOf(0));
         this.memberLevel = new SimpleStringProperty();
 
         // Set save button action to show states
@@ -68,14 +67,8 @@ public class MemberFormTab extends TabContainer {
                 return;
             }
 
-            // Print form values
-            System.out.println("Name: " + name.getValue());
-            System.out.println("Telephone: " + telephone.getValue());
-            System.out.println("Points: " + points.getValue());
-            System.out.println("Member Level: " + memberLevel.getValue());
-
             // Validate form
-            if (validateForm(false)) {
+            if (formNotValid(false)) {
                 System.out.println("Form is not valid");
                 return;
             }
@@ -139,10 +132,7 @@ public class MemberFormTab extends TabContainer {
             }
 
             // Validate form
-            // If field is null, then do not save
-
-
-            if (validateForm(true)) {
+            if (formNotValid(true)) {
                 System.out.println("Form is not valid");
                 return;
             }
@@ -173,14 +163,18 @@ public class MemberFormTab extends TabContainer {
         };
     }
 
-    private boolean validateForm(boolean newMember) {
-
-        // If any of the fields are empty, then do not save
-        if (name.getValue().isEmpty() || telephone.getValue().isEmpty() || points.getValue().isEmpty()) {
-            System.out.println("Empty fields");
+    private boolean formNotValid(boolean newMember) {
+        // If any of the fields are null, then do not save
+        if (name.getValue() == null || telephone.getValue() == null || memberLevel.getValue() == null || points.getValue() == null) {
+            System.out.println("Null fields");
             return true;
         }
 
+        // If any of the fields are empty, then do not save
+        if (name.getValue().isEmpty() || telephone.getValue().isEmpty() || memberLevel.getValue().isEmpty() || points.getValue().isEmpty()) {
+            System.out.println("Empty fields");
+            return true;
+        }
 
         // If telephone is not a number, then do not save
         if (!telephone.getValue().matches("\\d+")) {

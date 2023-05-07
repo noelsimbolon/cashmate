@@ -171,7 +171,6 @@ public class MembershipTab extends TabContainer {
                 });
 
                 // Promote/Demote button
-                // TODO: Update DataStore to promote or demote member
                 MenuItem item3;
                 if (customer.getMemberLevel().equals("VIP")) {
                     item3 = new MenuItem("Demote");
