@@ -23,7 +23,7 @@ public class XMLAdapter implements Adapter {
             CollectionType listType = xmlMapper.getTypeFactory().constructCollectionType(ArrayList.class, type);
             objectList = xmlMapper.readValue(new File(filePath), listType);
         } catch (IOException e) {
-            e.printStackTrace();
+            return new ArrayList<>();
         }
 
         return objectList;
