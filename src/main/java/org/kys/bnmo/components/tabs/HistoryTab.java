@@ -28,9 +28,17 @@ public class HistoryTab  extends TabContainer {
     private final NavigationHandler historyActionHandler;
     private final EventHandler<ActionEvent> backHandler;
     private final UUID customerId;
-
+    private final String customerName;
     public HistoryTab(UUID customerId, NavigationHandler historyActionHandler, EventHandler<ActionEvent> backHandler) {
         this.customerId = customerId;
+        this.customerName = "Customer #" + customerId.toString().substring(0, 8) + "...";
+        this.historyActionHandler = historyActionHandler;
+        this.backHandler = backHandler;
+    }
+
+    public HistoryTab(UUID customerId, String customerName, NavigationHandler historyActionHandler, EventHandler<ActionEvent> backHandler) {
+        this.customerId = customerId;
+        this.customerName = customerName;
         this.historyActionHandler = historyActionHandler;
         this.backHandler = backHandler;
     }
@@ -68,7 +76,7 @@ public class HistoryTab  extends TabContainer {
             viewBill.setOnAction(e -> {
                 historyActionHandler.getEventHandler(
                         new BillTab(transaction.getTransactionID()),
-                        "Bill #" + transaction.getTransactionID()
+                        "Bill"
                 ).handle(e);
             });
 
@@ -112,6 +120,6 @@ public class HistoryTab  extends TabContainer {
         getHeader().getChildren().add(0, backButton);
 
         getRoot().getStyleClass().add("fill-tab-content");
-        addHeaderTitle("Transaction History of Customer #" + customerId);
+        addHeaderTitle("Transaction History for " + customerName);
     }
 }

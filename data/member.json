@@ -1,27 +1,27 @@
 [ {
   "customerID" : "779f04b2-8c4d-4a9f-b33e-1444bb6a20ba",
-  "name" : "Member 1",
+  "name" : "Fio",
   "phoneNumber" : "12345678",
   "points" : 0,
   "status" : "Inactive",
   "memberLevel" : "Member"
 }, {
   "customerID" : "13286969-ea6d-4c22-9214-a08dfd8aee8c",
-  "name" : "Member 2",
+  "name" : "Jojo",
   "phoneNumber" : "12345678",
   "points" : 0,
   "status" : "Active",
   "memberLevel" : "Member"
 }, {
   "customerID" : "be8b8d69-f88b-4029-93fc-7989561941a7",
-  "name" : "Member 3",
+  "name" : "Farhan",
   "phoneNumber" : "12345678",
   "points" : 0,
   "status" : "Inactive",
   "memberLevel" : "Member"
 }, {
   "customerID" : "af4b8203-c92a-449c-aa14-9d8c4cdb6545",
-  "name" : "Member 4",
+  "name" : "Noel",
   "phoneNumber" : "12345678",
   "points" : 0,
   "status" : "Active",
@@ -56,7 +56,7 @@
   "memberLevel" : "Member"
 }, {
   "customerID" : "42aa5c09-9ddf-4067-9939-6cc4d8a85cb7",
-  "name" : "VIP 1",
+  "name" : "Didi",
   "phoneNumber" : "98765432",
   "points" : 0,
   "status" : "Inactive",
