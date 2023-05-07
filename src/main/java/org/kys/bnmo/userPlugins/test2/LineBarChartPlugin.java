@@ -10,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import org.jetbrains.annotations.NotNull;
 import org.kys.bnmo.model.Transaction;
 import org.kys.bnmo.plugins.interfaces.BasePlugin;
 import org.kys.bnmo.plugins.interfaces.PluginServiceInterface;
@@ -20,11 +21,14 @@ import java.util.Calendar;
 
 public class LineBarChartPlugin extends BasePlugin {
 
+    private Timeline timeline;
+
     public LineBarChartPlugin(PluginServiceInterface service)
     {
         super(service);
     }
 
+    @NotNull
     private Chart getLineChart()
     {
         final CategoryAxis xAxis = new CategoryAxis();
@@ -45,7 +49,7 @@ public class LineBarChartPlugin extends BasePlugin {
                 "July", "August", "September", "October", "November", "December"
         };
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
+        timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
             // Get Transaction Count
             int[] transactionCount = new int[12];
             ArrayList<Transaction> transactions = (ArrayList<Transaction>) getService().getController().getTransactions();
@@ -66,11 +70,11 @@ public class LineBarChartPlugin extends BasePlugin {
         }));
 
         timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
 
         return lineChart;
     }
 
+    @NotNull
     private Chart getBarChart()
     {
         final CategoryAxis xAxis = new CategoryAxis();
@@ -126,11 +130,11 @@ public class LineBarChartPlugin extends BasePlugin {
         }));
 
         timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
 
         return bc;
     }
 
+    @NotNull
     private Pane getContent()
     {
         HBox root = new HBox(new VBox(getLineChart()), new VBox(getBarChart()));
@@ -141,6 +145,7 @@ public class LineBarChartPlugin extends BasePlugin {
         return root;
     }
 
+    @NotNull
     private Pane getTabContainer()
     {
         HBox header = new HBox();
@@ -158,8 +163,9 @@ public class LineBarChartPlugin extends BasePlugin {
 
         return root;
     }
+
     @Override
     public void onLoad() {
-        getService().addTab(getTabContainer(), "Line Bar Chart");
+        getService().addTab(getTabContainer(), "Line Bar Chart", timeline);
     }
 }

@@ -13,16 +13,16 @@ public class UnpopulatedOrder {
     @Getter
     private int quantity;
     @Getter
-    private int purchasePrice;
+    private Double purchasePrice;
 
     public UnpopulatedOrder() {
         this.orderID = UUID.randomUUID();
         this.itemID = UUID.randomUUID();
         this.quantity = 0;
-        this.purchasePrice = 0;
+        this.purchasePrice = 0.0;
     }
 
-    public UnpopulatedOrder(UUID orderID, UUID itemID, int purchasePrice, int quantity) {
+    public UnpopulatedOrder(UUID orderID, UUID itemID, Double purchasePrice, int quantity) {
         this.orderID = orderID;
         this.itemID = itemID;
         this.purchasePrice = purchasePrice;
