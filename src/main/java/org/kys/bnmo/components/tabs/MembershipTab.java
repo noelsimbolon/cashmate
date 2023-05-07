@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class MembershipTab extends TabContainer {
 
@@ -39,10 +40,10 @@ public class MembershipTab extends TabContainer {
     protected Pane getContent() {
 
         // Fetch customer data
-        List<Customer> customers = customerController.fetchAll();
+        ArrayList<Customer> customers = customerController.fetchAll();
 
         // Concatenate with member data
-        List<Member> members = memberController.fetchAll();
+        ArrayList<Member> members = memberController.fetchAll();
         customers.addAll(members);
 
         // Sort by customer ID
@@ -97,6 +98,8 @@ public class MembershipTab extends TabContainer {
             // Action menu
             ContextMenu menu;
             if (customer instanceof Member) {
+                int editedCustomerID = customer.getCustomerID();
+                int editedCustomerIndex = IntStream.range(0, members.size()).filter(i -> members.get(i).getCustomerID() == editedCustomerID).findFirst().orElse(-1);
 
                 // Set menu item action
                 // Edit button
@@ -108,17 +111,70 @@ public class MembershipTab extends TabContainer {
                 });
 
                 // Activate/Deactivate button
-                // TODO: Update DataStore to activate or deactivate member
                 MenuItem item2;
                 if (((Member) customer).getStatus().equals("Active")) {
                     item2 = new MenuItem("Deactivate");
                     item2.setOnAction(e -> {
-                        System.out.println("Deactivate member");
+
+                        // If customer is not found, then do not save but refresh the tab
+                        if (editedCustomerIndex == -1) {
+                            System.out.println("Customer not found");
+                            memberActionHandler.getEventHandler(
+                                    new MembershipTab(memberActionHandler, backHandler)
+                            ).handle(e);
+                        }
+
+                        // Get customer from list
+                        Member editedCustomer = members.get(editedCustomerIndex);
+
+                        // Delete customer from list
+                        members.remove(editedCustomerIndex);
+
+                        // Update customer status
+                        editedCustomer.deactivate();
+
+                        // Add customer back to list
+                        members.add(editedCustomerIndex, editedCustomer);
+
+                        // Save to DataStore
+                        memberController.save(members);
+
+                        // Refresh tab
+                        memberActionHandler.getEventHandler(
+                                new MembershipTab(memberActionHandler, backHandler)
+                        ).handle(e);
                     });
                 } else {
                     item2 = new MenuItem("Activate");
                     item2.setOnAction(e -> {
-                        System.out.println("Activate member");
+
+                        // If customer is not found, then do not save but refresh the tab
+                        if (editedCustomerIndex == -1) {
+                            System.out.println("Customer not found");
+                            memberActionHandler.getEventHandler(
+                                    new MembershipTab(memberActionHandler, backHandler)
+                            ).handle(e);
+                        }
+
+                        // Get customer from list
+                        Member editedCustomer = members.get(editedCustomerIndex);
+
+                        // Delete customer from list
+                        members.remove(editedCustomerIndex);
+
+                        // Update customer status
+                        editedCustomer.activate();
+
+                        // Add customer back to list
+                        members.add(editedCustomerIndex, editedCustomer);
+
+                        // Save to DataStore
+                        memberController.save(members);
+
+                        // Refresh tab
+                        memberActionHandler.getEventHandler(
+                                new MembershipTab(memberActionHandler, backHandler)
+                        ).handle(e);
                     });
                 }
 
