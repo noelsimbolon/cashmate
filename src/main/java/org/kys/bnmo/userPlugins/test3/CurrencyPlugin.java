@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 
 public class CurrencyPlugin extends BasePlugin {
-
     private static final Map<String, Double> currencyMap = new HashMap<>();
     private static final StringProperty value = new SimpleStringProperty("IDR");
     public CurrencyPlugin(PluginServiceInterface service)
@@ -45,11 +44,15 @@ public class CurrencyPlugin extends BasePlugin {
         List<Transaction> transactions = modifiable.transactions;
         List<InventoryItem> inventoryItems = modifiable.inventoryItems;
 
+        double factor = currencyMap.get(value.getValue());
+
+        if (!modifiable.get) factor = 1 / factor;
+
         if (transactions != null)
         {
             for (Transaction transaction: transactions)
             {
-
+                transaction.setTotalPrice(transaction.getTotalPrice() * factor);
             }
         }
 
@@ -57,17 +60,8 @@ public class CurrencyPlugin extends BasePlugin {
         {
             for (InventoryItem item: inventoryItems)
             {
-                if (modifiable.get)
-                {
-                    item.setPrice(item.getPrice() * currencyMap.get(value.getValue()));
-                    item.setPurchasePrice(item.getPurchasePrice() * currencyMap.get(value.getValue()));
-
-                }
-                else
-                {
-                    item.setPrice(item.getPrice() / currencyMap.get(value.getValue()));
-                    item.setPurchasePrice(item.getPurchasePrice() / currencyMap.get(value.getValue()));
-                }
+                item.setPrice(item.getPrice() * factor);
+                item.setPurchasePrice(item.getPurchasePrice() * factor);
             }
         }
     }
