@@ -2,10 +2,15 @@ package org.kys.bnmo.controllers;
 
 import org.kys.bnmo.model.Customer;
 import org.kys.bnmo.model.InventoryItem;
+import org.kys.bnmo.model.Order;
+import org.kys.bnmo.model.Transaction;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 public class DataStoreDriver {
     public static void main(String[] args) {
@@ -53,6 +58,21 @@ public class DataStoreDriver {
                  System.out.println(customers.get(i).getCustomerID());
                  System.out.println(readCustomers.get(i).getCustomerID());
              }
+
+             ArrayList<Transaction> transactions = new ArrayList<>();
+             Order o1 = new Order(items.get(0), 3);
+             Order o2 = new Order(items.get(4), 1);
+             Order o3 = new Order(items.get(2), 5);
+             List<Order> orders = new ArrayList<>(Arrays.asList(o1, o2, o3));
+
+            Transaction transaction = new Transaction(customers.get(1), orders, 4500, new Date(), 1000);
+            transactions.add(transaction);
+
+            ArrayList<Order> emptyOrders = new ArrayList<>();
+            dataStore.writeData("order", emptyOrders);
+
+            TransactionController transactionController = new TransactionController();
+             transactionController.save(transactions);
         } catch (Exception e) {
             e.printStackTrace();
         }
