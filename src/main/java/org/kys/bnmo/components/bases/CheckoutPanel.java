@@ -8,19 +8,24 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import lombok.Getter;
+import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
+import org.kys.bnmo.components.documents.BillDocument;
 import org.kys.bnmo.controllers.CustomerController;
 import org.kys.bnmo.controllers.InventoryItemController;
+import org.kys.bnmo.controllers.TransactionController;
+import org.kys.bnmo.helpers.views.DocumentPrinter;
 import org.kys.bnmo.helpers.views.loaders.StyleLoadHelper;
-import org.kys.bnmo.model.Customer;
-import org.kys.bnmo.model.InventoryItem;
-import org.kys.bnmo.model.Member;
+import org.kys.bnmo.model.*;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.function.Function;
 import java.util.stream.IntStream;
 
 public class CheckoutPanel extends VBox {
@@ -56,6 +61,10 @@ public class CheckoutPanel extends VBox {
     private VBox checkoutPanelContainer;
     private Button checkoutButton;
     private Text discountAmountLabel;
+
+    @Getter
+    @Setter
+    private Runnable onCheckout;
 
     public CheckoutPanel(List<Member> members) {
         super();
@@ -181,7 +190,8 @@ public class CheckoutPanel extends VBox {
                 VBox cardBox = (VBox) itemScrollPane.getContent();
 
                 cardBox.getChildren().clear();
-                temporaryBills.get(customerDropdown.getSelectionModel().getSelectedIndex())
+                if (newValue != null)
+                    temporaryBills.get(customerDropdown.getSelectionModel().getSelectedIndex())
                         .getOrders()
                         .forEach(order -> {
                             addItemCard(createItemCard(order, "Rp"));
@@ -347,6 +357,12 @@ public class CheckoutPanel extends VBox {
     }
 
     private void updateCheckoutPrice() {
+        if (customerDropdown.getSelectionModel().getSelectedIndex() == -1) {
+            discountAmountLabel.setText("Rp 0");
+            checkoutButton.setText("Charge");
+            return;
+        }
+
         Locale localeID = new Locale("in", "ID");
 
         NumberFormat rupiahFormat = NumberFormat.getCurrencyInstance(localeID);
@@ -397,12 +413,84 @@ public class CheckoutPanel extends VBox {
     }
 
     private void checkoutCurrentBill() {
-//        TemporaryBill currentBill = temporaryBills.get(customerDropdown.getSelectionModel().getSelectedIndex());
-//
-//        CustomerController customerController = new CustomerController();
-//        List<Customer> dataStoreCustomers = customerController.fetchByID(currentBill.getCustomer().getCustomerID());
-//
-//        InventoryItemController inventoryItemController = new InventoryItemController();
-//        List<InventoryItem> dataStoreItems = inventoryItemController.
+        TemporaryBill currentBill = temporaryBills.get(customerDropdown.getSelectionModel().getSelectedIndex());
+
+        if (currentBill.getOrders().size() == 0) {
+            removeCurrentBill();
+            return;
+        }
+
+        CustomerController customerController = new CustomerController();
+        ArrayList<Customer> dataStoreCustomers = customerController.fetchAll();
+        Customer currentCustomer = currentBill.getCustomer();
+        if (dataStoreCustomers.stream().filter(customer -> customer.getCustomerID() == currentBill.getCustomer().getCustomerID()).toList().size() > 0)
+            currentCustomer = dataStoreCustomers.stream().filter(customer -> customer.getCustomerID() == currentBill.getCustomer().getCustomerID()).findFirst().orElse(null);
+
+        InventoryItemController inventoryItemController = new InventoryItemController();
+        ArrayList<InventoryItem> dataStoreItems = inventoryItemController.readInventoryItems();
+
+        for (TemporaryOrder t_order : currentBill.getOrders()) {
+            InventoryItem item = t_order.getItem();
+            List<InventoryItem> matchedItems = dataStoreItems.stream().filter(dataItem -> dataItem.getItemID().equals(item.getItemID())).toList();
+            if (matchedItems.size() == 0) {
+                removeCurrentBill();
+                return;
+            }
+            if (matchedItems.get(0).getStock() < t_order.quantity.get()) {
+                removeCurrentBill();
+                return;
+            }
+        }
+
+        List<Order> orders = new ArrayList<>();
+        int totalPrice = 0;
+        for (TemporaryOrder t_order : currentBill.getOrders()) {
+            orders.add(new Order(t_order.getItem(), t_order.getQuantity().get()));
+            totalPrice += t_order.getItem().getPrice() * t_order.getQuantity().get();
+            InventoryItem matchedItem = dataStoreItems.stream().filter(dataItem -> dataItem.getItemID().equals(t_order.getItem().getItemID())).toList().get(0);
+            matchedItem.setStock(matchedItem.getStock() - t_order.getQuantity().get());
+        }
+        inventoryItemController.writeInventoryItems(dataStoreItems);
+
+        int subtotal = totalPrice;
+        int discount = 0;
+        int pointsUsed = 0;
+        if (currentBill.getCustomer() instanceof Member member) {
+            discount += Math.min(subtotal, member.getPoints());
+            pointsUsed = Math.min(subtotal, member.getPoints());
+            subtotal -= discount;
+            if (member.getMemberLevel().equalsIgnoreCase("vip"))
+                discount += subtotal * 0.1;
+        }
+        dataStoreCustomers.add(currentCustomer);
+        if (currentCustomer instanceof Member member) {
+            member.setPoints(member.getPoints() - pointsUsed);
+        }
+        customerController.save(dataStoreCustomers);
+
+        TransactionController transactionController = new TransactionController();
+        ArrayList<Transaction> transactions = transactionController.fetchAll();
+        Transaction newTransaction = new Transaction(currentBill.getCustomer(), orders, totalPrice, new Date(), discount);
+        transactions.add(newTransaction);
+        transactionController.save(transactions);
+
+        BillDocument billDocumentFactory = new BillDocument(newTransaction.getTransactionID());
+        Pane bill = billDocumentFactory.getComponent();
+        DocumentPrinter printer = new DocumentPrinter((Stage) this.getScene().getWindow());
+        try {
+            printer.printElement(bill, "bill-" + newTransaction.getTransactionID());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        removeCurrentBill();
+
+        if (onCheckout != null)
+            onCheckout.run();
+    }
+
+    private void removeCurrentBill() {
+        temporaryBills.remove(temporaryBills.get(customerDropdown.getSelectionModel().getSelectedIndex()));
+        customerDropdown.getItems().remove(customerDropdown.getItems().remove(customerDropdown.getSelectionModel().getSelectedIndex()));
+        customerDropdown.setValue(null);
     }
 }

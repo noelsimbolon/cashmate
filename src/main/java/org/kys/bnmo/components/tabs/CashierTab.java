@@ -25,36 +25,30 @@ public class CashierTab extends TabContainer {
 
     @Override
     protected Pane getContent() {
+        HBox tableWrapper = new HBox();
+        HBox.setHgrow(tableWrapper, Priority.ALWAYS);
+
         List<Member> members = new ArrayList<>();
         members.add(new Member("Fio", "+62-812-3456-891", "Member"));
         members.add(new Member("Jojo", "+62-812-3456-891", "Member"));
         members.add(new Member("Agus", "+62-812-3456-891", "VIP"));
         CheckoutPanel checkoutPanel = new CheckoutPanel(members);
+        checkoutPanel.setOnCheckout(() -> {
+            reloadTable(checkoutPanel, tableWrapper);
+        });
 
-        // Set table data
-//        TableData inventoryData = loadTableData(checkoutPanel);
+        reloadTable(checkoutPanel, tableWrapper);
 
-        List<String> headers = new ArrayList<>(Arrays.asList("Item ID", "Name", "Price", "Actions"));
-        List<List<String>> content = new ArrayList<>();
-        int item_id = 2000;
-        List<String> foodNames = Arrays.asList("Burger", "Pizza", "Hotdog", "Taco", "Sushi");
+        HBox root = new HBox(tableWrapper, checkoutPanel);
 
-        Random random = new Random();
-        List<InventoryItem> items = new ArrayList<>();
-        List<EventHandler<MouseEvent>> handlers = new ArrayList<>();
+        root.setPrefWidth(Double.MAX_VALUE);
+        VBox.setVgrow(root, Priority.ALWAYS);
+        root.getStyleClass().add("tab-row");
+        return root;
+    }
 
-        for (int i = 0; i < 25; i++) {
-            int randomIndex = random.nextInt(foodNames.size());
-            String randomFoodName = foodNames.get(randomIndex);
-            content.add(new ArrayList<>(Arrays.asList(Integer.toString(item_id), randomFoodName, "Rp12.000")));
-            items.add(new InventoryItem(randomFoodName, "Fast Food", 10, 12000, 12000, ""));
-            int idx = i;
-            handlers.add(e -> {
-                checkoutPanel.addItem(items.get(idx));
-            });
-            item_id++;
-        }
-//        TableData tableData = new TableData(headers, content, handlers, null);
+    private void reloadTable(CheckoutPanel checkoutPanel, Pane wrapper) {
+        wrapper.getChildren().clear();
         TableData tableData = loadTableData(checkoutPanel);
 
         tableBuilder.setTableData(tableData, List.of(0, 1, 3));
@@ -73,30 +67,8 @@ public class CashierTab extends TabContainer {
         checkoutPanel.getStyleClass().add("tab-checkout-panel");
 
         HBox.setHgrow(itemTable, Priority.ALWAYS);
-
-        root.getChildren().addAll(
-                itemTable,
-                checkoutPanel
-        );
-
-        root.setPrefWidth(Double.MAX_VALUE);
-        VBox.setVgrow(root, Priority.ALWAYS);
-        root.getStyleClass().add("tab-row");
-        return root;
-
+        wrapper.getChildren().add(itemTable);
     }
-
-//    private List<Member> loadMembers() {
-//        MemberController memberController = new MemberController();
-//
-//        try {
-//            memberController.fetchAll();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//    }
 
     private TableData loadTableData(CheckoutPanel checkoutPanel) {
         InventoryItemController inventoryItemController = new InventoryItemController();
@@ -133,15 +105,16 @@ public class CashierTab extends TabContainer {
 
             images.add(itemImage);
 
-            handlers.add(e -> {checkoutPanel.addItem(inventoryItem);});
+            handlers.add(e -> {
+                checkoutPanel.addItem(inventoryItem);
+            });
         }
 
         return new TableData(heading, data, images, 0, handlers, null);
     }
 
     @Override
-    protected void additionalAction()
-    {
+    protected void additionalAction() {
         getRoot().getStyleClass().add("fill-tab-content");
         addHeaderTitle("Cashier");
     }
