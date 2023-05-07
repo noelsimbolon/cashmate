@@ -37,8 +37,9 @@ public class DataStore {
 
     private static final Map<String, Class> classFileNameMap = new HashMap<>() {{
         put("customer", Customer.class);
-        put("member", Member.class);
         put("inventory-item", InventoryItem.class);
+        put("member", Member.class);
+        put("order", Order.class);
         put("transaction", UnpopulatedTransaction.class);
     }};
 
@@ -67,6 +68,45 @@ public class DataStore {
             writeData("config", new ArrayList<>(defaultConfig));
             folderPath = defaultConfig.get(0);
             fileFormat = defaultConfig.get(1);
+        }
+    }
+
+    public void writeConfigAPI(String filename, String content) throws Exception {
+        if (filename.equals("config")) throw new Exception("Unallowed to overwrite default config file");
+
+        String oldFolderPath = folderPath;
+        String oldFormat = fileFormat;
+
+        folderPath = System.getProperty("user.dir");
+        fileFormat = "xml";
+
+        File file = new File(filename);
+        writeData(filename, new ArrayList<>() {{add(content);}});
+
+        folderPath = oldFolderPath;
+        fileFormat = oldFormat;
+    }
+
+    public String loadConfigAPI(String filename) throws Exception {
+        if (filename.equals("config")) throw new Exception("Unallowed to read default config file");
+
+        String oldFolderPath = folderPath;
+        String oldFormat = fileFormat;
+
+        folderPath = System.getProperty("user.dir");
+        fileFormat = "xml";
+
+        File file = new File(filename);
+
+        ArrayList<String> config = readData(filename, String.class);
+
+        folderPath = oldFolderPath;
+        fileFormat = oldFormat;
+
+        if (config.size() == 1) {
+            return config.get(0);
+        } else {
+            throw new Exception("Invalid Config Format");
         }
     }
 

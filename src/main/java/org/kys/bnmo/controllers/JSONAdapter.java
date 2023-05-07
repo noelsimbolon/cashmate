@@ -36,7 +36,7 @@ public class JSONAdapter implements Adapter {
             if (!file.exists()) {
                 file.createNewFile();
             }
-            objectMapper.writeValue(file, data);
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(file, data);
         } catch (IOException e) {
             e.printStackTrace();
         }
