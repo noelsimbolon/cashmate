@@ -23,7 +23,7 @@ public class JSONAdapter implements Adapter {
             CollectionType listType = objectMapper.getTypeFactory().constructCollectionType(ArrayList.class, type);
             objectList = objectMapper.readValue(new File(filePath), listType);
         } catch (IOException e) {
-            e.printStackTrace();
+            return new ArrayList<>();
         }
 
         return objectList;
