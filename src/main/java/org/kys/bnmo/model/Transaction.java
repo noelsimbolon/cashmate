@@ -21,7 +21,7 @@ public class Transaction implements Serializable {
     private int quantity;
 
     @Getter
-    private int totalPrice;
+    private Double totalPrice;
 
     @Getter
     private Date date;
