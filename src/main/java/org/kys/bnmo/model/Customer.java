@@ -12,18 +12,13 @@ import java.util.UUID;
 public class Customer implements Serializable {
 
     @Getter
-    private final int customerID;
-
-    // Customer count
-    public static int customerCount = 0;
+    private final UUID customerID;
 
     public Customer() {
-        // Set incremental id
-        customerCount++;
-        this.customerID = customerCount;
+        this.customerID = UUID.randomUUID();
     }
 
-    public Customer(int customerID) {
+    public Customer(UUID customerID) {
         // Set predefined id
         this.customerID = customerID;
     }

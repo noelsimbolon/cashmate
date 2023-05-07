@@ -19,6 +19,7 @@ import javafx.event.EventHandler;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 public class HistoryTab  extends TabContainer {
     private static final TableBuilder tableBuilder = new TableBuilder();
@@ -26,9 +27,9 @@ public class HistoryTab  extends TabContainer {
     private static final IconButtonHelper iconButtonHelper = new IconButtonHelper();
     private final NavigationHandler historyActionHandler;
     private final EventHandler<ActionEvent> backHandler;
-    private final int customerId;
+    private final UUID customerId;
 
-    public HistoryTab(int customerId, NavigationHandler historyActionHandler, EventHandler<ActionEvent> backHandler) {
+    public HistoryTab(UUID customerId, NavigationHandler historyActionHandler, EventHandler<ActionEvent> backHandler) {
         this.customerId = customerId;
         this.historyActionHandler = historyActionHandler;
         this.backHandler = backHandler;
@@ -65,7 +66,6 @@ public class HistoryTab  extends TabContainer {
             MenuItem viewBill = new MenuItem("View Bill");
 
             viewBill.setOnAction(e -> {
-                System.out.println("View bill");
                 historyActionHandler.getEventHandler(
                         new BillTab(transaction.getTransactionID()),
                         "Bill #" + transaction.getTransactionID()
