@@ -90,9 +90,10 @@ public class DocumentPrinter {
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf"));
         File pdfFile = fileChooser.showSaveDialog(stage);
         try {
-            document.save(pdfFile);
+            if (pdfFile != null)
+                document.save(pdfFile);
         } catch (IOException e) {
-            e.printStackTrace();
+
         }
 
         // Close the PDF document

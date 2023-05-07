@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public class Order {
     @Getter
-    private int orderID;
+    private UUID orderID;
 
     private static int orderCount = 0;
 
@@ -16,21 +16,20 @@ public class Order {
     private InventoryItem item;
     @Getter
     private int quantity;
+    @Getter
+    private int purchasePrice;
 
-    public Order() {
-        this(0, null, 0);
-    }
-
-    public Order(InventoryItem item, int quantity) {
+    public Order(InventoryItem item, int purchasePrice, int quantity) {
         this.item = item;
         this.quantity = quantity;
-        this.orderID = orderCount;
-        orderCount++;
+        this.orderID = UUID.randomUUID();
+        this.purchasePrice = purchasePrice;
     }
 
-    public Order(int orderID,InventoryItem item, int quantity) {
+    public Order(UUID orderID, InventoryItem item, int purchasePrice, int quantity) {
         this.item = item;
         this.quantity = quantity;
         this.orderID = orderID;
+        this.purchasePrice = purchasePrice;
     }
 }

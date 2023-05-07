@@ -49,7 +49,7 @@ public class HistoryTab  extends TabContainer {
         ArrayList<Transaction> transactions = transactionController.fetchByCustomerID(customerId);
 
         // Sort by transaction ID
-        transactions.sort((t1, t2) -> t2.getTransactionID() - t1.getTransactionID());
+//        transactions.sort((t1, t2) -> t2.getTransactionID() - t1.getTransactionID());
 
         // Table headings
         List<String> tableHeadings = new ArrayList<>(Arrays.asList("Transaction ID", "Date", "Total Price", "Discount", "Action"));

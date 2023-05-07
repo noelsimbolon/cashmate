@@ -1,0 +1,34 @@
+<ArrayList>
+  <item>
+    <customerID>4007f7af-ad2f-4b11-9c77-b651dd203ab8</customerID>
+    <memberLevel>Customer</memberLevel>
+  </item>
+  <item>
+    <customerID>3cd505d6-1618-49bc-98e5-1990a84dc6f9</customerID>
+    <memberLevel>Customer</memberLevel>
+  </item>
+  <item>
+    <customerID>c495f793-f596-424f-9256-57a8d87c8066</customerID>
+    <memberLevel>Customer</memberLevel>
+  </item>
+  <item>
+    <customerID>050f7ab5-fe76-4ac7-b1a1-03cac22f9716</customerID>
+    <memberLevel>Customer</memberLevel>
+  </item>
+  <item>
+    <customerID>2f74a2eb-0643-4714-ada7-dbffc3e1d390</customerID>
+    <memberLevel>Customer</memberLevel>
+  </item>
+  <item>
+    <customerID>9f5862a0-a71f-48cf-b38a-7dd1927b5c11</customerID>
+    <memberLevel>Customer</memberLevel>
+  </item>
+  <item>
+    <customerID>830bc1be-d24a-4da3-81f3-09855a39d4c6</customerID>
+    <memberLevel>Customer</memberLevel>
+  </item>
+  <item>
+    <customerID>ed3cac29-0192-4046-b4a4-9b85992dac9f</customerID>
+    <memberLevel>Customer</memberLevel>
+  </item>
+</ArrayList>
