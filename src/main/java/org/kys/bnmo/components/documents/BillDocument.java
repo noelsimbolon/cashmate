@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 import org.kys.bnmo.components.interfaces.ComponentFactory;
-import org.kys.bnmo.components.ComponentFactory;
 import org.kys.bnmo.controllers.TransactionController;
 import org.kys.bnmo.helpers.views.loaders.StyleLoadHelper;
 import org.kys.bnmo.model.Customer;
@@ -26,9 +25,9 @@ public class BillDocument implements ComponentFactory {
     private static final BillPageBuilder billPageBuilder = new BillPageBuilder();
     private static final TransactionController transactionController = new TransactionController();
     @Setter
-    private int transactionID;
+    private UUID transactionID;
 
-    public BillDocument(int transactionID) {
+    public BillDocument(UUID transactionID) {
         this.transactionID = transactionID;
     }
 

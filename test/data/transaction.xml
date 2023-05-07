@@ -1,0 +1,24 @@
+<ArrayList>
+  <item>
+    <transactionID>5c373bb7-2192-4310-9fbd-33d2b3af8d38</transactionID>
+    <customerID>9f5862a0-a71f-48cf-b38a-7dd1927b5c11</customerID>
+    <totalPrice>500.0</totalPrice>
+    <date>1683478140761</date>
+    <orderIDs>
+      <orderIDs>f3d84743-a3b7-4d0d-ad28-f22c8f9bc4e5</orderIDs>
+      <orderIDs>c7a9a211-71d4-4f27-aa35-05e7ca4a3e0d</orderIDs>
+    </orderIDs>
+    <discount>0</discount>
+  </item>
+  <item>
+    <transactionID>9d86b88c-40b8-46b8-9420-48c5936ca29c</transactionID>
+    <customerID>830bc1be-d24a-4da3-81f3-09855a39d4c6</customerID>
+    <totalPrice>500.0</totalPrice>
+    <date>1683478332473</date>
+    <orderIDs>
+      <orderIDs>1a724be1-2de3-4306-a502-e7c104786dfc</orderIDs>
+      <orderIDs>364b5f08-f2e3-45a5-8ccd-ac096bfc9c04</orderIDs>
+    </orderIDs>
+    <discount>0</discount>
+  </item>
+</ArrayList>

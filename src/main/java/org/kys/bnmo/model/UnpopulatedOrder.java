@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public class UnpopulatedOrder {
     @Getter
-    private int orderID;
+    private UUID orderID;
 
     @Getter
     private UUID itemID;
@@ -16,13 +16,13 @@ public class UnpopulatedOrder {
     private int purchasePrice;
 
     public UnpopulatedOrder() {
-        this.orderID = 0;
+        this.orderID = UUID.randomUUID();
         this.itemID = UUID.randomUUID();
         this.quantity = 0;
         this.purchasePrice = 0;
     }
 
-    public UnpopulatedOrder(int orderID, UUID itemID, int purchasePrice, int quantity) {
+    public UnpopulatedOrder(UUID orderID, UUID itemID, int purchasePrice, int quantity) {
         this.orderID = orderID;
         this.itemID = itemID;
         this.purchasePrice = purchasePrice;

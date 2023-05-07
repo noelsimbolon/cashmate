@@ -36,7 +36,7 @@ public class BillPageBuilder extends ComponentBuilder {
         dateRow.getStyleClass().add("label-row");
 
         Label idTitle = new Label("Invoice:");
-        Label idValue = new Label(Integer.toString(transaction.getTransactionID()));
+        Label idValue = new Label(transaction.getTransactionID().toString());
         idTitle.getStyleClass().addAll("small-text", "dark");
         idValue.getStyleClass().addAll("small-text", "light");
 

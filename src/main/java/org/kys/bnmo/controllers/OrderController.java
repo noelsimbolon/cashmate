@@ -10,6 +10,7 @@ import org.kys.bnmo.plugins.base.PluginService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class OrderController {
@@ -50,9 +51,9 @@ public class OrderController {
         return orders;
     }
 
-    public ArrayList<Order> fetchByID(int id) {
+    public ArrayList<Order> fetchByID(UUID id) {
         return (ArrayList<Order>) fetchAll().stream()
-                .filter(c -> c.getOrderID() == id)
+                .filter(c -> c.getOrderID().equals(id))
                 .collect(Collectors.toList());
     }
 
@@ -64,11 +65,11 @@ public class OrderController {
         dataStore.writeData(fileName, ups);
     }
 
-    public void deleteById(int id) {
+    public void deleteById(UUID id) {
         ArrayList<Order> data = fetchAll();
 
         for (Order order: data) {
-            if (order.getOrderID() == id) {
+            if (order.getOrderID().equals(id)) {
                 data.remove(order);
                 break;
             }

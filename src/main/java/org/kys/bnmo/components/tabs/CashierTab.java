@@ -11,13 +11,17 @@ import javafx.scene.layout.VBox;
 import org.jetbrains.annotations.NotNull;
 import org.kys.bnmo.components.bases.CheckoutPanel;
 import org.kys.bnmo.components.bases.TableBuilder;
+import org.kys.bnmo.controllers.CustomerController;
 import org.kys.bnmo.controllers.InventoryItemController;
 import org.kys.bnmo.controllers.MemberController;
 import org.kys.bnmo.helpers.views.tables.TableData;
+import org.kys.bnmo.model.Customer;
 import org.kys.bnmo.model.InventoryItem;
 import org.kys.bnmo.model.Member;
 
+import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class CashierTab extends TabContainer {
 
@@ -28,10 +32,12 @@ public class CashierTab extends TabContainer {
         HBox tableWrapper = new HBox();
         HBox.setHgrow(tableWrapper, Priority.ALWAYS);
 
-        List<Member> members = new ArrayList<>();
-        members.add(new Member("Fio", "+62-812-3456-891", "Member"));
-        members.add(new Member("Jojo", "+62-812-3456-891", "Member"));
-        members.add(new Member("Agus", "+62-812-3456-891", "VIP"));
+        CustomerController customerController = new CustomerController();
+        List<Customer> customers = customerController.fetchAll();
+        List<Member> members = customers.stream()
+                .filter(customer -> customer instanceof Member)
+                .map(customer -> (Member) customer)
+                .collect(Collectors.toList());
         CheckoutPanel checkoutPanel = new CheckoutPanel(members);
         checkoutPanel.setOnCheckout(() -> {
             reloadTable(checkoutPanel, tableWrapper);
@@ -74,11 +80,7 @@ public class CashierTab extends TabContainer {
     private TableData loadTableData(CheckoutPanel checkoutPanel) {
         InventoryItemController inventoryItemController = new InventoryItemController();
 
-        try {
-            inventoryItemController.loadConfig();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        inventoryItemController.loadConfig();
 
         // Read inventory items from data store
         ArrayList<InventoryItem> inventoryItems = inventoryItemController.readInventoryItems();

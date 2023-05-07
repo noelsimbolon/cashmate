@@ -39,7 +39,7 @@ public class TransactionController {
         ArrayList<Transaction> transactions = new ArrayList<>();
         for (UnpopulatedTransaction ut : unpopulatedTransactions) {
             List<Order> orders = new ArrayList<>();
-            for (int orderID : ut.getOrderIDs()) {
+            for (UUID orderID : ut.getOrderIDs()) {
                 orders.add(orderController.fetchByID(orderID).get(0));
             }
 
@@ -60,9 +60,9 @@ public class TransactionController {
         return transactions;
     }
 
-    public ArrayList<Transaction> fetchByID(int uuid) {
+    public ArrayList<Transaction> fetchByID(UUID uuid) {
         return (ArrayList<Transaction>) fetchAll().stream()
-                .filter(t -> t.getTransactionID() == uuid)
+                .filter(t -> t.getTransactionID().equals(uuid))
                 .collect(Collectors.toList());
     }
 
@@ -76,7 +76,7 @@ public class TransactionController {
         ArrayList<Order> orders = orderController.fetchAll();
 
         ArrayList<UnpopulatedTransaction> uts = data.stream().map(t -> {
-            List<Integer> orderIDs = new ArrayList<>();
+            List<UUID> orderIDs = new ArrayList<>();
 
             for (Order order: t.getOrders()) {
                 orderIDs.add(order.getOrderID());
@@ -91,11 +91,11 @@ public class TransactionController {
         dataStore.writeData(fileName, uts);
     }
 
-    public void deleteById(int uuid) {
+    public void deleteById(UUID uuid) {
         ArrayList<Transaction> data = fetchAll();
 
         for (Transaction transaction: data) {
-            if (transaction.getTransactionID() == uuid) {
+            if (transaction.getTransactionID().equals(uuid)) {
                 data.remove(transaction);
                 break;
             }
