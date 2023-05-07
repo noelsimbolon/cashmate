@@ -1,112 +1,98 @@
 [ {
-  "customerID" : 1,
-  "name" : "Alifio",
-  "phoneNumber" : "082112300087",
-  "points" : 69,
-  "status" : "Active",
-  "memberLevel" : "VIP"
-}, {
-  "customerID" : 2,
-  "name" : "Noel",
-  "phoneNumber" : "081234567898",
-  "points" : 420,
+  "customerID" : "779f04b2-8c4d-4a9f-b33e-1444bb6a20ba",
+  "name" : "Member 1",
+  "phoneNumber" : "12345678",
+  "points" : 0,
   "status" : "Inactive",
   "memberLevel" : "Member"
 }, {
-  "customerID" : 6,
-  "name" : "Jojo",
-  "phoneNumber" : "0812121212",
-  "points" : 500000000,
-  "status" : "Active",
-  "memberLevel" : "VIP"
-}, {
-  "customerID" : 7,
-  "name" : "Farhan",
-  "phoneNumber" : "0812121212",
-  "points" : 69420,
-  "status" : "Active",
-  "memberLevel" : "Member"
-}, {
-  "customerID" : 8,
-  "name" : "Member3",
-  "phoneNumber" : "0812121212",
+  "customerID" : "13286969-ea6d-4c22-9214-a08dfd8aee8c",
+  "name" : "Member 2",
+  "phoneNumber" : "12345678",
   "points" : 0,
   "status" : "Active",
   "memberLevel" : "Member"
 }, {
-  "customerID" : 9,
-  "name" : "Member4",
-  "phoneNumber" : "0812121212",
+  "customerID" : "be8b8d69-f88b-4029-93fc-7989561941a7",
+  "name" : "Member 3",
+  "phoneNumber" : "12345678",
+  "points" : 0,
+  "status" : "Inactive",
+  "memberLevel" : "Member"
+}, {
+  "customerID" : "af4b8203-c92a-449c-aa14-9d8c4cdb6545",
+  "name" : "Member 4",
+  "phoneNumber" : "12345678",
   "points" : 0,
   "status" : "Active",
   "memberLevel" : "Member"
 }, {
-  "customerID" : 10,
-  "name" : "Member5",
-  "phoneNumber" : "0812121212",
+  "customerID" : "a7bcab8d-624c-481f-8774-2ca333d151ce",
+  "name" : "Member 5",
+  "phoneNumber" : "12345678",
+  "points" : 0,
+  "status" : "Inactive",
+  "memberLevel" : "Member"
+}, {
+  "customerID" : "754ba72b-b02c-4346-b3e7-36721a4e9db2",
+  "name" : "Member 6",
+  "phoneNumber" : "12345678",
   "points" : 0,
   "status" : "Active",
   "memberLevel" : "Member"
 }, {
-  "customerID" : 11,
-  "name" : "Member6",
-  "phoneNumber" : "0812121212",
+  "customerID" : "497ce265-d2f0-4737-b92a-660a11f032f5",
+  "name" : "Member 7",
+  "phoneNumber" : "12345678",
+  "points" : 0,
+  "status" : "Inactive",
+  "memberLevel" : "Member"
+}, {
+  "customerID" : "e271b936-c01f-4e4a-9e82-84934f5beefc",
+  "name" : "Member 8",
+  "phoneNumber" : "12345678",
   "points" : 0,
   "status" : "Active",
   "memberLevel" : "Member"
 }, {
-  "customerID" : 12,
-  "name" : "Member7",
-  "phoneNumber" : "0812121212",
-  "points" : 0,
-  "status" : "Active",
-  "memberLevel" : "Member"
-}, {
-  "customerID" : 13,
-  "name" : "Member8",
-  "phoneNumber" : "0812121212",
-  "points" : 0,
-  "status" : "Active",
-  "memberLevel" : "Member"
-}, {
-  "customerID" : 14,
-  "name" : "Member9",
-  "phoneNumber" : "0812121212",
-  "points" : 0,
-  "status" : "Active",
-  "memberLevel" : "Member"
-}, {
-  "customerID" : 15,
-  "name" : "Member10",
-  "phoneNumber" : "0812121212",
-  "points" : 0,
-  "status" : "Active",
-  "memberLevel" : "Member"
-}, {
-  "customerID" : 16,
-  "name" : "VIP1",
-  "phoneNumber" : "0812121212",
+  "customerID" : "42aa5c09-9ddf-4067-9939-6cc4d8a85cb7",
+  "name" : "VIP 1",
+  "phoneNumber" : "98765432",
   "points" : 0,
   "status" : "Inactive",
   "memberLevel" : "VIP"
 }, {
-  "customerID" : 17,
-  "name" : "VIP2",
-  "phoneNumber" : "0812121212",
+  "customerID" : "13b2f636-bd8c-4401-b5a7-06d1f6c97016",
+  "name" : "VIP 2",
+  "phoneNumber" : "98765432",
   "points" : 0,
   "status" : "Active",
   "memberLevel" : "VIP"
 }, {
-  "customerID" : 18,
-  "name" : "VIP3",
-  "phoneNumber" : "0812121212",
+  "customerID" : "04ca8f54-ba8b-4c18-a0be-df9e7e0faa51",
+  "name" : "VIP 3",
+  "phoneNumber" : "98765432",
+  "points" : 0,
+  "status" : "Inactive",
+  "memberLevel" : "VIP"
+}, {
+  "customerID" : "5b189ab3-d777-401f-854c-1e06acba3234",
+  "name" : "VIP 4",
+  "phoneNumber" : "98765432",
   "points" : 0,
   "status" : "Active",
   "memberLevel" : "VIP"
 }, {
-  "customerID" : 19,
-  "name" : "VIP4",
-  "phoneNumber" : "0812121212",
+  "customerID" : "7b31ad27-1f9e-4b4b-b608-67dae860445e",
+  "name" : "VIP 5",
+  "phoneNumber" : "98765432",
+  "points" : 0,
+  "status" : "Inactive",
+  "memberLevel" : "VIP"
+}, {
+  "customerID" : "fa0f79d3-f9e6-4f7f-be46-a3d111f55a66",
+  "name" : "VIP 6",
+  "phoneNumber" : "98765432",
   "points" : 0,
   "status" : "Active",
   "memberLevel" : "VIP"
