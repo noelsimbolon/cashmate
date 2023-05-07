@@ -51,6 +51,11 @@ public class PluginService implements PluginServiceInterface {
 
     @Override
     public void addDropdownSetting(String label, String placeholder, String[] items, Property<String> selectedValue) {
-        settingBuilder.addDropdown(label, placeholder, items, selectedValue);
+
+        if (settingBuilder != null)
+        {
+            settingBuilder.addDropdown(label, placeholder, items, selectedValue);
+        }
+
     }
 }
