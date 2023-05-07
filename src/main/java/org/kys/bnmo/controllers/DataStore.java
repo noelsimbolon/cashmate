@@ -4,8 +4,6 @@ import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import org.kys.bnmo.model.*;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -204,22 +202,5 @@ public class DataStore {
         if (!parentFolder.exists()) parentFolder.mkdirs();
 
         adapter.writeFile(file.getAbsolutePath(), data);
-    }
-
-    public BufferedImage readImage(String filename) throws IOException {
-        File file = new File(folderPath + "\\images\\" + filename);
-        return ImageIO.read(file);
-    }
-
-    public void writeImage(String filename, BufferedImage image) {
-        File file = new File(folderPath + "\\images\\" + filename);
-        File parentFolder = file.getParentFile();
-        if (!parentFolder.exists()) parentFolder.mkdirs();
-
-        try {
-            ImageIO.write(image, "png", file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

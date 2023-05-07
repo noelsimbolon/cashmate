@@ -39,10 +39,6 @@ public class InventoryItemController {
 
     }
 
-    public Image getFXImage(String fileName) throws IOException {
-        return SwingFXUtils.toFXImage(dataStore.readImage(fileName), null);
-    }
-
     public void loadConfig() {
         dataStore.loadConfig();
     }
