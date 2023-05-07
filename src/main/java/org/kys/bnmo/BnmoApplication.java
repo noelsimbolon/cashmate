@@ -258,8 +258,8 @@ public class BnmoApplication extends Application {
                 new DefaultTab(catalogueTabFactory, tabPane.getTabs().get(2)),
                 new DefaultTab(settingTabFactory, tabPane.getTabs().get(3))
         );
-// TODO: UNCOMMENT
-//        tabPane.getTabs().clear();
+
+        tabPane.getTabs().clear();
 
     }
 
