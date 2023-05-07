@@ -28,6 +28,10 @@ public class Member extends Customer {
     @NotNull
     private String memberLevel; // "Member" or "VIP"
 
+    public Member() {
+        this("", "", "");
+    }
+
     public Member(int customerID, @NotNull String name, @NotNull String phoneNumber, @NotNull String memberLevel) {
         super(customerID);
         this.name = name;
