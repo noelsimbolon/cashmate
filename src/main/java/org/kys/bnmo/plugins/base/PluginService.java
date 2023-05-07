@@ -1,5 +1,6 @@
 package org.kys.bnmo.plugins.base;
 
+import javafx.animation.Timeline;
 import javafx.beans.property.Property;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
@@ -53,6 +54,14 @@ public class PluginService implements PluginServiceInterface {
         }
     }
 
+    @Override
+    public void addTab(Pane content, String title, Timeline timeline) {
+        if (pageBuilder != null)
+        {
+            addTab(content, title);
+            timeline.play();
+        }
+    }
     @Override
     public ControllerAdapterInterface getController() {
         return new ControllerAdapter();
