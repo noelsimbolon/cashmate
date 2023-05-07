@@ -91,7 +91,7 @@ public class LineBarChartPlugin extends BasePlugin {
             Calendar cal = Calendar.getInstance();
             cal.setTime(transaction.getDate());
             int year = cal.get(Calendar.YEAR);
-            System.out.println(year);
+//            System.out.println(year);
 
             int yearIndex = year - LocalDate.now().getYear() + 4;
             if (yearIndex < 0 || yearIndex >= 5) continue;
