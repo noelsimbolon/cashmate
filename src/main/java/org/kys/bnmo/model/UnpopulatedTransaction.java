@@ -27,7 +27,7 @@ public class UnpopulatedTransaction {
     private int discount;
 
     public UnpopulatedTransaction() {
-        this(0, 0, null, 0, null, 0);
+        this(0, 0, new ArrayList<>(), 0, new Date(), 0);
     }
 
     public UnpopulatedTransaction(int transactionID, int customerID, List<Integer> orderIDs, double totalPrice, Date date, int discount) {
