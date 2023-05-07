@@ -1,781 +1,301 @@
 [ {
-  "orderID" : "6f9a844f-319b-4ac2-81a2-0fe0391a6dbe",
-  "item" : {
-    "itemID" : "4096e30e-33b8-444c-a9eb-7094ed4f1d12",
-    "itemName" : "Item 3",
-    "category" : "Stationery",
-    "stock" : 51,
-    "price" : 77000.0,
-    "purchasePrice" : 70000.0,
-    "imageFileName" : "stationery.png"
-  },
-  "quantity" : 4,
-  "purchasePrice" : 70000.0
-}, {
-  "orderID" : "ff28237f-30c1-4a80-b970-45b284a33734",
-  "item" : {
-    "itemID" : "4096e30e-33b8-444c-a9eb-7094ed4f1d12",
-    "itemName" : "Item 3",
-    "category" : "Stationery",
-    "stock" : 51,
-    "price" : 77000.0,
-    "purchasePrice" : 70000.0,
-    "imageFileName" : "stationery.png"
-  },
-  "quantity" : 1,
-  "purchasePrice" : 70000.0
-}, {
-  "orderID" : "a6b6b8f8-b731-4a0e-85cb-4973834efae7",
-  "item" : {
-    "itemID" : "915d105b-fe5a-4605-9515-813e94bc1d7d",
-    "itemName" : "Item 12",
-    "category" : "Medicine",
-    "stock" : 61,
-    "price" : 11000.0,
-    "purchasePrice" : 10000.0,
-    "imageFileName" : "medicine.png"
-  },
-  "quantity" : 0,
-  "purchasePrice" : 10000.0
-}, {
-  "orderID" : "a130c15c-0ff3-40bc-94cd-c97289498470",
-  "item" : {
-    "itemID" : "e742423b-824c-4308-959c-112a4f84be07",
-    "itemName" : "Item 4",
-    "category" : "Stationery",
-    "stock" : 38,
-    "price" : 22000.0,
-    "purchasePrice" : 20000.0,
-    "imageFileName" : "stationery.png"
-  },
-  "quantity" : 1,
+  "orderID" : "61cd576c-1e6a-42c9-9cb6-e862263b03ea",
+  "itemID" : "e742423b-824c-4308-959c-112a4f84be07",
+  "quantity" : 3,
   "purchasePrice" : 20000.0
 }, {
-  "orderID" : "0cf0f4d4-a16d-4e7b-b356-46db695039c3",
-  "item" : {
-    "itemID" : "6169d4e1-724f-435c-820d-18c7a0b3c3be",
-    "itemName" : "Item 1",
-    "category" : "Food",
-    "stock" : 75,
-    "price" : 100000.0,
-    "purchasePrice" : 90000.0,
-    "imageFileName" : "food.png"
-  },
-  "quantity" : 1,
-  "purchasePrice" : 90000.0
-}, {
-  "orderID" : "fc603c04-962f-44bb-a2b4-122ad5a816b7",
-  "item" : {
-    "itemID" : "e840558b-88b8-4f55-a552-4d8d9c47a3f3",
-    "itemName" : "Item 9",
-    "category" : "Beverage",
-    "stock" : 83,
-    "price" : 111000.0,
-    "purchasePrice" : 100000.0,
-    "imageFileName" : "beverage.png"
-  },
-  "quantity" : 2,
-  "purchasePrice" : 100000.0
-}, {
-  "orderID" : "f4abc9ac-2743-46cf-947f-1f42370c36b2",
-  "item" : {
-    "itemID" : "b6de4aee-db96-412b-a661-f0bd021d97a0",
-    "itemName" : "Item 13",
-    "category" : "Medicine",
-    "stock" : 20,
-    "price" : 22000.0,
-    "purchasePrice" : 20000.0,
-    "imageFileName" : "medicine.png"
-  },
-  "quantity" : 0,
-  "purchasePrice" : 20000.0
-}, {
-  "orderID" : "eca54271-04fd-4666-a930-c4277d31a5ff",
-  "item" : {
-    "itemID" : "7225046c-a335-4139-91b2-f4edcc36a57d",
-    "itemName" : "Item 20",
-    "category" : "Medicine",
-    "stock" : 41,
-    "price" : 111000.0,
-    "purchasePrice" : 100000.0,
-    "imageFileName" : "medicine.png"
-  },
+  "orderID" : "36529cac-300e-401a-a50c-50b8ea676f5a",
+  "itemID" : "db0c42a2-3fbe-4ed4-a1c7-3f39cf8057f5",
   "quantity" : 4,
-  "purchasePrice" : 100000.0
+  "purchasePrice" : 50000.0
 }, {
-  "orderID" : "cdc2398f-d605-4a9d-bbe6-4205c87ae041",
-  "item" : {
-    "itemID" : "e840558b-88b8-4f55-a552-4d8d9c47a3f3",
-    "itemName" : "Item 9",
-    "category" : "Beverage",
-    "stock" : 83,
-    "price" : 111000.0,
-    "purchasePrice" : 100000.0,
-    "imageFileName" : "beverage.png"
-  },
+  "orderID" : "db3bd223-f483-444c-bc2e-bdf490467fe7",
+  "itemID" : "dffc2b97-cfe4-4a43-a79f-1c5aa24b7e0e",
+  "quantity" : 3,
+  "purchasePrice" : 60000.0
+}, {
+  "orderID" : "008d84c1-88e4-4032-a735-29d4a64184e7",
+  "itemID" : "db0c42a2-3fbe-4ed4-a1c7-3f39cf8057f5",
+  "quantity" : 3,
+  "purchasePrice" : 50000.0
+}, {
+  "orderID" : "ed4f47a6-5ac2-43fa-9f31-bfdfdb525de3",
+  "itemID" : "7ffffe28-d1db-480f-b1dd-80f5c2625dfc",
   "quantity" : 4,
-  "purchasePrice" : 100000.0
-}, {
-  "orderID" : "324cd945-a3d8-49ad-82ab-e1276026b8a8",
-  "item" : {
-    "itemID" : "a4f2819f-b9db-489c-821f-631da462d031",
-    "itemName" : "Item 14",
-    "category" : "Food",
-    "stock" : 39,
-    "price" : 66000.0,
-    "purchasePrice" : 60000.0,
-    "imageFileName" : "food.png"
-  },
-  "quantity" : 1,
   "purchasePrice" : 60000.0
 }, {
-  "orderID" : "38e18c58-0a32-4126-97da-5280f8b765c0",
-  "item" : {
-    "itemID" : "6169d4e1-724f-435c-820d-18c7a0b3c3be",
-    "itemName" : "Item 1",
-    "category" : "Food",
-    "stock" : 75,
-    "price" : 100000.0,
-    "purchasePrice" : 90000.0,
-    "imageFileName" : "food.png"
-  },
-  "quantity" : 3,
-  "purchasePrice" : 90000.0
-}, {
-  "orderID" : "61f7fa0e-c3b6-479f-a66b-ac9e6a38f3ed",
-  "item" : {
-    "itemID" : "72a73440-cb0f-45b9-b584-87a798f1bdb2",
-    "itemName" : "Item 7",
-    "category" : "Food",
-    "stock" : 8,
-    "price" : 66000.0,
-    "purchasePrice" : 60000.0,
-    "imageFileName" : "food.png"
-  },
-  "quantity" : 3,
-  "purchasePrice" : 60000.0
-}, {
-  "orderID" : "556fe571-6b5b-4a3d-beb0-df89058f9e38",
-  "item" : {
-    "itemID" : "e840558b-88b8-4f55-a552-4d8d9c47a3f3",
-    "itemName" : "Item 9",
-    "category" : "Beverage",
-    "stock" : 83,
-    "price" : 111000.0,
-    "purchasePrice" : 100000.0,
-    "imageFileName" : "beverage.png"
-  },
-  "quantity" : 3,
-  "purchasePrice" : 100000.0
-}, {
-  "orderID" : "c9e50696-9dd9-478b-81b9-1eebaf87e931",
-  "item" : {
-    "itemID" : "7ffffe28-d1db-480f-b1dd-80f5c2625dfc",
-    "itemName" : "Item 18",
-    "category" : "Beverage",
-    "stock" : 14,
-    "price" : 66000.0,
-    "purchasePrice" : 60000.0,
-    "imageFileName" : "beverage.png"
-  },
-  "quantity" : 1,
-  "purchasePrice" : 60000.0
-}, {
-  "orderID" : "2fdbc2b7-f6bb-4057-b9c0-2b244c76548a",
-  "item" : {
-    "itemID" : "4096e30e-33b8-444c-a9eb-7094ed4f1d12",
-    "itemName" : "Item 3",
-    "category" : "Stationery",
-    "stock" : 51,
-    "price" : 77000.0,
-    "purchasePrice" : 70000.0,
-    "imageFileName" : "stationery.png"
-  },
-  "quantity" : 2,
-  "purchasePrice" : 70000.0
-}, {
-  "orderID" : "34ebb52a-9bf1-41d2-b139-a36ca2ec14b3",
-  "item" : {
-    "itemID" : "e435771d-beb5-4223-b6d8-a6715e356426",
-    "itemName" : "Item 5",
-    "category" : "Stationery",
-    "stock" : 70,
-    "price" : 66000.0,
-    "purchasePrice" : 60000.0,
-    "imageFileName" : "stationery.png"
-  },
-  "quantity" : 2,
-  "purchasePrice" : 60000.0
-}, {
-  "orderID" : "d291a9d8-ec59-4620-8364-1f43fd5770a7",
-  "item" : {
-    "itemID" : "88b5c708-932d-42d7-907a-3ffc4813542a",
-    "itemName" : "Item 19",
-    "category" : "Medicine",
-    "stock" : 53,
-    "price" : 33000.0,
-    "purchasePrice" : 30000.0,
-    "imageFileName" : "medicine.png"
-  },
-  "quantity" : 3,
-  "purchasePrice" : 30000.0
-}, {
-  "orderID" : "b85d698f-7697-499f-ba7c-6e6a1cad996e",
-  "item" : {
-    "itemID" : "732e9d0e-2671-4302-aebb-35cf6768d043",
-    "itemName" : "Item 10",
-    "category" : "Food",
-    "stock" : 89,
-    "price" : 56000.0,
-    "purchasePrice" : 50000.0,
-    "imageFileName" : "food.png"
-  },
+  "orderID" : "08d1c415-4760-49d1-983f-14b4e4c1740c",
+  "itemID" : "db0c42a2-3fbe-4ed4-a1c7-3f39cf8057f5",
   "quantity" : 2,
   "purchasePrice" : 50000.0
 }, {
-  "orderID" : "9518561d-a430-4961-bf64-f8a8f0f63895",
-  "item" : {
-    "itemID" : "2c008511-169e-48fe-bfee-89e5e36257dc",
-    "itemName" : "Item 16",
-    "category" : "Stationery",
-    "stock" : 18,
-    "price" : 88000.0,
-    "purchasePrice" : 80000.0,
-    "imageFileName" : "stationery.png"
-  },
-  "quantity" : 2,
+  "orderID" : "205e6cd1-a507-476c-8020-c4cd7973e314",
+  "itemID" : "4096e30e-33b8-444c-a9eb-7094ed4f1d12",
+  "quantity" : 4,
+  "purchasePrice" : 70000.0
+}, {
+  "orderID" : "97c87d4c-9284-4027-a4b1-4f91a43bf545",
+  "itemID" : "2c008511-169e-48fe-bfee-89e5e36257dc",
+  "quantity" : 0,
   "purchasePrice" : 80000.0
 }, {
-  "orderID" : "917f55c9-beee-4043-b7ab-caa0c2024281",
-  "item" : {
-    "itemID" : "162aa607-9473-446b-8e76-9cc7c63915b6",
-    "itemName" : "Item 11",
-    "category" : "Medicine",
-    "stock" : 51,
-    "price" : 111000.0,
-    "purchasePrice" : 100000.0,
-    "imageFileName" : "medicine.png"
-  },
+  "orderID" : "147ef758-b767-4926-9299-eee55f926b6b",
+  "itemID" : "915d105b-fe5a-4605-9515-813e94bc1d7d",
   "quantity" : 2,
-  "purchasePrice" : 100000.0
+  "purchasePrice" : 10000.0
 }, {
-  "orderID" : "d4e2688c-c74f-4e0d-a9d5-2189b11015ea",
-  "item" : {
-    "itemID" : "dffc2b97-cfe4-4a43-a79f-1c5aa24b7e0e",
-    "itemName" : "Item 8",
-    "category" : "Medicine",
-    "stock" : 75,
-    "price" : 66000.0,
-    "purchasePrice" : 60000.0,
-    "imageFileName" : "medicine.png"
-  },
+  "orderID" : "63e98adf-ca35-4903-a96c-8ff153f7a1a8",
+  "itemID" : "e435771d-beb5-4223-b6d8-a6715e356426",
+  "quantity" : 2,
+  "purchasePrice" : 60000.0
+}, {
+  "orderID" : "32f0a4ce-0c27-464a-8ca9-1de884ca7a6e",
+  "itemID" : "4096e30e-33b8-444c-a9eb-7094ed4f1d12",
+  "quantity" : 3,
+  "purchasePrice" : 70000.0
+}, {
+  "orderID" : "6baa5336-331b-4f00-a324-983aba9cb7b7",
+  "itemID" : "732e9d0e-2671-4302-aebb-35cf6768d043",
+  "quantity" : 3,
+  "purchasePrice" : 50000.0
+}, {
+  "orderID" : "3f618670-2f79-470e-8ec2-5d1b47b66734",
+  "itemID" : "db0c42a2-3fbe-4ed4-a1c7-3f39cf8057f5",
+  "quantity" : 3,
+  "purchasePrice" : 50000.0
+}, {
+  "orderID" : "bc97299d-9c16-410b-b88a-12b52c0c7457",
+  "itemID" : "a4f2819f-b9db-489c-821f-631da462d031",
   "quantity" : 3,
   "purchasePrice" : 60000.0
 }, {
-  "orderID" : "f7c6791e-97d8-4f34-bba0-049a53447a40",
-  "item" : {
-    "itemID" : "e742423b-824c-4308-959c-112a4f84be07",
-    "itemName" : "Item 4",
-    "category" : "Stationery",
-    "stock" : 38,
-    "price" : 22000.0,
-    "purchasePrice" : 20000.0,
-    "imageFileName" : "stationery.png"
-  },
-  "quantity" : 3,
+  "orderID" : "0178334f-a5e3-4841-b563-dd6cba7a0887",
+  "itemID" : "b6de4aee-db96-412b-a661-f0bd021d97a0",
+  "quantity" : 4,
   "purchasePrice" : 20000.0
 }, {
-  "orderID" : "53357cbe-55c8-4cbd-b0a7-93805be7b0ef",
-  "item" : {
-    "itemID" : "72a73440-cb0f-45b9-b584-87a798f1bdb2",
-    "itemName" : "Item 7",
-    "category" : "Food",
-    "stock" : 8,
-    "price" : 66000.0,
-    "purchasePrice" : 60000.0,
-    "imageFileName" : "food.png"
-  },
+  "orderID" : "bc702e82-eb6b-4308-b610-d661c085ef2c",
+  "itemID" : "db0c42a2-3fbe-4ed4-a1c7-3f39cf8057f5",
   "quantity" : 1,
-  "purchasePrice" : 60000.0
+  "purchasePrice" : 50000.0
 }, {
-  "orderID" : "1608dede-1021-4891-b428-0acae9bc7ef7",
-  "item" : {
-    "itemID" : "72a73440-cb0f-45b9-b584-87a798f1bdb2",
-    "itemName" : "Item 7",
-    "category" : "Food",
-    "stock" : 8,
-    "price" : 66000.0,
-    "purchasePrice" : 60000.0,
-    "imageFileName" : "food.png"
-  },
+  "orderID" : "d4013b73-22b8-47dd-be45-7988d04eb91f",
+  "itemID" : "e435771d-beb5-4223-b6d8-a6715e356426",
   "quantity" : 2,
   "purchasePrice" : 60000.0
 }, {
-  "orderID" : "129b3245-9836-416f-82d9-1aa31eedac1e",
-  "item" : {
-    "itemID" : "2fac3c73-0813-42df-95b4-ea32336b7a4b",
-    "itemName" : "Item 2",
-    "category" : "Stationery",
-    "stock" : 46,
-    "price" : 111000.0,
-    "purchasePrice" : 100000.0,
-    "imageFileName" : "stationery.png"
-  },
-  "quantity" : 3,
+  "orderID" : "76c9dc88-0b1d-485b-82af-d286a5462c7e",
+  "itemID" : "2fac3c73-0813-42df-95b4-ea32336b7a4b",
+  "quantity" : 2,
   "purchasePrice" : 100000.0
 }, {
-  "orderID" : "2d716adb-fc83-48bb-81ad-341f4bf9627f",
-  "item" : {
-    "itemID" : "2fac3c73-0813-42df-95b4-ea32336b7a4b",
-    "itemName" : "Item 2",
-    "category" : "Stationery",
-    "stock" : 46,
-    "price" : 111000.0,
-    "purchasePrice" : 100000.0,
-    "imageFileName" : "stationery.png"
-  },
+  "orderID" : "9d0c83b7-d12b-4a12-b36f-d43f6863623c",
+  "itemID" : "7225046c-a335-4139-91b2-f4edcc36a57d",
   "quantity" : 1,
   "purchasePrice" : 100000.0
 }, {
-  "orderID" : "c208aa48-6c4e-4000-89f1-590fd57f1d0e",
-  "item" : {
-    "itemID" : "88b5c708-932d-42d7-907a-3ffc4813542a",
-    "itemName" : "Item 19",
-    "category" : "Medicine",
-    "stock" : 53,
-    "price" : 33000.0,
-    "purchasePrice" : 30000.0,
-    "imageFileName" : "medicine.png"
-  },
-  "quantity" : 2,
-  "purchasePrice" : 30000.0
-}, {
-  "orderID" : "2e56ddf3-d27e-490a-8289-211c7f9319a4",
-  "item" : {
-    "itemID" : "e840558b-88b8-4f55-a552-4d8d9c47a3f3",
-    "itemName" : "Item 9",
-    "category" : "Beverage",
-    "stock" : 83,
-    "price" : 111000.0,
-    "purchasePrice" : 100000.0,
-    "imageFileName" : "beverage.png"
-  },
-  "quantity" : 1,
+  "orderID" : "27985a36-1bc5-4311-b2b1-f8905efc1a5a",
+  "itemID" : "7225046c-a335-4139-91b2-f4edcc36a57d",
+  "quantity" : 0,
   "purchasePrice" : 100000.0
 }, {
-  "orderID" : "bfc211ae-808b-4a72-b8b8-d810d3a2053c",
-  "item" : {
-    "itemID" : "a4f2819f-b9db-489c-821f-631da462d031",
-    "itemName" : "Item 14",
-    "category" : "Food",
-    "stock" : 39,
-    "price" : 66000.0,
-    "purchasePrice" : 60000.0,
-    "imageFileName" : "food.png"
-  },
-  "quantity" : 2,
-  "purchasePrice" : 60000.0
-}, {
-  "orderID" : "8f5db954-283e-4cc0-84c0-8350430b3ea3",
-  "item" : {
-    "itemID" : "72a73440-cb0f-45b9-b584-87a798f1bdb2",
-    "itemName" : "Item 7",
-    "category" : "Food",
-    "stock" : 8,
-    "price" : 66000.0,
-    "purchasePrice" : 60000.0,
-    "imageFileName" : "food.png"
-  },
-  "quantity" : 3,
-  "purchasePrice" : 60000.0
-}, {
-  "orderID" : "7d1aa0e4-354a-46c5-936b-e097fc362276",
-  "item" : {
-    "itemID" : "4096e30e-33b8-444c-a9eb-7094ed4f1d12",
-    "itemName" : "Item 3",
-    "category" : "Stationery",
-    "stock" : 51,
-    "price" : 77000.0,
-    "purchasePrice" : 70000.0,
-    "imageFileName" : "stationery.png"
-  },
+  "orderID" : "8cfcd947-a2fd-4c75-86b8-eac87014aed2",
+  "itemID" : "4096e30e-33b8-444c-a9eb-7094ed4f1d12",
   "quantity" : 2,
   "purchasePrice" : 70000.0
 }, {
-  "orderID" : "46ecb0f6-8a7a-4c4b-bc0b-f9a0fcec8c9d",
-  "item" : {
-    "itemID" : "72a73440-cb0f-45b9-b584-87a798f1bdb2",
-    "itemName" : "Item 7",
-    "category" : "Food",
-    "stock" : 8,
-    "price" : 66000.0,
-    "purchasePrice" : 60000.0,
-    "imageFileName" : "food.png"
-  },
-  "quantity" : 2,
-  "purchasePrice" : 60000.0
-}, {
-  "orderID" : "890e78b5-c6d4-4d17-a86d-86f6dda9d719",
-  "item" : {
-    "itemID" : "162aa607-9473-446b-8e76-9cc7c63915b6",
-    "itemName" : "Item 11",
-    "category" : "Medicine",
-    "stock" : 51,
-    "price" : 111000.0,
-    "purchasePrice" : 100000.0,
-    "imageFileName" : "medicine.png"
-  },
-  "quantity" : 0,
-  "purchasePrice" : 100000.0
-}, {
-  "orderID" : "53862b1b-8250-446f-9b98-99e9dc78ee19",
-  "item" : {
-    "itemID" : "e742423b-824c-4308-959c-112a4f84be07",
-    "itemName" : "Item 4",
-    "category" : "Stationery",
-    "stock" : 38,
-    "price" : 22000.0,
-    "purchasePrice" : 20000.0,
-    "imageFileName" : "stationery.png"
-  },
-  "quantity" : 0,
-  "purchasePrice" : 20000.0
-}, {
-  "orderID" : "d58bd52c-a182-45d2-b87a-e7e9d7cd9f63",
-  "item" : {
-    "itemID" : "915d105b-fe5a-4605-9515-813e94bc1d7d",
-    "itemName" : "Item 12",
-    "category" : "Medicine",
-    "stock" : 61,
-    "price" : 11000.0,
-    "purchasePrice" : 10000.0,
-    "imageFileName" : "medicine.png"
-  },
-  "quantity" : 4,
-  "purchasePrice" : 10000.0
-}, {
-  "orderID" : "f8fcf118-d9b8-4189-81c4-656f042fdfc1",
-  "item" : {
-    "itemID" : "a4f2819f-b9db-489c-821f-631da462d031",
-    "itemName" : "Item 14",
-    "category" : "Food",
-    "stock" : 39,
-    "price" : 66000.0,
-    "purchasePrice" : 60000.0,
-    "imageFileName" : "food.png"
-  },
-  "quantity" : 0,
-  "purchasePrice" : 60000.0
-}, {
-  "orderID" : "df9f1040-73ac-4bcc-8be4-4efe050e8d22",
-  "item" : {
-    "itemID" : "2c008511-169e-48fe-bfee-89e5e36257dc",
-    "itemName" : "Item 16",
-    "category" : "Stationery",
-    "stock" : 18,
-    "price" : 88000.0,
-    "purchasePrice" : 80000.0,
-    "imageFileName" : "stationery.png"
-  },
-  "quantity" : 4,
-  "purchasePrice" : 80000.0
-}, {
-  "orderID" : "e9f772e9-b1e2-46f3-80fe-fe0b141e8736",
-  "item" : {
-    "itemID" : "e742423b-824c-4308-959c-112a4f84be07",
-    "itemName" : "Item 4",
-    "category" : "Stationery",
-    "stock" : 38,
-    "price" : 22000.0,
-    "purchasePrice" : 20000.0,
-    "imageFileName" : "stationery.png"
-  },
-  "quantity" : 3,
-  "purchasePrice" : 20000.0
-}, {
-  "orderID" : "1b9725bc-0199-4140-9366-f3a7c36e9ec2",
-  "item" : {
-    "itemID" : "2fac3c73-0813-42df-95b4-ea32336b7a4b",
-    "itemName" : "Item 2",
-    "category" : "Stationery",
-    "stock" : 46,
-    "price" : 111000.0,
-    "purchasePrice" : 100000.0,
-    "imageFileName" : "stationery.png"
-  },
-  "quantity" : 1,
-  "purchasePrice" : 100000.0
-}, {
-  "orderID" : "3ad19d77-ed5e-4daa-b9f7-c1cf1f9b4a75",
-  "item" : {
-    "itemID" : "2fac3c73-0813-42df-95b4-ea32336b7a4b",
-    "itemName" : "Item 2",
-    "category" : "Stationery",
-    "stock" : 46,
-    "price" : 111000.0,
-    "purchasePrice" : 100000.0,
-    "imageFileName" : "stationery.png"
-  },
-  "quantity" : 1,
-  "purchasePrice" : 100000.0
-}, {
-  "orderID" : "f96279da-394d-4ab8-80ba-193ca8b2e4fd",
-  "item" : {
-    "itemID" : "e435771d-beb5-4223-b6d8-a6715e356426",
-    "itemName" : "Item 5",
-    "category" : "Stationery",
-    "stock" : 70,
-    "price" : 66000.0,
-    "purchasePrice" : 60000.0,
-    "imageFileName" : "stationery.png"
-  },
-  "quantity" : 3,
-  "purchasePrice" : 60000.0
-}, {
-  "orderID" : "6f923b65-38d7-4545-a4cc-62dd849de11c",
-  "item" : {
-    "itemID" : "88b5c708-932d-42d7-907a-3ffc4813542a",
-    "itemName" : "Item 19",
-    "category" : "Medicine",
-    "stock" : 53,
-    "price" : 33000.0,
-    "purchasePrice" : 30000.0,
-    "imageFileName" : "medicine.png"
-  },
-  "quantity" : 4,
-  "purchasePrice" : 30000.0
-}, {
-  "orderID" : "5e88dd02-8502-4a2f-af78-026dd8cf28a5",
-  "item" : {
-    "itemID" : "162aa607-9473-446b-8e76-9cc7c63915b6",
-    "itemName" : "Item 11",
-    "category" : "Medicine",
-    "stock" : 51,
-    "price" : 111000.0,
-    "purchasePrice" : 100000.0,
-    "imageFileName" : "medicine.png"
-  },
-  "quantity" : 1,
-  "purchasePrice" : 100000.0
-}, {
-  "orderID" : "dd89b343-45a6-49c5-8d60-59d229f1a6ca",
-  "item" : {
-    "itemID" : "e435771d-beb5-4223-b6d8-a6715e356426",
-    "itemName" : "Item 5",
-    "category" : "Stationery",
-    "stock" : 70,
-    "price" : 66000.0,
-    "purchasePrice" : 60000.0,
-    "imageFileName" : "stationery.png"
-  },
-  "quantity" : 1,
-  "purchasePrice" : 60000.0
-}, {
-  "orderID" : "b9f1e187-cebf-4945-ae8b-7b6449d1ba1e",
-  "item" : {
-    "itemID" : "7ffffe28-d1db-480f-b1dd-80f5c2625dfc",
-    "itemName" : "Item 18",
-    "category" : "Beverage",
-    "stock" : 14,
-    "price" : 66000.0,
-    "purchasePrice" : 60000.0,
-    "imageFileName" : "beverage.png"
-  },
-  "quantity" : 4,
-  "purchasePrice" : 60000.0
-}, {
-  "orderID" : "032d63eb-a99a-451b-9869-da0129b25a83",
-  "item" : {
-    "itemID" : "30d21d48-b96e-4f41-8917-ebfa0afbc941",
-    "itemName" : "Item 6",
-    "category" : "Food",
-    "stock" : 39,
-    "price" : 111000.0,
-    "purchasePrice" : 100000.0,
-    "imageFileName" : "food.png"
-  },
-  "quantity" : 0,
-  "purchasePrice" : 100000.0
-}, {
-  "orderID" : "4414164e-d3b2-4c3e-9cb5-2b67204a25c6",
-  "item" : {
-    "itemID" : "2fac3c73-0813-42df-95b4-ea32336b7a4b",
-    "itemName" : "Item 2",
-    "category" : "Stationery",
-    "stock" : 46,
-    "price" : 111000.0,
-    "purchasePrice" : 100000.0,
-    "imageFileName" : "stationery.png"
-  },
-  "quantity" : 4,
-  "purchasePrice" : 100000.0
-}, {
-  "orderID" : "2435324e-9694-4930-b312-9649193d9318",
-  "item" : {
-    "itemID" : "db0c42a2-3fbe-4ed4-a1c7-3f39cf8057f5",
-    "itemName" : "Item 15",
-    "category" : "Food",
-    "stock" : 25,
-    "price" : 56000.0,
-    "purchasePrice" : 50000.0,
-    "imageFileName" : "food.png"
-  },
+  "orderID" : "3fc75be2-fca6-40f8-b2d8-e08cad7cac6f",
+  "itemID" : "db0c42a2-3fbe-4ed4-a1c7-3f39cf8057f5",
   "quantity" : 2,
   "purchasePrice" : 50000.0
 }, {
-  "orderID" : "e468eb9f-081a-4816-9864-1a69ad4fbabd",
-  "item" : {
-    "itemID" : "a4f2819f-b9db-489c-821f-631da462d031",
-    "itemName" : "Item 14",
-    "category" : "Food",
-    "stock" : 39,
-    "price" : 66000.0,
-    "purchasePrice" : 60000.0,
-    "imageFileName" : "food.png"
-  },
-  "quantity" : 3,
+  "orderID" : "c3dc1cb8-3829-4121-9160-cbf3d5d3240f",
+  "itemID" : "2fac3c73-0813-42df-95b4-ea32336b7a4b",
+  "quantity" : 1,
+  "purchasePrice" : 100000.0
+}, {
+  "orderID" : "2885efbb-d175-46ad-8a00-c8b90817226e",
+  "itemID" : "e840558b-88b8-4f55-a552-4d8d9c47a3f3",
+  "quantity" : 1,
+  "purchasePrice" : 100000.0
+}, {
+  "orderID" : "c3102405-e2a6-4067-93ba-f3741c1067de",
+  "itemID" : "e742423b-824c-4308-959c-112a4f84be07",
+  "quantity" : 4,
+  "purchasePrice" : 20000.0
+}, {
+  "orderID" : "28a90519-d587-41c3-8b0d-6a1ff2f9c376",
+  "itemID" : "72a73440-cb0f-45b9-b584-87a798f1bdb2",
+  "quantity" : 1,
   "purchasePrice" : 60000.0
 }, {
-  "orderID" : "8320e363-d081-4580-8701-5fb213e4a799",
-  "item" : {
-    "itemID" : "2cc42dc2-630e-43c7-be98-bec9b890bfc5",
-    "itemName" : "Item 17",
-    "category" : "Beverage",
-    "stock" : 4,
-    "price" : 77000.0,
-    "purchasePrice" : 70000.0,
-    "imageFileName" : "beverage.png"
-  },
-  "quantity" : 3,
-  "purchasePrice" : 70000.0
+  "orderID" : "28678ed1-1fcf-4a00-a650-c873e80d324b",
+  "itemID" : "72a73440-cb0f-45b9-b584-87a798f1bdb2",
+  "quantity" : 2,
+  "purchasePrice" : 60000.0
 }, {
-  "orderID" : "140768d0-e631-4efd-b585-387e603356a4",
-  "item" : {
-    "itemID" : "e840558b-88b8-4f55-a552-4d8d9c47a3f3",
-    "itemName" : "Item 9",
-    "category" : "Beverage",
-    "stock" : 83,
-    "price" : 111000.0,
-    "purchasePrice" : 100000.0,
-    "imageFileName" : "beverage.png"
-  },
+  "orderID" : "ac2e95a7-c3a1-43c6-88de-63b69b2b1982",
+  "itemID" : "b6de4aee-db96-412b-a661-f0bd021d97a0",
+  "quantity" : 0,
+  "purchasePrice" : 20000.0
+}, {
+  "orderID" : "56d8d84d-fd07-45af-988b-682b20cb1af7",
+  "itemID" : "e742423b-824c-4308-959c-112a4f84be07",
+  "quantity" : 3,
+  "purchasePrice" : 20000.0
+}, {
+  "orderID" : "8647c993-f202-47d2-84a8-8baebd09dcbe",
+  "itemID" : "a4f2819f-b9db-489c-821f-631da462d031",
+  "quantity" : 0,
+  "purchasePrice" : 60000.0
+}, {
+  "orderID" : "6b53dbee-78cc-4158-b9b8-7922fdb6bb89",
+  "itemID" : "915d105b-fe5a-4605-9515-813e94bc1d7d",
+  "quantity" : 4,
+  "purchasePrice" : 10000.0
+}, {
+  "orderID" : "1d0d14dd-6b35-4385-bcf9-5cf03a64226b",
+  "itemID" : "2fac3c73-0813-42df-95b4-ea32336b7a4b",
+  "quantity" : 3,
+  "purchasePrice" : 100000.0
+}, {
+  "orderID" : "74f49c82-53ba-4b42-bf6e-d66ec67d5e78",
+  "itemID" : "2fac3c73-0813-42df-95b4-ea32336b7a4b",
   "quantity" : 2,
   "purchasePrice" : 100000.0
 }, {
-  "orderID" : "b43555ca-31ef-4a02-9f48-50cde551e0fb",
-  "item" : {
-    "itemID" : "88b5c708-932d-42d7-907a-3ffc4813542a",
-    "itemName" : "Item 19",
-    "category" : "Medicine",
-    "stock" : 53,
-    "price" : 33000.0,
-    "purchasePrice" : 30000.0,
-    "imageFileName" : "medicine.png"
-  },
+  "orderID" : "131848a3-5ce0-4596-aa82-ab0530d33457",
+  "itemID" : "4096e30e-33b8-444c-a9eb-7094ed4f1d12",
+  "quantity" : 0,
+  "purchasePrice" : 70000.0
+}, {
+  "orderID" : "7d24c646-3dc1-4f6f-ae2a-23a256f84509",
+  "itemID" : "6169d4e1-724f-435c-820d-18c7a0b3c3be",
   "quantity" : 3,
+  "purchasePrice" : 90000.0
+}, {
+  "orderID" : "e84ff04d-bd2f-41a3-b795-5c84eb9acfb4",
+  "itemID" : "915d105b-fe5a-4605-9515-813e94bc1d7d",
+  "quantity" : 1,
+  "purchasePrice" : 10000.0
+}, {
+  "orderID" : "2cd5d883-ba16-4077-8c8b-f1a39717c4b0",
+  "itemID" : "2fac3c73-0813-42df-95b4-ea32336b7a4b",
+  "quantity" : 3,
+  "purchasePrice" : 100000.0
+}, {
+  "orderID" : "5cd6fb39-83c4-43f9-9551-4629067a5d83",
+  "itemID" : "88b5c708-932d-42d7-907a-3ffc4813542a",
+  "quantity" : 0,
   "purchasePrice" : 30000.0
 }, {
-  "orderID" : "3d1ff68f-7345-4c55-a6ec-93e37bd38875",
-  "item" : {
-    "itemID" : "2cc42dc2-630e-43c7-be98-bec9b890bfc5",
-    "itemName" : "Item 17",
-    "category" : "Beverage",
-    "stock" : 4,
-    "price" : 77000.0,
-    "purchasePrice" : 70000.0,
-    "imageFileName" : "beverage.png"
-  },
+  "orderID" : "c489111e-7e86-4ec7-8316-902d2fc4e059",
+  "itemID" : "a4f2819f-b9db-489c-821f-631da462d031",
+  "quantity" : 0,
+  "purchasePrice" : 60000.0
+}, {
+  "orderID" : "6bfcbea1-9267-4d83-84df-7d63049e72f0",
+  "itemID" : "4096e30e-33b8-444c-a9eb-7094ed4f1d12",
   "quantity" : 2,
   "purchasePrice" : 70000.0
 }, {
-  "orderID" : "66b64f09-989f-4320-ad93-00b59bbd0adb",
-  "item" : {
-    "itemID" : "162aa607-9473-446b-8e76-9cc7c63915b6",
-    "itemName" : "Item 11",
-    "category" : "Medicine",
-    "stock" : 51,
-    "price" : 111000.0,
-    "purchasePrice" : 100000.0,
-    "imageFileName" : "medicine.png"
-  },
-  "quantity" : 1,
-  "purchasePrice" : 100000.0
-}, {
-  "orderID" : "be55c508-8ed1-4c55-b1c4-a275eed02662",
-  "item" : {
-    "itemID" : "30d21d48-b96e-4f41-8917-ebfa0afbc941",
-    "itemName" : "Item 6",
-    "category" : "Food",
-    "stock" : 39,
-    "price" : 111000.0,
-    "purchasePrice" : 100000.0,
-    "imageFileName" : "food.png"
-  },
-  "quantity" : 0,
-  "purchasePrice" : 100000.0
-}, {
-  "orderID" : "59fa59f4-c9c8-417e-a39f-9158e7165c35",
-  "item" : {
-    "itemID" : "7225046c-a335-4139-91b2-f4edcc36a57d",
-    "itemName" : "Item 20",
-    "category" : "Medicine",
-    "stock" : 41,
-    "price" : 111000.0,
-    "purchasePrice" : 100000.0,
-    "imageFileName" : "medicine.png"
-  },
-  "quantity" : 0,
-  "purchasePrice" : 100000.0
-}, {
-  "orderID" : "60c3cf4c-fa7f-4971-915e-fcc903d01a29",
-  "item" : {
-    "itemID" : "b6de4aee-db96-412b-a661-f0bd021d97a0",
-    "itemName" : "Item 13",
-    "category" : "Medicine",
-    "stock" : 20,
-    "price" : 22000.0,
-    "purchasePrice" : 20000.0,
-    "imageFileName" : "medicine.png"
-  },
-  "quantity" : 2,
-  "purchasePrice" : 20000.0
-}, {
-  "orderID" : "195d43a3-f3df-4eba-b68f-ddc6f96b35f2",
-  "item" : {
-    "itemID" : "2cc42dc2-630e-43c7-be98-bec9b890bfc5",
-    "itemName" : "Item 17",
-    "category" : "Beverage",
-    "stock" : 4,
-    "price" : 77000.0,
-    "purchasePrice" : 70000.0,
-    "imageFileName" : "beverage.png"
-  },
+  "orderID" : "54192d18-ec70-4bdc-bb20-644222052007",
+  "itemID" : "30d21d48-b96e-4f41-8917-ebfa0afbc941",
   "quantity" : 4,
-  "purchasePrice" : 70000.0
+  "purchasePrice" : 100000.0
 }, {
-  "orderID" : "b37eb3ac-a1fd-426c-a2df-e88804af7024",
-  "item" : {
-    "itemID" : "b6de4aee-db96-412b-a661-f0bd021d97a0",
-    "itemName" : "Item 13",
-    "category" : "Medicine",
-    "stock" : 20,
-    "price" : 22000.0,
-    "purchasePrice" : 20000.0,
-    "imageFileName" : "medicine.png"
-  },
+  "orderID" : "5ecc7621-d424-4efb-bd9b-1e854bd88ad1",
+  "itemID" : "732e9d0e-2671-4302-aebb-35cf6768d043",
+  "quantity" : 0,
+  "purchasePrice" : 50000.0
+}, {
+  "orderID" : "6e3a032a-3919-4289-b95d-159da42b8d62",
+  "itemID" : "6169d4e1-724f-435c-820d-18c7a0b3c3be",
+  "quantity" : 0,
+  "purchasePrice" : 90000.0
+}, {
+  "orderID" : "10ecd0a9-484a-4371-84bc-90db842af573",
+  "itemID" : "7225046c-a335-4139-91b2-f4edcc36a57d",
+  "quantity" : 3,
+  "purchasePrice" : 100000.0
+}, {
+  "orderID" : "f5ec7706-5048-4437-a77d-6aaa8e41ddee",
+  "itemID" : "dffc2b97-cfe4-4a43-a79f-1c5aa24b7e0e",
+  "quantity" : 0,
+  "purchasePrice" : 60000.0
+}, {
+  "orderID" : "2fe54f53-c493-4050-9c8f-66a4f5c6e974",
+  "itemID" : "162aa607-9473-446b-8e76-9cc7c63915b6",
+  "quantity" : 3,
+  "purchasePrice" : 100000.0
+}, {
+  "orderID" : "adf6e99d-f48a-4bc1-b460-552105b31b5d",
+  "itemID" : "732e9d0e-2671-4302-aebb-35cf6768d043",
+  "quantity" : 2,
+  "purchasePrice" : 50000.0
+}, {
+  "orderID" : "2931c228-e1aa-4dbf-8605-ae2c087d3f02",
+  "itemID" : "e742423b-824c-4308-959c-112a4f84be07",
   "quantity" : 1,
   "purchasePrice" : 20000.0
 }, {
-  "orderID" : "16dcc8cb-a733-484b-a6af-db5dcdf29068",
-  "item" : {
-    "itemID" : "6169d4e1-724f-435c-820d-18c7a0b3c3be",
-    "itemName" : "Item 1",
-    "category" : "Food",
-    "stock" : 75,
-    "price" : 100000.0,
-    "purchasePrice" : 90000.0,
-    "imageFileName" : "food.png"
-  },
-  "quantity" : 1,
+  "orderID" : "508edb2f-1029-41e1-8d64-6f78f23d9c8a",
+  "itemID" : "a4f2819f-b9db-489c-821f-631da462d031",
+  "quantity" : 4,
+  "purchasePrice" : 60000.0
+}, {
+  "orderID" : "682b19e5-049a-4ebc-a3c5-764e8347589e",
+  "itemID" : "e742423b-824c-4308-959c-112a4f84be07",
+  "quantity" : 2,
+  "purchasePrice" : 20000.0
+}, {
+  "orderID" : "d8c0769a-d51a-4aa8-97f6-337e571221d3",
+  "itemID" : "2cc42dc2-630e-43c7-be98-bec9b890bfc5",
+  "quantity" : 0,
+  "purchasePrice" : 70000.0
+}, {
+  "orderID" : "7f5b7c6e-5581-477d-a45b-9e960c90d47e",
+  "itemID" : "2c008511-169e-48fe-bfee-89e5e36257dc",
+  "quantity" : 2,
+  "purchasePrice" : 80000.0
+}, {
+  "orderID" : "f17f3a9a-57c0-4a57-8cf2-bcab766756af",
+  "itemID" : "6169d4e1-724f-435c-820d-18c7a0b3c3be",
+  "quantity" : 2,
   "purchasePrice" : 90000.0
+}, {
+  "orderID" : "f2f905aa-dcbb-4774-a1c2-7f49b809392f",
+  "itemID" : "db0c42a2-3fbe-4ed4-a1c7-3f39cf8057f5",
+  "quantity" : 1,
+  "purchasePrice" : 50000.0
+}, {
+  "orderID" : "2aab78c5-3314-499f-9779-d100a0805472",
+  "itemID" : "4096e30e-33b8-444c-a9eb-7094ed4f1d12",
+  "quantity" : 0,
+  "purchasePrice" : 70000.0
+}, {
+  "orderID" : "0c08a12e-a36a-49b7-97b2-8fa1a132176b",
+  "itemID" : "b6de4aee-db96-412b-a661-f0bd021d97a0",
+  "quantity" : 1,
+  "purchasePrice" : 20000.0
+}, {
+  "orderID" : "87e3a5fc-d2bd-4c4b-ab64-2fb00e1dea34",
+  "itemID" : "7ffffe28-d1db-480f-b1dd-80f5c2625dfc",
+  "quantity" : 4,
+  "purchasePrice" : 60000.0
+}, {
+  "orderID" : "6f603007-9677-4e83-846f-457baa3ab247",
+  "itemID" : "e435771d-beb5-4223-b6d8-a6715e356426",
+  "quantity" : 1,
+  "purchasePrice" : 60000.0
+}, {
+  "orderID" : "5d6cc092-44d9-4906-840c-922d600bf8b6",
+  "itemID" : "e840558b-88b8-4f55-a552-4d8d9c47a3f3",
+  "quantity" : 1,
+  "purchasePrice" : 100000.0
+}, {
+  "orderID" : "6dbac55d-ca43-480e-ab98-e48707025622",
+  "itemID" : "2cc42dc2-630e-43c7-be98-bec9b890bfc5",
+  "quantity" : 0,
+  "purchasePrice" : 70000.0
 } ]
