@@ -82,7 +82,7 @@ public class TransactionController {
 
             for (Order order: t.getOrders()) {
                 orderIDs.add(order.getOrderID());
-                if (orders.stream().filter(dataOrder -> dataOrder.getOrderID() == order.getOrderID()).toList().size() == 0)
+                if (orders.stream().filter(dataOrder -> dataOrder.getOrderID().equals(order.getOrderID())).toList().size() == 0)
                     orders.add(order);
             }
 
