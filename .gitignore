@@ -8,6 +8,8 @@ compiledPlugins4/
 
 # User-specific config
 config.*
+cashierPlugin.*
+currencyPlugin.*
 
 target/
 !.mvn/wrapper/maven-wrapper.jar
