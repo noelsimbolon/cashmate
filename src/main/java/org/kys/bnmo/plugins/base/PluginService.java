@@ -55,11 +55,13 @@ public class PluginService implements PluginServiceInterface {
     }
 
     @Override
-    public void addTab(Pane content, String title, Timeline timeline) {
+    public void addTab(Pane content, String title, Timeline ... timelines) {
         if (pageBuilder != null)
         {
             addTab(content, title);
-            timeline.play();
+            for (Timeline timeline : timelines) {
+                timeline.play();
+            }
         }
     }
     @Override

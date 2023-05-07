@@ -63,6 +63,7 @@ public class OrderController {
             orders.add(order);
         }
 
+        processGetData(orders);
         return orders;
     }
 

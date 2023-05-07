@@ -4,7 +4,7 @@
   "category" : "Food",
   "stock" : 75,
   "price" : 100000.0,
-  "purchasePrice" : 90000.0,
+  "purchasePrice" : 2000000.0,
   "imageFileName" : "food.png"
 }, {
   "itemID" : "2fac3c73-0813-42df-95b4-ea32336b7a4b",

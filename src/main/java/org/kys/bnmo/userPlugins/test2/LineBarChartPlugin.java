@@ -21,7 +21,8 @@ import java.util.Calendar;
 
 public class LineBarChartPlugin extends BasePlugin {
 
-    private Timeline timeline;
+    private Timeline lineChartTimeline;
+    private Timeline barChartTimeline;
 
     public LineBarChartPlugin(PluginServiceInterface service)
     {
@@ -49,7 +50,7 @@ public class LineBarChartPlugin extends BasePlugin {
                 "July", "August", "September", "October", "November", "December"
         };
 
-        timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
+        lineChartTimeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
             // Get Transaction Count
             int[] transactionCount = new int[12];
             ArrayList<Transaction> transactions = (ArrayList<Transaction>) getService().getController().getTransactions();
@@ -69,7 +70,7 @@ public class LineBarChartPlugin extends BasePlugin {
             lineChart.setData(FXCollections.observableArrayList(series));
         }));
 
-        timeline.setCycleCount(Animation.INDEFINITE);
+        lineChartTimeline.setCycleCount(Animation.INDEFINITE);
 
         return lineChart;
     }
@@ -89,7 +90,7 @@ public class LineBarChartPlugin extends BasePlugin {
         bc.setTitle("Transaction Count by Membership Level for The Last 5 Years");
         bc.lookup(".chart-title").setStyle("-fx-text-fill: #ffffff;");
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
+        barChartTimeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
             XYChart.Series<String, Number> series1 = new XYChart.Series<>();
             series1.setName("Customer");
             XYChart.Series<String, Number> series2 = new XYChart.Series<>();
@@ -129,7 +130,7 @@ public class LineBarChartPlugin extends BasePlugin {
             bc.lookup(".chart-legend").setStyle("-fx-background-color: white; -fx-pref-height: 75px; -fx-pref-width: 100px");
         }));
 
-        timeline.setCycleCount(Animation.INDEFINITE);
+        barChartTimeline.setCycleCount(Animation.INDEFINITE);
 
         return bc;
     }
@@ -166,6 +167,6 @@ public class LineBarChartPlugin extends BasePlugin {
 
     @Override
     public void onLoad() {
-        getService().addTab(getTabContainer(), "Line Bar Chart", timeline);
+        getService().addTab(getTabContainer(), "Line Bar Chart", lineChartTimeline, barChartTimeline);
     }
 }

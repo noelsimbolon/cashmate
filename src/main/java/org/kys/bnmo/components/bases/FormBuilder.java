@@ -260,7 +260,11 @@ public class FormBuilder extends ComponentBuilder {
         inputFields.getChildren().add(row);
     }
 
-    public void addFilePicker(String label, Stage stage) {
+    public void addFilePicker(
+            String label,
+            Stage stage,
+            StringProperty path,
+            FileChooser.ExtensionFilter extFilter) {
 
         // Layout
         HBox row = new HBox();
@@ -276,6 +280,7 @@ public class FormBuilder extends ComponentBuilder {
 
         // create a File chooser
         FileChooser chooser = new FileChooser();
+        chooser.getExtensionFilters().add(extFilter);
 
         // create an Event Handler
         EventHandler<ActionEvent> event =
@@ -284,6 +289,7 @@ public class FormBuilder extends ComponentBuilder {
                         // get the file selected
                         File file = chooser.showOpenDialog(stage);
                         if (file != null) {
+                            button.setText(file.getAbsolutePath());
                         }
                     }
                 };
@@ -296,6 +302,7 @@ public class FormBuilder extends ComponentBuilder {
                 row.widthProperty(), labelComponent.widthProperty());
 
         button.prefWidthProperty().bind(comboBoxWidth);
+        button.textProperty().bindBidirectional(path);
 
         // Add components to root
         row.getChildren().addAll(labelComponent, button);
