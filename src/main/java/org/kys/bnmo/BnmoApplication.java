@@ -292,14 +292,18 @@ public class BnmoApplication extends Application {
 
         stage.show();
 
-        Tab a = new Tab("Transaction history for Customer [ID]");
-        a.setContent(new ReportTab().getComponent());
-        tabPane.getTabs().add(a);
-
+//        Tab a = new Tab("Transaction history for Customer [ID]");
+//        a.setContent(new BillTab(1).getComponent());
+//        tabPane.getTabs().add(a);
+//
+//        BillDocument billDocumentFactory = new BillDocument(1);
+//        Pane bill = billDocumentFactory.getComponent();
 //        DocumentPrinter printer = new DocumentPrinter(stage);
-//        VBox B = new VBox();
-//        B.getChildren().addAll(new Label("33"), new Label("33"));
-//        printer.printElement((Pane)((ScrollPane)(new BillDocument(3).getComponent()).getChildren().get(0)).getContent());
+//        try {
+//            printer.printElement(bill, "bill-123");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
 // Checkout panel testing

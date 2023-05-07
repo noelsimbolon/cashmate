@@ -33,8 +33,8 @@ public class CurrencyPlugin extends BasePlugin {
                 "Currency",
                 "Select Currency",
                 currencyMap.keySet().toArray(new String[0]),
+                "IDR",
                 value
-
         );
     }
 
