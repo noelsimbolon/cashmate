@@ -1,169 +1,141 @@
 [ {
-  "transactionID" : "fff44619-5968-4e61-9155-f0a4c94dda4a",
-  "customerID" : "9beb23a2-e6b4-484d-b874-ad9c558f352a",
-  "totalPrice" : 130000.0,
-  "date" : 1599675108402,
-  "orderIDs" : [ "61cd576c-1e6a-42c9-9cb6-e862263b03ea", "36529cac-300e-401a-a50c-50b8ea676f5a", "db3bd223-f483-444c-bc2e-bdf490467fe7" ],
-  "discount" : 0
-}, {
-  "transactionID" : "7d75e855-bf46-4e9b-9442-cb9035790c93",
+  "transactionID" : "387b2906-06d9-43e8-864c-fb297b0c57cf",
   "customerID" : "6eaacd63-dee5-4650-bce5-8c56b649f4d2",
-  "totalPrice" : 160000.0,
-  "date" : 1641060708417,
-  "orderIDs" : [ "008d84c1-88e4-4032-a735-29d4a64184e7", "ed4f47a6-5ac2-43fa-9f31-bfdfdb525de3", "08d1c415-4760-49d1-983f-14b4e4c1740c" ],
+  "totalPrice" : 243000.0,
+  "date" : 1659406956243,
+  "orderIDs" : [ "8725a4eb-a31d-4807-8e8a-abb19799d9ea", "730fa0f8-e7d5-4eb8-bea7-089f76924679", "eaf5071a-a01d-4e23-ae50-e0a32666e16c" ],
   "discount" : 0
 }, {
-  "transactionID" : "cdc5eee5-076e-45dd-a2de-e643288d0017",
+  "transactionID" : "fe0dea17-be1b-4e08-a613-0cd83d9ef679",
   "customerID" : "a0979fa8-c583-47c1-86d4-ed444057bb0a",
-  "totalPrice" : 160000.0,
-  "date" : 1575310308417,
-  "orderIDs" : [ "205e6cd1-a507-476c-8020-c4cd7973e314", "97c87d4c-9284-4027-a4b1-4f91a43bf545", "147ef758-b767-4926-9299-eee55f926b6b" ],
-  "discount" : 0
-}, {
-  "transactionID" : "8c148a25-0b53-4994-8df6-b18c02a705fc",
-  "customerID" : "403e14ee-4b87-487f-a2c4-813fe9aa5210",
-  "totalPrice" : 180000.0,
-  "date" : 1662574308417,
-  "orderIDs" : [ "63e98adf-ca35-4903-a96c-8ff153f7a1a8", "32f0a4ce-0c27-464a-8ca9-1de884ca7a6e", "6baa5336-331b-4f00-a324-983aba9cb7b7" ],
-  "discount" : 0
-}, {
-  "transactionID" : "95ec35c1-fd92-4cd1-b17c-0213dc8ed965",
-  "customerID" : "1c8df9be-66e2-4e32-b1f5-07bf4f040173",
-  "totalPrice" : 130000.0,
-  "date" : 1630692708417,
-  "orderIDs" : [ "3f618670-2f79-470e-8ec2-5d1b47b66734", "bc97299d-9c16-410b-b88a-12b52c0c7457", "0178334f-a5e3-4841-b563-dd6cba7a0887" ],
-  "discount" : 0
-}, {
-  "transactionID" : "2b2fb5be-bbca-4e90-96fb-7a1f181e11cf",
-  "customerID" : "eabe1fe3-8661-451b-8cc2-3254ce70f166",
-  "totalPrice" : 210000.0,
-  "date" : 1683483108417,
-  "orderIDs" : [ "bc702e82-eb6b-4308-b610-d661c085ef2c", "d4013b73-22b8-47dd-be45-7988d04eb91f", "76c9dc88-0b1d-485b-82af-d286a5462c7e" ],
-  "discount" : 0
-}, {
-  "transactionID" : "fae36f7e-2e8d-405a-aa9e-8b541406c6c9",
-  "customerID" : "779f04b2-8c4d-4a9f-b33e-1444bb6a20ba",
-  "totalPrice" : 270000.0,
-  "date" : 1622484708418,
-  "orderIDs" : [ "9d0c83b7-d12b-4a12-b36f-d43f6863623c", "27985a36-1bc5-4311-b2b1-f8905efc1a5a", "8cfcd947-a2fd-4c75-86b8-eac87014aed2" ],
-  "discount" : 0
-}, {
-  "transactionID" : "0517fd63-758c-47c5-b45d-f4d8ac4c5cb6",
-  "customerID" : "13286969-ea6d-4c22-9214-a08dfd8aee8c",
-  "totalPrice" : 250000.0,
-  "date" : 1681063908418,
-  "orderIDs" : [ "3fc75be2-fca6-40f8-b2d8-e08cad7cac6f", "c3dc1cb8-3829-4121-9160-cbf3d5d3240f", "2885efbb-d175-46ad-8a00-c8b90817226e" ],
-  "discount" : 0
-}, {
-  "transactionID" : "d65982ce-d858-4876-8385-4d3d1b46a331",
-  "customerID" : "be8b8d69-f88b-4029-93fc-7989561941a7",
-  "totalPrice" : 140000.0,
-  "date" : 1631038308418,
-  "orderIDs" : [ "c3102405-e2a6-4067-93ba-f3741c1067de", "28a90519-d587-41c3-8b0d-6a1ff2f9c376", "28678ed1-1fcf-4a00-a650-c873e80d324b" ],
-  "discount" : 0
-}, {
-  "transactionID" : "46f5d90e-f09e-4b3f-a914-1c7c4ef56633",
-  "customerID" : "af4b8203-c92a-449c-aa14-9d8c4cdb6545",
   "totalPrice" : 100000.0,
-  "date" : 1573063908418,
-  "orderIDs" : [ "ac2e95a7-c3a1-43c6-88de-63b69b2b1982", "56d8d84d-fd07-45af-988b-682b20cb1af7", "8647c993-f202-47d2-84a8-8baebd09dcbe" ],
+  "date" : 1583202156258,
+  "orderIDs" : [ "32470981-fcca-4360-b809-a788a25e5093", "e3fd80c4-ca10-47aa-ba22-490b68b39d44", "bc0e9883-5dda-463b-954b-b6b8ca818aba" ],
   "discount" : 0
 }, {
-  "transactionID" : "ece03380-6a17-48e6-8fa7-69f0c272bd33",
-  "customerID" : "a7bcab8d-624c-481f-8774-2ca333d151ce",
-  "totalPrice" : 210000.0,
-  "date" : 1626027108418,
-  "orderIDs" : [ "6b53dbee-78cc-4158-b9b8-7922fdb6bb89", "1d0d14dd-6b35-4385-bcf9-5cf03a64226b", "74f49c82-53ba-4b42-bf6e-d66ec67d5e78" ],
+  "transactionID" : "861eef84-a530-4117-a68e-b46afa5ca910",
+  "customerID" : "403e14ee-4b87-487f-a2c4-813fe9aa5210",
+  "totalPrice" : 143000.0,
+  "date" : 1549765356259,
+  "orderIDs" : [ "b4846180-ea50-4f08-8818-ea286a329461", "60c891ea-6144-42b1-85d2-116cd6e2ea1e", "ea2a1d99-8784-40d0-9be3-1790da568457" ],
   "discount" : 0
 }, {
-  "transactionID" : "272cd4d2-0f99-4308-aa25-01401b8aece2",
-  "customerID" : "754ba72b-b02c-4346-b3e7-36721a4e9db2",
-  "totalPrice" : 170000.0,
-  "date" : 1610215908418,
-  "orderIDs" : [ "131848a3-5ce0-4596-aa82-ab0530d33457", "7d24c646-3dc1-4f6f-ae2a-23a256f84509", "e84ff04d-bd2f-41a3-b795-5c84eb9acfb4" ],
+  "transactionID" : "2c10561d-30e8-4b0e-a46f-1aead64de543",
+  "customerID" : "1c8df9be-66e2-4e32-b1f5-07bf4f040173",
+  "totalPrice" : 233000.0,
+  "date" : 1572574956259,
+  "orderIDs" : [ "7c925aa1-667a-4b5a-b5b3-6ab87d8845b5", "f2c2edd2-2810-4d2c-a2d1-96fc3f088edf", "2003cabf-9656-4cd1-b602-3b05f1994ebf" ],
   "discount" : 0
 }, {
-  "transactionID" : "037fcbd4-4380-48e5-bc60-920f39825d7b",
-  "customerID" : "497ce265-d2f0-4737-b92a-660a11f032f5",
-  "totalPrice" : 190000.0,
-  "date" : 1690913508419,
-  "orderIDs" : [ "2cd5d883-ba16-4077-8c8b-f1a39717c4b0", "5cd6fb39-83c4-43f9-9551-4629067a5d83", "c489111e-7e86-4ec7-8316-902d2fc4e059" ],
+  "transactionID" : "04ce4ec4-787d-44ec-8ca6-8654d4d6a47c",
+  "customerID" : "eabe1fe3-8661-451b-8cc2-3254ce70f166",
+  "totalPrice" : 189000.0,
+  "date" : 1649643756259,
+  "orderIDs" : [ "a0f733b8-7237-4717-abc1-f92ef45bd274", "d2289d7c-d91c-4e1f-90e2-11d8bd5c7f2d", "3a2139e4-87a4-4b5a-a1b5-939f78a3c020" ],
   "discount" : 0
 }, {
-  "transactionID" : "400b6401-b225-4f68-bca0-d3a54fbf730a",
-  "customerID" : "e271b936-c01f-4e4a-9e82-84934f5beefc",
-  "totalPrice" : 220000.0,
-  "date" : 1685988708419,
-  "orderIDs" : [ "6bfcbea1-9267-4d83-84df-7d63049e72f0", "54192d18-ec70-4bdc-bb20-644222052007", "5ecc7621-d424-4efb-bd9b-1e854bd88ad1" ],
-  "discount" : 0
-}, {
-  "transactionID" : "fd99df17-8ebe-4d1d-81ac-15f5f3df679c",
-  "customerID" : "42aa5c09-9ddf-4067-9939-6cc4d8a85cb7",
-  "totalPrice" : 250000.0,
-  "date" : 1628014308419,
-  "orderIDs" : [ "6e3a032a-3919-4289-b95d-159da42b8d62", "10ecd0a9-484a-4371-84bc-90db842af573", "f5ec7706-5048-4437-a77d-6aaa8e41ddee" ],
-  "discount" : 0
-}, {
-  "transactionID" : "1c216c94-5cfa-4720-9f0a-98405445cef7",
-  "customerID" : "13b2f636-bd8c-4401-b5a7-06d1f6c97016",
-  "totalPrice" : 170000.0,
-  "date" : 1696097508419,
-  "orderIDs" : [ "2fe54f53-c493-4050-9c8f-66a4f5c6e974", "adf6e99d-f48a-4bc1-b460-552105b31b5d", "2931c228-e1aa-4dbf-8605-ae2c087d3f02" ],
-  "discount" : 0
-}, {
-  "transactionID" : "51a2ef9e-9c1a-447d-9cda-7ac94a88c88f",
-  "customerID" : "04ca8f54-ba8b-4c18-a0be-df9e7e0faa51",
-  "totalPrice" : 150000.0,
-  "date" : 1657044708419,
-  "orderIDs" : [ "508edb2f-1029-41e1-8d64-6f78f23d9c8a", "682b19e5-049a-4ebc-a3c5-764e8347589e", "d8c0769a-d51a-4aa8-97f6-337e571221d3" ],
-  "discount" : 0
-}, {
-  "transactionID" : "eafc4865-e51a-4add-a7b7-5e2c80dabe7d",
-  "customerID" : "5b189ab3-d777-401f-854c-1e06acba3234",
-  "totalPrice" : 220000.0,
-  "date" : 1680718308419,
-  "orderIDs" : [ "7f5b7c6e-5581-477d-a45b-9e960c90d47e", "f17f3a9a-57c0-4a57-8cf2-bcab766756af", "f2f905aa-dcbb-4774-a1c2-7f49b809392f" ],
-  "discount" : 0
-}, {
-  "transactionID" : "068f7087-07ea-4490-abde-f6acc4947fe3",
-  "customerID" : "7b31ad27-1f9e-4b4b-b608-67dae860445e",
-  "totalPrice" : 150000.0,
-  "date" : 1701972708419,
-  "orderIDs" : [ "2aab78c5-3314-499f-9779-d100a0805472", "0c08a12e-a36a-49b7-97b2-8fa1a132176b", "87e3a5fc-d2bd-4c4b-ab64-2fb00e1dea34" ],
-  "discount" : 0
-}, {
-  "transactionID" : "86dfcae6-b32c-41d8-ba02-f95a6db1a13f",
-  "customerID" : "fa0f79d3-f9e6-4f7f-be46-a3d111f55a66",
-  "totalPrice" : 230000.0,
-  "date" : 1578679908419,
-  "orderIDs" : [ "6f603007-9677-4e83-846f-457baa3ab247", "5d6cc092-44d9-4906-840c-922d600bf8b6", "6dbac55d-ca43-480e-ab98-e48707025622" ],
-  "discount" : 0
-}, {
-  "transactionID" : "5ba5acdc-0a71-4912-9b11-b7cc84f898ab",
+  "transactionID" : "1cb7862b-4368-4557-944f-d2f5fffce9a0",
   "customerID" : "049d8502-aee5-4ea3-b818-a5b63d0f6e68",
-  "totalPrice" : 286085.80000000005,
-  "date" : 1683508273078,
-  "orderIDs" : [ "80058e96-e2cf-492a-8ceb-97fc78617e51" ],
+  "totalPrice" : 265000.0,
+  "date" : 1549851756259,
+  "orderIDs" : [ "6839b518-56ec-40ad-8f08-7a4e5d87be2b", "c458cd93-48c3-46e9-bfe2-dd4716486de7", "da427824-4a98-4169-97a3-fc67319a2abc" ],
   "discount" : 0
 }, {
-  "transactionID" : "85589ab4-86d8-4a83-a6fe-2331c7beacdf",
+  "transactionID" : "b89bf261-b98d-42df-a4c3-0d258513d447",
   "customerID" : "16336120-06cd-4a80-8277-8e9f4cda7e4e",
-  "totalPrice" : 286085.80000000005,
-  "date" : 1683508523648,
-  "orderIDs" : [ "74d9282a-9015-4805-9d80-3a6cf643f8bc" ],
+  "totalPrice" : 333000.0,
+  "date" : 1627870956259,
+  "orderIDs" : [ "e10ee1e3-84bb-4493-a19c-79745f81e5f6", "4e959787-2846-4182-96af-028ec28bbf55", "d72b1b15-7742-4c01-997a-4b290015402e" ],
   "discount" : 0
 }, {
-  "transactionID" : "0cb62f58-2614-4bd6-a365-1bc99082a6dd",
+  "transactionID" : "177d8bc6-ac78-448b-aac0-6a09e54ae15a",
   "customerID" : "75e18bb1-863a-4a89-b1fd-c20d9adbd43c",
-  "totalPrice" : 286085.80000000005,
-  "date" : 1683509495336,
-  "orderIDs" : [ "eea2417e-9408-44db-81e4-9137569e406b" ],
+  "totalPrice" : 210000.0,
+  "date" : 1614651756259,
+  "orderIDs" : [ "a7cc0eae-74fc-4c89-a050-642e3c003b01", "18136950-9501-4dc5-b000-966557515205", "6b2b7b15-e406-4df9-a883-46ab38813db1" ],
   "discount" : 0
 }, {
-  "transactionID" : "9d0c78b2-9f3a-4cc4-bba8-5b672b9ad774",
+  "transactionID" : "4e948f16-e514-4e3b-8bf1-0906e6af41a0",
   "customerID" : "be281936-8bd6-4169-9493-12bcc0764842",
-  "totalPrice" : 200000.0,
-  "date" : 1683509954897,
-  "orderIDs" : [ "4177b26f-82c2-44da-b32f-3ad5a6b64bc8" ],
+  "totalPrice" : 220000.0,
+  "date" : 1651890156259,
+  "orderIDs" : [ "e9a5c19f-fe51-4fe8-99d8-297dd0812107", "2242da13-69f0-4bde-99a6-2e2406e44201", "5ea3ced5-8cc4-4b92-9d55-fb3dd6470105" ],
+  "discount" : 0
+}, {
+  "transactionID" : "1459c947-092a-4471-951e-15e3d667661b",
+  "customerID" : "779f04b2-8c4d-4a9f-b33e-1444bb6a20ba",
+  "totalPrice" : 189000.0,
+  "date" : 1690856556259,
+  "orderIDs" : [ "86b57f44-d5de-4ee6-8b60-818dda7b5d7e", "393ca572-a022-4470-a2c8-7162541b1e6f", "8a310e8c-eba3-4d23-b207-53c4abddff19" ],
+  "discount" : 0
+}, {
+  "transactionID" : "52fc970f-d107-4a6c-8080-1e955ade40fd",
+  "customerID" : "13286969-ea6d-4c22-9214-a08dfd8aee8c",
+  "totalPrice" : 188000.0,
+  "date" : 1660011756259,
+  "orderIDs" : [ "72bf432a-439e-4ec4-8b4f-73a540f6b2b8", "9f08e970-88b8-4b0e-9871-73dd1fea0928", "7091497d-71b7-4667-9c85-c4bc8149687a" ],
+  "discount" : 0
+}, {
+  "transactionID" : "65fecbfa-eca7-4983-b8af-c5f786784d37",
+  "customerID" : "be8b8d69-f88b-4029-93fc-7989561941a7",
+  "totalPrice" : 299000.0,
+  "date" : 1662430956260,
+  "orderIDs" : [ "d2d40588-0938-47e3-ab62-e2e132e47de7", "76a5db55-295c-406d-86e0-896851ab16d0", "fe2c6eac-9196-4b49-9086-06d6d0a99535" ],
+  "discount" : 0
+}, {
+  "transactionID" : "b82c8b8e-66a9-4463-a36e-760a2f52f325",
+  "customerID" : "af4b8203-c92a-449c-aa14-9d8c4cdb6545",
+  "totalPrice" : 220000.0,
+  "date" : 1625797356260,
+  "orderIDs" : [ "c636c8fc-e466-41cc-85ae-d91cd130ebbf", "d9e4d4d8-3e00-474e-8a75-9c18e5137668", "7aaa1be9-3a73-4f93-9523-396c7d0bab27" ],
+  "discount" : 0
+}, {
+  "transactionID" : "79f4f5fb-7208-4a45-9519-b527d7747c6c",
+  "customerID" : "a7bcab8d-624c-481f-8774-2ca333d151ce",
+  "totalPrice" : 155000.0,
+  "date" : 1575685356260,
+  "orderIDs" : [ "08dcb0e7-d916-4fab-8fcd-c84792bcf082", "370e37a8-13c5-417c-ac57-83ded62a94d5", "c72fc739-e7d1-4290-a20f-3138561c2028" ],
+  "discount" : 0
+}, {
+  "transactionID" : "7c48571b-dec2-4340-be52-39f6ea0bfeb8",
+  "customerID" : "754ba72b-b02c-4346-b3e7-36721a4e9db2",
+  "totalPrice" : 256000.0,
+  "date" : 1562120556260,
+  "orderIDs" : [ "deff532b-4263-435f-a3d6-e6fcc5613105", "424188fb-07bc-4972-854f-a8a8c8b916ab", "bfa68480-8388-4c6e-a761-8d82f1e0c0c2" ],
+  "discount" : 0
+}, {
+  "transactionID" : "1d2a2bcc-79c6-4882-96b6-f66c694dca4b",
+  "customerID" : "497ce265-d2f0-4737-b92a-660a11f032f5",
+  "totalPrice" : 176000.0,
+  "date" : 1675909356260,
+  "orderIDs" : [ "0e8ad67e-5173-4a84-a7a4-2c584c850295", "c246ae21-466b-4c15-b28f-c55b5953ccde", "9d40459a-e64c-4518-a431-57a657101d9d" ],
+  "discount" : 0
+}, {
+  "transactionID" : "e107084a-e5e2-4b68-8620-e043d4e811dd",
+  "customerID" : "e271b936-c01f-4e4a-9e82-84934f5beefc",
+  "totalPrice" : 233000.0,
+  "date" : 1693707756260,
+  "orderIDs" : [ "7f912d71-5c1d-468c-be70-cdb38e6bfe6b", "fc6f2475-2b1a-4e1a-8c90-50a8e0d251e7", "6aff7525-e0fe-48d5-adbb-d93122f976c9" ],
+  "discount" : 0
+}, {
+  "transactionID" : "bef10078-7af8-4997-99d1-85bae71499c8",
+  "customerID" : "42aa5c09-9ddf-4067-9939-6cc4d8a85cb7",
+  "totalPrice" : 278000.0,
+  "date" : 1599877356260,
+  "orderIDs" : [ "40189a71-9e40-40fa-96a2-70e613914b29", "b2c47a22-dc40-4d40-969c-59d6144c0af0", "b546090e-41bb-41ea-a573-2e057c554c9c" ],
+  "discount" : 0
+}, {
+  "transactionID" : "b74ddffc-de72-4ea3-a951-a192e82670b0",
+  "customerID" : "13b2f636-bd8c-4401-b5a7-06d1f6c97016",
+  "totalPrice" : 178000.0,
+  "date" : 1672712556260,
+  "orderIDs" : [ "8db0a33e-2e61-4fce-81a4-f676532899bd", "8b7a2c8d-9fe9-44d4-b498-5b89502fb89b", "b804b185-5b9a-431f-9734-f5cb0205e3b5" ],
+  "discount" : 0
+}, {
+  "transactionID" : "2357fb26-e1cf-4453-86da-055338588e55",
+  "customerID" : "04ca8f54-ba8b-4c18-a0be-df9e7e0faa51",
+  "totalPrice" : 210000.0,
+  "date" : 1649211756260,
+  "orderIDs" : [ "a0faac5f-6ed3-4d06-910f-c52f798976e1", "c6d5b530-d446-48e1-ba28-144ce540e5b1", "8c48a89f-24d6-41e1-836b-2f7fc41a624f" ],
   "discount" : 0
 } ]
