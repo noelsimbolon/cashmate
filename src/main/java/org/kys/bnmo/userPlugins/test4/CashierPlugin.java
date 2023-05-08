@@ -6,6 +6,7 @@ import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
+import org.kys.bnmo.model.Modifiable;
 import org.kys.bnmo.plugins.interfaces.BasePlugin;
 import org.kys.bnmo.plugins.interfaces.PluginServiceInterface;
 import java.io.FileNotFoundException;
@@ -187,7 +188,18 @@ public class CashierPlugin extends BasePlugin {
 
     private void processPrice()
     {
+        Modifiable.TotalPrice totalPrice = getService().getModifiable().totalPrice;
 
+        if (totalPrice.prioritize)
+        {
+            totalPrice.amount += totalPrice.amount * serviceChargeNumberValue.getValue() / 100;
+            totalPrice.amount += totalPrice.amount * taxNumberValue.getValue() / 100;
+        }
+
+        else
+        {
+            totalPrice.amount -= totalPrice.amount * otherDiscountNumberValue.getValue() / 100;
+        }
     }
 
     @Override
@@ -195,5 +207,6 @@ public class CashierPlugin extends BasePlugin {
         addSettings();
         addCashierMenu();
         getService().addSettingSaveAction(new SaveHandler());
+        processPrice();
     }
 }

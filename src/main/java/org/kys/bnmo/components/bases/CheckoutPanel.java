@@ -16,9 +16,12 @@ import org.kys.bnmo.components.documents.BillDocument;
 import org.kys.bnmo.controllers.CustomerController;
 import org.kys.bnmo.controllers.InventoryItemController;
 import org.kys.bnmo.controllers.TransactionController;
+import org.kys.bnmo.helpers.plugins.PluginLoader;
 import org.kys.bnmo.helpers.views.DocumentPrinter;
 import org.kys.bnmo.helpers.views.loaders.StyleLoadHelper;
 import org.kys.bnmo.model.*;
+import org.kys.bnmo.plugins.adapters.PageAdapter;
+import org.kys.bnmo.plugins.adapters.PluginService;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -113,6 +116,8 @@ public class CheckoutPanel extends VBox {
 
         // Add the checkout panel to the root
         this.getChildren().add(checkoutPanelContainer);
+
+        this.discountAmountLabel = new Text("0");
     }
 
     private void addButtonAndTextField() {
@@ -191,7 +196,7 @@ public class CheckoutPanel extends VBox {
                     temporaryBills.get(customerDropdown.getSelectionModel().getSelectedIndex())
                         .getOrders()
                         .forEach(order -> {
-                            addItemCard(createItemCard(order, "Rp"));
+                            addItemCard(createItemCard(order, ""));
                         });
                 updateCheckoutPrice();
             }
@@ -351,7 +356,7 @@ public class CheckoutPanel extends VBox {
 
     private void updateCheckoutPrice() {
         if (customerDropdown.getSelectionModel().getSelectedIndex() == -1) {
-            discountAmountLabel.setText("Rp 0");
+            discountAmountLabel.setText("0");
             checkoutButton.setText("Charge");
             return;
         }
@@ -359,11 +364,11 @@ public class CheckoutPanel extends VBox {
         Locale localeID = new Locale("in", "ID");
 
         NumberFormat rupiahFormat = NumberFormat.getCurrencyInstance(localeID);
-        int amount = 0;
+        double amount = 0;
         for (TemporaryOrder order : temporaryBills.get(customerDropdown.getSelectionModel().getSelectedIndex()).getOrders()) {
             amount += order.quantity.get() * order.item.getPrice();
         }
-        int initial = amount;
+        double initial = amount;
 
         Customer customer = temporaryBills.get(customerDropdown.getSelectionModel().getSelectedIndex()).customer;
         if (customer instanceof Member member) {
@@ -372,7 +377,7 @@ public class CheckoutPanel extends VBox {
                 amount *= 0.9;
         }
 
-        discountAmountLabel.setText("Rp" + (initial - amount));
+        discountAmountLabel.setText("" + (initial - amount));
 
         String formattedAmount = rupiahFormat.format(amount);
 
@@ -397,7 +402,7 @@ public class CheckoutPanel extends VBox {
             int currentIdx = customerDropdown.getSelectionModel().getSelectedIndex();
             TemporaryOrder order = new TemporaryOrder(item, 1);
             temporaryBills.get(currentIdx).getOrders().add(order);
-            addItemCard(createItemCard(order, "Rp"));
+            addItemCard(createItemCard(order, ""));
         } else {
             var items = (VBox) checkoutPanelContainer.lookup("#items");
             Spinner<Integer> spinner = (Spinner<Integer>) items.getChildren().get(existsIdx).lookup("#quantity-spinner");
@@ -436,7 +441,7 @@ public class CheckoutPanel extends VBox {
         }
 
         List<Order> orders = new ArrayList<>();
-        int totalPrice = 0;
+        double totalPrice = 0;
         for (TemporaryOrder t_order : currentBill.getOrders()) {
             orders.add(new Order(t_order.getItem(), t_order.getItem().getPurchasePrice(), t_order.getQuantity().get()));
             totalPrice += t_order.getItem().getPrice() * t_order.getQuantity().get();
@@ -456,18 +461,48 @@ public class CheckoutPanel extends VBox {
                 discount += subtotal * 0.1;
         }
 
+        double changes = 0;
+
+        PluginLoader pluginLoader = new PluginLoader();
+
+        PluginService pluginService = new PluginService(
+                null,
+                null,
+                null,
+                new Modifiable(totalPrice, true)
+        );
+        pluginLoader.runClasses(pluginService);
+
+        changes += pluginService.getModifiable().totalPrice.amount - totalPrice;
+        totalPrice = pluginService.getModifiable().totalPrice.amount;
+
+
         for (int i = 1; i < staticDiscounts.size(); i++) {
             subtotal -= staticDiscounts.get(i).getValue().get();
         }
 
-        for (var pair : dynamicDiscounts) {
-            try {
-                subtotal -= Integer.parseInt(pair.getValue().getText());
-                discount += Integer.parseInt(pair.getValue().getText());
-            } catch (NumberFormatException e) {
+//        for (var pair : dynamicDiscounts) {
+//            try {
+//                subtotal -= Integer.parseInt(pair.getValue().getText());
+//                discount += Integer.parseInt(pair.getValue().getText());
+//            } catch (NumberFormatException e) {
+//
+//            }
+//        }
 
-            }
-        }
+        pluginService = new PluginService(
+                null,
+                null,
+                null,
+                new Modifiable(totalPrice, false)
+        );
+
+        pluginLoader.runClasses(pluginService);
+
+        changes += pluginService.getModifiable().totalPrice.amount - totalPrice;
+        totalPrice = pluginService.getModifiable().totalPrice.amount;
+
+        // TODO: PAKAI CHANGES DI BILL SEBAGAI "OTHERS"
 
         dataStoreCustomers.add(currentCustomer);
         if (currentCustomer instanceof Member member) {

@@ -109,7 +109,7 @@ public class CashierTab extends TabContainer {
             row.add(inventoryItem.getItemName());
             row.add(inventoryItem.getCategory());
             row.add(inventoryItem.getStock().toString());
-            row.add(inventoryItem.getPrice().toString());
+            row.add(String.format("%.2f", inventoryItem.getPrice()));
 
             data.add(row);
 
