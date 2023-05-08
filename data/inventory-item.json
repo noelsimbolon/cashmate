@@ -2,7 +2,7 @@
   "itemID" : "6169d4e1-724f-435c-820d-18c7a0b3c3be",
   "itemName" : "Item 1",
   "category" : "Food",
-  "stock" : 69,
+  "stock" : 67,
   "price" : 100000.0,
   "purchasePrice" : 2000000.0,
   "imageFileName" : "food.png"

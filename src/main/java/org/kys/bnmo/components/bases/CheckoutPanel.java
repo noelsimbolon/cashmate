@@ -319,6 +319,7 @@ public class CheckoutPanel extends VBox {
                 var items = (VBox) this.lookup("#items");
                 items.getChildren().remove(itemCard);
             }
+
             order.getQuantity().set(newValue);
             updateCheckoutPrice();
         });

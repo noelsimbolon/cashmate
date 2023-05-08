@@ -1,5 +1,7 @@
 package org.kys.bnmo.helpers.views;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.print.PrinterJob;
 import javafx.scene.Node;
@@ -13,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -21,6 +24,7 @@ import org.apache.pdfbox.pdmodel.graphics.image.LosslessFactory;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.apache.pdfbox.printing.PDFPageable;
 import org.apache.pdfbox.printing.PDFPrintable;
+import org.kys.bnmo.model.Transaction;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -28,7 +32,9 @@ import java.awt.image.BufferedImage;
 import java.awt.print.PrinterException;
 import java.io.File;
 import java.io.IOException;
+import java.security.Key;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -89,22 +95,43 @@ public class DocumentPrinter {
         fileChooser.setInitialFileName(defaultFilename);
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf"));
         File pdfFile = fileChooser.showSaveDialog(stage);
-        try {
-            if (pdfFile != null)
-                document.save(pdfFile);
-        } catch (IOException e) {
 
-        }
+        if (pdfFile != null)
+        {
+            Timeline timer = new Timeline(new KeyFrame(Duration.seconds(10), event -> {
 
-        // Close the PDF document
-        try {
-            document.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+                try
+                {
+                    document.save(pdfFile);
+                }
 
-        for (var file : files) {
-            file.delete();
+                catch (Exception e)
+                {
+
+                }
+
+                finally {
+                    try
+                    {
+                        document.close();
+                    }
+
+                    catch (Exception err)
+                    {
+
+                    }
+
+                    finally {
+                        for (var file : files) {
+                            file.delete();
+                        }
+                    }
+                }
+
+            }));
+
+            timer.setCycleCount(1);
+            timer.play();
         }
     }
 }
