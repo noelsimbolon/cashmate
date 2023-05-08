@@ -13,13 +13,14 @@ import org.kys.bnmo.components.bases.CheckoutPanel;
 import org.kys.bnmo.components.bases.TableBuilder;
 import org.kys.bnmo.controllers.CustomerController;
 import org.kys.bnmo.controllers.InventoryItemController;
-import org.kys.bnmo.controllers.MemberController;
+import org.kys.bnmo.helpers.plugins.PluginLoader;
 import org.kys.bnmo.helpers.views.tables.TableData;
 import org.kys.bnmo.model.Customer;
 import org.kys.bnmo.model.InventoryItem;
 import org.kys.bnmo.model.Member;
+import org.kys.bnmo.plugins.adapters.CheckoutPanelAdapter;
+import org.kys.bnmo.plugins.adapters.PluginService;
 
-import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -39,6 +40,16 @@ public class CashierTab extends TabContainer {
                 .map(customer -> (Member) customer)
                 .collect(Collectors.toList());
         CheckoutPanel checkoutPanel = new CheckoutPanel(members);
+
+        PluginLoader pluginLoader = new PluginLoader();
+        PluginService pluginService = new PluginService(
+                null,
+                null,
+                new CheckoutPanelAdapter(checkoutPanel),
+                null
+        );
+        pluginLoader.runClasses(pluginService);
+
         checkoutPanel.setOnCheckout(() -> {
             reloadTable(checkoutPanel, tableWrapper);
         });

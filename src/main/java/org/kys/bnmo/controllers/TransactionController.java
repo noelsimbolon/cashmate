@@ -2,7 +2,7 @@ package org.kys.bnmo.controllers;
 
 import org.kys.bnmo.model.*;
 import org.kys.bnmo.helpers.plugins.PluginLoader;
-import org.kys.bnmo.plugins.base.PluginService;
+import org.kys.bnmo.plugins.adapters.PluginService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +27,7 @@ public class TransactionController {
         pluginLoader.runClasses(new PluginService(
                 null ,
                 null,
+                null,
                 new Modifiable(
                         transactions,
                         null,
@@ -41,6 +42,7 @@ public class TransactionController {
         PluginLoader pluginLoader = new PluginLoader();
         pluginLoader.runClasses(new PluginService(
                 null ,
+                null,
                 null,
                 new Modifiable(
                         transactions,

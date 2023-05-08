@@ -1,13 +1,16 @@
-package org.kys.bnmo.plugins.base;
+package org.kys.bnmo.plugins.adapters;
 
 import javafx.animation.Timeline;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.Property;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import lombok.Getter;
 import org.jetbrains.annotations.Nullable;
+import org.kys.bnmo.plugins.adapters.CheckoutPanelAdapter;
 import org.kys.bnmo.plugins.adapters.ControllerAdapter;
 import org.kys.bnmo.plugins.adapters.SettingAdapterInterface;
 import org.kys.bnmo.plugins.interfaces.ControllerAdapterInterface;
@@ -21,6 +24,7 @@ public class PluginService implements PluginServiceInterface {
 
     private PageAdapterInterface pageBuilder;
     private SettingAdapterInterface settingBuilder;
+    private CheckoutPanelAdapter checkoutPanel;
     private Modifiable modifiable;
 
     @Getter
@@ -32,11 +36,13 @@ public class PluginService implements PluginServiceInterface {
     public PluginService(
             @Nullable PageAdapterInterface pageBuilder,
             @Nullable SettingAdapterInterface settingBuilder,
+            @Nullable CheckoutPanelAdapter checkoutPanel,
             @Nullable Modifiable modifiable
             )
     {
         this.pageBuilder = pageBuilder;
         this.settingBuilder = settingBuilder;
+        this.checkoutPanel = checkoutPanel;
         this.modifiable = modifiable;
 
         pageContainers = new ArrayList<>();
@@ -103,6 +109,22 @@ public class PluginService implements PluginServiceInterface {
             String defaultValue,
             StringProperty property
     ) {
-        settingBuilder.addTextBox(label, placeholder, defaultValue, property);
+        if (settingBuilder != null) {
+            settingBuilder.addTextBox(label, placeholder, defaultValue, property);
+        }
+    }
+
+    @Override
+    public void addStaticFieldCashier(String label, DoubleProperty property, String unit) {
+        if (checkoutPanel != null) {
+            checkoutPanel.addStaticField(label, property, unit);
+        }
+    }
+
+    @Override
+    public void addDynamicFieldCashier(String label, TextField field, String unit) {
+        if (checkoutPanel != null) {
+            checkoutPanel.addDynamicField(label, field, unit);
+        }
     }
 }

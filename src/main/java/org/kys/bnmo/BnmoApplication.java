@@ -7,24 +7,19 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.kys.bnmo.components.SingleComponent;
-import org.kys.bnmo.components.documents.BillDocument;
 import org.kys.bnmo.components.interfaces.ComponentFactory;
 import org.kys.bnmo.components.tabs.*;
 import org.kys.bnmo.controllers.DataStore;
 import org.kys.bnmo.events.NavigationHandler;
 import org.kys.bnmo.helpers.plugins.PluginLoader;
-import org.kys.bnmo.helpers.views.DocumentPrinter;
 import org.kys.bnmo.helpers.views.IconButtonHelper;
 import org.kys.bnmo.helpers.views.loaders.StyleLoadHelper;
 import org.kys.bnmo.plugins.adapters.PageAdapter;
-import org.kys.bnmo.plugins.base.PluginService;
-import org.kys.bnmo.plugins.interfaces.PluginServiceInterface;
+import org.kys.bnmo.plugins.adapters.PluginService;
 import org.kys.bnmo.views.Page;
 
-import java.lang.reflect.Method;
 import java.util.*;
 
 public class BnmoApplication extends Application {
@@ -253,7 +248,11 @@ public class BnmoApplication extends Application {
         page.addTab(settingTabFactory.getComponent(), "Settings");
         PluginLoader pluginLoader = new PluginLoader();
 
-        PluginService pluginService = new PluginService(new PageAdapter(page), null, null);
+        PluginService pluginService = new PluginService(
+                new PageAdapter(page),
+                null,
+                null,
+                null);
         pluginLoader.runClasses(pluginService);
 
         root = page.getAndResetComponent();

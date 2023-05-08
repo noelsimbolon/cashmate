@@ -103,7 +103,7 @@ public class CheckoutPanel extends VBox {
         inputFields.getChildren().add(discountContainer);
         staticDiscounts = new ArrayList<>();
         DoubleProperty doubleProp = new SimpleDoubleProperty(0.0);
-        addStaticDiscount("Discount", doubleProp);
+        addStaticField("Discount", doubleProp, "%");
 
         checkoutButton = new Button("Charge");
         addCheckoutButton();
@@ -349,10 +349,6 @@ public class CheckoutPanel extends VBox {
         updateCheckoutPrice();
     }
 
-    private void addDiscount(double discount, String currency) {
-
-    }
-
     private void updateCheckoutPrice() {
         if (customerDropdown.getSelectionModel().getSelectedIndex() == -1) {
             discountAmountLabel.setText("Rp 0");
@@ -505,19 +501,19 @@ public class CheckoutPanel extends VBox {
         customerDropdown.setValue(null);
     }
 
-    public void addStaticDiscount(String label, DoubleProperty property) {
+    public void addStaticField(String label, DoubleProperty property, String unit) {
         HBox container = new HBox();
         container.setAlignment(Pos.CENTER_LEFT);
         Label text = new Label(label);
         HBox spacer = new HBox();
         HBox.setHgrow(spacer, Priority.ALWAYS);
         Label discountValue = new Label();
-        discountValue.textProperty().bind(Bindings.format("Rp %.2f", property));
+        discountValue.textProperty().bind(Bindings.format("%.2f%s", property, unit));
         container.getChildren().addAll(text, spacer, discountValue);
         discountContainer.getChildren().add(container);
     }
 
-    public void addDynamicDiscount(String label, TextField field) {
+    public void addDynamicField(String label, TextField field, String unit) {
         HBox container = new HBox();
         container.setAlignment(Pos.CENTER_LEFT);
         Label text = new Label(label);
@@ -525,7 +521,7 @@ public class CheckoutPanel extends VBox {
         HBox.setHgrow(spacer, Priority.ALWAYS);
         Label discountValue = new Label();
         field.setAlignment(Pos.CENTER_RIGHT);
-        container.getChildren().addAll(text, spacer, field);
+        container.getChildren().addAll(text, spacer, field, new Label(unit));
         discountContainer.getChildren().add(container);
     }
 }

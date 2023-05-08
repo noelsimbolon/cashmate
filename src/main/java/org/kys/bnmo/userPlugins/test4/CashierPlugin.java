@@ -1,21 +1,16 @@
 package org.kys.bnmo.userPlugins.test4;
-
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import org.kys.bnmo.model.InventoryItem;
-import org.kys.bnmo.model.Modifiable;
-import org.kys.bnmo.model.Order;
-import org.kys.bnmo.model.Transaction;
+import javafx.scene.control.TextField;
 import org.kys.bnmo.plugins.interfaces.BasePlugin;
 import org.kys.bnmo.plugins.interfaces.PluginServiceInterface;
-
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
 
 public class CashierPlugin extends BasePlugin {
 
@@ -25,7 +20,10 @@ public class CashierPlugin extends BasePlugin {
     private static final String defaultDiscount = "0";
     private StringProperty taxValue;
     private StringProperty serviceChargeValue;
-    private StringProperty discountValue;
+    private DoubleProperty taxNumberValue;
+    private DoubleProperty serviceChargeNumberValue;
+    private DoubleProperty otherDiscountNumberValue;
+    private TextField otherDiscountInput;
     private class SaveHandler implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent actionEvent) {
@@ -41,20 +39,39 @@ public class CashierPlugin extends BasePlugin {
                         .getController()
                         .getDatastore()
                         .writeConfigAPI(configFileName, contents);
+
+                synchronizeNumbers();
             }
 
             catch (Exception exception)
             {
+                taxValue.set(taxNumberValue.getValue().toString());
+                serviceChargeValue.set(serviceChargeNumberValue.getValue().toString());
                 System.out.println(exception.getMessage());
             }
         }
+    }
+
+    private void synchronizeNumbers()
+    {
+        taxNumberValue.setValue(Double.parseDouble(taxValue.getValue()));
+        serviceChargeNumberValue.setValue(
+                Double.parseDouble(serviceChargeValue.getValue()));
     }
     public CashierPlugin(PluginServiceInterface service)
     {
         super(service);
         taxValue = new SimpleStringProperty(defaultTax);
         serviceChargeValue = new SimpleStringProperty(defaultServiceCharge);
-        discountValue = new SimpleStringProperty(defaultDiscount);
+
+        taxNumberValue = new SimpleDoubleProperty(
+                Double.parseDouble(defaultTax));
+        serviceChargeNumberValue = new SimpleDoubleProperty(
+                Double.parseDouble(defaultServiceCharge));
+        otherDiscountNumberValue = new SimpleDoubleProperty(
+                Double.parseDouble(defaultDiscount));
+
+        synchronizeNumbers();
     }
 
     private boolean isConfigValid(ArrayList<String> configs)
@@ -62,7 +79,9 @@ public class CashierPlugin extends BasePlugin {
         for (String config: configs)
         {
             try {
-                Double.parseDouble(config);
+                double val = Double.parseDouble(config);
+
+                if (val < 0 || val > 100) throw new Exception("Invalid value range!");
             }
 
             catch (Exception e)
@@ -90,6 +109,8 @@ public class CashierPlugin extends BasePlugin {
 
             taxValue.setValue(res.get(0));
             serviceChargeValue.setValue(res.get(1));
+
+            synchronizeNumbers();
         }
 
         catch (FileNotFoundException e)
@@ -135,7 +156,33 @@ public class CashierPlugin extends BasePlugin {
 
     private void addCashierMenu()
     {
+        getService().addStaticFieldCashier("Tax", taxNumberValue, "%");
+        getService().addStaticFieldCashier("Service Charge", serviceChargeNumberValue, "%");
 
+        otherDiscountInput = new TextField();;
+        otherDiscountInput.textProperty().setValue(otherDiscountNumberValue.getValue().toString());
+        otherDiscountInput.focusedProperty().addListener(
+            (observable, oldValue, newValue) -> {
+                if (!newValue) {
+                    try {
+                        double val = Double.parseDouble(
+                                otherDiscountInput.textProperty().getValue());
+
+                        if (val < 0 || val > 100) throw new Exception("Invalid value range!");
+
+                        otherDiscountNumberValue.setValue(val);
+                    }
+
+                    catch (Exception e)
+                    {
+                        otherDiscountInput.textProperty()
+                                .setValue(otherDiscountNumberValue.getValue().toString());
+                        System.out.println(e.getMessage());
+                    }
+                }
+            });
+        otherDiscountInput.setStyle("-fx-pref-width: 50px");
+        getService().addDynamicFieldCashier("Other discount", otherDiscountInput, "%");
     }
 
     private void processPrice()

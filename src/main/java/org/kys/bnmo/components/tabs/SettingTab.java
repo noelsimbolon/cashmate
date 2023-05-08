@@ -11,19 +11,15 @@ import javafx.stage.Stage;
 import org.kys.bnmo.components.bases.FormBuilder;
 import org.kys.bnmo.controllers.SettingsController;
 import org.kys.bnmo.helpers.plugins.PluginLoader;
-import org.kys.bnmo.plugins.adapters.PageAdapter;
 import org.kys.bnmo.plugins.adapters.SettingAdapter;
-import org.kys.bnmo.plugins.base.PluginService;
-import org.kys.bnmo.plugins.interfaces.PluginServiceInterface;
+import org.kys.bnmo.plugins.adapters.PluginService;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.jar.JarFile;
 
 public class SettingTab extends TabContainer {
     private static final FormBuilder formBuilder = new FormBuilder();
@@ -80,7 +76,7 @@ public class SettingTab extends TabContainer {
 
         PluginLoader pluginLoader = new PluginLoader();
 
-        PluginService service = new PluginService(null, new SettingAdapter(formBuilder), null);
+        PluginService service = new PluginService(null, new SettingAdapter(formBuilder), null, null);
 
         pluginLoader.runClasses(service);
 

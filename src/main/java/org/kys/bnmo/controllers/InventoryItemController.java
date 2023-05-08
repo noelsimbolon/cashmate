@@ -5,7 +5,7 @@ import org.jetbrains.annotations.Nullable;
 import org.kys.bnmo.helpers.plugins.PluginLoader;
 import org.kys.bnmo.model.InventoryItem;
 import org.kys.bnmo.model.Modifiable;
-import org.kys.bnmo.plugins.base.PluginService;
+import org.kys.bnmo.plugins.adapters.PluginService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +23,7 @@ public class InventoryItemController {
         pluginLoader.runClasses(new PluginService(
                 null,
                 null,
+                null,
                 new Modifiable(
                         null,
                         items,
@@ -36,6 +37,7 @@ public class InventoryItemController {
     private void processSetData(List<InventoryItem> items) {
         PluginLoader pluginLoader = new PluginLoader();
         pluginLoader.runClasses(new PluginService(
+                null,
                 null,
                 null,
                 new Modifiable(
