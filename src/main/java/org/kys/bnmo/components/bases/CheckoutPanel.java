@@ -361,9 +361,6 @@ public class CheckoutPanel extends VBox {
             return;
         }
 
-        Locale localeID = new Locale("in", "ID");
-
-        NumberFormat rupiahFormat = NumberFormat.getCurrencyInstance(localeID);
         double amount = 0;
         for (TemporaryOrder order : temporaryBills.get(customerDropdown.getSelectionModel().getSelectedIndex()).getOrders()) {
             amount += order.quantity.get() * order.item.getPrice();
@@ -379,9 +376,7 @@ public class CheckoutPanel extends VBox {
 
         discountAmountLabel.setText("" + (initial - amount));
 
-        String formattedAmount = rupiahFormat.format(amount);
-
-        checkoutButton.setText("Charge: " + formattedAmount);
+        checkoutButton.setText("Charge: " + amount);
     }
 
     public void addItem(InventoryItem item) {
