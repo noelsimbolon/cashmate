@@ -38,7 +38,7 @@ public class OrderController {
 
     }
 
-    private void processSetData(List<Order> orders) {
+    public void processSetData(List<Order> orders) {
         PluginLoader pluginLoader = new PluginLoader();
         pluginLoader.runClasses(new PluginService(
                 null,

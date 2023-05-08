@@ -99,11 +99,13 @@ public class TransactionController {
 
         ArrayList<UnpopulatedTransaction> uts = data.stream().map(t -> {
             List<UUID> orderIDs = new ArrayList<>();
+            (new OrderController()).processSetData(t.getOrders());
 
             for (Order order: t.getOrders()) {
                 orderIDs.add(order.getOrderID());
-                if (orders.stream().filter(dataOrder -> dataOrder.getOrderID().equals(order.getOrderID())).toList().size() == 0)
+                if (orders.stream().filter(dataOrder -> dataOrder.getOrderID().equals(order.getOrderID())).toList().size() == 0) {
                     orders.add(order);
+                }
             }
 
             return new UnpopulatedTransaction(t.getTransactionID(), t.getCustomer().getCustomerID(), orderIDs, t.getTotalPrice(), t.getDate(), t.getDiscount());
