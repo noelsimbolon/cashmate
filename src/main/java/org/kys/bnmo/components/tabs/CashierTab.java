@@ -13,6 +13,7 @@ import org.kys.bnmo.components.bases.CheckoutPanel;
 import org.kys.bnmo.components.bases.TableBuilder;
 import org.kys.bnmo.controllers.CustomerController;
 import org.kys.bnmo.controllers.InventoryItemController;
+import org.kys.bnmo.controllers.MemberController;
 import org.kys.bnmo.helpers.plugins.PluginLoader;
 import org.kys.bnmo.helpers.views.tables.TableData;
 import org.kys.bnmo.model.Customer;
@@ -34,11 +35,13 @@ public class CashierTab extends TabContainer {
         HBox.setHgrow(tableWrapper, Priority.ALWAYS);
 
         CustomerController customerController = new CustomerController();
-        List<Customer> customers = customerController.fetchAll();
-        List<Member> members = customers.stream()
-                .filter(customer -> customer instanceof Member)
-                .map(customer -> (Member) customer)
-                .collect(Collectors.toList());
+        MemberController memberController = new MemberController();
+
+        ArrayList<Customer> customers = customerController.fetchAll();
+
+        // Concatenate with member data
+        ArrayList<Member> members = memberController.fetchAll();
+        customers.addAll(members);
         CheckoutPanel checkoutPanel = new CheckoutPanel(members);
 
         PluginLoader pluginLoader = new PluginLoader();
