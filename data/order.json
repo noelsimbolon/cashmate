@@ -2,315 +2,300 @@
   "orderID" : "61cd576c-1e6a-42c9-9cb6-e862263b03ea",
   "itemID" : "e742423b-824c-4308-959c-112a4f84be07",
   "quantity" : 3,
-  "purchasePrice" : 6.28864E-9
+  "purchasePrice" : 20000.0
 }, {
   "orderID" : "36529cac-300e-401a-a50c-50b8ea676f5a",
   "itemID" : "db0c42a2-3fbe-4ed4-a1c7-3f39cf8057f5",
   "quantity" : 4,
-  "purchasePrice" : 1.5721599999999998E-8
+  "purchasePrice" : 50000.0
 }, {
   "orderID" : "db3bd223-f483-444c-bc2e-bdf490467fe7",
   "itemID" : "dffc2b97-cfe4-4a43-a79f-1c5aa24b7e0e",
   "quantity" : 3,
-  "purchasePrice" : 1.886592E-8
+  "purchasePrice" : 60000.0
 }, {
   "orderID" : "008d84c1-88e4-4032-a735-29d4a64184e7",
   "itemID" : "db0c42a2-3fbe-4ed4-a1c7-3f39cf8057f5",
   "quantity" : 3,
-  "purchasePrice" : 1.5721599999999998E-8
+  "purchasePrice" : 50000.0
 }, {
   "orderID" : "ed4f47a6-5ac2-43fa-9f31-bfdfdb525de3",
   "itemID" : "7ffffe28-d1db-480f-b1dd-80f5c2625dfc",
   "quantity" : 4,
-  "purchasePrice" : 1.886592E-8
+  "purchasePrice" : 60000.0
 }, {
   "orderID" : "08d1c415-4760-49d1-983f-14b4e4c1740c",
   "itemID" : "db0c42a2-3fbe-4ed4-a1c7-3f39cf8057f5",
   "quantity" : 2,
-  "purchasePrice" : 1.5721599999999998E-8
+  "purchasePrice" : 50000.0
 }, {
   "orderID" : "205e6cd1-a507-476c-8020-c4cd7973e314",
   "itemID" : "4096e30e-33b8-444c-a9eb-7094ed4f1d12",
   "quantity" : 4,
-  "purchasePrice" : 2.2010239999999997E-8
+  "purchasePrice" : 70000.0
 }, {
   "orderID" : "97c87d4c-9284-4027-a4b1-4f91a43bf545",
   "itemID" : "2c008511-169e-48fe-bfee-89e5e36257dc",
   "quantity" : 0,
-  "purchasePrice" : 2.515456E-8
+  "purchasePrice" : 80000.0
 }, {
   "orderID" : "147ef758-b767-4926-9299-eee55f926b6b",
   "itemID" : "915d105b-fe5a-4605-9515-813e94bc1d7d",
   "quantity" : 2,
-  "purchasePrice" : 3.14432E-9
+  "purchasePrice" : 10000.0
 }, {
   "orderID" : "63e98adf-ca35-4903-a96c-8ff153f7a1a8",
   "itemID" : "e435771d-beb5-4223-b6d8-a6715e356426",
   "quantity" : 2,
-  "purchasePrice" : 1.886592E-8
+  "purchasePrice" : 60000.0
 }, {
   "orderID" : "32f0a4ce-0c27-464a-8ca9-1de884ca7a6e",
   "itemID" : "4096e30e-33b8-444c-a9eb-7094ed4f1d12",
   "quantity" : 3,
-  "purchasePrice" : 2.2010239999999997E-8
+  "purchasePrice" : 70000.0
 }, {
   "orderID" : "6baa5336-331b-4f00-a324-983aba9cb7b7",
   "itemID" : "732e9d0e-2671-4302-aebb-35cf6768d043",
   "quantity" : 3,
-  "purchasePrice" : 1.5721599999999998E-8
+  "purchasePrice" : 50000.0
 }, {
   "orderID" : "3f618670-2f79-470e-8ec2-5d1b47b66734",
   "itemID" : "db0c42a2-3fbe-4ed4-a1c7-3f39cf8057f5",
   "quantity" : 3,
-  "purchasePrice" : 1.5721599999999998E-8
+  "purchasePrice" : 50000.0
 }, {
   "orderID" : "bc97299d-9c16-410b-b88a-12b52c0c7457",
   "itemID" : "a4f2819f-b9db-489c-821f-631da462d031",
   "quantity" : 3,
-  "purchasePrice" : 1.886592E-8
+  "purchasePrice" : 60000.0
 }, {
   "orderID" : "0178334f-a5e3-4841-b563-dd6cba7a0887",
   "itemID" : "b6de4aee-db96-412b-a661-f0bd021d97a0",
   "quantity" : 4,
-  "purchasePrice" : 6.28864E-9
+  "purchasePrice" : 20000.0
 }, {
   "orderID" : "bc702e82-eb6b-4308-b610-d661c085ef2c",
   "itemID" : "db0c42a2-3fbe-4ed4-a1c7-3f39cf8057f5",
   "quantity" : 1,
-  "purchasePrice" : 1.5721599999999998E-8
+  "purchasePrice" : 50000.0
 }, {
   "orderID" : "d4013b73-22b8-47dd-be45-7988d04eb91f",
   "itemID" : "e435771d-beb5-4223-b6d8-a6715e356426",
   "quantity" : 2,
-  "purchasePrice" : 1.886592E-8
+  "purchasePrice" : 60000.0
 }, {
   "orderID" : "76c9dc88-0b1d-485b-82af-d286a5462c7e",
   "itemID" : "2fac3c73-0813-42df-95b4-ea32336b7a4b",
   "quantity" : 2,
-  "purchasePrice" : 3.1443199999999997E-8
+  "purchasePrice" : 100000.0
 }, {
   "orderID" : "9d0c83b7-d12b-4a12-b36f-d43f6863623c",
   "itemID" : "7225046c-a335-4139-91b2-f4edcc36a57d",
   "quantity" : 1,
-  "purchasePrice" : 3.1443199999999997E-8
+  "purchasePrice" : 100000.0
 }, {
   "orderID" : "27985a36-1bc5-4311-b2b1-f8905efc1a5a",
   "itemID" : "7225046c-a335-4139-91b2-f4edcc36a57d",
   "quantity" : 0,
-  "purchasePrice" : 3.1443199999999997E-8
+  "purchasePrice" : 100000.0
 }, {
   "orderID" : "8cfcd947-a2fd-4c75-86b8-eac87014aed2",
   "itemID" : "4096e30e-33b8-444c-a9eb-7094ed4f1d12",
   "quantity" : 2,
-  "purchasePrice" : 2.2010239999999997E-8
+  "purchasePrice" : 70000.0
 }, {
   "orderID" : "3fc75be2-fca6-40f8-b2d8-e08cad7cac6f",
   "itemID" : "db0c42a2-3fbe-4ed4-a1c7-3f39cf8057f5",
   "quantity" : 2,
-  "purchasePrice" : 1.5721599999999998E-8
+  "purchasePrice" : 50000.0
 }, {
   "orderID" : "c3dc1cb8-3829-4121-9160-cbf3d5d3240f",
   "itemID" : "2fac3c73-0813-42df-95b4-ea32336b7a4b",
   "quantity" : 1,
-  "purchasePrice" : 3.1443199999999997E-8
+  "purchasePrice" : 100000.0
 }, {
   "orderID" : "2885efbb-d175-46ad-8a00-c8b90817226e",
   "itemID" : "e840558b-88b8-4f55-a552-4d8d9c47a3f3",
   "quantity" : 1,
-  "purchasePrice" : 3.1443199999999997E-8
+  "purchasePrice" : 100000.0
 }, {
   "orderID" : "c3102405-e2a6-4067-93ba-f3741c1067de",
   "itemID" : "e742423b-824c-4308-959c-112a4f84be07",
   "quantity" : 4,
-  "purchasePrice" : 6.28864E-9
+  "purchasePrice" : 20000.0
 }, {
   "orderID" : "28a90519-d587-41c3-8b0d-6a1ff2f9c376",
   "itemID" : "72a73440-cb0f-45b9-b584-87a798f1bdb2",
   "quantity" : 1,
-  "purchasePrice" : 1.886592E-8
+  "purchasePrice" : 60000.0
 }, {
   "orderID" : "28678ed1-1fcf-4a00-a650-c873e80d324b",
   "itemID" : "72a73440-cb0f-45b9-b584-87a798f1bdb2",
   "quantity" : 2,
-  "purchasePrice" : 1.886592E-8
+  "purchasePrice" : 60000.0
 }, {
   "orderID" : "ac2e95a7-c3a1-43c6-88de-63b69b2b1982",
   "itemID" : "b6de4aee-db96-412b-a661-f0bd021d97a0",
   "quantity" : 0,
-  "purchasePrice" : 6.28864E-9
+  "purchasePrice" : 20000.0
 }, {
   "orderID" : "56d8d84d-fd07-45af-988b-682b20cb1af7",
   "itemID" : "e742423b-824c-4308-959c-112a4f84be07",
   "quantity" : 3,
-  "purchasePrice" : 6.28864E-9
+  "purchasePrice" : 20000.0
 }, {
   "orderID" : "8647c993-f202-47d2-84a8-8baebd09dcbe",
   "itemID" : "a4f2819f-b9db-489c-821f-631da462d031",
   "quantity" : 0,
-  "purchasePrice" : 1.886592E-8
+  "purchasePrice" : 60000.0
 }, {
   "orderID" : "6b53dbee-78cc-4158-b9b8-7922fdb6bb89",
   "itemID" : "915d105b-fe5a-4605-9515-813e94bc1d7d",
   "quantity" : 4,
-  "purchasePrice" : 3.14432E-9
+  "purchasePrice" : 10000.0
 }, {
   "orderID" : "1d0d14dd-6b35-4385-bcf9-5cf03a64226b",
   "itemID" : "2fac3c73-0813-42df-95b4-ea32336b7a4b",
   "quantity" : 3,
-  "purchasePrice" : 3.1443199999999997E-8
+  "purchasePrice" : 100000.0
 }, {
   "orderID" : "74f49c82-53ba-4b42-bf6e-d66ec67d5e78",
   "itemID" : "2fac3c73-0813-42df-95b4-ea32336b7a4b",
   "quantity" : 2,
-  "purchasePrice" : 3.1443199999999997E-8
+  "purchasePrice" : 100000.0
 }, {
   "orderID" : "131848a3-5ce0-4596-aa82-ab0530d33457",
   "itemID" : "4096e30e-33b8-444c-a9eb-7094ed4f1d12",
   "quantity" : 0,
-  "purchasePrice" : 2.2010239999999997E-8
+  "purchasePrice" : 70000.0
 }, {
   "orderID" : "7d24c646-3dc1-4f6f-ae2a-23a256f84509",
   "itemID" : "6169d4e1-724f-435c-820d-18c7a0b3c3be",
   "quantity" : 3,
-  "purchasePrice" : 2.829888E-8
+  "purchasePrice" : 90000.0
 }, {
   "orderID" : "e84ff04d-bd2f-41a3-b795-5c84eb9acfb4",
   "itemID" : "915d105b-fe5a-4605-9515-813e94bc1d7d",
   "quantity" : 1,
-  "purchasePrice" : 3.14432E-9
+  "purchasePrice" : 10000.0
 }, {
   "orderID" : "2cd5d883-ba16-4077-8c8b-f1a39717c4b0",
   "itemID" : "2fac3c73-0813-42df-95b4-ea32336b7a4b",
   "quantity" : 3,
-  "purchasePrice" : 3.1443199999999997E-8
+  "purchasePrice" : 100000.0
 }, {
   "orderID" : "5cd6fb39-83c4-43f9-9551-4629067a5d83",
   "itemID" : "88b5c708-932d-42d7-907a-3ffc4813542a",
   "quantity" : 0,
-  "purchasePrice" : 9.43296E-9
+  "purchasePrice" : 30000.0
 }, {
   "orderID" : "c489111e-7e86-4ec7-8316-902d2fc4e059",
   "itemID" : "a4f2819f-b9db-489c-821f-631da462d031",
   "quantity" : 0,
-  "purchasePrice" : 1.886592E-8
+  "purchasePrice" : 60000.0
 }, {
   "orderID" : "6bfcbea1-9267-4d83-84df-7d63049e72f0",
   "itemID" : "4096e30e-33b8-444c-a9eb-7094ed4f1d12",
   "quantity" : 2,
-  "purchasePrice" : 2.2010239999999997E-8
+  "purchasePrice" : 70000.0
 }, {
   "orderID" : "54192d18-ec70-4bdc-bb20-644222052007",
   "itemID" : "30d21d48-b96e-4f41-8917-ebfa0afbc941",
   "quantity" : 4,
-  "purchasePrice" : 3.1443199999999997E-8
+  "purchasePrice" : 100000.0
 }, {
   "orderID" : "5ecc7621-d424-4efb-bd9b-1e854bd88ad1",
   "itemID" : "732e9d0e-2671-4302-aebb-35cf6768d043",
   "quantity" : 0,
-  "purchasePrice" : 1.5721599999999998E-8
+  "purchasePrice" : 50000.0
 }, {
   "orderID" : "6e3a032a-3919-4289-b95d-159da42b8d62",
   "itemID" : "6169d4e1-724f-435c-820d-18c7a0b3c3be",
   "quantity" : 0,
-  "purchasePrice" : 2.829888E-8
+  "purchasePrice" : 90000.0
 }, {
   "orderID" : "10ecd0a9-484a-4371-84bc-90db842af573",
   "itemID" : "7225046c-a335-4139-91b2-f4edcc36a57d",
   "quantity" : 3,
-  "purchasePrice" : 3.1443199999999997E-8
+  "purchasePrice" : 100000.0
 }, {
   "orderID" : "f5ec7706-5048-4437-a77d-6aaa8e41ddee",
   "itemID" : "dffc2b97-cfe4-4a43-a79f-1c5aa24b7e0e",
   "quantity" : 0,
-  "purchasePrice" : 1.886592E-8
+  "purchasePrice" : 60000.0
 }, {
   "orderID" : "2fe54f53-c493-4050-9c8f-66a4f5c6e974",
   "itemID" : "162aa607-9473-446b-8e76-9cc7c63915b6",
   "quantity" : 3,
-  "purchasePrice" : 3.1443199999999997E-8
+  "purchasePrice" : 100000.0
 }, {
   "orderID" : "adf6e99d-f48a-4bc1-b460-552105b31b5d",
   "itemID" : "732e9d0e-2671-4302-aebb-35cf6768d043",
   "quantity" : 2,
-  "purchasePrice" : 1.5721599999999998E-8
+  "purchasePrice" : 50000.0
 }, {
   "orderID" : "2931c228-e1aa-4dbf-8605-ae2c087d3f02",
   "itemID" : "e742423b-824c-4308-959c-112a4f84be07",
   "quantity" : 1,
-  "purchasePrice" : 6.28864E-9
+  "purchasePrice" : 20000.0
 }, {
   "orderID" : "508edb2f-1029-41e1-8d64-6f78f23d9c8a",
   "itemID" : "a4f2819f-b9db-489c-821f-631da462d031",
   "quantity" : 4,
-  "purchasePrice" : 1.886592E-8
+  "purchasePrice" : 60000.0
 }, {
   "orderID" : "682b19e5-049a-4ebc-a3c5-764e8347589e",
   "itemID" : "e742423b-824c-4308-959c-112a4f84be07",
   "quantity" : 2,
-  "purchasePrice" : 6.28864E-9
+  "purchasePrice" : 20000.0
 }, {
   "orderID" : "d8c0769a-d51a-4aa8-97f6-337e571221d3",
   "itemID" : "2cc42dc2-630e-43c7-be98-bec9b890bfc5",
   "quantity" : 0,
-  "purchasePrice" : 2.2010239999999997E-8
+  "purchasePrice" : 70000.0
 }, {
   "orderID" : "7f5b7c6e-5581-477d-a45b-9e960c90d47e",
   "itemID" : "2c008511-169e-48fe-bfee-89e5e36257dc",
   "quantity" : 2,
-  "purchasePrice" : 2.515456E-8
+  "purchasePrice" : 80000.0
 }, {
   "orderID" : "f17f3a9a-57c0-4a57-8cf2-bcab766756af",
   "itemID" : "6169d4e1-724f-435c-820d-18c7a0b3c3be",
   "quantity" : 2,
-  "purchasePrice" : 2.829888E-8
+  "purchasePrice" : 90000.0
 }, {
   "orderID" : "f2f905aa-dcbb-4774-a1c2-7f49b809392f",
   "itemID" : "db0c42a2-3fbe-4ed4-a1c7-3f39cf8057f5",
   "quantity" : 1,
-  "purchasePrice" : 1.5721599999999998E-8
+  "purchasePrice" : 50000.0
 }, {
   "orderID" : "2aab78c5-3314-499f-9779-d100a0805472",
   "itemID" : "4096e30e-33b8-444c-a9eb-7094ed4f1d12",
   "quantity" : 0,
-  "purchasePrice" : 2.2010239999999997E-8
+  "purchasePrice" : 70000.0
 }, {
   "orderID" : "0c08a12e-a36a-49b7-97b2-8fa1a132176b",
   "itemID" : "b6de4aee-db96-412b-a661-f0bd021d97a0",
   "quantity" : 1,
-  "purchasePrice" : 6.28864E-9
+  "purchasePrice" : 20000.0
 }, {
   "orderID" : "87e3a5fc-d2bd-4c4b-ab64-2fb00e1dea34",
   "itemID" : "7ffffe28-d1db-480f-b1dd-80f5c2625dfc",
   "quantity" : 4,
-  "purchasePrice" : 1.886592E-8
+  "purchasePrice" : 60000.0
 }, {
   "orderID" : "6f603007-9677-4e83-846f-457baa3ab247",
   "itemID" : "e435771d-beb5-4223-b6d8-a6715e356426",
   "quantity" : 1,
-  "purchasePrice" : 1.886592E-8
+  "purchasePrice" : 60000.0
 }, {
   "orderID" : "5d6cc092-44d9-4906-840c-922d600bf8b6",
   "itemID" : "e840558b-88b8-4f55-a552-4d8d9c47a3f3",
   "quantity" : 1,
-  "purchasePrice" : 3.1443199999999997E-8
+  "purchasePrice" : 100000.0
 }, {
   "orderID" : "6dbac55d-ca43-480e-ab98-e48707025622",
   "itemID" : "2cc42dc2-630e-43c7-be98-bec9b890bfc5",
   "quantity" : 0,
-  "purchasePrice" : 2.2010239999999997E-8
-}, {
-  "orderID" : "80058e96-e2cf-492a-8ceb-97fc78617e51",
-  "itemID" : "6169d4e1-724f-435c-820d-18c7a0b3c3be",
-  "quantity" : 2,
-  "purchasePrice" : 6.28864E-7
-}, {
-  "orderID" : "74d9282a-9015-4805-9d80-3a6cf643f8bc",
-  "itemID" : "6169d4e1-724f-435c-820d-18c7a0b3c3be",
-  "quantity" : 2,
-  "purchasePrice" : 0.009248
-}, {
-  "orderID" : "eea2417e-9408-44db-81e4-9137569e406b",
-  "itemID" : "6169d4e1-724f-435c-820d-18c7a0b3c3be",
-  "quantity" : 2,
-  "purchasePrice" : 136.0
+  "purchasePrice" : 70000.0
 } ]
