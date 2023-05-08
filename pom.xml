@@ -171,7 +171,7 @@
 <!--                            <goal>jar</goal>-->
 <!--                        </goals>-->
 <!--                        <configuration>-->
-<!--                            <classesDirectory>compiledPlugins</classesDirectory>-->
+<!--                            <classesDirectory>compiledPlugins1</classesDirectory>-->
 <!--                            <archive>-->
 <!--                                <manifest>-->
 <!--                                    <addClasspath>true</addClasspath>-->
@@ -197,7 +197,7 @@
 <!--                            <goal>jar</goal>-->
 <!--                        </goals>-->
 <!--                        <configuration>-->
-<!--                            <classesDirectory>compiledPlugins</classesDirectory>-->
+<!--                            <classesDirectory>compiledPlugins2</classesDirectory>-->
 <!--                            <archive>-->
 <!--                                <manifest>-->
 <!--                                    <addClasspath>true</addClasspath>-->
@@ -223,7 +223,7 @@
 <!--                            <goal>jar</goal>-->
 <!--                        </goals>-->
 <!--                        <configuration>-->
-<!--                            <classesDirectory>compiledPlugins</classesDirectory>-->
+<!--                            <classesDirectory>compiledPlugins3</classesDirectory>-->
 <!--                            <archive>-->
 <!--                                <manifest>-->
 <!--                                    <addClasspath>true</addClasspath>-->
@@ -249,7 +249,7 @@
 <!--                            <goal>jar</goal>-->
 <!--                        </goals>-->
 <!--                        <configuration>-->
-<!--                            <classesDirectory>compiledPlugins</classesDirectory>-->
+<!--                            <classesDirectory>compiledPlugins4</classesDirectory>-->
 <!--                            <archive>-->
 <!--                                <manifest>-->
 <!--                                    <addClasspath>true</addClasspath>-->
