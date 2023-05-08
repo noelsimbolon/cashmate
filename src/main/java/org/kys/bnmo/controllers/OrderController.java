@@ -64,7 +64,6 @@ public class OrderController {
             orders.add(order);
         }
 
-        processGetData(orders);
         return orders;
     }
 
@@ -78,7 +77,6 @@ public class OrderController {
         ArrayList<UnpopulatedOrder> ups = data.stream().map(o -> {
             return new UnpopulatedOrder(o.getOrderID(), o.getItem().getItemID(), o.getPurchasePrice(), o.getQuantity());
         }).collect(Collectors.toCollection(ArrayList::new));
-        processSetData(data);
 
         dataStore.writeData(fileName, ups);
     }

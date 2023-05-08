@@ -108,8 +108,8 @@ public class TransactionController {
 
             return new UnpopulatedTransaction(t.getTransactionID(), t.getCustomer().getCustomerID(), orderIDs, t.getTotalPrice(), t.getDate(), t.getDiscount());
         }).collect(Collectors.toCollection(ArrayList::new));
-        orderController.save(orders);
 
+        orderController.save(orders);
         dataStore.writeData(fileName, uts);
     }
 
