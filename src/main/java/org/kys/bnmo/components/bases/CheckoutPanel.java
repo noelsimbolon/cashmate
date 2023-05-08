@@ -66,7 +66,6 @@ public class CheckoutPanel extends VBox {
     private Text discountAmountLabel;
     private VBox discountContainer;
     private List<Pair<String, DoubleProperty>> staticDiscounts;
-    private List<Pair<String, TextField>> dynamicDiscounts;
 
     @Getter
     @Setter
@@ -294,7 +293,7 @@ public class CheckoutPanel extends VBox {
         priceLabel.textProperty().bind(Bindings.createStringBinding(() -> {
             int quantity = order.getQuantity().get();
             double price = order.getItem().getPrice();
-            return String.format("%s%d", currency, Math.round(quantity * order.getItem().getPrice()));
+            return String.format("%s%.2f", currency, quantity * order.getItem().getPrice());
         }, order.getQuantity()));
         priceLabel.setId("item-price-label");
 
@@ -449,6 +448,7 @@ public class CheckoutPanel extends VBox {
             InventoryItem matchedItem = dataStoreItems.stream().filter(dataItem -> dataItem.getItemID().equals(t_order.getItem().getItemID())).toList().get(0);
             matchedItem.setStock(matchedItem.getStock() - t_order.getQuantity().get());
         }
+
         inventoryItemController.writeInventoryItems(dataStoreItems);
 
         double subtotal = totalPrice;
@@ -481,15 +481,6 @@ public class CheckoutPanel extends VBox {
         for (int i = 1; i < staticDiscounts.size(); i++) {
             subtotal -= staticDiscounts.get(i).getValue().get();
         }
-
-//        for (var pair : dynamicDiscounts) {
-//            try {
-//                subtotal -= Integer.parseInt(pair.getValue().getText());
-//                discount += Integer.parseInt(pair.getValue().getText());
-//            } catch (NumberFormatException e) {
-//
-//            }
-//        }
 
         pluginService = new PluginService(
                 null,
@@ -525,6 +516,7 @@ public class CheckoutPanel extends VBox {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         removeCurrentBill();
 
         if (onCheckout != null)
