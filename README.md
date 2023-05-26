@@ -1,10 +1,6 @@
-# bnmo
-Program dibuat menggunakan Java 17
+# CashMate.
+A retail management desktop application implemented using JavaFX.
 
-# Authors
-13521096 / Noel Christoffel Simbolon  
-13521114 / Farhan Nabil Suryono  
-13521134 / Rinaldy Adin   
-13521142 / Enrique Alifio Ditya  
-13521148 / Johanes Lee  
-13521167 / Irgiansyah Mondo  
+# Prerequisites
+- [Oracle OpenJDK 17](https://www.oracle.com/java/technologies/downloads/#java17)
+- [Apache Maven](https://maven.apache.org/download.cgi)
